@@ -16,7 +16,7 @@ jobs:
         submodules: true
     - name: Install dependencies
       run: |
-        sudo apt install python-dev libboost-python-dev python-setuptools
+        sudo apt-get install python-dev libboost-python-dev python-setuptools
         python -m pip install --upgrade pip
     - name: Pip install pylint, RPi.GPIO, Sphinx, & sphinx-rtd-theme RPi.GPIO
       run: |
