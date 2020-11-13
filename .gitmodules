@@ -1,0 +1,9 @@
+[submodule "RF24"]
+	path = RF24
+	url = http://github.com/nRF24/RF24
+[submodule "RF24Network"]
+	path = RF24Network
+	url = http://github.com/nRF24/RF24Network
+[submodule "RF24Mesh"]
+	path = RF24Mesh
+	url = http://github.com/nRF24/RF24Mesh
