@@ -7,3 +7,6 @@
 [submodule "src/RF24Mesh"]
 	path = src/RF24Mesh
 	url = https://github.com/nRF24/RF24Mesh.git
+[submodule "src/pybind11"]
+	path = src/pybind11
+	url = https://github.com/pybind/pybind11.git
