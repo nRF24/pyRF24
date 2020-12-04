@@ -1,9 +1,9 @@
-[submodule "RF24"]
-	path = RF24
-	url = http://github.com/nRF24/RF24
-[submodule "RF24Network"]
-	path = RF24Network
-	url = http://github.com/nRF24/RF24Network
-[submodule "RF24Mesh"]
-	path = RF24Mesh
-	url = http://github.com/nRF24/RF24Mesh
+[submodule "src/RF24"]
+	path = src/RF24
+	url = https://github.com/nRF24/RF24.git
+[submodule "src/RF24Network"]
+	path = src/RF24Network
+	url = https://github.com/nRF24/RF24Network.git
+[submodule "src/RF24Mesh"]
+	path = src/RF24Mesh
+	url = https://github.com/nRF24/RF24Mesh.git

@@ -27,6 +27,7 @@ def process_configparams():
 
     os.environ["CFLAGS"] = cflags
 
+
 if sys.version_info >= (3,):
     BOOST_LIB = "boost_python3"
 else:
@@ -36,11 +37,15 @@ process_configparams()
 crossunixccompiler.register()
 
 module_RF24 = setuptools.Extension(
-    "RF24", libraries=["rf24", BOOST_LIB], sources=["pyRF24.cpp"]
+    "RF24",
+    libraries=["rf24", BOOST_LIB],
+    sources=["pyRF24.cpp"]
 )
 
 module_RF24Network = setuptools.Extension(
-    "RF24Network", libraries=["rf24network", BOOST_LIB], sources=["pyRF24Network.cpp"]
+    "RF24Network",
+    libraries=["rf24network", BOOST_LIB],
+    sources=["pyRF24Network.cpp"]
 )
 
 module_RF24Mesh = setuptools.Extension(
@@ -48,6 +53,7 @@ module_RF24Mesh = setuptools.Extension(
     libraries=["rf24mesh", "rf24network", BOOST_LIB],
     sources=["pyRF24Mesh.cpp"],
 )
+
 setuptools.setup(
     name="pyrf24",
     use_scm_version=True,
