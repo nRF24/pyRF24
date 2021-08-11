@@ -1,12 +1,12 @@
 [submodule "src/RF24"]
 	path = src/RF24
 	url = https://github.com/nRF24/RF24.git
-[submodule "src/RF24Network"]
-	path = src/RF24Network
+[submodule "RF24Network"]
+	path = RF24Network
 	url = https://github.com/nRF24/RF24Network.git
-[submodule "src/RF24Mesh"]
-	path = src/RF24Mesh
+[submodule "RF24Mesh"]
+	path = RF24Mesh
 	url = https://github.com/nRF24/RF24Mesh.git
-[submodule "src/pybind11"]
-	path = src/pybind11
+[submodule "pybind11"]
+	path = pybind11
 	url = https://github.com/pybind/pybind11.git
