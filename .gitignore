@@ -165,3 +165,14 @@ dmypy.json
 
 */Makefile.inc
 RF24/utility/includes.h
+
+# Cmake build-in-source generated stuff
+CMakeCache.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CMakeFiles
+DEBIAN
+cmake_install.cmake
+compile_commands.json
+# Makefile is modified when `cmake .` is run
+# Makefile # preserve old/traditional build system

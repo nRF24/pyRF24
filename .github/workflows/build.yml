@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up Python 3.6
+    - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
@@ -16,10 +16,9 @@ jobs:
         submodules: true
     - name: Install dependencies
       run: |
-        sudo apt-get install python-dev libboost-python-dev python-setuptools
+        sudo apt-get install python-dev
         python -m pip install --upgrade pip
-        python -m pip install wheel
-    - name: Pip install pylint, RPi.GPIO, Sphinx, & sphinx-rtd-theme RPi.GPIO
+    - name: Pip install pylint, Sphinx, & sphinx-rtd-theme
       run: |
         pip install pylint Sphinx sphinx-rtd-theme
     - name: Library version
