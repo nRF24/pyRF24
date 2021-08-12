@@ -1,5 +1,5 @@
-[submodule "src/RF24"]
-	path = src/RF24
+[submodule "RF24"]
+	path = RF24
 	url = https://github.com/nRF24/RF24.git
 [submodule "RF24Network"]
 	path = RF24Network
