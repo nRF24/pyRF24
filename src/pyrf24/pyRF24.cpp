@@ -1,6 +1,6 @@
-#include "../RF24/RF24.h"
-#include "../RF24/nRF24L01.h"
-#include "../pybind11/pybind11.h"
+#include "RF24.h"
+#include "nRF24L01.h"
+#include "pybind11/pybind11.h"
 
 namespace py = pybind11;
 
@@ -9,8 +9,13 @@ class RF24Wrapper : public RF24
 
 public:
 
-    /*********************************************************************************/
-    /* wrappers for buffer protocol objects (bytes, bytearray) */
+    RF24Wrapper(uint16_t ce_pin, uint16_t csn_pin, uint32_t spi_speed = 10000000) : RF24(ce_pin, csn_pin, spi_speed)
+    {
+    }
+
+    RF24Wrapper(uint32_t spi_speed = 10000000) : RF24(spi_speed)
+    {
+    }
 
     std::tuple<bool, uint8_t> available_pipe()
     {
@@ -201,10 +206,10 @@ PYBIND11_MODULE(rf24, m) {
     #if defined (FAILURE_HANDLING)
         .def_readwrite("failure_detected", &RF24Wrapper::failureDetected)
     #endif // defined (FAILURE_HANDLING)
-        .def_readwrite("is_valid", &RF24Wrapper::isValid)
-        .def_readwrite("is_plus_variant", &RF24Wrapper::isPVariant)
-        .def_readwrite("rpd", &RF24Wrapper::testRPD)
-        .def_readwrite("rx_fifo_full", &RF24Wrapper::rxFifoFull)
+        .def_property_readonly("is_valid", &RF24Wrapper::isValid)
+        .def_property_readonly("is_plus_variant", &RF24Wrapper::isPVariant)
+        .def_property_readonly("rpd", &RF24Wrapper::testRPD)
+        .def_property_readonly("rx_fifo_full", &RF24Wrapper::rxFifoFull)
 
         // old wrapper from boost.python usage
         .def("start_fast_write", &RF24Wrapper::startFastWrite, py::arg("buf"), py::arg("multicast") = false, py::arg("start_tx") = true)
