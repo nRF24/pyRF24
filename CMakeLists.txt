@@ -12,25 +12,25 @@ add_library(rf24_alias ALIAS rf24)
 add_subdirectory(RF24Network)
 
 # add a global ALIAS for the RF24 lib for direct inclusioin with a larger build-system
-add_library(rf24network_alias ALIAS rf24network)
+# add_library(rf24network_alias ALIAS rf24network)
 
-add_subdirectory(RF24Mesh)
+# add_subdirectory(RF24Mesh)
 
-pybind11_add_module(core
-    src/pyrf24/pyRF24.cpp
-    ${rf24_alias}
-)
-target_include_directories(core PUBLIC RF24)
+pybind11_add_module(core src/pyrf24/pyRF24.cpp)
+target_include_directories(core PRIVATE RF24)
+
 pybind11_add_module(rf24_network
     src/pyrf24/pyRF24Network.cpp
-    ${rf24_alias}
-    ${rf24network_alias}
 )
-target_include_directories(rf24_network PUBLIC RF24 RF24Network)
-pybind11_add_module(rf24_mesh
-    src/pyrf24/pyRF24Mesh.cpp
-    ${rf24_alias}
-    ${rf24network_alias}
-    ${rf24mesh}
+target_include_directories(rf24_network
+    PUBLIC RF24
+    PUBLIC RF24Network
 )
-target_include_directories(rf24_mesh BEFORE PUBLIC RF24 RF24Network RF24Mesh)
+
+# pybind11_add_module(rf24_mesh
+#     src/pyrf24/pyRF24Mesh.cpp
+#     ${rf24_alias}
+#     ${rf24network_alias}
+#     ${rf24mesh}
+# )
+# target_include_directories(rf24_mesh BEFORE PUBLIC RF24 RF24Network RF24Mesh)

@@ -1,6 +1,6 @@
-#include "RF24.h"
-#include "nRF24L01.h"
-#include "pybind11/pybind11.h"
+#include <pybind11/pybind11.h>
+#include <RF24.h>
+#include <nRF24L01.h>
 
 namespace py = pybind11;
 
@@ -9,11 +9,11 @@ class RF24Wrapper : public RF24
 
 public:
 
-    RF24Wrapper(uint16_t ce_pin, uint16_t csn_pin, uint32_t spi_speed = 10000000) : RF24(ce_pin, csn_pin, spi_speed)
+    RF24Wrapper(uint16_t _ce_pin, uint16_t _csn_pin, uint32_t _spi_speed = 10000000) : RF24(_ce_pin, _csn_pin, _spi_speed)
     {
     }
 
-    RF24Wrapper(uint32_t spi_speed = 10000000) : RF24(spi_speed)
+    RF24Wrapper(uint32_t _spi_speed = 10000000) : RF24(_spi_speed)
     {
     }
 
@@ -33,39 +33,41 @@ public:
 
     py::bytearray read(const uint8_t length)
     {
-        char payload[length + 1];
+        uint8_t *payload = new uint8_t[length];
         RF24::read(&payload, length);
-        return py::bytearray(payload, length);
+        py::bytearray buf = py::bytearray(reinterpret_cast<char *>(payload));
+        delete[] payload;
+        return buf;
     }
 
     void startFastWrite(char *buf, const bool multicast = false, bool startTx = true)
     {
-        RF24::startFastWrite(buf, strlen(buf), multicast, startTx);
+        RF24::startFastWrite(buf, static_cast<uint8_t>(strlen(buf)), multicast, startTx);
     }
 
     bool startWrite(char *buf, const bool multicast)
     {
-        return RF24::startWrite(buf, strlen(buf), multicast);
+        return RF24::startWrite(buf, static_cast<uint8_t>(strlen(buf)), multicast);
     }
 
     bool writeFast(char *buf, const bool multicast = false)
     {
-        return RF24::writeFast(buf, strlen(buf), multicast);
+        return RF24::writeFast(buf, static_cast<uint8_t>(strlen(buf)), multicast);
     }
 
     bool write(char *buf, const bool multicast = false)
     {
-        return RF24::write(buf, strlen(buf), multicast);
+        return RF24::write(buf, static_cast<uint8_t>(strlen(buf)), multicast);
     }
 
     bool writeBlocking(char *buf, uint32_t timeout)
     {
-        return RF24::writeBlocking(buf, strlen(buf), timeout);
+        return RF24::writeBlocking(buf, static_cast<uint8_t>(strlen(buf)), timeout);
     }
 
     bool writeAckPayload(uint8_t pipe, char *buf)
     {
-        return RF24::writeAckPayload(pipe, buf, strlen(buf));
+        return RF24::writeAckPayload(pipe, buf, static_cast<uint8_t>(strlen(buf)));
     }
 
     /*********************************************************************************/
@@ -73,7 +75,7 @@ public:
 
     bool is_dynamic_payloads_enabled()
     {
-        return (bool)read_register(DYNPD);
+        return read_register(DYNPD);
     }
 
     void dynamic_payloads(const bool enable)
@@ -86,7 +88,7 @@ public:
 
     bool isPowerUp()
     {
-        return (bool)(read_register(NRF_CONFIG) & _BV(PWR_UP));
+        return read_register(NRF_CONFIG) & _BV(PWR_UP);
     }
 
     void power(const bool enable)
@@ -99,7 +101,7 @@ public:
 
     bool isListening()
     {
-        return (bool)(read_register(NRF_CONFIG) & _BV(PRIM_RX));
+        return read_register(NRF_CONFIG) & _BV(PRIM_RX);
     }
 
     void listen(const bool enable)
@@ -218,4 +220,4 @@ PYBIND11_MODULE(rf24, m) {
         .def("write_ack_payload", &RF24Wrapper::writeAckPayload, py::arg("pipe"), py::arg("buf"))
         .def("write_blocking", &RF24Wrapper::writeBlocking, py::arg("buf"), py::arg("timeout"))
         .def("write_fast", &RF24Wrapper::writeFast, py::arg("buf"), py::arg("multicast") = false);
-};
+}

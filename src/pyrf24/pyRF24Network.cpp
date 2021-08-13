@@ -8,7 +8,7 @@ class RF24NetworkWrapper : public RF24Network
 {
 public:
 
-    RF24NetworkWrapper(RF24 & radio) : RF24Network(radio)
+    RF24NetworkWrapper(RF24 &radio) : RF24Network(radio)
     {
     }
 
