@@ -1,7 +1,7 @@
-#include "RF24.h"
-#include "RF24Network.h"
-#include "RF24Mesh.h"
-#include "pybind11/pybind11.h"
+#include <pybind11/pybind11.h>
+#include <RF24.h>
+#include <RF24Network.h>
+#include <RF24Mesh.h>
 
 namespace py = pybind11;
 

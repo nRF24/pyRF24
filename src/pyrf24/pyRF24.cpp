@@ -213,7 +213,7 @@ PYBIND11_MODULE(rf24, m) {
         .def_property_readonly("rpd", &RF24Wrapper::testRPD)
         .def_property_readonly("rx_fifo_full", &RF24Wrapper::rxFifoFull)
 
-        // old wrapper from boost.python usage
+        // functions that need python's bytearray wrapped/casted to char *buffer
         .def("start_fast_write", &RF24Wrapper::startFastWrite, py::arg("buf"), py::arg("multicast") = false, py::arg("start_tx") = true)
         .def("start_write", &RF24Wrapper::startWrite, py::arg("buf"), py::arg("multicast") = false)
         .def("write", &RF24Wrapper::write, py::arg("buf"), py::arg("multicast") = false)

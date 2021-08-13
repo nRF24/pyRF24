@@ -1,6 +1,6 @@
-#include "RF24.h"
-#include "RF24Network.h"
-#include "pybind11/pybind11.h"
+#include <pybind11/pybind11.h>
+#include <RF24.h>
+#include <RF24Network.h>
 
 namespace py = pybind11;
 
@@ -8,7 +8,7 @@ class RF24NetworkWrapper : public RF24Network
 {
 public:
 
-    RF24NetworkWrapper(RF24 &radio) : RF24Network(radio)
+    RF24NetworkWrapper(RF24 &_radio) : RF24Network(_radio)
     {
     }
 
@@ -33,7 +33,7 @@ public:
 
     void set_multicast_level(uint8_t level)
     {
-        RF24Network::multicast_level(level);
+        RF24Network::multicastLevel(level);
     }
 
     uint8_t get_multicast_level()
@@ -58,9 +58,14 @@ public:
 
     uint16_t get_node_address()
     {
-        return RF24Network::_node_address;
+        return RF24Network::node_address;
     }
 };
+
+std::string toString_wrap(RF24NetworkHeader &ref)
+{
+    return std::string(ref.toString());
+}
 
 
 PYBIND11_MODULE(rf24_network, m)
@@ -69,9 +74,8 @@ PYBIND11_MODULE(rf24_network, m)
     //
     py::class_<RF24NetworkHeader>(m, "RF24NetworkHeader")
         .def(py::init<>())
-        .def(py::init<uint16_t>())
-        .def(py::init<uint16_t, uint8_t>())
-        .def("to_string", &RF24NetworkHeader::toString)
+        .def(py::init<uint16_t, uint8_t>(), py::arg("to_node"), py::arg("type") = 0)
+        .def("to_string", &toString_wrap)
         .def_readwrite("from_node", &RF24NetworkHeader::from_node)
         .def_readwrite("id", &RF24NetworkHeader::id)
         .def_readwrite("reserved", &RF24NetworkHeader::reserved)
