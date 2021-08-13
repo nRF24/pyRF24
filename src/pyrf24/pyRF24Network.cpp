@@ -62,11 +62,6 @@ public:
     }
 };
 
-std::string toString_wrap(RF24NetworkHeader &ref)
-{
-    return std::string(ref.toString());
-}
-
 
 PYBIND11_MODULE(rf24_network, m)
 {
@@ -75,7 +70,7 @@ PYBIND11_MODULE(rf24_network, m)
     py::class_<RF24NetworkHeader>(m, "RF24NetworkHeader")
         .def(py::init<>())
         .def(py::init<uint16_t, uint8_t>(), py::arg("to_node"), py::arg("type") = 0)
-        .def("to_string", &toString_wrap)
+        .def("to_string", &RF24NetworkHeader::toString)
         .def_readwrite("from_node", &RF24NetworkHeader::from_node)
         .def_readwrite("id", &RF24NetworkHeader::id)
         .def_readwrite("reserved", &RF24NetworkHeader::reserved)
