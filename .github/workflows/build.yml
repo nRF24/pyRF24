@@ -6,28 +6,38 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: Checkout Current Repo
-      uses: actions/checkout@v1
-      with:
-        submodules: true
-    - name: Install dependencies
-      run: |
-        sudo apt-get install python-dev
-        python -m pip install --upgrade pip
-    - name: Pip install pylint, Sphinx, & sphinx-rtd-theme
-      run: |
-        pip install pylint Sphinx sphinx-rtd-theme
-    - name: Library version
-      run: git describe --dirty --always --tags
-    # - name: check python examples PEP8 compliance
-    #   run: |
-    #     pylint examples/*.py --disable=invalid-name,no-name-in-module,no-member,duplicate-code
-      # invalid-name,no-name-in-module,no-member are errors related to C++ wrapped into a python package; Applies to RPi.GPIO package as well.
-      # duplicate-code error gets flagged because some examples use similar code snippets
-    - name: Build docs
-      working-directory: docs
-      run: sphinx-build -E -W -b html . _build/html
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Checkout Current Repo
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install python3-dev
+          python3 -m pip install --upgrade pip pylint
+          python3 -m pip install -r docs/requirements.txt
+
+      - name: Library version
+        run: git describe --dirty --always --tags
+
+      - name: check python examples PEP8 compliance
+        run: |
+          pylint examples/*.py --disable=duplicate-code
+        # duplicate-code error gets flagged because some examples use similar code snippets
+
+      - name: Build package for docs extraction
+        run: python3 -m pip install .
+
+      - name: Build docs
+        working-directory: docs
+        run: sphinx-build -E -W -b html . _build/html
+
+      - name: Validate distribution
+        run: |
+          python3 setup.py bdist
+          twine check dist/*

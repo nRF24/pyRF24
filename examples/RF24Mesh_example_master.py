@@ -1,21 +1,21 @@
-from RF24 import *
-from RF24Network import *
-from RF24Mesh import *
+"""
+Example of using the rf24_mesh module to operate the nRF24L01 transceiver as
+a Mesh network master node.
+"""
+from pyrf24 import RF24, RF24Network, RF24Mesh
 
-# radio setup for RPi B Rev2: CS0=Pin 24
-radio = RF24(RPI_V2_GPIO_P1_15, RPI_V2_GPIO_P1_24, BCM2835_SPI_SPEED_8MHZ)
+
+radio = RF24(22, 0)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
+mesh.begin(0)
+radio.print_pretty_details()
 
-mesh.setNodeID(0)
-mesh.begin(108, RF24_250KBPS)
-radio.setPALevel(RF24_PA_MAX)  # Power Amplifier
-radio.printDetails()
 
-while 1:
+while True:
     mesh.update()
-    mesh.DHCP()
+    mesh.dhcp()
 
     while network.available():
-        print("Received message")
-        header, payload = network.read(10)
+        header, payload = network.read()
+        print(f"Received message {header.to_string()}")

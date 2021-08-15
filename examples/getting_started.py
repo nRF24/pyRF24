@@ -3,11 +3,8 @@ Simple example of using the RF24 class.
 """
 import time
 import struct
-from RF24 import RF24, RF24_PA_LOW
+from pyrf24 import RF24, RF24_PA_LOW
 
-# RPi.GPIO will show a warning if any pin is setup() that is already been
-# setup() for use without calling cleanup() first
-GPIO.cleanup()  # call this now in case it wasn't called on last program exit
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -49,26 +46,26 @@ if not radio.begin():
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity of each other
-radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+radio.pa_level = RF24_PA_LOW  # RF24_PA_MAX is default
 
 # set TX address of RX node into the TX pipe
-radio.openWritingPipe(address[radio_number])  # always uses pipe 0
+radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 
 # set RX address of TX node into an RX pipe
-radio.openReadingPipe(1, address[not radio_number])  # using pipe 1
+radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # To save time during transmission, we'll set the payload size to be only what
 # we need. A float value occupies 4 bytes in memory using len(struct.pack())
 # "<f" means a little endian unsigned float
-radio.setPayloadSize(len(struct.pack("<f", payload[0])))
+radio.payload_size = len(struct.pack("<f", payload[0]))
 
 # for debugging
-radio.printDetails()
+radio.print_details()
 
 
 def master(count=5):  # count = 5 will only transmit 5 packets
     """Transmits an incrementing float every second"""
-    radio.stopListening()  # ensures the nRF24L01 is in TX mode
+    radio.listen = False  # ensures the nRF24L01 is in TX mode
 
     while count:
         # use struct.pack to packetize your data
@@ -96,19 +93,19 @@ def master(count=5):  # count = 5 will only transmit 5 packets
 def slave(count=5):
     """Polls the radio and prints the received value. This method expires
     after 6 seconds of no received transmission"""
-    radio.startListening()  # put radio into RX mode and power up
+    radio.listen = True  # put radio into RX mode and power up
 
     start = time.monotonic()
     while count and (time.monotonic() - start) < 6:
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
             count -= 1
-            length = radio.getPayloadSize()  # grab the payload length
+            length = radio.payload_size  # grab the payload length
             # fetch 1 payload from RX FIFO
-            rx = radio.read(length)  # also clears radio.irq_dr status flag
+            received = radio.read(length)  # also clears radio.irq_dr status flag
             # expecting a little endian float, thus the format string "<f"
-            # rx[:4] truncates padded 0s in case dynamic payloads are disabled
-            payload[0] = struct.unpack("<f", rx[:4])[0]
+            # received[:4] truncates padded 0s in case dynamic payloads are disabled
+            payload[0] = struct.unpack("<f", received[:4])[0]
             # print details about the received packet
             print(
                 "Received {} bytes on pipe {}: {}".format(
@@ -120,7 +117,7 @@ def slave(count=5):
             start = time.monotonic()  # reset the timeout timer
 
     # recommended behavior is to keep in TX mode while idle
-    radio.stopListening()  # put the nRF24L01 is in TX mode
+    radio.listen = False  # put the nRF24L01 is in TX mode
 
 
 print(

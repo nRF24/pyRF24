@@ -2,11 +2,8 @@
 Example of library usage for streaming multiple payloads.
 """
 import time
-from RF24 import RF24, RF24_PA_LOW
+from pyrf24 import RF24, RF24_PA_LOW
 
-# RPi.GPIO will show a warning if any pin is setup() that is already been
-# setup() for use without calling cleanup() first
-GPIO.cleanup()  # call this now in case it wasn't called on last program exit
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -38,16 +35,16 @@ if not radio.begin():
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity of each other
-radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+radio.pa_level = RF24_PA_LOW  # RF24_PA_MAX is default
 
 # set TX address of RX node into the TX pipe
-radio.openWritingPipe(address[radio_number])  # always uses pipe 0
+radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 
 # set RX address of TX node into an RX pipe
-radio.openReadingPipe(1, address[not radio_number])  # using pipe 1
+radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # for debugging
-radio.printDetails()
+radio.print_pretty_details()
 
 
 def make_buffer(buf_iter, size=32):
@@ -72,10 +69,10 @@ def master(count=1, size=32):
 
     # save on transmission time by setting the radio to only transmit the
     #  number of bytes we need to transmit
-    radio.setPayloadSize(size)  # the default is the maximum 32 bytes
+    radio.payload_size = size  # the default is the maximum 32 bytes
 
-    radio.stopListening()  # ensures the nRF24L01 is in TX mode
-    for c in range(count):  # transmit the same payloads this many times
+    radio.listen = False  # ensures the nRF24L01 is in TX mode
+    for cnt in range(count):  # transmit the same payloads this many times
         radio.flush_tx()  # clear the TX FIFO so we can use all 3 levels
         # NOTE the write_only parameter does not initiate sending
         buf_iter = 0  # iterator of payloads for the while loop
@@ -87,7 +84,7 @@ def master(count=1, size=32):
                 # reception failed; we need to reset the irq_rf flag
                 failures += 1  # increment manual retries
                 radio.reUseTX()
-                if failures > 99 and buf_iter < 7 and c < 2:
+                if failures > 99 and buf_iter < 7 and cnt < 2:
                     # we need to prevent an infinite loop
                     print(
                         "Make sure slave() node is listening."
@@ -112,22 +109,22 @@ def slave(timeout=5, size=32):
 
     # save on transmission time by setting the radio to only transmit the
     #  number of bytes we need to transmit
-    radio.setPayloadSize(size)  # the default is the maximum 32 bytes
+    radio.payload_size = size  # the default is the maximum 32 bytes
 
-    radio.startListening()  # put radio into RX mode and power up
+    radio.listen = True  # put radio into RX mode and power up
     count = 0  # keep track of the number of received payloads
     start_timer = time.monotonic()  # start timer
     while time.monotonic() < start_timer + timeout:
         if radio.available():
             count += 1
             # retreive the received packet's payload
-            length = radio.getDynamicPayloadSize()
+            length = radio.get_dynamic_payload_size()
             receive_payload = radio.read(length)
             print("Received: {} - {}".format(receive_payload, count))
             start_timer = time.monotonic()  # reset timer on every RX payload
 
     # recommended behavior is to keep in TX mode while idle
-    radio.stopListening()  # put the nRF24L01 is in TX mode
+    radio.listen = False  # put the nRF24L01 is in TX mode
 
 
 print(

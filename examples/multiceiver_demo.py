@@ -4,11 +4,7 @@ transceivers. This technique is called "multiceiver" in the datasheet.
 """
 import time
 import struct
-from RF24 import RF24, RF24_PA_LOW
-
-# RPi.GPIO will show a warning if any pin is setup() that is already been
-# setup() for use without calling cleanup() first
-GPIO.cleanup()  # call this now in case it wasn't called on last program exit
+from pyrf24 import RF24, RF24_PA_LOW
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -41,43 +37,43 @@ if not radio.begin():
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity of each other
-radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+radio.pa_level = RF24_PA_LOW  # RF24_PA_MAX is default
 
 # To save time during transmission, we'll set the payload size to be only what
 # we need.
 # A byte and an int occupy 5 bytes in memory using len(struct.pack())
 # "<bi" means a little endian unsigned byte and int
-radio.setPayloadSize(len(struct.unpack("<bi", 0, 0)))
+radio.payload_size = len(struct.unpack("<bi", 0, 0))
 
 # for debugging
-radio.printDetails()
+radio.print_pretty_details()
 
 
 def base(timeout=10):
     """Use the nRF24L01 as a base station for lisening to all nodes"""
     # write the addresses to all pipes.
     for pipe_n, addr in enumerate(addresses):
-        radio.openReadingPipe(pipe_n, addr)
-    radio.startListening()  # put base station into RX mode
+        radio.open_rx_pipe(pipe_n, addr)
+    radio.listen = True  # put base station into RX mode
     start_timer = time.monotonic()  # start timer
     while time.monotonic() - start_timer < timeout:
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
-            length = radio.getPayloadSize()  # grab the payload length
+            length = radio.payload_size  # grab the payload length
             # unpack payload
-            nodeID, payloadID = struct.unpack("<bi", radio.read(8))
+            node_id, payload_id = struct.unpack("<bi", radio.read(8))
             # show the pipe number that received the payload
             print(
                 "Received {} bytes on pipe {} from node {}. PayloadID: "
                 "{}".format(
                     length,
                     pipe_number,
-                    nodeID,
-                    payloadID
+                    node_id,
+                    payload_id
                 )
             )
             start_timer = time.monotonic()  # reset timer with every payload
-    radio.stopListening()
+    radio.listen = False
 
 
 def node(node_number, count=10):
@@ -88,9 +84,9 @@ def node(node_number, count=10):
         :param int count: the number of times that the node will transmit
             to the base station.
     """
-    radio.stopListening()
+    radio.listen = False
     # set the TX address to the address of the base station.
-    radio.openWritingPipe(addresses[node_number])
+    radio.open_tx_pipe(addresses[node_number])
     counter = 0
     # use the node_number to identify where the payload came from
     while counter < count:

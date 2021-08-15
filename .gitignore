@@ -164,6 +164,7 @@ dmypy.json
 *.app
 
 # Cmake build-in-source generated stuff
+CMakeUserPresets.json
 CMakeCache.txt
 CPackConfig.cmake
 CPackSourceConfig.cmake
@@ -172,3 +173,4 @@ DEBIAN
 cmake_install.cmake
 compile_commands.json
 Makefile
+_skbuild

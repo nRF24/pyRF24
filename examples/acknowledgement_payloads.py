@@ -3,11 +3,7 @@ Simple example of using the library to transmit
 and retrieve custom automatic acknowledgment payloads.
 """
 import time
-from RF24 import RF24, RF24_PA_LOW
-
-# RPi.GPIO will show a warning if any pin is setup() that is already been
-# setup() for use without calling cleanup() first
-GPIO.cleanup()  # call this now in case it wasn't called on last program exit
+from pyrf24 import RF24, RF24_PA_LOW
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -49,31 +45,27 @@ if not radio.begin():
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity of each other
-radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+radio.pa_level = RF24_PA_LOW  # RF24_PA_MAX is default
 
 # ACK payloads are dynamically sized, so we need to enable that feature also
-radio.enableDynamicPayloads()
+radio.dynamic_payloads = True
 
 # to enable the custom ACK payload feature
-radio.enableAckPayload()
-
-# set the Power Amplifier level to -12 dBm since this test example is
-# usually run with nRF24L01 transceivers in close proximity of each other
-radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+radio.enable_ack_payload()
 
 # set TX address of RX node into the TX pipe
-radio.openWritingPipe(address[radio_number])  # always uses pipe 0
+radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 
 # set RX address of TX node into an RX pipe
-radio.openReadingPipe(1, address[not radio_number])  # using pipe 1
+radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # for debugging
-radio.printDetails()
+radio.print_pretty_details()
 
 
 def master(count=5):  # count = 5 will only transmit 5 packets
     """Transmits a payload every second and prints the ACK payload"""
-    radio.stopListening()  # put radio in TX mode
+    radio.listen = False  # put radio in TX mode
 
     while count:
         # construct a payload to send
@@ -96,7 +88,7 @@ def master(count=5):  # count = 5 will only transmit 5 packets
             )
             if radio.available():
                 # print the received ACK that was automatically sent
-                result = radio.read(radio.getDynamicPayloadSize())
+                result = radio.read(radio.get_dynamic_payload_size())
                 print(
                     " Received: {}{}".format(
                         result[:6].decode("utf-8"),
@@ -114,20 +106,20 @@ def master(count=5):  # count = 5 will only transmit 5 packets
 
 def slave(count=5):
     """Prints the received value and sends an ACK payload"""
-    radio.startListening()  # put radio into RX mode, power it up
+    radio.listen = True  # put radio into RX mode, power it up
 
     # setup the first transmission's ACK payload
     buffer = b"World \x00" + bytes([counter[0]])
     # we must set the ACK payload data and corresponding
     # pipe number [0,5]
-    radio.writeAckPayload(1, buffer)  # load ACK for first response
+    radio.write_ack_payload(1, buffer)  # load ACK for first response
 
     start = time.monotonic()  # start timer
     while count and (time.monotonic() - start) < 6:  # use 6 second timeout
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
             count -= 1
-            length = radio.getDynamicPayloadSize()  # grab the payload length
+            length = radio.get_dynamic_payload_size()  # grab the payload length
             received = radio.read(length)  # fetch 1 payload from RX FIFO
             # increment counter from received payload
             counter[0] = received[7:8][0] + 1
@@ -145,10 +137,10 @@ def slave(count=5):
             if count:  # Going again?
                 # build a new ACK payload
                 buffer = b"World \x00" + bytes([counter[0]])
-                radio.writeAckPayload(1, buffer)  # load ACK for next response
+                radio.write_ack_payload(1, buffer)  # load ACK for next response
 
     # recommended behavior is to keep in TX mode while idle
-    radio.stopListening()  # put radio in TX mode & flush unused ACK payloads
+    radio.listen = False  # put radio in TX mode & flush unused ACK payloads
 
 
 print(

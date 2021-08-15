@@ -11,22 +11,10 @@
 
 .. toctree::
    :maxdepth: 4
-   :caption: RF24 API
+   :caption: API Reference
 
    rf24_api
-
-
-.. toctree::
-   :maxdepth: 4
-   :caption: RF24Network API
-
    rf24_network_api
-
-
-.. toctree::
-   :maxdepth: 4
-   :caption: RF24Mesh API
-
    rf24_mesh_api
 
 Indices and tables
