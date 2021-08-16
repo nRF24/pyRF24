@@ -37,6 +37,13 @@ jobs:
         working-directory: docs
         run: sphinx-build -E -W -b html . _build/html
 
+      - name: upload to github pages
+        # if: ${{ github.event_name == 'release'}}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/html
+
       - name: Validate distribution
         run: |
           python3 -m pip install -r requirements.txt twine
