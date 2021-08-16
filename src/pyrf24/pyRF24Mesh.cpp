@@ -135,7 +135,7 @@ PYBIND11_MODULE(rf24_mesh, m)
             :param int,float timeout: The maximum amount of time (in seconds) spent while attempting
                 to communicate with the mesh network's master node.
 
-            :Retruns:
+            :Returns:
                 - If successful, this function returns the newly assigned logical address.
                 - If unsuccessfull, the returned integer will be the default address used by any
                   node not connected to the mesh network. This default address is ``0o4444`` (or

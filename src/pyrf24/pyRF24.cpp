@@ -402,7 +402,7 @@ PYBIND11_MODULE(rf24, m) {
                 - If the value specified by this parameter is grater than the length of the last
                   available payload, then the payload's last byte is returned repetitly until the
                   length value is fulfilled.
-            :Retruns: A `bytearray` of the specified ``length`` containing the data from the
+            :Returns: A `bytearray` of the specified ``length`` containing the data from the
                 payload in the RX FIFO.
         )docstr", py::arg("length"))
 
