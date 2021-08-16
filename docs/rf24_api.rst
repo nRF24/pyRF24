@@ -39,7 +39,8 @@ Basic RF24 API
 **************
 
 .. autoclass:: pyrf24.rf24.RF24
-    :members: __init__, begin, listen, available, read, write, open_tx_pipe, open_rx_pipe
+    :members: begin, listen, available, read, write, open_tx_pipe, open_rx_pipe
+    :special-members: __init__
 
 Advanced RF24 API
 *****************

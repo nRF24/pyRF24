@@ -13,7 +13,7 @@ Basic RF24Network API
 
 .. autoclass:: pyrf24.rf24_network.RF24Network
     :members: begin, update, available, peek, read, write, node_address
-    :special-members:
+    :special-members: __init__
 
 Advanced RF24Network API
 ************************

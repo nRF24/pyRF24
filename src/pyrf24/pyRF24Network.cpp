@@ -75,10 +75,10 @@ PYBIND11_MODULE(rf24_network, m)
     // **************** RF24NetworkHeader exposed  *****************
     //
     py::class_<RF24NetworkHeader>(m, "RF24NetworkHeader")
-        .def(py::init<>())
-        .def(py::init<uint16_t, uint8_t>(), R"docstr(
+        .def(py::init<>(), R"docstr(
             __init__(to_node: int = None, type: int = None)
-
+        )docstr")
+        .def(py::init<uint16_t, uint8_t>(), R"docstr(
             Create a RF24NetworkHeader object.
 
             :param int to_node: Set the header's `to_node` attribute.

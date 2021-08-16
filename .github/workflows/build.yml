@@ -25,13 +25,13 @@ jobs:
       - name: Library version
         run: git describe --dirty --always --tags
 
+      - name: Build package for docs extraction and linting examples
+        run: python3 -m pip install .
+
       - name: check python examples PEP8 compliance
         run: |
           pylint examples/*.py --disable=duplicate-code
         # duplicate-code error gets flagged because some examples use similar code snippets
-
-      - name: Build package for docs extraction
-        run: python3 -m pip install .
 
       - name: Build docs
         working-directory: docs

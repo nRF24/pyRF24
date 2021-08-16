@@ -8,7 +8,7 @@ Basic RF24Mesh API
 
 .. autoclass:: pyrf24.rf24_mesh.RF24Mesh
     :members: begin, update, write, node_id, renew_address
-    :special-members:
+    :special-members: __init__
 
 Advanced RF24Mesh API
 ---------------------
