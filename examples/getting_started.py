@@ -46,7 +46,7 @@ if not radio.begin():
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity of each other
-radio.pa_level = RF24_PA_LOW  # RF24_PA_MAX is default
+radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
 # set TX address of RX node into the TX pipe
 radio.open_tx_pipe(address[radio_number])  # always uses pipe 0

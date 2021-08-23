@@ -402,7 +402,7 @@ PYBIND11_MODULE(rf24, m) {
                 - If the value specified by this parameter is grater than the length of the last
                   available payload, then the payload's last byte is returned repetitly until the
                   length value is fulfilled.
-            :Returns: A `bytearray` of the specified ``length`` containing the data from the
+            :Retruns: A `bytearray` of the specified ``length`` containing the data from the
                 payload in the RX FIFO.
         )docstr", py::arg("length"))
 
@@ -447,7 +447,7 @@ PYBIND11_MODULE(rf24, m) {
 
             :Returns: `True` if there is a payload in the radio's RX FIFO, otherwise `False`.
         )docstr")
-        .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, const uint8_t*)>(&RF24Wrapper::openReadingPipe), R"docstr(
+        .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, char*)>(&RF24Wrapper::openReadingPipe), R"docstr(
             open_rx_pipe(pipe_number: int, address: bytes)
 
             Open a data pipe for recieving.
@@ -458,7 +458,7 @@ PYBIND11_MODULE(rf24, m) {
         .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
             For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
         )docstr", py::arg("pipe_number"), py::arg("address"))
-        .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(const uint8_t*)>(&RF24Wrapper::openWritingPipe), R"docstr(
+        .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(const char*)>(&RF24Wrapper::openWritingPipe), R"docstr(
             open_tx_pipe(address: bytes)
 
             Open data pipe 0 for transmitting to a specified address.
