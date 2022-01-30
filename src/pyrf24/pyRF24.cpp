@@ -31,43 +31,53 @@ public:
         return std::tuple<bool, bool, bool>(ds, df, dr);
     }
 
+    void open_tx_pipe(py::bytes &address)
+    {
+        RF24::openWritingPipe(address.cast<uint64_t>());
+    }
+
+    void open_rx_pipe(uint8_t number, py::bytes &address)
+    {
+        RF24::openReadingPipe(number, address.cast<uint64_t>());
+    }
+
     py::bytearray read(const uint8_t length)
     {
         uint8_t *payload = new uint8_t[length];
         RF24::read(&payload, length);
-        py::bytearray buf = py::bytearray(reinterpret_cast<char *>(payload));
+        py::bytearray buf = py::cast(payload);
         delete[] payload;
         return buf;
     }
 
-    void startFastWrite(char *buf, const bool multicast = false, bool startTx = true)
+    void startFastWrite(py::object &buf, const bool multicast = false, bool startTx = true)
     {
-        RF24::startFastWrite(buf, static_cast<uint8_t>(strlen(buf)), multicast, startTx);
+        RF24::startFastWrite(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast, startTx);
     }
 
-    bool startWrite(char *buf, const bool multicast)
+    bool startWrite(py::object &buf, const bool multicast)
     {
-        return RF24::startWrite(buf, static_cast<uint8_t>(strlen(buf)), multicast);
+        return RF24::startWrite(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast);
     }
 
-    bool writeFast(char *buf, const bool multicast = false)
+    bool writeFast(py::object &buf, const bool multicast = false)
     {
-        return RF24::writeFast(buf, static_cast<uint8_t>(strlen(buf)), multicast);
+        return RF24::writeFast(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast);
     }
 
-    bool write(char *buf, const bool multicast = false)
+    bool write(py::object &buf, const bool multicast = false)
     {
-        return RF24::write(buf, static_cast<uint8_t>(strlen(buf)), multicast);
+        return RF24::write(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast);
     }
 
-    bool writeBlocking(char *buf, uint32_t timeout)
+    bool writeBlocking(py::object &buf, uint32_t timeout)
     {
-        return RF24::writeBlocking(buf, static_cast<uint8_t>(strlen(buf)), timeout);
+        return RF24::writeBlocking(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), timeout);
     }
 
-    bool writeAckPayload(uint8_t pipe, char *buf)
+    bool writeAckPayload(uint8_t pipe, py::object &buf)
     {
-        return RF24::writeAckPayload(pipe, buf, static_cast<uint8_t>(strlen(buf)));
+        return RF24::writeAckPayload(pipe, buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)));
     }
 
     // complete FIFO info helper; this replaces isRxFifoFull()
@@ -233,7 +243,7 @@ PYBIND11_MODULE(rf24, m) {
         //     Power down the radio.
 
         //     .. important::
-        //         No transmissions can be recieved or transmitted when the radio is powered down.
+        //         No transmissions can be received or transmitted when the radio is powered down.
         // )docstr")
         // .def("power_up", &RF24Wrapper::powerUp, R"docstr(
         //     Power up the radio.
@@ -307,8 +317,8 @@ PYBIND11_MODULE(rf24, m) {
 
             Configure the radio's auto-retries feature.
 
-            :param int delay: A nuber in the range [0, 15] used as a multiple of 250. This
-                controls the amount of time (in micoseconds) the radio waits for an
+            :param int delay: A number in the range [0, 15] used as a multiple of 250. This
+                controls the amount of time (in microseconds) the radio waits for an
                 auto-acknowledgment.
             :param int count: A number in range [0, 15]. This is the amount of automatic retries
                 that the radio attempts when an automatic acknowledgment is not received.
@@ -447,18 +457,18 @@ PYBIND11_MODULE(rf24, m) {
 
             :Returns: `True` if there is a payload in the radio's RX FIFO, otherwise `False`.
         )docstr")
-        .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, char*)>(&RF24Wrapper::openReadingPipe), R"docstr(
+        .def("open_rx_pipe", &RF24Wrapper::open_rx_pipe, R"docstr(
             open_rx_pipe(pipe_number: int, address: bytes)
 
-            Open a data pipe for recieving.
+            Open a data pipe for receiving.
 
             :param int pipe_number: The pipe number to use for receiving transmissions. This value should be in range [0, 5].
             :param bytes,bytearray address: The address assigned to the specified data pipe for receiving transmissions.
         )docstr", py::arg("pipe_number"), py::arg("address"))
-        .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
-            For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
-        )docstr", py::arg("pipe_number"), py::arg("address"))
-        .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(const char*)>(&RF24Wrapper::openWritingPipe), R"docstr(
+        // .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
+        //     For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
+        // )docstr", py::arg("pipe_number"), py::arg("address"))
+        .def("open_tx_pipe", &RF24Wrapper::open_tx_pipe, R"docstr(
             open_tx_pipe(address: bytes)
 
             Open data pipe 0 for transmitting to a specified address.

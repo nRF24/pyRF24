@@ -1,5 +1,5 @@
-from .rf24 import RF24
 from typing import Tuple, Union
+from .rf24 import RF24
 
 
 class RF24NetworkHeader:

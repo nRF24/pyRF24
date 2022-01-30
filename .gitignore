@@ -173,4 +173,5 @@ DEBIAN
 cmake_install.cmake
 compile_commands.json
 Makefile
+!docs/Makefile
 _skbuild
