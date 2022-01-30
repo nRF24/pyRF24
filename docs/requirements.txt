@@ -1,2 +1,2 @@
-git+https://github.com/2bndy5/breathe@remix
+# git+https://github.com/2bndy5/breathe@remix
 sphinx-immaterial

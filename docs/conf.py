@@ -10,6 +10,7 @@
 project = "pyrf24"
 copyright = "2020, TMRh20 Avamander 2bndy5"
 author = "TMRh20 Avamander 2bndy5"
+language="en"
 
 # The full version, including alpha/beta/rc tags
 release = "http://github.com/nRF24/pyRF24/releases"
