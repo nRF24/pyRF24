@@ -30,7 +30,7 @@ jobs:
 
       - name: check python examples PEP8 compliance
         run: |
-          pylint examples/*.py --disable=duplicate-code
+          pylint examples/*.py --disable=duplicate-code,consider-using-f-string
         # duplicate-code error gets flagged because some examples use similar code snippets
 
       - name: Build docs
