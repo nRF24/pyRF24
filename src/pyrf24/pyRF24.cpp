@@ -66,14 +66,20 @@ public:
         return std::tuple<bool, bool, bool>(ds, df, dr);
     }
 
-    void open_tx_pipe(py::bytes &address)
+    void open_tx_pipe(py::object &address)
     {
-        RF24::openWritingPipe(address.cast<uint64_t>());
+        // if (PyLong_Check(address)) {
+        //     return RF24::openWritingPipe(address.cast<uint64_t>());
+        // }
+        RF24::openWritingPipe(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
-    void open_rx_pipe(uint8_t number, py::bytes &address)
+    void open_rx_pipe(uint8_t number, py::object &address)
     {
-        RF24::openReadingPipe(number, address.cast<uint64_t>());
+        // if (PyLong_Check(address)) {
+        //     return RF24::openReadingPipe(number, address.cast<uint64_t>());
+        // }
+        RF24::openReadingPipe(number, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
     py::bytearray read(const uint8_t length)
