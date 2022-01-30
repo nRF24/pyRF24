@@ -4,6 +4,41 @@
 
 namespace py = pybind11;
 
+void throw_ba_exception(void)
+{
+    PyErr_SetString(PyExc_TypeError, "buf parameter must be bytes or bytearray");
+    py::error_already_set();
+}
+
+char* get_bytes_or_bytearray_str(py::object buf)
+{
+    PyObject* py_ba;
+    py_ba = buf.ptr();
+    if (PyByteArray_Check(py_ba))
+        return PyByteArray_AsString(py_ba);
+    else if (PyBytes_Check(py_ba))
+        return PyBytes_AsString(py_ba);
+    else
+        throw_ba_exception();
+
+    return NULL;
+}
+
+
+int get_bytes_or_bytearray_ln(py::object buf)
+{
+    PyObject* py_ba;
+    py_ba = buf.ptr();
+    if (PyByteArray_Check(py_ba))
+        return PyByteArray_Size(py_ba);
+    else if (PyBytes_Check(py_ba))
+        return PyBytes_Size(py_ba);
+    else
+        throw_ba_exception();
+
+    return 0;
+}
+
 class RF24Wrapper : public RF24
 {
 
@@ -52,32 +87,50 @@ public:
 
     void startFastWrite(py::object &buf, const bool multicast = false, bool startTx = true)
     {
-        RF24::startFastWrite(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast, startTx);
+        RF24::startFastWrite(
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            multicast, startTx);
     }
 
     bool startWrite(py::object &buf, const bool multicast)
     {
-        return RF24::startWrite(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast);
+        return RF24::startWrite(
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            multicast);
     }
 
     bool writeFast(py::object &buf, const bool multicast = false)
     {
-        return RF24::writeFast(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast);
+        return RF24::writeFast(
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            multicast);
     }
 
     bool write(py::object &buf, const bool multicast = false)
     {
-        return RF24::write(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), multicast);
+        return RF24::write(
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            multicast);
     }
 
     bool writeBlocking(py::object &buf, uint32_t timeout)
     {
-        return RF24::writeBlocking(buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)), timeout);
+        return RF24::writeBlocking(
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            timeout);
     }
 
     bool writeAckPayload(uint8_t pipe, py::object &buf)
     {
-        return RF24::writeAckPayload(pipe, buf.cast<void*>(), static_cast<uint8_t>(sizeof(buf)));
+        return RF24::writeAckPayload(
+            pipe,
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)));
     }
 
     // complete FIFO info helper; this replaces isRxFifoFull()

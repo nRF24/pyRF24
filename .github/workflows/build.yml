@@ -46,6 +46,7 @@ jobs:
 
       - name: Validate distribution
         run: |
+          rm -r _skbuild/
           python3 -m pip install -r requirements.txt twine
           python3 setup.py bdist
           twine check dist/*
