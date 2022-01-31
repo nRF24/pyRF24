@@ -87,7 +87,7 @@ public:
         char *payload = new char[length];
         RF24::read(&payload, length);
         py::bytearray buf = py::cast(payload);
-        delete[] payload;
+        // delete[] payload;
         return &buf;
     }
 
@@ -585,9 +585,9 @@ PYBIND11_MODULE(rf24, m) {
                 - A `bool` describing if the specified FIFO is empty or full.
                 - A `int` if the ``check_empty`` parameter was unspecified. In which case, the return integer is
 
-                    * ``0`` if the specified FIFO is neither full nor empty.
-                    * ``1`` if the specified FIFO is empty.
-                    * ``2`` if the specified FIFO is full.
+                  - ``0`` if the specified FIFO is neither full nor empty.
+                  - ``1`` if the specified FIFO is empty.
+                  - ``2`` if the specified FIFO is full.
         )docstr", py::arg("about_tx"))
 
 
