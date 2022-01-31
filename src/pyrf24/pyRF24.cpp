@@ -84,7 +84,7 @@ public:
 
     py::bytearray read(const uint8_t length)
     {
-        uint8_t *payload = new uint8_t[length];
+        char *payload = new char[length];
         RF24::read(&payload, length);
         py::bytearray buf = py::cast(payload);
         delete[] payload;
