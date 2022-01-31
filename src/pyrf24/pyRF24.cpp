@@ -88,6 +88,7 @@ public:
         RF24::read(&payload, length);
         payload[length] = '\0';
         py::bytearray buf = py::bytearray(std::string(payload));
+        buf.inc_ref();
         delete[] payload;
         return buf;
     }
