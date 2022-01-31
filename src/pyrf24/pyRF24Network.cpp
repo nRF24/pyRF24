@@ -114,7 +114,7 @@ PYBIND11_MODULE(rf24_network, m)
             integers in range [128, 255] are reserved for system usage.
         )docstr")
         .def_readwrite_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
-            The next sequential identiying number used for the next created frame. It is not
+            The next sequential identifying number used for the next created frame. It is not
             advised to alter this attribute.
         )docstr");
 
