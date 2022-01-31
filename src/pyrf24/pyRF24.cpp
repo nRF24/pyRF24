@@ -82,13 +82,13 @@ public:
         RF24::openReadingPipe(number, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
-    py::bytearray* read(const uint8_t length)
+    py::bytearray read(const uint8_t length)
     {
         char *payload = new char[length];
         RF24::read(&payload, length);
         py::bytearray buf = py::cast(payload);
         // delete[] payload;
-        return &buf;
+        return buf;
     }
 
     void startFastWrite(py::object &buf, const bool multicast = false, bool startTx = true)
