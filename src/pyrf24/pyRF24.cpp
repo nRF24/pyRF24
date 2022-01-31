@@ -82,11 +82,11 @@ public:
         RF24::openReadingPipe(number, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
-    py::bytearray read(const uint8_t length)
+    py::object read(const uint8_t length)
     {
-        char *payload = new char[length];
+        char *payload = new char[length + 1];
         RF24::read(&payload, length);
-        py::bytearray buf = py::cast(payload);
+        py::object buf = py::bytearray(payload);
         // delete[] payload;
         return buf;
     }
