@@ -86,8 +86,8 @@ public:
     {
         char *payload = new char[length + 1];
         RF24::read(&payload, length);
-        PyObject *p = PyByteArray_FromStringAndSize(payload, length);
-        py::bytearray buf = py::reinterpret_steal<py::bytearray>(p);
+        payload[length] = '\0';
+        py::bytearray buf = py::bytearray(std::string(payload));
         delete[] payload;
         return buf;
     }
