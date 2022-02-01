@@ -135,11 +135,11 @@ PYBIND11_MODULE(rf24_mesh, m)
             :Returns: `True` if connected, otherwise `False`
         )docstr")
         .def("renew_address", &RF24MeshWrapper::renewAddress, R"docstr(
-            renew_address(timeout: Union(int, float) = 7.5) -> int
+            renew_address(timeout: int = 7500) -> int
 
             Attempt to get a new logical address assigned from the mesh network's master node.
 
-            :param int,float timeout: The maximum amount of time (in seconds) spent while attempting
+            :param int timeout: The maximum amount of time (in milliseconds) spent while attempting
                 to communicate with the mesh network's master node.
 
             :Retruns:

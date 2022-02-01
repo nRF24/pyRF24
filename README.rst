@@ -35,7 +35,7 @@ The IRQ pin is not typically connected, and it is only used in the interrupt_con
     nRF24L01+PA+LNA modules.
 
 .. important:: It is highly recommended that the nRF24L01's VCC and GND pins have a parallel
-    capacitor to stablize the power supply. Usually 100 microfarad is enough, but the capacitance
+    capacitor to stabilize the power supply. Usually 100 microfarad is enough, but the capacitance
     ultimately depends on the nature of your power supply's stability.
 
 Dependencies
@@ -52,7 +52,7 @@ It is advised that some dependencies be installed manually to ensure up-to-date 
 
 .. note::
     Notice that RPi.GPIO (for python) is used to manage the GPIO pins on the Raspberry Pi
-    (excusively during the `interrupt_configure.py <examples.html#interrupt-configure>`_ example).
+    (exclusively during the `interrupt_configure.py <examples.html#interrupt-configure>`_ example).
 
     RPi.GPIO is not required for normal usage.
 
@@ -62,12 +62,12 @@ It is advised that some dependencies be installed manually to ensure up-to-date 
 
 The following dependencies are also installed during build process.
 
-    * setuptools >= 42
-    * wheel
-    * pybind11 >= 2.7.1
-    * scikit-build
-    * cmake (though it may be out-of-date)
-    * ninja (not actually used but needed to satisfy scikit-build dependency)
+* setuptools >= 42
+* wheel
+* pybind11 >= 2.7.1
+* scikit-build
+* cmake
+* ninja
 
 Lastly, use the following command to install the python package from the root directory of this
 library's repository:
@@ -97,7 +97,7 @@ sphinx.
 
     python3 -m pip install Sphinx sphinx-rtd-theme
 
-or optioinally use the following command from the repository's root directory
+or optionally use the following command from the repository's root directory
 
 .. code-block:: bash
 
@@ -110,6 +110,11 @@ or optioinally use the following command from the repository's root directory
     installing sphinx, see the
     `official Sphinx install instructions
     <https://www.sphinx-doc.org/en/master/usage/installation.html>`_.
+
+    .. warning::
+        This documentation's theme requires Sphinx v4.0+. So, it is not recommended to install
+        sphinx from ``apt`` on Linux because the version distributed with the OS's PPA repository
+        may not be the most recent version of sphinx.
 
 To build the documentation locally, the pyrf24 package needs to be installed first. Then run:
 
