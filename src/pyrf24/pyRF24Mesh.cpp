@@ -11,14 +11,22 @@ public:
     {
     }
 
-    bool write(char *buf, uint8_t msg_type, uint8_t nodeID = 0)
+    bool write(py::object &buf, uint8_t msg_type, uint8_t nodeID = 0)
     {
-        return RF24Mesh::write(buf, msg_type, strlen(buf), nodeID);
+        return RF24Mesh::write(
+            get_bytes_or_bytearray_str(buf),
+            msg_type,
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            nodeID);
     }
 
-    bool write(uint16_t to_node, char *buf, uint8_t msg_type)
+    bool write(uint16_t to_node, py::object &buf, uint8_t msg_type)
     {
-        return RF24Mesh::write(to_node, buf, msg_type, strlen(buf));
+        return RF24Mesh::write(
+            to_node,
+            get_bytes_or_bytearray_str(buf),
+            msg_type,
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)));
     }
 
     uint8_t get_node_id()
@@ -52,7 +60,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
                 .. seealso:: Use `renew_address()` in the event that the node becomes disconnected
                     from the mesh network.
-        )docstr")
+        )docstr", py::arg("channel")=MESH_DEFAULT_CHANNEL, py::arg("data_rate")=RF24_1MBPS, py::arg("timeout")=MESH_RENEWAL_TIMEOUT)
         .def("update", &RF24MeshWrapper::update, R"docstr(
             update() -> int
 
@@ -61,7 +69,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             :Returns: the `int` of the last received header's :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type`
         )docstr")
-        .def("write", static_cast<bool (RF24MeshWrapper::*)(char *, uint8_t, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
+        .def("write", static_cast<bool (RF24MeshWrapper::*)(py::object&, uint8_t, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
             write(buf: bytes, message_type: int, to_node_id: int = 0) -> bool
 
             Transmit a message to a unique `node_id` of a mesh network node.
@@ -74,7 +82,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             :Returns: `True` if the message was successfully sent, otherwise `False`
         )docstr", py::arg("buf"), py::arg("msg_type"), py::arg("node_id") = 0)
-        .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, char *, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
+        .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, py::object&, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
             When the network node's logical address is already known, the parameters to
             Transmit a message to a specific logical address of a network node are as follows:
 
@@ -148,7 +156,7 @@ PYBIND11_MODULE(rf24_mesh, m)
             .. tip:: This function allows re-use of the assigned address for other mesh network nodes.
                 Call this function from mesh network nodes that are going offline (or to sleep).
 
-            :Returns: `True` if the mesh network's master node recieved the request to de-allocate
+            :Returns: `True` if the mesh network's master node received the request to de-allocate
                 the assigned address. `False` means the wireless transaction did not complete.
         )docstr")
         .def("get_address", &RF24MeshWrapper::getAddress, R"docstr(
@@ -175,13 +183,13 @@ PYBIND11_MODULE(rf24_mesh, m)
             Control the node's ability to have child nodes connect to it.
 
             :param bool allow: Allow or disallow (`True`/`False`) the instantiated mesh network node
-                to resond to other mesh network nodes attempting to connect to the network.
+                to respond to other mesh network nodes attempting to connect to the network.
         )docstr", py::arg("allow"))
         .def("set_address", &RF24MeshWrapper::setAddress, R"docstr(
             set_address(node_id: int, address: int, search_by_address: bool = False)
 
             Call this function on a mesh network's master node to manually assign a logical
-            address to a unique `node_id`. This function is meant to inlude RF24Network nodes in
+            address to a unique `node_id`. This function is meant to include RF24Network nodes in
             mesh networks.
 
             :param int node_id: The unique identifying number for the connected node.

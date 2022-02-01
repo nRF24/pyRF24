@@ -28,9 +28,13 @@ public:
         return std::tuple<RF24NetworkHeader, py::bytearray>(header, py_ba);
     }
 #if defined (RF24NetworkMulticast)
-    bool multicast(RF24NetworkHeader header, char *buf, uint8_t level = 7)
+    bool multicast(RF24NetworkHeader header, py::object &buf, uint8_t level = 7)
     {
-        return RF24Network::multicast(header, buf, static_cast<uint8_t>(strlen(buf)), level);
+        return RF24Network::multicast(
+            header,
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            level);
     }
 
     void set_multicast_level(uint8_t level)
@@ -46,7 +50,7 @@ public:
 
     std::tuple<RF24NetworkHeader, py::bytearray> read(uint16_t maxlen = MAX_PAYLOAD_SIZE)
     {
-        char *buf = new char[maxlen];
+        char *buf = new char[maxlen + 1];
         RF24NetworkHeader header;
         uint16_t len = RF24Network::read(header, buf, maxlen);
         py::bytearray py_ba = py::bytearray(buf, len);
@@ -54,9 +58,12 @@ public:
         return std::tuple<RF24NetworkHeader, py::bytearray>(header, py_ba);
     }
 
-    bool write(RF24NetworkHeader &header, char *buf)
+    bool write(RF24NetworkHeader &header, py::object &buf)
     {
-        return RF24Network::write(header, buf, static_cast<uint8_t>(strlen(buf)));
+        return RF24Network::write(
+            header,
+            get_bytes_or_bytearray_str(buf),
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)));
     }
 
     uint16_t get_node_address()
@@ -207,7 +214,7 @@ PYBIND11_MODULE(rf24_network, m)
             :param RF24NetworkHeader header: The outgoing frame's `RF24NetworkHeader` about the outgoing message.
             :param bytes,bytearray buf: The outgoing frame's message (AKA buffer).
 
-            :Returns: `True` if the frame was succefully sent or otherwise `False`.
+            :Returns: `True` if the frame was successfully sent or otherwise `False`.
         )docstr", py::arg("header"), py::arg("buf"))
 #if defined RF24NetworkMulticast
         .def_property("multicast_level", &RF24NetworkWrapper::get_multicast_level, &RF24NetworkWrapper::set_multicast_level, R"docstr(
@@ -232,7 +239,7 @@ PYBIND11_MODULE(rf24_network, m)
             :Returns: This function will always return `True` as multicasted messages do not use the radio's auto-ack feature.
         )docstr", py::arg("header"), py::arg("buf"), py::arg("level") = 7)
         .def_readwrite("multicast_relay", &RF24NetworkWrapper::multicastRelay, R"docstr(
-            This attribute detirmines if any received multicasted messages should be forwarded to the next highest network level.
+            This attribute determines if any received multicasted messages should be forwarded to the next highest network level.
             Defaults to `False`.
         )docstr")
 #endif // defined RF24NetworkMulticast
