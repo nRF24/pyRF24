@@ -1,5 +1,5 @@
 #include <pybind11/pybind11.h>
-#include <RF24.h>
+#include "pyRF24.cpp"
 #include <RF24Network.h>
 
 namespace py = pybind11;
@@ -8,7 +8,7 @@ class RF24NetworkWrapper : public RF24Network
 {
 public:
 
-    RF24NetworkWrapper(RF24 &_radio) : RF24Network(_radio)
+    RF24NetworkWrapper(RF24Wrapper &_radio) : RF24Network(_radio)
     {
     }
 
@@ -122,7 +122,7 @@ PYBIND11_MODULE(rf24_network, m)
     // *********************** RF24Network exposed ******************
     //
     py::class_<RF24NetworkWrapper>(m, "RF24Network")
-        .def(py::init<RF24 &>(), R"docstr(
+        .def(py::init<RF24Wrapper &>(), R"docstr(
             __init__(radio: RF24)
 
             Create a RF24Network object.

@@ -383,6 +383,7 @@ PYBIND11_MODULE(rf24, m) {
             :param int count: A number in range [0, 15]. This is the amount of automatic retries
                 that the radio attempts when an automatic acknowledgment is not received.
         )docstr", py::arg("delay"), py::arg("count"))
+
         // .def("set_crc_length", &RF24Wrapper::setCRCLength, R"docstr(
         //     set_crc_length(length: rf24_crclength_e)
 
@@ -412,7 +413,7 @@ PYBIND11_MODULE(rf24, m) {
         //     Configure the radio's Address Width feature.
 
         //     :param int width: The number of bytes used for address' length assigned to the data
-        //         pipes. Acepted values are clamped to range [3, 5].
+        //         pipes. Accepted values are clamped to range [3, 5].
         // )docstr", py::arg("width"))
         .def("close_rx_pipe", &RF24Wrapper::closeReadingPipe, R"docstr(
             close_rx_pipe(pipe: int)
@@ -470,7 +471,7 @@ PYBIND11_MODULE(rf24, m) {
                   available payload, then the data from the next level of the RX FIFO is returned
                   (if any).
                 - If the value specified by this parameter is grater than the length of the last
-                  available payload, then the payload's last byte is returned repetitly until the
+                  available payload, then the payload's last byte is returned repeatedly until the
                   length value is fulfilled.
             :Retruns: A `bytearray` of the specified ``length`` containing the data from the
                 payload in the RX FIFO.
@@ -500,7 +501,6 @@ PYBIND11_MODULE(rf24, m) {
 
             Initialize the radio's hardware.
 
-            :Returns: `True` if the radio was configured successfully, otherwise `False`.
         )docstr")
         .def("begin", static_cast<bool (RF24Wrapper::*)(uint16_t, uint16_t)>(&RF24Wrapper::begin), R"docstr(
             If configuring the radio's CE & CSN pins dynamically, then the respective pin numbers must be passed to this function.
@@ -535,9 +535,9 @@ PYBIND11_MODULE(rf24, m) {
 
             :param bytes,bytearray address: The address assigned to data pipe 0 for outgoing transmissions.
         )docstr", py::arg("address"))
-        .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
-            For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
-        )docstr", py::arg("address"))
+        // .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
+        //     For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
+        // )docstr", py::arg("address"))
         .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(bool)>(&RF24Wrapper::setAutoAck), R"docstr(
             set_auto_ack(enable: bool)
 
