@@ -1,6 +1,5 @@
 #include <pybind11/pybind11.h>
-#include <RF24.h>
-#include <RF24Network.h>
+#include "pyRF24Network.cpp"
 #include <RF24Mesh.h>
 
 namespace py = pybind11;
@@ -8,7 +7,7 @@ namespace py = pybind11;
 class RF24MeshWrapper : public RF24Mesh
 {
 public:
-    RF24MeshWrapper(RF24 &_radio, RF24Network &_network) : RF24Mesh(_radio, _network)
+    RF24MeshWrapper(RF24Wrapper &_radio, RF24NetworkWrapper &_network) : RF24Mesh(_radio, _network)
     {
     }
 
@@ -36,7 +35,7 @@ PYBIND11_MODULE(rf24_mesh, m)
     options.disable_function_signatures();
 
     py::class_<RF24MeshWrapper>(m, "RF24Mesh")
-        .def(py::init<RF24 &, RF24Network &>(), R"docstr(
+        .def(py::init<RF24Wrapper &, RF24NetworkWrapper &>(), R"docstr(
             __init__(radio: RF24, network: RF24Network)
 
             Create a RF24Mesh object.
