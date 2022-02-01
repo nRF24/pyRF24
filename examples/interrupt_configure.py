@@ -20,8 +20,6 @@ GPIO.cleanup()  # call this now in case it wasn't called on last program exit
 
 # Generic:
 radio = RF24(22, 0)
-# RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and
-# set 'this->device = "/dev/spidev0.0";;' or as listed in /dev
 
 # select your digital input pin that's connected to the IRQ pin on the nRF24L01
 IRQ_PIN = 12
@@ -35,7 +33,13 @@ address = [b"1Node", b"2Node"]
 # to use different addresses on a pair of radios, we need a variable to
 # uniquely identify which address this radio will use to transmit
 # 0 uses address[0] to transmit, 1 uses address[1] to transmit
-radio_number = bool(int(input("Which radio is this ('0' or '1')? ")))
+radio_number = bool(
+    int(
+        input(
+            "Which radio is this? Enter '0' or '1'. Defaults to '0' "
+        ) or 0
+    )
+)
 
 # initialize the nRF24L01 on the spi bus
 if not radio.begin():
@@ -72,23 +76,11 @@ def interrupt_handler():
     tx_ds, tx_df, rx_dr = radio.what_happened()   # update IRQ status flags
     print("\ttx_ds: {}, tx_df: {}, rx_dr: {}".format(tx_ds, tx_df, rx_dr))
     if pl_iterator[0] == 0 and rx_dr:
-        print(
-            "'data ready' event test {}".format(
-                "passed" if rx_dr else "failed"
-            )
-        )
+        print("'data ready' event test", ("passed" if rx_dr else "failed"))
     elif pl_iterator[0] == 1:
-        print(
-            "'data sent' event test {}".format(
-                "passed" if tx_ds else "failed"
-            )
-        )
+        print("'data sent' event test", ("passed" if tx_ds else "failed"))
     elif pl_iterator[0] == 2:
-        print(
-            "'data fail' event test {}".format(
-                "passed" if tx_df else "failed"
-            )
-        )
+        print("'data fail' event test", ("passed" if tx_df else "failed"))
 
 
 # setup IRQ GPIO pin
@@ -121,7 +113,7 @@ def master():
 
     # on data ready test
     print("\nConfiguring IRQ pin to only ignore 'on data sent' event")
-    radio.maskIRQ(True, False, False)  # args = tx_ds, tx_df, rx_dr
+    radio.mask_irq(True, False, False)  # args = tx_ds, tx_df, rx_dr
     print("    Pinging slave node for an ACK payload...", end=" ")
     pl_iterator[0] = 0
     radio.startWrite(tx_payloads[0], False)  # False means expecting an ACK
@@ -129,7 +121,7 @@ def master():
 
     # on "data sent" test
     print("\nConfiguring IRQ pin to only ignore 'on data ready' event")
-    radio.maskIRQ(False, False, True)  # args = tx_ds, tx_df, rx_dr
+    radio.mask_irq(False, False, True)  # args = tx_ds, tx_df, rx_dr
     print("    Pinging slave node again...             ", end=" ")
     pl_iterator[0] = 1
     radio.startWrite(tx_payloads[1], False)  # False means expecting an ACK
@@ -145,7 +137,7 @@ def master():
 
     # on "data fail" test
     print("\nConfiguring IRQ pin to go active for all events.")
-    radio.maskIRQ(False, False, False)  # args = tx_ds, tx_df, rx_dr
+    radio.mask_irq(False, False, False)  # args = tx_ds, tx_df, rx_dr
     print("    Sending a ping to inactive slave node...", end=" ")
     radio.flush_tx()  # just in case any previous tests failed
     pl_iterator[0] = 2
@@ -159,7 +151,7 @@ def master():
 
 def slave(timeout=6):  # will listen for 6 seconds before timing out
     """Only listen for 3 payload from the master node"""
-    # setup radio to recieve pings, fill TX FIFO with ACK payloads
+    # setup radio to receive pings, fill TX FIFO with ACK payloads
     radio.writeAckPayload(1, ack_payloads[0])
     radio.writeAckPayload(1, ack_payloads[1])
     radio.writeAckPayload(1, ack_payloads[2])

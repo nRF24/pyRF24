@@ -19,8 +19,6 @@ from pyrf24 import RF24, RF24_PA_LOW
 
 # Generic:
 radio = RF24(22, 0)
-# RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and
-# set 'this->device = "/dev/spidev0.0";;' or as listed in /dev
 
 # For this example, we will use different addresses
 # An address need to be a buffer protocol object (bytearray)
@@ -66,7 +64,7 @@ def master(count=10):
     radio.open_tx_pipe(address[0])  # set address of RX node into a TX pipe
 
     while count:  # only transmit `count` packets
-        # use struct.pack to packetize your data into a usable payload
+        # use struct.pack() to pack your data into a usable payload
         # "<b" means a single little endian unsigned byte.
         # NOTE we added a b"\x00" byte as a c-string's NULL terminating 0
         buffer = b"Hello \x00" + struct.pack("<b", payload[0])
@@ -87,10 +85,8 @@ def master(count=10):
                     radio.open_tx_pipe(address[0])
             end_timer = time.monotonic_ns()  # end timer
             print(
-                "Transmission successful. Sent: {}{}.".format(
-                    buffer[:6].decode("utf-8"),
-                    payload[0]
-                ),
+                "Transmission successful. Sent: ",
+                f"{buffer[:6].decode('utf-8')}{payload[0]}.",
                 end=" "
             )
             if ack[0] == 0:
@@ -104,56 +100,43 @@ def master(count=10):
                 # "<b" means its a single little endian unsigned byte
                 payload[0] = struct.unpack("<b", ack[7:])[0]
                 print(
-                    "Received: {}{}. Roundtrip delay: {} us.".format(
-                        response,
-                        payload[0],
-                        (end_timer - start_timer) / 1000
-                    )
+                    f"Received: {response}{payload[0]}. Roundtrip delay:",
+                    f"{(end_timer - start_timer) / 1000} us."
                 )
         time.sleep(1)  # make example readable by slowing down transmissions
         count -= 1
 
 
-def slave(count=10):
+def slave():
     """Polls the radio and prints the received value. This method expires
     after 6 seconds of no received transmission"""
     radio.open_rx_pipe(1, address[0])  # set TX address to an RX pipe
     radio.listen = True  # put radio into RX mode and power up
 
     start_timer = time.monotonic()  # start a timer to detect timeout
-    while count and (time.monotonic() - start_timer) < 6:
-        # receive `count` payloads or wait 6 seconds till timing out
+    while (time.monotonic() - start_timer) < 6:
+        # receive payloads or wait 6 seconds till timing out
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
-            count -= 1
             length = radio.payload_size  # grab the payload length
             received = radio.read(length)  # fetch 1 payload from RX FIFO
             # use struct.unpack() to get the payload's appended int
             # NOTE received[7:] discards NULL terminating 0, and
             # "<b" means its a single little endian unsigned byte
             payload[0] = struct.unpack("<b", received[7:])[0] + 1
-            # use bytes() to packetize our data into a usable payload
+            # use bytes() to pack our data into a usable payload
             # NOTE b"\x00" byte is a c-string's NULL terminating 0
             buffer = b"World \x00" + bytes([payload[0]])
             # save response's result
             response = radio.write(buffer)
             # print the payload received and the response's payload
             print(
-                "Received {} bytes on pipe {}: {}{}.".format(
-                    length,
-                    pipe_number,
-                    received[:6].decode("utf-8"),
-                    payload[0] - 1
-                ),
+                f"Received {length} bytes on pipe {pipe_number}:",
+                f"{received[:6].decode('utf-8')}{payload[0] - 1}.",
                 end=" "
             )
             if response:
-                print(
-                    "Sent: {}{}".format(
-                        buffer[:6].decode("utf-8"),
-                        payload[0]
-                    )
-                )
+                print(f"Sent: {buffer[:6].decode('utf-8')}{payload[0]}")
             else:
                 print("Response failed or timed out")
             start_timer = time.monotonic()  # reset the timeout timer
@@ -164,7 +147,7 @@ def slave(count=10):
 
 print(
     """\
-    RF24/examples_linux/manual_acknowledgements\n\
+    manual_acknowledgements example\n\
     Run slave() on receiver\n\
     Run master() on transmitter"""
 )

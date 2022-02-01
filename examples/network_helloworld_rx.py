@@ -31,6 +31,6 @@ while True:
         print("payload length ", len(payload))
         millis, packet_count = struct.unpack("<LL", bytes(payload))
         print(
-            f"Received payload {packet_count} at {millis} "
-            f"from {oct(header.from_node)}"
+            f"Received payload {packet_count} at {millis}",
+            f"Header details {header.to_string()}"
         )

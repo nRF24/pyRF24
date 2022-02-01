@@ -3,8 +3,8 @@ the RF24 C++ libraries."""
 from skbuild import setup
 
 
-long_description = ""
-with open("README.rst", "r") as file_handle:
+long_description = ""  # pylint: disable=invalid-name
+with open("README.rst", "r", encoding="utf-8") as file_handle:
     long_description = file_handle.read()
 
 # def exclude_rf24_utility_folder(cmake_manifest):
@@ -20,6 +20,7 @@ setup(
     long_description_content_type="text/x-rst",
     url="https://github.com/nRF24/pyRF24",
     packages=["pyrf24"],
+    package_data={"pyrf24": ["rf24.pyi", "rf24_network.pyi", "rf24_mesh.pyi"]},
     package_dir={"": "src"},
     cmake_install_dir="src/pyrf24",
     cmake_args=["-DRF24_DRIVER=SPIDEV"],

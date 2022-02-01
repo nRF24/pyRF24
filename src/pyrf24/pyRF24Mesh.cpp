@@ -53,7 +53,7 @@ PYBIND11_MODULE(rf24_mesh, m)
                 networking layer.
         )docstr", py::arg("radio"), py::arg("network"))
         .def("begin", &RF24MeshWrapper::begin, R"docstr(
-            begin() -> bool
+            begin(channel: int = 97, data_rate: int = RF24_1MBPS, timeout: int = 7500) -> bool
 
             :Returns: `True` if the radio's hardware was properly intialized and the node
                 successfully connected to the mesh network.

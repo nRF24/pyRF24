@@ -16,8 +16,6 @@ from pyrf24 import RF24, RF24_PA_LOW
 
 # Generic:
 radio = RF24(22, 0)
-# RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and
-# set 'this->device = "/dev/spidev0.0";;' or as listed in /dev
 
 # using the python keyword global is bad practice. Instead we'll use a 1 item
 # list to store our float number for the payloads sent
@@ -68,7 +66,7 @@ def master(count=5):  # count = 5 will only transmit 5 packets
     radio.listen = False  # ensures the nRF24L01 is in TX mode
 
     while count:
-        # use struct.pack to packetize your data
+        # use struct.pack() to pack your data into a usable payload
         # into a usable payload
         buffer = struct.pack("<f", payload[0])
         # "<f" means a single little endian (4 byte) float value.
@@ -79,27 +77,23 @@ def master(count=5):  # count = 5 will only transmit 5 packets
             print("Transmission failed or timed out")
         else:
             print(
-                "Transmission successful! Time to Transmit: "
-                "{} us. Sent: {}".format(
-                    (end_timer - start_timer) / 1000,
-                    payload[0]
-                )
+                "Transmission successful! Time to Transmit:",
+                f"{(end_timer - start_timer) / 1000} us. Sent: {payload[0]}"
             )
             payload[0] += 0.01
         time.sleep(1)
         count -= 1
 
 
-def slave(count=5):
+def slave():
     """Polls the radio and prints the received value. This method expires
-    after 6 seconds of no received transmission"""
+    after 6 seconds of no received transmission."""
     radio.listen = True  # put radio into RX mode and power up
 
     start = time.monotonic()
-    while count and (time.monotonic() - start) < 6:
+    while (time.monotonic() - start) < 6:
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
-            count -= 1
             length = radio.payload_size  # grab the payload length
             # fetch 1 payload from RX FIFO
             received = radio.read(length)  # also clears radio.irq_dr status flag
@@ -107,13 +101,7 @@ def slave(count=5):
             # received[:4] truncates padded 0s in case dynamic payloads are disabled
             payload[0] = struct.unpack("<f", received[:4])[0]
             # print details about the received packet
-            print(
-                "Received {} bytes on pipe {}: {}".format(
-                    length,
-                    pipe_number,
-                    payload[0]
-                )
-            )
+            print(f"Received {length} bytes on pipe {pipe_number}: {payload[0]}")
             start = time.monotonic()  # reset the timeout timer
 
     # recommended behavior is to keep in TX mode while idle
@@ -122,7 +110,7 @@ def slave(count=5):
 
 print(
     """\
-    RF24/examples_linux/getting_started\n\
+    getting_started example\n\
     Run slave() on receiver\n\
     Run master() on transmitter"""
 )

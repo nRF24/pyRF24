@@ -8,7 +8,9 @@ from pyrf24 import RF24, RF24Network, RF24Mesh
 radio = RF24(22, 0)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
-mesh.begin(0)
+mesh.node_id = 0
+if not mesh.begin():
+    raise OSError("failed to initialize radio or could not connect to mesh")
 radio.print_pretty_details()
 
 

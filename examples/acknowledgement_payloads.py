@@ -15,8 +15,6 @@ from pyrf24 import RF24, RF24_PA_LOW
 
 # Generic:
 radio = RF24(22, 0)
-# RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and
-# set 'this->device = "/dev/spidev0.0";;' or as listed in /dev
 
 # using the python keyword global is bad practice. Instead we'll use a 1 item
 # list to store our integer number for the payloads' counter
@@ -78,23 +76,15 @@ def master(count=5):  # count = 5 will only transmit 5 packets
         if result:
             # print timer results upon transmission success
             print(
-                "Transmission successful! Time to transmit: "
-                "{} us. Sent: {}{}".format(
-                    int((end_timer - start_timer) / 1000),
-                    buffer[:6].decode("utf-8"),
-                    counter[0]
-                ),
+                "Transmission successful! Time to transmit:",
+                f"{int((end_timer - start_timer) / 1000)} us. Sent:",
+                f"{buffer[:6].decode('utf-8')}{counter[0]}",
                 end=" "
             )
             if radio.available():
                 # print the received ACK that was automatically sent
                 result = radio.read(radio.get_dynamic_payload_size())
-                print(
-                    " Received: {}{}".format(
-                        result[:6].decode("utf-8"),
-                        result[7:8][0]
-                    )
-                )
+                print(f" Received: {result[:6].decode('utf-8')}{result[7:8][0]}")
                 counter[0] += 1  # increment payload counter
             else:
                 print(" Received an empty ACK packet")
@@ -104,7 +94,7 @@ def master(count=5):  # count = 5 will only transmit 5 packets
         count -= 1
 
 
-def slave(count=5):
+def slave():
     """Prints the received value and sends an ACK payload"""
     radio.listen = True  # put radio into RX mode, power it up
 
@@ -115,29 +105,23 @@ def slave(count=5):
     radio.write_ack_payload(1, buffer)  # load ACK for first response
 
     start = time.monotonic()  # start timer
-    while count and (time.monotonic() - start) < 6:  # use 6 second timeout
+    while (time.monotonic() - start) < 6:  # use 6 second timeout
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
-            count -= 1
             length = radio.get_dynamic_payload_size()  # grab the payload length
             received = radio.read(length)  # fetch 1 payload from RX FIFO
             # increment counter from received payload
             counter[0] = received[7:8][0] + 1
             print(
-                "Received {} bytes on pipe {}: {}{} Sent: {}{}".format(
-                    length,
-                    pipe_number,
-                    received[:6].decode("utf-8"),
-                    received[7:8][0],
-                    buffer[:6].decode("utf-8"),
-                    counter[0]
-                )
+                f"Received {length} bytes on pipe {pipe_number}:",
+                f"{received[:6].decode('utf-8')}{received[7:8][0]} Sent:",
+                f"{buffer[:6].decode('utf-8')}{counter[0]}"
             )
             start = time.monotonic()  # reset timer
-            if count:  # Going again?
-                # build a new ACK payload
-                buffer = b"World \x00" + bytes([counter[0]])
-                radio.write_ack_payload(1, buffer)  # load ACK for next response
+
+            # build a new ACK payload
+            buffer = b"World \x00" + bytes([counter[0]])
+            radio.write_ack_payload(1, buffer)  # load ACK for next response
 
     # recommended behavior is to keep in TX mode while idle
     radio.listen = False  # put radio in TX mode & flush unused ACK payloads

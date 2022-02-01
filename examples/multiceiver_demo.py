@@ -16,8 +16,6 @@ from pyrf24 import RF24, RF24_PA_LOW
 
 # Generic:
 radio = RF24(22, 0)
-# RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and
-# set 'this->device = "/dev/spidev0.0";;' or as listed in /dev
 
 # setup the addresses for all transmitting nRF24L01 nodes
 addresses = [
@@ -50,7 +48,7 @@ radio.print_pretty_details()
 
 
 def base(timeout=10):
-    """Use the nRF24L01 as a base station for lisening to all nodes"""
+    """Use the nRF24L01 as a base station for listening to all nodes"""
     # write the addresses to all pipes.
     for pipe_n, addr in enumerate(addresses):
         radio.open_rx_pipe(pipe_n, addr)
@@ -64,13 +62,8 @@ def base(timeout=10):
             node_id, payload_id = struct.unpack("<bi", radio.read(8))
             # show the pipe number that received the payload
             print(
-                "Received {} bytes on pipe {} from node {}. PayloadID: "
-                "{}".format(
-                    length,
-                    pipe_number,
-                    node_id,
-                    payload_id
-                )
+                f"Received {length} bytes on pipe {pipe_number} from node {node_id}.",
+                f"PayloadID: {payload_id}"
             )
             start_timer = time.monotonic()  # reset timer with every payload
     radio.listen = False
@@ -99,12 +92,8 @@ def node(node_number, count=10):
         # show something to see it isn't frozen
         if report:
             print(
-                "Transmission of payloadID {} as node {} successfull! "
-                "Transmission time: {} us".format(
-                    counter,
-                    node_number,
-                    (end_timer - start_timer) / 1000
-                )
+                f"Transmission of payloadID {counter} as node {node_number} successfull!",
+                f"Transmission time: {(end_timer - start_timer) / 1000} us"
             )
         else:
             print("Transmission failed or timed out")

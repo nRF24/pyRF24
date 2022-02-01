@@ -15,8 +15,6 @@ from pyrf24 import RF24, RF24_PA_LOW
 
 # Generic:
 radio = RF24(22, 0)
-# RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and
-# set 'this->device = "/dev/spidev0.0";;' or as listed in /dev
 
 # For this example, we will use different addresses
 # An address need to be a buffer protocol object (bytearray)
@@ -27,7 +25,13 @@ address = [b"1Node", b"2Node"]
 # to use different addresses on a pair of radios, we need a variable to
 # uniquely identify which address this radio will use to transmit
 # 0 uses address[0] to transmit, 1 uses address[1] to transmit
-radio_number = bool(int(input("Which radio is this ('0' or '1')? ")))
+radio_number = bool(
+    int(
+        input(
+            "Which radio is this? Enter '0' or '1'. Defaults to '0' "
+        ) or 0
+    )
+)
 
 # initialize the nRF24L01 on the spi bus
 if not radio.begin():
@@ -96,10 +100,8 @@ def master(count=1, size=32):
             buf_iter += 1
         end_timer = time.monotonic() * 1000  # end timer
         print(
-            "Transmission took {} ms with {} failures detected.".format(
-                end_timer - start_timer,
-                failures
-            )
+            f"Transmission took {end_timer - start_timer} ms with",
+            f"{failures} failures detected."
         )
 
 
@@ -120,7 +122,7 @@ def slave(timeout=5, size=32):
             # retreive the received packet's payload
             length = radio.get_dynamic_payload_size()
             receive_payload = radio.read(length)
-            print("Received: {} - {}".format(receive_payload, count))
+            print(f"Received: {receive_payload} - {count}")
             start_timer = time.monotonic()  # reset timer on every RX payload
 
     # recommended behavior is to keep in TX mode while idle
@@ -129,7 +131,7 @@ def slave(timeout=5, size=32):
 
 print(
     """\
-    RF24/examples_linux/streaming_data.py\n\
+    streaming_data example\n\
     Run slave() on receiver\n\
     Run master() on transmitter to use all 3 levels of the TX FIFO."""
 )

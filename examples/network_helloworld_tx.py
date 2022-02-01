@@ -5,7 +5,6 @@ Simplest possible example of using RF24Network,
 TRANSMITTER NODE
 Sends messages from to receiver.
 """
-from __future__ import print_function
 import struct
 import time
 from pyrf24 import RF24, RF24Network, RF24NetworkHeader
@@ -20,7 +19,7 @@ THIS_NODE = 0o1
 # Address of the other node
 OTHER_NODE = 0o0
 
-# ms -  How long to wait before sending the next message
+# milliseconds - How long to wait before sending the next message
 INTERVAL = 2000
 
 
@@ -45,4 +44,4 @@ while True:
         PACKETS_SENT += 1
         payload = struct.pack("<LL", now, PACKETS_SENT)
         ok = network.write(RF24NetworkHeader(OTHER_NODE), payload)
-        print("Sending... {}".format("ok" if ok else "failed"))
+        print("Sending...", ("ok" if ok else "failed"))
