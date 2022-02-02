@@ -74,7 +74,7 @@ def interrupt_handler():
     """This function is called when IRQ pin is detected active LOW"""
     print("IRQ pin went active LOW.")
     tx_ds, tx_df, rx_dr = radio.what_happened()   # update IRQ status flags
-    print("\ttx_ds: {}, tx_df: {}, rx_dr: {}".format(tx_ds, tx_df, rx_dr))
+    print(f"\ttx_ds: {tx_ds}, tx_df: {tx_df}, rx_dr: {rx_dr}")
     if pl_iterator[0] == 0 and rx_dr:
         print("'data ready' event test", ("passed" if rx_dr else "failed"))
     elif pl_iterator[0] == 1:
