@@ -7,11 +7,11 @@ namespace py = pybind11;
 class RF24MeshWrapper : public RF24Mesh
 {
 public:
-    RF24MeshWrapper(RF24Wrapper &_radio, RF24NetworkWrapper &_network) : RF24Mesh(_radio, _network)
+    RF24MeshWrapper(RF24Wrapper& _radio, RF24NetworkWrapper& _network) : RF24Mesh(_radio, _network)
     {
     }
 
-    bool write(py::object &buf, uint8_t msg_type, uint8_t nodeID = 0)
+    bool write(py::object& buf, uint8_t msg_type, uint8_t nodeID = 0)
     {
         return RF24Mesh::write(
             get_bytes_or_bytearray_str(buf),
@@ -20,7 +20,7 @@ public:
             nodeID);
     }
 
-    bool write(uint16_t to_node, py::object &buf, uint8_t msg_type)
+    bool write(uint16_t to_node, py::object& buf, uint8_t msg_type)
     {
         return RF24Mesh::write(
             to_node,
@@ -35,7 +35,6 @@ public:
     }
 };
 
-
 PYBIND11_MODULE(rf24_mesh, m)
 {
     m.doc() = "A Python module that wraps all RF24Mesh C++ library's API";
@@ -43,7 +42,7 @@ PYBIND11_MODULE(rf24_mesh, m)
     options.disable_function_signatures();
 
     py::class_<RF24MeshWrapper>(m, "RF24Mesh")
-        .def(py::init<RF24Wrapper &, RF24NetworkWrapper &>(), R"docstr(
+        .def(py::init<RF24Wrapper&, RF24NetworkWrapper&>(), R"docstr(
             __init__(radio: RF24, network: RF24Network)
 
             Create a RF24Mesh object.
@@ -51,16 +50,24 @@ PYBIND11_MODULE(rf24_mesh, m)
             :param RF24 radio: The `RF24` object used to control the radio.
             :param RF24Network network: The `RF24Network` object used to provide the base
                 networking layer.
-        )docstr", py::arg("radio"), py::arg("network"))
+        )docstr",
+             py::arg("radio"), py::arg("network"))
+
+        // *****************************************************************************
+
         .def("begin", &RF24MeshWrapper::begin, R"docstr(
-            begin(channel: int = 97, data_rate: int = RF24_1MBPS, timeout: int = 7500) -> bool
+            begin(channel: int = 97, data_rate: pyrf24.rf24.rf24_datarate_e = RF24_1MBPS, timeout: int = 7500) -> bool
 
             :Returns: `True` if the radio's hardware was properly intialized and the node
                 successfully connected to the mesh network.
 
                 .. seealso:: Use `renew_address()` in the event that the node becomes disconnected
                     from the mesh network.
-        )docstr", py::arg("channel")=MESH_DEFAULT_CHANNEL, py::arg("data_rate")=RF24_1MBPS, py::arg("timeout")=MESH_RENEWAL_TIMEOUT)
+        )docstr",
+             py::arg("channel") = MESH_DEFAULT_CHANNEL, py::arg("data_rate") = RF24_1MBPS, py::arg("timeout") = MESH_RENEWAL_TIMEOUT)
+
+        // *****************************************************************************
+
         .def("update", &RF24MeshWrapper::update, R"docstr(
             update() -> int
 
@@ -69,6 +76,9 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             :Returns: the `int` of the last received header's :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type`
         )docstr")
+
+        // *****************************************************************************
+
         .def("write", static_cast<bool (RF24MeshWrapper::*)(py::object&, uint8_t, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
             write(buf: bytes, message_type: int, to_node_id: int = 0) -> bool
 
@@ -81,7 +91,11 @@ PYBIND11_MODULE(rf24_mesh, m)
                 specified, then the message is sent to the mesh network's master node.
 
             :Returns: `True` if the message was successfully sent, otherwise `False`
-        )docstr", py::arg("buf"), py::arg("msg_type"), py::arg("node_id") = 0)
+        )docstr",
+             py::arg("buf"), py::arg("msg_type"), py::arg("node_id") = 0)
+
+        // *****************************************************************************
+
         .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, py::object&, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
             When the network node's logical address is already known, the parameters to
             Transmit a message to a specific logical address of a network node are as follows:
@@ -93,15 +107,27 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             :Returns: `True` if the message was successfully sent, otherwise `False`
         )docstr")
+
+        // *****************************************************************************
+
         .def_property("node_id", &RF24MeshWrapper::getNodeID, &RF24MeshWrapper::setNodeID, R"docstr(
             The instantiated RF24Mesh object's unique identifying number. This value must range [0, 255].
         )docstr")
+
+        // *****************************************************************************
+
         .def_readwrite("mesh_address", &RF24MeshWrapper::mesh_address, R"docstr(
             The assigned logical address (in octal) given to the node by the mesh network's master node.
         )docstr")
+
+        // *****************************************************************************
+
         .def("set_node_id", &RF24MeshWrapper::setNodeID, R"docstr(
             Configure the `node_id` attribute.
         )docstr")
+
+        // *****************************************************************************
+
         .def("get_node_id", &RF24MeshWrapper::getNodeID, R"docstr(
             get_node_id(address: int) -> int
 
@@ -117,6 +143,9 @@ PYBIND11_MODULE(rf24_mesh, m)
                   * ``-1`` means the given does not have an assigned `node_id`.
                   * ``-2`` means the mesh network's master node could not be reached to fetch the data.
         )docstr")
+
+        // *****************************************************************************
+
         .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
             dhcp()
 
@@ -125,6 +154,9 @@ PYBIND11_MODULE(rf24_mesh, m)
             .. tip:: This function should be called on mesh network's master nodes only just after
                 calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
         )docstr")
+
+        // *****************************************************************************
+
         .def("check_connection", &RF24MeshWrapper::checkConnection, R"docstr(
             check_connection() -> bool
 
@@ -134,6 +166,9 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             :Returns: `True` if connected, otherwise `False`
         )docstr")
+
+        // *****************************************************************************
+
         .def("renew_address", &RF24MeshWrapper::renewAddress, R"docstr(
             renew_address(timeout: int = 7500) -> int
 
@@ -147,7 +182,11 @@ PYBIND11_MODULE(rf24_mesh, m)
                 - If unsuccessfull, the returned integer will be the default address used by any
                   node not connected to the mesh network. This default address is ``0o4444`` (or
                   ``2340`` in decimal).
-        )docstr", py::arg("timeout") = 7.5)
+        )docstr",
+             py::arg("timeout") = 7.5)
+
+        // *****************************************************************************
+
         .def("release_address", &RF24MeshWrapper::releaseAddress, R"docstr(
             release_address() -> bool
 
@@ -159,6 +198,9 @@ PYBIND11_MODULE(rf24_mesh, m)
             :Returns: `True` if the mesh network's master node received the request to de-allocate
                 the assigned address. `False` means the wireless transaction did not complete.
         )docstr")
+
+        // *****************************************************************************
+
         .def("get_address", &RF24MeshWrapper::getAddress, R"docstr(
             get_address(node_id: int) -> int
 
@@ -171,12 +213,20 @@ PYBIND11_MODULE(rf24_mesh, m)
 
                   * ``-1`` means the `node_id` does not have an assigned address.
                   * ``-2`` means the mesh network's master node could not be reached to fetch the data.
-        )docstr", py::arg("node_id"))
+        )docstr",
+             py::arg("node_id"))
+
+        // *****************************************************************************
+
         .def("set_channel", &RF24MeshWrapper::setChannel, R"docstr(
             set_channel(channel: int)
 
             This function controls the radio's configured `channel` (AKA frequency).
-        )docstr", py::arg("channel"))
+        )docstr",
+             py::arg("channel"))
+
+        // *****************************************************************************
+
         .def("set_child", &RF24MeshWrapper::setChild, R"docstr(
             set_child(allow: bool)
 
@@ -184,7 +234,11 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             :param bool allow: Allow or disallow (`True`/`False`) the instantiated mesh network node
                 to respond to other mesh network nodes attempting to connect to the network.
-        )docstr", py::arg("allow"))
+        )docstr",
+             py::arg("allow"))
+
+        // *****************************************************************************
+
         .def("set_address", &RF24MeshWrapper::setAddress, R"docstr(
             set_address(node_id: int, address: int, search_by_address: bool = False)
 
@@ -197,7 +251,11 @@ PYBIND11_MODULE(rf24_mesh, m)
             :param bool search_by_address: Set this parameter to `True` traverse the list of
                 assigned addresses by address. The default value of `False` traverses the list of
                 assigned addresses by node_id.
-        )docstr", py::arg("node_id"), py::arg("address"), py::arg("search_by_address") = false)
+        )docstr",
+             py::arg("node_id"), py::arg("address"), py::arg("search_by_address") = false)
+
+        // *****************************************************************************
+
         .def("save_dhcp", &RF24MeshWrapper::saveDHCP, R"docstr(
             save_dhcp()
 
@@ -205,11 +263,17 @@ PYBIND11_MODULE(rf24_mesh, m)
             assigned addresses to a local binary text file. This is meant for persistence when the
             master node needs to go offline.
         )docstr")
+
+        // *****************************************************************************
+
         // .def("set_static_address", &RF24MeshWrapper::setStaticAddress, R"docstr(
         //     set_static_address(node_id: int, address: int)
 
         //     For backwards compatiblity, this function is similar to the `set_address()` function.
         // )docstr", py::arg("node_id"), py::arg("address"))
+
+        // *****************************************************************************
+
         .def("load_dhcp", &RF24MeshWrapper::loadDHCP, R"docstr(
             load_dhcp()
 

@@ -65,6 +65,11 @@ To build this python package locally, you need to have cloned this library's rep
     cd pyRF24
     python -m pip install .
 
+.. note::
+    Installing the package can take a long time, and you might think that pip is frozen
+    on the step labeled "Building wheel for pyrf24 (pyproject.toml)". Just wait for about
+    5 minutes (maybe longer on older/slower variants of Raspberry Pi).
+
 Using a specific RF24 driver
 ----------------------------
 

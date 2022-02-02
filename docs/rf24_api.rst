@@ -22,7 +22,6 @@ Enum classes
         "RF24_2MBPS (1)", "for 2 Mbps"
         "RF24_250KBPS (2)", "for 250 kbps"
 
-
 .. class:: pyrf24.rf24.rf24_pa_dbm_e
 
     .. csv-table::
@@ -76,19 +75,25 @@ Configurable RF24 API
 
 .. .. automethod:: pyrf24.rf24.RF24.set_address_width
 .. autoattribute:: pyrf24.rf24.RF24.address_width
+
 .. automethod:: pyrf24.rf24.RF24.set_retries
+
 .. autoattribute:: pyrf24.rf24.RF24.channel
+
 .. autoattribute:: pyrf24.rf24.RF24.payload_size
 .. automethod:: pyrf24.rf24.RF24.get_dynamic_payload_size
 .. .. automethod:: pyrf24.rf24.RF24.enable_ack_payload
 .. .. automethod:: pyrf24.rf24.RF24.disable_ack_payload
 .. .. automethod:: pyrf24.rf24.RF24.enable_dynamic_payloads
 .. .. automethod:: pyrf24.rf24.RF24.disable_dynamic_payloads
-.. autoattribute:: pyrf24.rf24.RF24.ack_payloads
 .. autoattribute:: pyrf24.rf24.RF24.dynamic_payloads
+.. autoattribute:: pyrf24.rf24.RF24.ack_payloads
+
 .. automethod:: pyrf24.rf24.RF24.enable_dynamic_ack
 .. automethod:: pyrf24.rf24.RF24.set_auto_ack
+
 .. automethod:: pyrf24.RF24.toggle_all_pipes
+
 .. automethod:: pyrf24.RF24.set_radiation
 .. automethod:: pyrf24.rf24.RF24.set_pa_level
 .. automethod:: pyrf24.rf24.RF24.get_pa_level
@@ -96,9 +101,12 @@ Configurable RF24 API
 .. .. automethod:: pyrf24.rf24.RF24.set_data_rate
 .. .. automethod:: pyrf24.rf24.RF24.get_data_rate
 .. autoattribute:: pyrf24.rf24.RF24.data_rate
+
 .. .. automethod:: pyrf24.rf24.RF24.set_crc_length
 .. .. automethod:: pyrf24.rf24.RF24.get_crc_length
 .. autoattribute:: pyrf24.rf24.RF24.crc_length
+
 .. automethod:: pyrf24.rf24.RF24.mask_irq
+
 .. automethod:: pyrf24.rf24.RF24.start_const_carrier
 .. automethod:: pyrf24.rf24.RF24.stop_const_carrier
