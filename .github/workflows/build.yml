@@ -20,17 +20,17 @@ jobs:
         run: |
           sudo apt-get install python3-dev
           python3 -m pip install --upgrade pip pylint
-          python3 -m pip install -r docs/requirements.txt
-
-      - name: Library version
-        run: git describe --dirty --always --tags
+          python3 -m pip install -r docs/requirements.txt -r requirements.txt
 
       - name: Build package for docs extraction and linting examples
-        run: python3 -m pip install .
+        id: wheel
+        run:
+          python3 setup.py bdist_wheel
+          python3 -m pip install $(ls dist/pyrf24-*.whl)
 
       - name: check python examples PEP8 compliance
         run: |
-          pylint examples/*.py --disable=duplicate-code,consider-using-f-string
+          pylint examples/*.py --disable=duplicate-code
         # duplicate-code error gets flagged because some examples use similar code snippets
 
       - name: Build docs
@@ -46,7 +46,5 @@ jobs:
 
       - name: Validate distribution
         run: |
-          rm -r _skbuild/
-          python3 -m pip install -r requirements.txt twine
-          python3 setup.py bdist
+          python3 -m pip install twine
           twine check dist/*

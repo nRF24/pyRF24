@@ -27,7 +27,7 @@ extensions = [
     "sphinx_immaterial",
 ]
 
-intersphinx_mapping = {"python": ("https://docs.python.org/3.7", None)}
+intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 # autodoc gets confused about __init__() functions' signature when overloaded
 #
@@ -98,7 +98,7 @@ html_theme_options = {
     "globaltoc_includehidden": True,
 }
 # Set link name generated in the top bar.
-html_title = "RF24 C++ library"
+html_title = "pyRF24 library"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

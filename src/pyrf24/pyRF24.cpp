@@ -315,6 +315,12 @@ PYBIND11_MODULE(rf24, m) {
             Print out details about the radio's configuration. This function differs from
             `print_details()` as the output for this function is more human-friendly/readable.
         )docstr")
+        .def("sprintf_pretty_details", &RF24Wrapper::sprintfPrettyDetails, R"docstr(
+            Put details about the radio's configuration into a string. This function differs from
+            `print_pretty_details()` as it does not use stdout output stream.
+
+            :Returns: A string that describes the radio's details.
+        )docstr")
         .def("reuse_tx", &RF24Wrapper::reUseTX, R"docstr(
             Re-use the 1\ :sup:`st` level of the radio's TX FIFO.
         )docstr")
@@ -339,7 +345,7 @@ PYBIND11_MODULE(rf24, m) {
         // .def("is_plus_variant", &RF24Wrapper::isPVariant, R"docstr(
         //     Is the detected radio compatible with the nRF24L01+ family?
 
-        //     :Returns: `True` of the radio is a nRF24L01+ model (or compatible), otherwose `False`.
+        //     :Returns: `True` of the radio is a nRF24L01+ model (or compatible), otherwise `False`.
         // )docstr")
         // .def("test_rpd", &RF24Wrapper::testRPD, R"docstr(
         //     :Returns: `True` if a signal (above -64 dbm) was detected in RX mode, otherwise `False`.
@@ -372,6 +378,18 @@ PYBIND11_MODULE(rf24, m) {
 
         // **************************************** functions that take args
 
+        .def("set_radiation", &RF24Wrapper::setRadiation, R"docstr(
+            set_radiation(level: rf24_pa_dbm_e, speed: rf24_datarate_e, lna_enable: bool = True)
+
+            Configure the RF_SETUP register in 1 SPI transaction.
+
+            :param rf24_pa_dbm_e level: The desired Power Amplitude level. Options are defined in the
+                `rf24_pa_dbm_e` enum.
+            :param rf24_datarate_e speed: The desired RF data rate. Options are defined in the
+                `rf24_datarate_e` enum.
+            :param bool lna_enable: A toggle for radio's that support controlling the Low Noise
+                Amplifier feature. This is always enabled by default and when not specified.
+        )docstr", py::arg("level"), py::arg("speed"), py::arg("lna_enable")=true)
         .def("set_retries", &RF24Wrapper::setRetries, R"docstr(
             set_retries(delay: int, count: int)
 
@@ -538,6 +556,15 @@ PYBIND11_MODULE(rf24, m) {
         // .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
         //     For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
         // )docstr", py::arg("address"))
+        .def("toggle_all_pipes", &RF24Wrapper::toggleAllPipes, R"docstr(
+            toggle_all_pipes(enable: bool)
+
+            Open or close all pipes with 1 SPI transaction. This does not alter the addresses assigned to
+            the data pipes (using `open_rx_pipe()` or `open_tx_pipe()`).
+
+            :param bool enable: `True` opens all data pipes for RX operation.
+                `False` closes all data pipes for RX operation.
+        )docstr", py::arg("enable"))
         .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(bool)>(&RF24Wrapper::setAutoAck), R"docstr(
             set_auto_ack(enable: bool)
 
@@ -600,6 +627,10 @@ PYBIND11_MODULE(rf24, m) {
 
             | 2400 MHz + 76 = 2.4076 GHz
         )docstr")
+        .def_property("pa_level", &RF24Wrapper::getPALevel, &RF24Wrapper::setPALevel, R"docstr(
+            This attribute represents the radio's configured Power Amplitude level. Options are defined in the
+            `rf24_pa_dbm_e` enum.
+        )docstr")
         .def_property("payload_size", &RF24Wrapper::getPayloadSize, &RF24Wrapper::setPayloadSize, R"docstr(
             This attribute represents the radio's static payload lengths.
 
@@ -654,7 +685,7 @@ PYBIND11_MODULE(rf24, m) {
             Check if the SPI bus is working with the radio.
         )docstr")
 
-        // functions that need python's bytearray wrapped/casted to char *buffer
+        // **************** functions that accept python's buffer protocol objects (bytes, bytearray)
         .def("start_fast_write", &RF24Wrapper::startFastWrite, R"docstr(
             start_fast_write(buf: bytes, multicast: bool = False, start_tx: bool = True) -> None
 

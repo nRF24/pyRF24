@@ -48,6 +48,7 @@ Advanced RF24 API
 .. autoattribute:: pyrf24.rf24.RF24.failure_detected
 .. automethod:: pyrf24.rf24.RF24.print_details
 .. automethod:: pyrf24.rf24.RF24.print_pretty_details
+.. automethod:: pyrf24.rf24.RF24.sprintf_pretty_details
 .. automethod:: pyrf24.rf24.RF24.available_pipe
 .. automethod:: pyrf24.rf24.RF24.is_fifo
 .. .. autoattribute:: pyrf24.rf24.RF24.rx_fifo_full
@@ -87,8 +88,11 @@ Configurable RF24 API
 .. autoattribute:: pyrf24.rf24.RF24.dynamic_payloads
 .. automethod:: pyrf24.rf24.RF24.enable_dynamic_ack
 .. automethod:: pyrf24.rf24.RF24.set_auto_ack
+.. automethod:: pyrf24.RF24.toggle_all_pipes
+.. automethod:: pyrf24.RF24.set_radiation
 .. automethod:: pyrf24.rf24.RF24.set_pa_level
 .. automethod:: pyrf24.rf24.RF24.get_pa_level
+.. autoattribute:: pyrf24.RF24.pa_level
 .. .. automethod:: pyrf24.rf24.RF24.set_data_rate
 .. .. automethod:: pyrf24.rf24.RF24.get_data_rate
 .. autoattribute:: pyrf24.rf24.RF24.data_rate
