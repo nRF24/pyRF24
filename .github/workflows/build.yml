@@ -24,7 +24,7 @@ jobs:
 
       - name: Build package for docs extraction and linting examples
         id: wheel
-        run:
+        run: |
           python3 setup.py bdist_wheel
           python3 -m pip install $(ls dist/pyrf24-*.whl)
 
