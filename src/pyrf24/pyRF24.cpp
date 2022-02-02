@@ -156,6 +156,11 @@ public:
         return debug_info;
     }
 
+    void set_radiation(rf24_pa_dbm_e level, rf24_datarate_e speed, bool lna_enable = true)
+    {
+        RF24::setRadiation(level, speed, lna_enable);
+    }
+
     /*********************************************************************************/
     /* wrappers for python-like properties */
 
@@ -498,7 +503,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
         // **************************************** functions that take args
 
-        .def("set_radiation", &RF24Wrapper::setRadiation, R"docstr(
+        .def("set_radiation", &RF24Wrapper::set_radiation, R"docstr(
             set_radiation(level: rf24_pa_dbm_e, speed: rf24_datarate_e, lna_enable: bool = True)
 
             Configure the RF_SETUP register in 1 SPI transaction.
