@@ -85,7 +85,7 @@ public:
         char* payload = new char[length + 1];
         RF24::read(payload, length);
         payload[length] = '\0';
-        py::bytearray buf = py::bytearray(std::string(payload));
+        py::bytearray buf = py::bytearray(payload, length);
         delete[] payload;
         return buf;
     }
