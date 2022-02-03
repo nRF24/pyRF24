@@ -1,8 +1,41 @@
 #include <pybind11/pybind11.h>
 #include "pyRF24.cpp"
 #include <RF24Network.h>
+#include <deque>
+#include <pybind11/stl.h>
 
 namespace py = pybind11;
+
+
+struct RF24NetworkFrameWrapper : public RF24NetworkFrame
+{
+    RF24NetworkFrameWrapper() : RF24NetworkFrame()
+    {
+    }
+
+    RF24NetworkFrameWrapper(RF24NetworkHeader &header, py::object &message)
+    {
+        RF24NetworkFrame::header = header;
+        set_message(message);
+    }
+
+    py::bytearray get_message()
+    {
+        char* buf = new char[MAX_PAYLOAD_SIZE + 1];
+        memcpy(reinterpret_cast<uint8_t*>(buf), RF24NetworkFrame::message_buffer, RF24NetworkFrame::message_size);
+        buf[RF24NetworkFrame::message_size] = '\0';
+        py::bytearray py_ba = py::bytearray(buf, RF24NetworkFrame::message_size);
+        delete[] buf;
+        return py_ba;
+    }
+
+    void set_message(py::object &message)
+    {
+        RF24NetworkFrame::message_size = static_cast<uint16_t>(get_bytes_or_bytearray_ln(message));
+        memcpy(RF24NetworkFrame::message_buffer, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(message)), RF24NetworkFrame::message_size);
+    }
+};
+
 
 class RF24NetworkWrapper : public RF24Network
 {
@@ -58,12 +91,13 @@ public:
         return std::tuple<RF24NetworkHeader, py::bytearray>(header, py_ba);
     }
 
-    bool write(RF24NetworkHeader& header, py::object& buf)
+    bool write(RF24NetworkHeader& header, py::object& buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
     {
         return RF24Network::write(
             header,
             get_bytes_or_bytearray_str(buf),
-            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)));
+            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            writeDirect);
     }
 
     uint16_t get_node_address()
@@ -72,11 +106,27 @@ public:
     }
 };
 
+
 PYBIND11_MODULE(rf24_network, m)
 {
     m.doc() = "A Python module that wraps all RF24Network C++ library's API";
     py::options options;
     options.disable_function_signatures();
+
+    // **************** Module level constants *********************
+    // 
+    m.attr("MAX_USER_DEFINED_HEADER_TYPE") = MAX_USER_DEFINED_HEADER_TYPE;
+    m.attr("NETWORK_ADDR_RESPONSE") = NETWORK_ADDR_RESPONSE;
+    m.attr("NETWORK_PING") = NETWORK_PING;
+    m.attr("EXTERNAL_DATA_TYPE") = EXTERNAL_DATA_TYPE;
+    m.attr("NETWORK_FIRST_FRAGMENT") = NETWORK_FIRST_FRAGMENT;
+    m.attr("NETWORK_MORE_FRAGMENTS") = NETWORK_MORE_FRAGMENTS;
+    m.attr("NETWORK_LAST_FRAGMENT") = NETWORK_LAST_FRAGMENT;
+    m.attr("NETWORK_ACK") = NETWORK_ACK;
+    m.attr("NETWORK_POLL") = NETWORK_POLL;
+    m.attr("NETWORK_REQ_ADDRESS") = NETWORK_REQ_ADDRESS;
+    m.attr("FLAG_FAST_FRAG") = FLAG_FAST_FRAG;
+    m.attr("FLAG_NO_POLL") = FLAG_NO_POLL;
 
     // **************** RF24NetworkHeader exposed  *****************
     //
@@ -94,7 +144,9 @@ PYBIND11_MODULE(rf24_network, m)
             :param int type: Set the header's `type` attribute.
 
             .. hint:: These parameters can be left unspecified to create a blank object that can
-                be augmented after instantiation.
+                be augmented after instantiation. However, the header's
+                :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.next_id`
+                is not automatically incremented when no parameters are given.
         )docstr",
              py::arg("to"), py::arg("type") = 0)
 
@@ -138,20 +190,46 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readwrite("type", &RF24NetworkHeader::type, R"docstr(
-            The type of frame sent. Users are encouraged to use an integer in range [0, 127] as
-            integers in range [128, 255] are reserved for system usage.
+            The type of frame sent. Users are encouraged to use an integer in range [0, 127]
+            because integers in range [128, 255] are reserved for system usage.
         )docstr")
 
         // *****************************************************************************
 
         .def_readwrite_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
             The next sequential identifying number used for the next created frame. It is not
-            advised to alter this attribute.
+            advised to alter this attribute (unless creating a blank header without specifying
+            any parameters to the constructor).
         )docstr")
 
         // *****************************************************************************
 
         .def("__repr__", [](RF24NetworkHeader& obj) { return std::string("<RF24NetworkHeader ") + std::string(obj.toString()) + std::string(">"); });
+
+    // *********************** RF24Network exposed ******************
+    //
+    py::class_<RF24NetworkFrameWrapper>(m, "RF24NetworkFrame")
+        .def(py::init<RF24NetworkHeader&, py::object&>(), R"docstr(
+            __init__(header: RF24NetworkHeader = None, message: Union[bytes, bytearray] = None)
+
+            :param RF24NetworkHeader header: The RF24NetworkHeader associated with the frame.
+            :param bytes,bytearray message: The 'message' or data.
+        )docstr")
+        .def(py::init<>(), R"docstr(
+            .. tip::
+                Simply constructs a blank frame with no parameters. Frames are generally used internally.
+                See :py:class:`RF24NetworkHeader`.
+        )docstr")
+        .def_readwrite("header", &RF24NetworkFrameWrapper::header, R"docstr(
+            The :py:class:`~pyrf24.rf24_network.RF24NetworkHeader` object about the frame's message.
+        )docstr")
+        .def_property("message_buffer", &RF24NetworkFrameWrapper::get_message, &RF24NetworkFrameWrapper::set_message, R"docstr(
+            The frame's message buffer. This is typically a `bytearray`.
+        )docstr")
+        .def_readonly("message_size", &RF24NetworkFrameWrapper::message_size, R"docstr(
+            A read-only attribute that returns the length of the message. This is set accordingly
+            when the :py:attr:`~pyrf24.rf24_network.RF24NetworkFrame.message_buffer` is changed.
+        )docstr");
 
     // *********************** RF24Network exposed ******************
     //
@@ -180,7 +258,7 @@ PYBIND11_MODULE(rf24_network, m)
 
             Give the instantiated network node a logical address.
 
-            :param int node_addess: This is a logical address (set in octal format).
+            :param int node_addess: This is a logical address (typically an octal integer).
         )docstr",
              py::arg("node_address"))
 
@@ -193,7 +271,7 @@ PYBIND11_MODULE(rf24_network, m)
 
                 .. seealso:: Use :py:attr:`~pyrf24.rf24.RF24.channel` attribute to change the radio
                     channel.
-            :param int node_address: This is a logical address (set in octal format).
+            :param int node_address: This is a logical address (typically an octal integer).
         )docstr",
              py::arg("channel"), py::arg("node_address"))
 
@@ -220,7 +298,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("read", &RF24NetworkWrapper::read, R"docstr(
-            read(maxlen: int = 144) -> Tuple(RF24NetworkHeader, bytearray)
+            read(maxlen: int = 144) -> Tuple[RF24NetworkHeader, bytearray]
 
             Fetch the next available frame received by the network node. This differs from `peek()` as it removes the frame from the queue.
 
@@ -237,7 +315,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("peek", &RF24NetworkWrapper::peek_header, R"docstr(
-            peek(arg: Union(RF24NetworkHeader, int)) -> Union(int, Tuple(RF24NetworkHeader, bytearray))
+            peek(arg: Union[RF24NetworkHeader, int]) -> Union[int, Tuple[RF24NetworkHeader, bytearray]]
             To fetch the next available frame's header received by the network node, the parameter and return type is as follows:
 
             :param RF24NetworkHeader header: The object to save the header information to.
@@ -265,22 +343,24 @@ PYBIND11_MODULE(rf24_network, m)
             Keep the network layer current. This function should be called regularly in the application.
             For applications that have a long-running operations in 1 "loop"/iteration, then it is advised to call this function more than once.
 
-            :Returns: the `int` of the last received header's :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type`
+            :Returns: The `int` of the last received header's :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type`
         )docstr")
 
         // *****************************************************************************
 
         .def("write", &RF24NetworkWrapper::write, R"docstr(
-            write(header: RF24NetworkHeader, buf: bytes) -> bool
+            write(header: RF24NetworkHeader, buf: Union[bytes, bytearray], write_direct: int = 0o70) -> bool
 
             Send an outgoing frame over the network.
 
             :param RF24NetworkHeader header: The outgoing frame's `RF24NetworkHeader` about the outgoing message.
             :param bytes,bytearray buf: The outgoing frame's message (AKA buffer).
+            :param int write_direct: An optional parameter to route the message directly to a specified node.
+                The default value will invoke automatic routing.
 
             :Returns: `True` if the frame was successfully sent or otherwise `False`.
         )docstr",
-             py::arg("header"), py::arg("buf"))
+             py::arg("header"), py::arg("buf"), py::arg("write_direct") = NETWORK_AUTO_ROUTING)
 
 #if defined RF24NetworkMulticast
         // *****************************************************************************
@@ -300,7 +380,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("multicast", &RF24NetworkWrapper::multicast, R"docstr(
-            multicast(header: RF24NetworkHeader, buf: bytes, level: int = 7) -> bool
+            multicast(header: RF24NetworkHeader, buf: Union[bytes, bytearray], level: int = 7) -> bool
 
             Broadcast a message to all nodes in a network level.
 
@@ -317,7 +397,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readwrite("multicast_relay", &RF24NetworkWrapper::multicastRelay, R"docstr(
-            This attribute determines if any received multicasted messages should be forwarded to the next highest network level.
+            This `bool` attribute determines if any received multicasted messages should be forwarded to the next highest network level.
             Defaults to `False`.
         )docstr")
 #endif // defined RF24NetworkMulticast
@@ -338,25 +418,54 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readwrite("tx_timeout", &RF24NetworkWrapper::txTimeout, R"docstr(
-            The timeout value (in milliseconds) to ensure a frame is properly sent. Defaults to 25.
+            The timeout `int` value (in milliseconds) to ensure a frame is properly sent. Defaults to 25.
         )docstr")
 
         // *****************************************************************************
 
         .def_readwrite("route_timeout", &RF24Network::routeTimeout, R"docstr(
-            The timeout value (in milliseconds) used to wait for a Network ACK message. Defaults to 75.
+            The timeout `int` value (in milliseconds) used to wait for a Network ACK message. Defaults to 75.
         )docstr")
 
         // *****************************************************************************
 
         .def_readwrite("return_sys_msgs", &RF24Network::returnSysMsgs, R"docstr(
-            This `bool` attribute is used by RF24Mesh to force
-            :py:meth:`~pyrf24.rf24_network.RF24Network.update()` to return when handling a frame containing a system message.
+            This `bool` attribute is used by RF24Mesh to force :py:meth:`~pyrf24.rf24_network.RF24Network.update()`
+            to return when handling a frame containing a system message.
+
+            When this attribute is enabled, the following system messages are not returned because they are handled
+            internally.
+
+            .. csv-table::
+                :header: Message Name, Numeric Value, Additional Context
+
+                :py:attr:`~pyrf24.rf24_network.NETWORK_ADDR_RESPONSE`, 128, 
+                :py:attr:`~pyrf24.rf24_network.NETWORK_ACK`, 193,
+                :py:attr:`~pyrf24.rf24_network.NETWORK_PING`, 130,
+                :py:attr:`~pyrf24.rf24_network.NETWORK_POLL`, 194,  With multicast enabled (which is enabled by default)
+                :py:attr:`~pyrf24.rf24_network.NETWORK_REQ_ADDRESS`, 195,
         )docstr")
+
+        // *****************************************************************************
+
+        /// TODO: need to write a custom type caster for std::queue to expose the external_queue member
+        // .def_readwrite("external_queue", &RF24NetworkWrapper::external_queue, R"docstr(
+        //     Data with a header type of :py:attr:`~pyrf24.rf24_network.EXTERNAL_DATA_TYPE` will be loaded into a separate queue.
+        // )docstr")
+
+        // *****************************************************************************
+
+        /// TODO: Optionally expose the frame_buffer member as mutable bytearray (or immutable bytes) object.
 
         // *****************************************************************************
 
         .def_readwrite("network_flags", &RF24Network::networkFlags, R"docstr(
             A 4-bit integer used to indicate special system behavior. Currently only bit positions 2 and 3 are used.
+
+            .. csv-table::
+                :header: Flags, Value, Description
+
+                :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Replaces the fastFragTransfer variable and allows for faster transfers between directly connected nodes.
+                :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables NETWORK_POLL responses on a node-by-node basis.
         )docstr");
 }
