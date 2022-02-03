@@ -817,7 +817,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("is_fifo", static_cast<bool (RF24Wrapper::*)(const bool, const bool)>(&RF24Wrapper::is_fifo), R"docstr(
-            is_fifo(about_tx: bool, check_empty: bool = None) -> Union(bool, int)
+            is_fifo(about_tx: bool, check_empty: bool = None) -> Union[bool, int]
 
             :param bool about_tx: Ensure the returned data is about the TX FIFO. Set this to `False`
                 to make returned data describe the RX FIFO.
@@ -913,13 +913,16 @@ PYBIND11_MODULE(rf24, m)
             .. seealso::
                 Review `write_ack_payload()` and `set_auto_ack()`.
         )docstr")
+
+        // *****************************************************************************
+
         .def_property("address_width", &RF24Wrapper::get_address_width, &RF24Wrapper::setAddressWidth, R"docstr(
             This `int` attribute represents length of addresses used on the radio's data pipes. Accepted values range [2, 5].
         )docstr")
 
-    // *****************************************************************************
-
 #if defined(FAILURE_HANDLING)
+        // *****************************************************************************
+
         .def_readwrite("failure_detected", &RF24Wrapper::failureDetected, R"docstr(
             The number of accumulative transmission failures.
         )docstr")
@@ -965,7 +968,7 @@ PYBIND11_MODULE(rf24, m)
         // **************** functions that accept python's buffer protocol objects (bytes, bytearray)
 
         .def("start_fast_write", &RF24Wrapper::startFastWrite, R"docstr(
-            start_fast_write(buf: bytes, multicast: bool = False, start_tx: bool = True) -> None
+            start_fast_write(buf: Union[bytearray, bytes], multicast: bool = False, start_tx: bool = True) -> None
 
             Write a payload to the radio's TX FIFO.
 
@@ -989,7 +992,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("start_write", &RF24Wrapper::startWrite, R"docstr(
-            start_write(buf: bytes, multicast: bool = False) -> bool
+            start_write(buf: Union[bytearray, bytes], multicast: bool = False) -> bool
 
             For backward compatibility, this function is similar to `start_fast_write()`.
 
@@ -1008,7 +1011,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("write", &RF24Wrapper::write, R"docstr(
-            write(buf: bytes, multicast: bool = False, start_tx: bool = True) -> bool
+            write(buf: Union[bytearray, bytes], multicast: bool = False) -> bool
 
             Transmit a single payload.
 
@@ -1027,7 +1030,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("write_ack_payload", &RF24Wrapper::writeAckPayload, R"docstr(
-            write_ack_payload(pipe: int, buf: bytes) -> bool
+            write_ack_payload(pipe: int, buf: Union[bytearray, bytes]) -> bool
 
             Load a payload into the TX FIFO to be used in the ACK packet of automatic acknowledgements.
 
@@ -1043,7 +1046,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("write_blocking", &RF24Wrapper::writeBlocking, R"docstr(
-            write_blocking(buf: bytes, timeout: int) -> bool
+            write_blocking(buf: Union[bytearray, bytes], timeout: int) -> bool
 
             A blocking function to load a payload into the radio's TX FIFO. If there is no un-occupied
             level of the TX FIFO, this function waits until a level becomes available or the specified
@@ -1060,7 +1063,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("write_fast", &RF24Wrapper::writeFast, R"docstr(
-            write_fast(buf: bytes, multicast: bool = False) -> bool
+            write_fast(buf: Union[bytearray, bytes], multicast: bool = False) -> bool
 
             Simply load a payload into the radio's TX FIFO and assert the radio's CE pin to activate transmission.
 

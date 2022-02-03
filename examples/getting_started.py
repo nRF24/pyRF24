@@ -1,6 +1,8 @@
 """
 Simple example of using the RF24 class.
 """
+import sys
+import argparse
 import time
 import struct
 from pyrf24 import RF24, RF24_PA_LOW
@@ -13,8 +15,6 @@ from pyrf24 import RF24, RF24_PA_LOW
 # their own pin numbering
 # CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
-
-# Generic:
 radio = RF24(22, 0)
 
 # using the python keyword global is bad practice. Instead we'll use a 1 item
@@ -31,11 +31,7 @@ address = [b"1Node", b"2Node"]
 # uniquely identify which address this radio will use to transmit
 # 0 uses address[0] to transmit, 1 uses address[1] to transmit
 radio_number = bool(
-    int(
-        input(
-            "Which radio is this? Enter '0' or '1'. Defaults to '0' "
-        ) or 0
-    )
+    int(input("Which radio is this? Enter '0' or '1'. Defaults to '0' ") or 0)
 )
 
 # initialize the nRF24L01 on the spi bus
@@ -61,7 +57,7 @@ radio.payload_size = len(struct.pack("<f", payload[0]))
 radio.print_details()
 
 
-def master(count=5):  # count = 5 will only transmit 5 packets
+def master(count: int = 5):  # count = 5 will only transmit 5 packets
     """Transmits an incrementing float every second"""
     radio.listen = False  # ensures the nRF24L01 is in TX mode
 
@@ -78,20 +74,20 @@ def master(count=5):  # count = 5 will only transmit 5 packets
         else:
             print(
                 "Transmission successful! Time to Transmit:",
-                f"{(end_timer - start_timer) / 1000} us. Sent: {payload[0]}"
+                f"{(end_timer - start_timer) / 1000} us. Sent: {payload[0]}",
             )
             payload[0] += 0.01
         time.sleep(1)
         count -= 1
 
 
-def slave():
+def slave(timeout: int = 6):
     """Polls the radio and prints the received value. This method expires
     after 6 seconds of no received transmission."""
     radio.listen = True  # put radio into RX mode and power up
 
     start = time.monotonic()
-    while (time.monotonic() - start) < 6:
+    while (time.monotonic() - start) < timeout:
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
             length = radio.payload_size  # grab the payload length
@@ -108,9 +104,64 @@ def slave():
     radio.listen = False  # put the nRF24L01 is in TX mode
 
 
-print(
-    """\
-    getting_started example\n\
-    Run slave() on receiver\n\
-    Run master() on transmitter"""
-)
+def set_role():
+    """Set the role using stdin stream. Timeout arg for slave() can be
+    specified using a space delimiter (e.g. 'R 10' calls `slave(10)`)
+
+    :return:
+        - True when role is complete & app should continue running.
+        - False when app should exit
+    """
+    user_input = (
+        input(
+            "*** Enter 'R' for receiver role.\n"
+            "*** Enter 'T' for transmitter role.\n"
+            "*** Enter 'Q' to quit example.\n"
+        )
+        or "?"
+    )
+    user_input = user_input.split()
+    if user_input[0].upper().startswith("R"):
+        slave(*[int(x) for x in user_input[1:2]])
+        return True
+    if user_input[0].upper().startswith("T"):
+        master(*[int(x) for x in user_input[1:2]])
+        return True
+    if user_input[0].upper().startswith("Q"):
+        radio.power = False
+        return False
+    print(user_input[0], "is an unrecognized input. Please try again.")
+    return set_role()
+
+
+print(sys.argv[0])  # print example name
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "-r",
+        "--role",
+        type=int,
+        choices=range(2),
+        help="'1' specifies the TX role. '0' specifies the RX role.",
+    )
+    args = parser.parse_args()  # parse any CLI args
+
+    try:
+        if args.role is None:  # if not specified with CLI arg '-r'
+            while set_role():
+                pass  # continue example until 'Q' is entered
+        elif bool(args.role):  # if role was set using CLI args, run role once and exit
+            master()
+        else:
+            slave()
+    except KeyboardInterrupt:
+        print(" Keyboard Interrupt detected. Exiting...")
+        radio.power = False
+        sys.exit()
+else:
+    print("    Run slave() on receiver\n    Run master() on transmitter")
