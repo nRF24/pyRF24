@@ -2,7 +2,6 @@
 """
 Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.
 """
-import sys
 import time
 import struct
 from pyrf24 import RF24, RF24Network, RF24Mesh

@@ -19,10 +19,6 @@ radio = RF24(22, 0)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
 
-# set the Power Amplifier level to -12 dBm since this test example is
-# usually run with nRF24L01 transceivers in close proximity
-radio.pa_level = RF24_PA_LOW
-
 print(sys.argv[0])
 IS_MESH = (
     (
@@ -59,6 +55,10 @@ else:
     if not radio.begin():
         raise OSError("radio hardware not responding")
     network.begin(THIS_NODE)
+
+# set the Power Amplifier level to -12 dBm since this test example is
+# usually run with nRF24L01 transceivers in close proximity
+radio.pa_level = RF24_PA_LOW
 
 # This example covers fragmented payloads also. Set a sentinel for readability.
 MAX_FRAG_SIZE = 24

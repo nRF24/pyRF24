@@ -177,7 +177,7 @@ class FakeBLE(RF24):
     """A class to implement BLE advertisements using the nRF24L01."""
 
     def __init__(self, ce_pin: int = 0xFFFF, csn: int = 0xFFFF, spi_frequency=10000000):
-        super().__init__(ce_pin, csn, spi_frequency=spi_frequency)
+        super().__init__(ce_pin, csn, spi_frequency)
         self._curr_freq = 2
         self._show_dbm = False
         self._ble_name = None
