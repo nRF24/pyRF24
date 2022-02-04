@@ -37,9 +37,21 @@ from .rf24_mesh import (
     MESH_ADDR_RELEASE,
     MESH_ID_LOOKUP,
 )
-
-
-def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
-    """Convert a buffer into a hexlified string."""
-    order = range(len(buf) - 1, -1, -1) if reverse else range(len(buf))
-    return delimit.join(["%02X" % buf[byte] for byte in order])
+from .fake_ble import (
+    address_repr,
+    swap_bits,
+    reverse_bits,
+    crc24_ble,
+    chunk,
+    whitener,
+    BLE_FREQ,
+    BATTERY_UUID,
+    EDDYSTONE_UUID,
+    TEMPERATURE_UUID,
+    QueueElement,
+    FakeBLE,
+    ServiceData,
+    UrlServiceData,
+    BatteryServiceData,
+    TemperatureServiceData,
+)

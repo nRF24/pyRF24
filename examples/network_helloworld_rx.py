@@ -25,13 +25,16 @@ radio.print_pretty_details()
 
 EXPECTED_SIZE = struct.calcsize("<LL")
 
-while True:
-    network.update()
-    while network.available():
-        header, payload = network.read()
-        print("payload length ", len(payload))
-        millis, packet_count = struct.unpack("<LL", payload[: EXPECTED_SIZE])
-        print(
-            f"Received payload {packet_count} at {millis}",
-            f"Header details {header.to_string()}"
-        )
+try:
+    while True:
+        network.update()
+        while network.available():
+            header, payload = network.read()
+            print("payload length ", len(payload))
+            millis, packet_count = struct.unpack("<LL", payload[:EXPECTED_SIZE])
+            print(
+                f"Received payload {packet_count} at {millis}",
+                f"Header details {header.to_string()}",
+            )
+except KeyboardInterrupt:
+    radio.power = False  # power radio down before exiting

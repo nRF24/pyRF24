@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Simplest possible example of using RF24Network,
+Simplest possible example of using RF24Network.
 
 TRANSMITTER NODE
 Sends messages from to receiver.
@@ -34,14 +34,17 @@ radio.print_pretty_details()
 PACKETS_SENT = 0
 LAST_SENT = time.monotonic_ns() / 1000000
 
-while True:
-    network.update()
-    now = int(time.monotonic_ns() / 1000000)
+try:
+    while True:
+        network.update()
+        now = int(time.monotonic_ns() / 1000000)
 
-    # If it's time to send a message, send it!
-    if now - LAST_SENT >= INTERVAL:
-        LAST_SENT = now
-        PACKETS_SENT += 1
-        payload = struct.pack("<LL", now, PACKETS_SENT)
-        ok = network.write(RF24NetworkHeader(OTHER_NODE), payload)
-        print("Sending...", ("ok" if ok else "failed"))
+        # If it's time to send a message, send it!
+        if now - LAST_SENT >= INTERVAL:
+            LAST_SENT = now
+            PACKETS_SENT += 1
+            payload = struct.pack("<LL", now, PACKETS_SENT)
+            ok = network.write(RF24NetworkHeader(OTHER_NODE), payload)
+            print("Sending...", ("ok" if ok else "failed"))
+except KeyboardInterrupt:
+    radio.power = False  # power radio down before exiting
