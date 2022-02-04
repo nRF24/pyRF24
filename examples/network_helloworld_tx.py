@@ -36,7 +36,7 @@ LAST_SENT = time.monotonic_ns() / 1000000
 
 while True:
     network.update()
-    now = time.monotonic_ns() / 1000000
+    now = int(time.monotonic_ns() / 1000000)
 
     # If it's time to send a message, send it!
     if now - LAST_SENT >= INTERVAL:
