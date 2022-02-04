@@ -39,15 +39,52 @@ radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
 # To save time during transmission, we'll set the payload size to be only what
 # we need.
-# A byte and an int occupy 5 bytes in memory using struct.calcsize()
-# "<bi" means a little endian unsigned byte and int
-radio.payload_size = struct.calcsize("<bi")
+# 2 int occupy 8 bytes in memory using len(struct.pack())
+# "<ii" means 2x little endian unsigned int
+radio.payload_size = struct.calcsize("<ii")
 
 # for debugging
 radio.print_pretty_details()
 
 
-def base(timeout=10):
+def master(node_number: int = 0, count: int = 6):
+    """start transmitting to the base station.
+
+    :param int node_number: the node's identifying index (from the
+        the `addresses` list). This is a required parameter
+    :param int count: the number of times that the node will transmit
+        to the base station.
+    """
+    # According to the datasheet, the auto-retry features's delay value should
+    # be "skewed" to allow the RX node to receive 1 transmission at a time.
+    # So, use varying delay between retry attempts and 15 (at most) retry attempts
+    radio.set_retries(((node_number * 3) % 12) + 3, 15)  # max value is 15 for both args
+
+    radio.listen = False
+    # set the TX address to the address of the base station.
+    radio.open_tx_pipe(addresses[node_number])
+    counter = 0
+    # use the node_number to identify where the payload came from
+    while counter < count:
+        counter += 1
+        # payloads will include the node_number and a payload ID character
+        payload = struct.pack("<ii", node_number, counter)
+        start_timer = time.monotonic_ns()
+        report = radio.write(payload)
+        end_timer = time.monotonic_ns()
+        # show something to see it isn't frozen
+        if report:
+            print(
+                f"Transmission of payloadID {counter} as node {node_number}",
+                f"successfull! Transmission time: {(end_timer - start_timer) / 1000}",
+                "us",
+            )
+        else:
+            print("Transmission failed or timed out")
+        time.sleep(0.5)  # slow down the test for readability
+
+
+def slave(timeout=10):
     """Use the nRF24L01 as a base station for listening to all nodes"""
     # write the addresses to all pipes.
     for pipe_n, addr in enumerate(addresses):
@@ -59,7 +96,7 @@ def base(timeout=10):
         if has_payload:
             length = radio.payload_size  # grab the payload length
             # unpack payload
-            node_id, payload_id = struct.unpack("<bi", radio.read(8))
+            node_id, payload_id = struct.unpack("<ii", radio.read(radio.payload_size))
             # show the pipe number that received the payload
             print(
                 f"Received {length} bytes on pipe {pipe_number} from node {node_id}.",
@@ -67,37 +104,6 @@ def base(timeout=10):
             )
             start_timer = time.monotonic()  # reset timer with every payload
     radio.listen = False
-
-
-def node(node_number: int = 0, count: int = 10):
-    """start transmitting to the base station.
-
-    :param int node_number: the node's identifying index (from the
-        the `addresses` list). This is a required parameter
-    :param int count: the number of times that the node will transmit
-        to the base station.
-    """
-    radio.listen = False
-    # set the TX address to the address of the base station.
-    radio.open_tx_pipe(addresses[node_number])
-    counter = 0
-    # use the node_number to identify where the payload came from
-    while counter < count:
-        counter += 1
-        # payloads will include the node_number and a payload ID character
-        payload = struct.pack("<bi", node_number, counter)
-        start_timer = time.monotonic_ns()
-        report = radio.write(payload)
-        end_timer = time.monotonic_ns()
-        # show something to see it isn't frozen
-        if report:
-            print(
-                f"Transmission of payloadID {counter} as node {node_number} successfull!",
-                f"Transmission time: {(end_timer - start_timer) / 1000} us",
-            )
-        else:
-            print("Transmission failed or timed out")
-        time.sleep(0.5)  # slow down the test for readability
 
 
 def set_role():
@@ -118,10 +124,10 @@ def set_role():
     )
     user_input = user_input.split()
     if user_input[0].upper().startswith("R"):
-        base(*[int(x) for x in user_input[1:2]])
+        slave(*[int(x) for x in user_input[1:2]])
         return True
     if user_input[0].upper().startswith("T"):
-        node(*[int(x) for x in user_input[1:2]])
+        master(*[int(x) for x in user_input[1:2]])
         return True
     if user_input[0].upper().startswith("Q"):
         radio.power = False
@@ -152,13 +158,14 @@ if __name__ == "__main__":
             while set_role():
                 pass  # continue example until 'Q' is entered
         elif bool(args.role):  # if role was set using CLI args, run role once and exit
-            node()
+            master()
         else:
-            base()
+            slave()
     except KeyboardInterrupt:
         print(" Keyboard Interrupt detected. Exiting...")
         radio.power = False
         sys.exit()
 else:
-    print("    Run base() on the receiver\n    Run node(node_number) on a transmitter")
-    print("        node()'s parameter, `node_number`, must be in range [0, 5]")
+    print("    Run slave() on the receiver")
+    print("    Run master(node_number) on a transmitter")
+    print("        master()'s parameter, `node_number`, must be in range [0, 5]")

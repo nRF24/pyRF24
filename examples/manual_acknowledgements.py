@@ -78,7 +78,7 @@ def master(count: int = 10):
             radio.listen = True
             timout = time.monotonic() * 1000 + 200  # use 200 ms timeout
             ack = b"\x00" * len(buffer)  # variable used for the response
-            while ack[0] == 0 or time.monotonic() * 1000 < timout:
+            while ack[0] == 0 and time.monotonic() * 1000 < timout:
                 if radio.available():
                     # get the response & save it to ack variable
                     ack = radio.read(radio.payload_size)
