@@ -88,7 +88,7 @@ def noise(timeout: int = 1, channel: int = None):
     radio.listen = True
     timeout += time.monotonic()
     while time.monotonic() < timeout:
-        signal = radio.read()
+        signal = radio.read(radio.payload_size)
         if signal:
             print(address_repr(signal, False, " "))
     radio.listen = False

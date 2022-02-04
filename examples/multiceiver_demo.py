@@ -39,9 +39,9 @@ radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
 # To save time during transmission, we'll set the payload size to be only what
 # we need.
-# A byte and an int occupy 5 bytes in memory using len(struct.pack())
+# A byte and an int occupy 5 bytes in memory using struct.calcsize()
 # "<bi" means a little endian unsigned byte and int
-radio.payload_size = len(struct.unpack("<bi", 0, 0))
+radio.payload_size = struct.calcsize("<bi")
 
 # for debugging
 radio.print_pretty_details()

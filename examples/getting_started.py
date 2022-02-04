@@ -49,9 +49,9 @@ radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # To save time during transmission, we'll set the payload size to be only what
-# we need. A float value occupies 4 bytes in memory using len(struct.pack())
+# we need. A float value occupies 4 bytes in memory using struct.calcsize()
 # "<f" means a little endian unsigned float
-radio.payload_size = len(struct.pack("<f", payload[0]))
+radio.payload_size = struct.calcsize("<f")
 
 # for debugging
 radio.print_details()

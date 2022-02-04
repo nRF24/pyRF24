@@ -28,7 +28,7 @@ address = [b"1Node", b"2Node"]
 
 # to use different addresses on a pair of radios, we need a variable to
 # uniquely identify which address this radio will use to transmit
-# 0 uses address[0] to transmit, 1 uses address[1] to transmit
+# 0 uses address[radio_number] to transmit, 1 uses address[not radio_number] to transmit
 radio_number = bool(
     int(input("Which radio is this? Enter '0' or '1'. Defaults to '0' ") or 0)
 )
@@ -41,11 +41,17 @@ if not radio.begin():
 # usually run with nRF24L01 transceivers in close proximity of each other
 radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
+# set TX address of RX node into the TX pipe
+radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
+
+# set RX address of TX node into an RX pipe
+radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
+
 # To save time during transmission, we'll set the payload size to be only what
-# we need. A float value occupies 4 bytes in memory using len(struct.pack())
+# we need. A float value occupies 4 bytes in memory using struct.calcsize()
 # "<b" means a little endian unsigned byte
 # we also need an addition 7 bytes for the payload message
-radio.payload_size = len(struct.pack("<b", 0)) + 7
+radio.payload_size = struct.calcsize("<b") + 7
 
 # for debugging
 radio.print_pretty_details()
@@ -58,7 +64,6 @@ payload = [0]
 def master(count: int = 10):
     """Transmits a message and an incrementing integer every second"""
     radio.listen = False  # ensures the nRF24L01 is in TX mode
-    radio.open_tx_pipe(address[0])  # set address of RX node into a TX pipe
 
     while count:  # only transmit `count` packets
         # use struct.pack() to pack your data into a usable payload
@@ -70,7 +75,6 @@ def master(count: int = 10):
         if not result:
             print("Transmission failed or timed out")
         else:
-            radio.open_rx_pipe(1, address[1])
             radio.listen = True
             timout = time.monotonic() * 1000 + 200  # use 200 ms timeout
             ack = b"\x00" * len(buffer)  # variable used for the response
@@ -78,9 +82,8 @@ def master(count: int = 10):
                 if radio.available():
                     # get the response & save it to ack variable
                     ack = radio.read(radio.payload_size)
-                    radio.listen = False
-                    radio.open_tx_pipe(address[0])
             end_timer = time.monotonic_ns()  # end timer
+            radio.listen = False
             print(
                 "Transmission successful. Sent: ",
                 f"{buffer[:6].decode('utf-8')}{payload[0]}.",
@@ -107,7 +110,6 @@ def master(count: int = 10):
 def slave(timeout: int = 6):
     """Polls the radio and prints the received value. This method expires
     after 6 seconds of no received transmission"""
-    radio.open_rx_pipe(1, address[0])  # set TX address to an RX pipe
     radio.listen = True  # put radio into RX mode and power up
 
     start_timer = time.monotonic()  # start a timer to detect timeout
@@ -124,8 +126,11 @@ def slave(timeout: int = 6):
             # use bytes() to pack our data into a usable payload
             # NOTE b"\x00" byte is a c-string's NULL terminating 0
             buffer = b"World \x00" + bytes([payload[0]])
-            # save response's result
-            response = radio.write(buffer)
+            radio.listen = False  # set radio to TX mode
+            radio.write_fast(buffer)  # load payload into radio's RX buffer
+            # keep retrying to send response for 150 milliseconds
+            response = radio.tx_standby(150)  # save response's result
+            radio.listen = True  # set radio back into RX mode
             # print the payload received and the response's payload
             print(
                 f"Received {length} bytes on pipe {pipe_number}:",
