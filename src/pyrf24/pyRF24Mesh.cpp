@@ -41,6 +41,11 @@ PYBIND11_MODULE(rf24_mesh, m)
     py::options options;
     options.disable_function_signatures();
 
+    m.attr("MESH_DEFAULT_ADDRESS") = MESH_DEFAULT_ADDRESS;
+    m.attr("MESH_ADDR_LOOKUP") = MESH_ADDR_LOOKUP;
+    m.attr("MESH_ADDR_RELEASE") = MESH_ADDR_RELEASE;
+    m.attr("MESH_ID_LOOKUP") = MESH_ID_LOOKUP;
+
     py::class_<RF24MeshWrapper>(m, "RF24Mesh")
         .def(py::init<RF24Wrapper&, RF24NetworkWrapper&>(), R"docstr(
             __init__(radio: RF24, network: RF24Network)

@@ -37,13 +37,6 @@ RF24NetworkHeader class
     :members:
     :special-members:
 
-RF24NetworkFrame class
--------------------------
-
-.. autoclass:: pyrf24.rf24_network.RF24NetworkFrame
-    :members:
-    :special-members: __init__
-
 Constants
 ----------
 
@@ -53,6 +46,12 @@ code readability.
 .. autoattribute:: pyrf24.rf24_network.MAX_USER_DEFINED_HEADER_TYPE
     
     The maximum of user defined message types.
+
+.. autoattribute:: pyrf24.rf24_network.MAX_PAYLOAD_SIZE
+
+    Maximum size of fragmented network frames and fragmentation cache.
+
+.. _reserved_sys_msgs:
 
 Reserved System Message Types
 ******************************

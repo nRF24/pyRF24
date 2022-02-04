@@ -1,11 +1,21 @@
 #include <pybind11/pybind11.h>
 #include "pyRF24.cpp"
 #include <RF24Network.h>
-#include <deque>
+#include <queue>
 #include <pybind11/stl.h>
 
 namespace py = pybind11;
 
+/* 
+namespace pybind11 {
+namespace detail {
+
+    template<typename Type, typename Alloc>
+    struct type_caster<std::queue<Type, Alloc>> : list_caster<std::queue<Type, Alloc>, Type>
+    {
+    };
+} // namespace detail
+} // namespace pybind11
 
 struct RF24NetworkFrameWrapper : public RF24NetworkFrame
 {
@@ -13,7 +23,7 @@ struct RF24NetworkFrameWrapper : public RF24NetworkFrame
     {
     }
 
-    RF24NetworkFrameWrapper(RF24NetworkHeader &header, py::object &message)
+    RF24NetworkFrameWrapper(RF24NetworkHeader& header, py::object& message)
     {
         RF24NetworkFrame::header = header;
         set_message(message);
@@ -21,22 +31,20 @@ struct RF24NetworkFrameWrapper : public RF24NetworkFrame
 
     py::bytearray get_message()
     {
-        char* buf = new char[MAX_PAYLOAD_SIZE + 1];
+        char* buf = new char[RF24NetworkFrame::message_size];
         memcpy(reinterpret_cast<uint8_t*>(buf), RF24NetworkFrame::message_buffer, RF24NetworkFrame::message_size);
-        buf[RF24NetworkFrame::message_size] = '\0';
         py::bytearray py_ba = py::bytearray(buf, RF24NetworkFrame::message_size);
         delete[] buf;
         return py_ba;
     }
 
-    void set_message(py::object &message)
+    void set_message(py::object& message)
     {
         RF24NetworkFrame::message_size = static_cast<uint16_t>(get_bytes_or_bytearray_ln(message));
         memcpy(RF24NetworkFrame::message_buffer, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(message)), RF24NetworkFrame::message_size);
     }
 };
-
-
+*/
 class RF24NetworkWrapper : public RF24Network
 {
 public:
@@ -106,7 +114,6 @@ public:
     }
 };
 
-
 PYBIND11_MODULE(rf24_network, m)
 {
     m.doc() = "A Python module that wraps all RF24Network C++ library's API";
@@ -114,8 +121,9 @@ PYBIND11_MODULE(rf24_network, m)
     options.disable_function_signatures();
 
     // **************** Module level constants *********************
-    // 
+    //
     m.attr("MAX_USER_DEFINED_HEADER_TYPE") = MAX_USER_DEFINED_HEADER_TYPE;
+    m.attr("MAX_PAYLOAD_SIZE") = MAX_PAYLOAD_SIZE;
     m.attr("NETWORK_ADDR_RESPONSE") = NETWORK_ADDR_RESPONSE;
     m.attr("NETWORK_PING") = NETWORK_PING;
     m.attr("EXTERNAL_DATA_TYPE") = EXTERNAL_DATA_TYPE;
@@ -127,6 +135,7 @@ PYBIND11_MODULE(rf24_network, m)
     m.attr("NETWORK_REQ_ADDRESS") = NETWORK_REQ_ADDRESS;
     m.attr("FLAG_FAST_FRAG") = FLAG_FAST_FRAG;
     m.attr("FLAG_NO_POLL") = FLAG_NO_POLL;
+
 
     // **************** RF24NetworkHeader exposed  *****************
     //
@@ -207,7 +216,7 @@ PYBIND11_MODULE(rf24_network, m)
         .def("__repr__", [](RF24NetworkHeader& obj) { return std::string("<RF24NetworkHeader ") + std::string(obj.toString()) + std::string(">"); });
 
     // *********************** RF24Network exposed ******************
-    //
+    /*
     py::class_<RF24NetworkFrameWrapper>(m, "RF24NetworkFrame")
         .def(py::init<RF24NetworkHeader&, py::object&>(), R"docstr(
             __init__(header: RF24NetworkHeader = None, message: Union[bytes, bytearray] = None)
@@ -230,6 +239,7 @@ PYBIND11_MODULE(rf24_network, m)
             A read-only attribute that returns the length of the message. This is set accordingly
             when the :py:attr:`~pyrf24.rf24_network.RF24NetworkFrame.message_buffer` is changed.
         )docstr");
+    */
 
     // *********************** RF24Network exposed ******************
     //
@@ -444,6 +454,9 @@ PYBIND11_MODULE(rf24_network, m)
                 :py:attr:`~pyrf24.rf24_network.NETWORK_PING`, 130,
                 :py:attr:`~pyrf24.rf24_network.NETWORK_POLL`, 194,  With multicast enabled (which is enabled by default)
                 :py:attr:`~pyrf24.rf24_network.NETWORK_REQ_ADDRESS`, 195,
+            
+            .. seealso::
+                There's a more complete list (with behavioral descriptions) of the :ref:`reserved_sys_msgs`.
         )docstr")
 
         // *****************************************************************************
