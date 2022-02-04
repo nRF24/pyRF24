@@ -3,9 +3,8 @@ This is an example of how to use the nRF24L01's builtin
 Received Power Detection (RPD) to scan for possible interference.
 This example does not require a counterpart node.
 """
+# pylint: disable=consider-using-f-string
 import time
-import time
-import struct
 from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr
 
 
@@ -17,6 +16,10 @@ from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr
 # CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
 radio = RF24(22, 0)
+
+# initialize the nRF24L01 on the spi bus
+if not radio.begin():
+    raise OSError("nRF24L01 hardware isn't responding")
 
 # turn off RX features specific to the nRF24L01 module
 radio.set_auto_ack(False)
