@@ -69,7 +69,7 @@ def master(count=50):
             _prompt(count - i)  # something to show that it isn't frozen
             # broadcast the device name, MAC address, &
             # battery charge info; 0x16 means service data
-            ble.advertise(battery_service.buffer, data_type=0x16)
+            ble.write(battery_service.buffer, data_type=0x16)
             # channel hoping is recommended per BLE specs
             ble.hop_channel()
             time.sleep(0.5)  # wait till next broadcast
@@ -93,7 +93,7 @@ def send_temp(count=50):
         if ble.len_available(chunk(temperature_service.buffer)) >= 0:
             _prompt(count - i)
             # broadcast a temperature measurement; 0x16 means service data
-            ble.advertise(temperature_service.buffer, data_type=0x16)
+            ble.write(temperature_service.buffer, data_type=0x16)
             ble.hop_channel()
             time.sleep(0.2)
     ble.show_pa_level, ble.name = (False, None)
@@ -121,7 +121,7 @@ def send_url(count=50):
         # URLs easily exceed the nRF24L01's max payload length
         if ble.len_available(chunk(url_service.buffer)) >= 0:
             _prompt(count - i)
-            ble.advertise(url_service.buffer, 0x16)
+            ble.write(url_service.buffer, 0x16)
             ble.hop_channel()
             time.sleep(0.2)
 
