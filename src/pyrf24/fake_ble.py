@@ -174,11 +174,11 @@ class QueueElement:
         return True
 
 
-class FakeBLE(RF24):
+class FakeBLE():
     """A class to implement BLE advertisements using the nRF24L01."""
 
-    def __init__(self, ce_pin: int = 0xFFFF, csn: int = 0xFFFF, spi_frequency=10000000):
-        super().__init__(ce_pin, csn, spi_frequency)
+    def __init__(self, radio: RF24):
+        self._radio = radio
         self._curr_freq = 2
         self._show_dbm = False
         self._ble_name = None
@@ -192,23 +192,21 @@ class FakeBLE(RF24):
         """Initialize the radio using BLE specifications"""
         success = False
         if ce_pin is None and csn is None:
-            success = super().begin()
+            success = self._radio.begin()
         else:
-            success = super().begin(ce_pin, csn)
+            success = self._radio.begin(ce_pin, csn)
         if not success:
             return False
-        # pylint: disable=attribute-defined-outside-init
-        self.crc_length = RF24_CRC_DISABLED
-        self.set_auto_ack(False)
-        self.dynamic_payloads = False
-        self.set_retries(0, 0)
-        self.address_width = 4  # use only 4 byte address length
-        self.open_tx_pipe(b"\x71\x91\x7D\x6B\0")
-        self.open_rx_pipe(0, b"\x71\x91\x7D\x6B\0")
+        self._radio.crc_length = RF24_CRC_DISABLED
+        self._radio.set_auto_ack(False)
+        self._radio.dynamic_payloads = False
+        self._radio.set_retries(0, 0)
+        self._radio.address_width = 4  # use only 4 byte address length
+        self._radio.open_tx_pipe(b"\x71\x91\x7D\x6B\0")
+        self._radio.open_rx_pipe(0, b"\x71\x91\x7D\x6B\0")
         self.hop_channel()
-        self.listen = True
-        self.power = True
-        # pylint: enable=attribute-defined-outside-init
+        self._radio.power = True
+        self._radio.listen = True
         return success
 
     @property
@@ -260,9 +258,7 @@ class FakeBLE(RF24):
     def hop_channel(self):
         """Trigger an automatic change of BLE compliant channels."""
         self._curr_freq += 1 if self._curr_freq < 2 else -2
-        # pylint: disable=attribute-defined-outside-init
-        self.channel = BLE_FREQ[self._curr_freq]
-        # pylint: enable=attribute-defined-outside-init
+        self._radio.channel = BLE_FREQ[self._curr_freq]
 
     def whiten(self, data) -> bytearray:
         """Whitening the BLE packet data ensures there's no long repetition
@@ -321,16 +317,16 @@ class FakeBLE(RF24):
         payload = self.whiten(self._make_payload(payload))
         # print("original: 0x{}".format(address_repr(payload)))
         # print("reversed: 0x{}".format(address_repr(reverse_bits(payload))))
-        self.write(reverse_bits(payload))
+        self._radio.write(reverse_bits(payload))
 
     def print_pretty_details(self):
-        super().print_pretty_details()
+        self._radio.print_pretty_details()
         print(f"BLE device name           {str(self.name)}")
         print(f"Broadcasting PA Level     {self.show_pa_level}")
 
     def available(self) -> bool:
         """A `bool` describing if there is a payload in the `rx_queue`."""
-        if super().available():
+        if self._radio.available():
             self.rx_cache = self.read(self.payload_length)
             self.rx_cache = self.whiten(reverse_bits(self.rx_cache))
             end = self.rx_cache[1] + 2

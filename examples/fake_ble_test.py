@@ -3,19 +3,21 @@ This example uses the nRF24L01 as a 'fake' BLE Beacon
 """
 import time
 from pyrf24 import (
-    chunk,
+    RF24,
+    RF24_PA_LOW,
     FakeBLE,
+    chunk,
+    address_repr,
     UrlServiceData,
     BatteryServiceData,
     TemperatureServiceData,
-    address_repr,
-    RF24_PA_LOW,
 )
 
 
 
 # initialize the nRF24L01 on the spi bus object as a BLE compliant radio
-ble = FakeBLE(22, 0)
+radio = RF24(22, 0)
+ble = FakeBLE(radio)
 # On Linux, csn value is a bit coded
 #                 0 = bus 0, CE0  # SPI bus 0 is enabled by default
 #                10 = bus 1, CE0  # enable SPI bus 2 prior to running this
@@ -36,7 +38,7 @@ if not ble.begin():
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceiver in close proximity to the
 # BLE scanning application
-ble.pa_level = RF24_PA_LOW
+radio.pa_level = RF24_PA_LOW
 
 
 def _prompt(remaining):
@@ -132,7 +134,7 @@ def slave(timeout=6):
     end_timer = time.monotonic() + timeout
     while time.monotonic() <= end_timer:
         if ble.available():
-            result = ble.read()
+            result = ble.rx_queue.pop(0)
             print(
                 "received payload from MAC address",
                 address_repr(result.mac, delimit=":")
