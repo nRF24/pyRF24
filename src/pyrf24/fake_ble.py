@@ -197,16 +197,18 @@ class FakeBLE(RF24):
             success = super().begin(ce_pin, csn)
         if not success:
             return False
-        super().crc_length = RF24_CRC_DISABLED
+        # pylint: disable=attribute-defined-outside-init
+        self.crc_length = RF24_CRC_DISABLED
         self.set_auto_ack(False)
-        super().dynamic_payloads = False
+        self.dynamic_payloads = False
         self.set_retries(0, 0)
-        super().address_width = 4  # use only 4 byte address length
+        self.address_width = 4  # use only 4 byte address length
         self.open_tx_pipe(b"\x71\x91\x7D\x6B\0")
         self.open_rx_pipe(0, b"\x71\x91\x7D\x6B\0")
         self.hop_channel()
-        super().listen = True
-        super().power = True
+        self.listen = True
+        self.power = True
+        # pylint: enable=attribute-defined-outside-init
         return success
 
     @property
@@ -304,7 +306,7 @@ class FakeBLE(RF24):
         name_length = (len(self._ble_name) + 2) if self._ble_name is not None else 0
         return 18 - name_length - self._show_dbm * 3 - len(hypothetical)
 
-    def advertise(self, buf: Union[bytes, bytearray]=b"", data_type: int = 0xFF):
+    def write(self, buf: Union[bytes, bytearray]=b"", data_type: int = 0xFF):
         """This blocking function is used to broadcast a payload."""
         if not isinstance(buf, (bytearray, bytes, list, tuple)):
             raise ValueError("buffer is an invalid format")
@@ -332,7 +334,7 @@ class FakeBLE(RF24):
     def available(self) -> bool:
         """A `bool` describing if there is a payload in the `rx_queue`."""
         if super().available():
-            self.rx_cache = super().read(self.payload_length)
+            self.rx_cache = self.read(self.payload_length)
             self.rx_cache = self.whiten(reverse_bits(self.rx_cache))
             end = self.rx_cache[1] + 2
             self.rx_cache = self.rx_cache[: end + 3]
@@ -344,9 +346,10 @@ class FakeBLE(RF24):
                 self.rx_queue.append(QueueElement(self.rx_cache))
         return bool(self.rx_queue)
 
-    # pylint: disable=arguments-differ
-    def read(self) -> QueueElement:
+    def read(self, length: int = None) -> Union[QueueElement, bytearray]:
         """Get the First Out element from the queue."""
+        if length is not None:
+            return super().read(length)
         if self.rx_queue:
             ret_val = self.rx_queue[0]
             del self.rx_queue[0]
