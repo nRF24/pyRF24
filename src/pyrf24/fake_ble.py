@@ -260,7 +260,9 @@ class FakeBLE(RF24):
     def hop_channel(self):
         """Trigger an automatic change of BLE compliant channels."""
         self._curr_freq += 1 if self._curr_freq < 2 else -2
+        # pylint: disable=attribute-defined-outside-init
         self.channel = BLE_FREQ[self._curr_freq]
+        # pylint: enable=attribute-defined-outside-init
 
     def whiten(self, data) -> bytearray:
         """Whitening the BLE packet data ensures there's no long repetition
@@ -306,7 +308,7 @@ class FakeBLE(RF24):
         name_length = (len(self._ble_name) + 2) if self._ble_name is not None else 0
         return 18 - name_length - self._show_dbm * 3 - len(hypothetical)
 
-    def write(self, buf: Union[bytes, bytearray]=b"", data_type: int = 0xFF):
+    def advertise(self, buf: Union[bytes, bytearray]=b"", data_type: int = 0xFF):
         """This blocking function is used to broadcast a payload."""
         if not isinstance(buf, (bytearray, bytes, list, tuple)):
             raise ValueError("buffer is an invalid format")
@@ -319,16 +321,12 @@ class FakeBLE(RF24):
         payload = self.whiten(self._make_payload(payload))
         # print("original: 0x{}".format(address_repr(payload)))
         # print("reversed: 0x{}".format(address_repr(reverse_bits(payload))))
-        super().write(reverse_bits(payload))
+        self.write(reverse_bits(payload))
 
-    def print_details(self):
-        super().print_details()
+    def print_pretty_details(self):
+        super().print_pretty_details()
         print(f"BLE device name           {str(self.name)}")
         print(f"Broadcasting PA Level     {self.show_pa_level}")
-
-    def channel(self, value: int):
-        if value in BLE_FREQ:
-            super().channel = value
 
     def available(self) -> bool:
         """A `bool` describing if there is a payload in the `rx_queue`."""
@@ -344,16 +342,6 @@ class FakeBLE(RF24):
                 # print("crc:", self.rx_cache[end: end + 3])
                 self.rx_queue.append(QueueElement(self.rx_cache))
         return bool(self.rx_queue)
-
-    def read(self, length: int = None) -> Union[QueueElement, bytearray]:
-        """Get the First Out element from the queue."""
-        if length is not None:
-            return super().read(length)
-        if self.rx_queue:
-            ret_val = self.rx_queue[0]
-            del self.rx_queue[0]
-            return ret_val
-        return None
 
 
 class ServiceData:
