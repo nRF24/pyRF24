@@ -7,7 +7,8 @@ namespace py = pybind11;
 class RF24MeshWrapper : public RF24Mesh
 {
 public:
-    RF24MeshWrapper(RF24Wrapper& _radio, RF24NetworkWrapper& _network) : RF24Mesh(_radio, _network)
+    RF24MeshWrapper(RF24Wrapper& _radio, RF24NetworkWrapper& _network) 
+        : RF24Mesh(static_cast<RF24&>(_radio), static_cast<RF24Network&>(_network))
     {
     }
 
@@ -192,7 +193,7 @@ PYBIND11_MODULE(rf24_mesh, m)
                   node not connected to the mesh network. This default address is ``0o4444`` (or
                   ``2340`` in decimal).
         )docstr",
-             py::arg("timeout") = 7.5)
+             py::arg("timeout") = 7500)
 
         // *****************************************************************************
 
