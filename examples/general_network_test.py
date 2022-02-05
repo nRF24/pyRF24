@@ -44,16 +44,16 @@ else:
     # logical node_address is in octal
     THIS_NODE = int(input("an octal int. Defaults to '0' ") or "0", 8)
 
+if not radio.begin():
+    raise OSError("radio hardware not responding")
 if IS_MESH:
     mesh.node_id = THIS_NODE
     # RF24Mesh C++ library uses channel 97 by default
     if not mesh.begin():
-        raise OSError("failed to initialize radio or could not connect to mesh")
+        raise OSError("could not connect to mesh network")
 else:
     # C++ examples use channel 90 for RF24Network library
     radio.channel = 90
-    if not radio.begin():
-        raise OSError("radio hardware not responding")
     network.begin(THIS_NODE)
 
 # set the Power Amplifier level to -12 dBm since this test example is
