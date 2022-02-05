@@ -287,7 +287,7 @@ class FakeBLE():
         buf += chunk(b"\x05", 1)
         pa_level = b""
         if self._show_dbm:
-            pa_level = chunk(struct.pack(">b", self.pa_level), 0x0A)
+            pa_level = chunk(struct.pack(">b", self._radio.pa_level), 0x0A)
         buf += pa_level
         if name_length:
             buf += chunk(self.name, 0x08)
@@ -327,7 +327,7 @@ class FakeBLE():
     def available(self) -> bool:
         """A `bool` describing if there is a payload in the `rx_queue`."""
         if self._radio.available():
-            self.rx_cache = self.read(self.payload_length)
+            self.rx_cache = self._radio.read(self._radio.payload_length)
             self.rx_cache = self.whiten(reverse_bits(self.rx_cache))
             end = self.rx_cache[1] + 2
             self.rx_cache = self.rx_cache[: end + 3]
