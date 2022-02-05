@@ -23,6 +23,7 @@
 http://dmitry.gr/index.php?r=05.Projects&proj=11.%20Bluetooth%20LE%20fakery"""
 # pylint: disable=too-few-public-methods,missing-docstring,too-many-instance-attributes
 from os import urandom
+from sre_constants import SUCCESS
 import struct
 from typing import Union
 from .rf24 import RF24, RF24_CRC_DISABLED
@@ -187,9 +188,15 @@ class FakeBLE(RF24):
         self.rx_cache = bytearray(0)
         """The internal cache used when validating received BLE payloads."""
 
-    def begin(self, ce_pin: int = None, csn: int = None):
+    def begin(self, ce_pin: int = None, csn: int = None) -> bool:
         """Initialize the radio using BLE specifications"""
-        super().begin(ce_pin, csn)
+        success = False
+        if ce_pin is None and csn is None:
+            success = super().begin()
+        else:
+            success = super().begin(ce_pin, csn)
+        if not success:
+            return False
         super().crc_length = RF24_CRC_DISABLED
         self.set_auto_ack(False)
         super().dynamic_payloads = False
@@ -200,6 +207,7 @@ class FakeBLE(RF24):
         self.hop_channel()
         super().listen = True
         super().power = True
+        return success
 
     @property
     def mac(self):
