@@ -260,7 +260,7 @@ class FakeBLE(RF24):
     def hop_channel(self):
         """Trigger an automatic change of BLE compliant channels."""
         self._curr_freq += 1 if self._curr_freq < 2 else -2
-        super().channel = BLE_FREQ[self._curr_freq]
+        self.channel = BLE_FREQ[self._curr_freq]
 
     def whiten(self, data) -> bytearray:
         """Whitening the BLE packet data ensures there's no long repetition
@@ -326,7 +326,6 @@ class FakeBLE(RF24):
         print(f"BLE device name           {str(self.name)}")
         print(f"Broadcasting PA Level     {self.show_pa_level}")
 
-    @RF24.channel.setter
     def channel(self, value: int):
         if value in BLE_FREQ:
             super().channel = value
