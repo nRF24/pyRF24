@@ -1,6 +1,5 @@
 """Build & Install script for the pyrf24 package or python wrappers about
 the RF24 C++ libraries."""
-from typing import List
 from skbuild import setup
 
 
@@ -9,7 +8,7 @@ with open("README.rst", "r", encoding="utf-8") as file_handle:
     long_description = file_handle.read()
 
 
-def exclude_rf24_utility_folder(cmake_manifest: List[str]):
+def exclude_rf24_utility_folder(cmake_manifest):
     """Exclude unnecessary header files from the built python pkg."""
     return list(filter(lambda name: not (name.endswith(".h")), cmake_manifest))
 

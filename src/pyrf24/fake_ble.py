@@ -23,11 +23,9 @@
 http://dmitry.gr/index.php?r=05.Projects&proj=11.%20Bluetooth%20LE%20fakery"""
 # pylint: disable=too-few-public-methods,missing-docstring,too-many-instance-attributes
 from os import urandom
-from sre_constants import SUCCESS
 import struct
-from typing import Union
+from typing import Union, List
 from .rf24 import RF24, RF24_CRC_DISABLED
-
 
 
 def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
@@ -37,7 +35,8 @@ def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
     return delimit.join(["%02X" % buf[byte] for byte in order])
     # pylint: enable=consider-using-f-string
 
-def swap_bits(original):
+
+def swap_bits(original: int) -> int:
     """This function reverses the bit order for a single byte."""
     original &= 0xFF
     reverse = 0
@@ -48,7 +47,7 @@ def swap_bits(original):
     return reverse
 
 
-def reverse_bits(original):
+def reverse_bits(original: bytearray) -> bytearray:
     """This function reverses the bit order for an entire buffer protocol object."""
     ret = bytearray(len(original))
     for i, byte in enumerate(original):
@@ -56,13 +55,13 @@ def reverse_bits(original):
     return ret
 
 
-def chunk(buf, data_type=0x16):
+def chunk(buf: Union[bytes, bytearray], data_type: int = 0x16) -> bytearray:
     """This function is used to pack data values into a block of data that
     make up part of the BLE payload per Bluetooth Core Specifications."""
     return bytearray([len(buf) + 1, data_type & 0xFF]) + buf
 
 
-def whitener(buf, coefficient):
+def whitener(buf: Union[bytes, bytearray], coefficient: int) -> bytearray:
     """Whiten and de-whiten data according to the given coefficient."""
     data = bytearray(buf)
     for i, byte in enumerate(data):
@@ -77,7 +76,9 @@ def whitener(buf, coefficient):
     return data
 
 
-def crc24_ble(data, deg_poly=0x65B, init_val=0x555555):
+def crc24_ble(
+    data: Union[bytes, bytearray], deg_poly: int = 0x65B, init_val: int = 0x555555
+) -> bytearray:
     """This function calculates a checksum of various sized buffers."""
     crc = init_val
     for byte in data:
@@ -108,20 +109,20 @@ class QueueElement:
         properties.
     """
 
-    def __init__(self, buffer):
+    def __init__(self, buffer: Union[bytes, bytearray]):
         #: The transmitting BLE device's MAC address as a `bytes` object.
-        self.mac = bytes(buffer[2:8])
-        self.name = None
+        self.mac: bytes = bytes(buffer[2:8])
+        self.name: bytes = None
         """The transmitting BLE device's name. This will be a `str`, `bytes` object (if
         a `UnicodeError` was caught), or `None` (if not included in the received
         payload)."""
-        self.pa_level = None
+        self.pa_level: int = None
         """The transmitting device's PA Level (if included in the received payload)
         as an `int`.
 
         .. note:: This value does not represent the received signal strength.
             The nRF24L01 will receive anything over a -64 dbm threshold."""
-        self.data = []
+        self.data: List[Union[bytearray, bytes, ServiceData]] = []
         """A `list` of the transmitting device's data structures (if any).
         If an element in this `list` is not an instance (or descendant) of the
         `ServiceData` class, then it is likely a custom, user-defined, or unsupported
@@ -140,7 +141,7 @@ class QueueElement:
                 self.data.append(buffer[i : i + 1 + size])
             i += 1 + size
 
-    def _decode_data_struct(self, buf):
+    def _decode_data_struct(self, buf: Union[bytes, bytearray]) -> bool:
         """Decode a data structure in a received BLE payload."""
         # print("decoding", address_repr(buf, 0, " "))
         if buf[0] not in (0x16, 0x0A, 0x08, 0x09):
@@ -174,14 +175,14 @@ class QueueElement:
         return True
 
 
-class FakeBLE():
+class FakeBLE:
     """A class to implement BLE advertisements using the nRF24L01."""
 
     def __init__(self, radio: RF24):
         self._radio = radio
         self._curr_freq = 2
         self._show_dbm = False
-        self._ble_name = None
+        self._ble_name: Union[bytes, bytearray] = None
         self._mac = urandom(6)
         #: The internal queue of received BLE payloads' data.
         self.rx_queue = []
@@ -279,7 +280,7 @@ class FakeBLE():
         if self.len_available(payload) < 0:
             raise ValueError(
                 "Payload length exceeds maximum buffer size by "
-                 + f"{abs(self.len_available(payload))} bytes"
+                + f"{abs(self.len_available(payload))} bytes"
             )
         name_length = (len(self.name) + 2) if self.name is not None else 0
         pl_size = 9 + len(payload) + name_length + self._show_dbm * 3
@@ -304,7 +305,7 @@ class FakeBLE():
         name_length = (len(self._ble_name) + 2) if self._ble_name is not None else 0
         return 18 - name_length - self._show_dbm * 3 - len(hypothetical)
 
-    def advertise(self, buf: Union[bytes, bytearray]=b"", data_type: int = 0xFF):
+    def advertise(self, buf: Union[bytes, bytearray] = b"", data_type: int = 0xFF):
         """This blocking function is used to broadcast a payload."""
         if not isinstance(buf, (bytearray, bytes, list, tuple)):
             raise ValueError("buffer is an invalid format")
@@ -327,7 +328,7 @@ class FakeBLE():
     def available(self) -> bool:
         """A `bool` describing if there is a payload in the `rx_queue`."""
         if self._radio.available():
-            self.rx_cache = self._radio.read(self._radio.payload_length)
+            self.rx_cache = self._radio.read(self._radio.payload_size)
             self.rx_cache = self.whiten(reverse_bits(self.rx_cache))
             end = self.rx_cache[1] + 2
             self.rx_cache = self.rx_cache[: end + 3]
@@ -393,7 +394,7 @@ class TemperatureServiceData(ServiceData):
     @property
     def data(self) -> float:
         """This attribute is a `float` value."""
-        return struct.unpack("<i", self._data[:3] + b"\0")[0] * 10 ** -2
+        return struct.unpack("<i", self._data[:3] + b"\0")[0] * 10**-2
 
     @data.setter
     def data(self, value: float):
