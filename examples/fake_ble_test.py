@@ -66,6 +66,7 @@ def master(count=50):
         "available bytes in next payload:",
         ble.len_available(chunk(battery_service.buffer)),
     )  # using chunk() gives an accurate estimate of available bytes
+    radio.listen = False  # ensure radio is in TX mode
     for i in range(count):  # advertise data this many times
         if ble.len_available(chunk(battery_service.buffer)) >= 0:
             _prompt(count - i)  # something to show that it isn't frozen
@@ -91,6 +92,7 @@ def send_temp(count=50):
         "available bytes in next payload:",
         ble.len_available(chunk(temperature_service.buffer)),
     )
+    radio.listen = False  # ensure radio is in TX mode
     for i in range(count):
         if ble.len_available(chunk(temperature_service.buffer)) >= 0:
             _prompt(count - i)
@@ -119,6 +121,7 @@ def send_url(count=50):
         ble.len_available(chunk(url_service.buffer)),
     )
     # NOTE we did NOT set a device name in this with block
+    radio.listen = False  # ensure radio is in TX mode
     for i in range(count):
         # URLs easily exceed the nRF24L01's max payload length
         if ble.len_available(chunk(url_service.buffer)) >= 0:
@@ -130,7 +133,7 @@ def send_url(count=50):
 
 def slave(timeout=6):
     """read and decipher BLE payloads for `timeout` seconds."""
-    ble.listen = True
+    radio.listen = True  # ensure radio is in RX mode
     end_timer = time.monotonic() + timeout
     while time.monotonic() <= end_timer:
         if ble.available():
@@ -148,6 +151,7 @@ def slave(timeout=6):
                     print("\traw buffer:", address_repr(service_data, False, " "))
                 else:
                     print("\t" + repr(service_data))
+    radio.listen = False  # ensure radio is in TX mode (preferred when idling)
 
 
 def set_role():
