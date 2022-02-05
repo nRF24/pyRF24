@@ -50,6 +50,9 @@ public:
     {
     }
 
+    // needed for polymorphic recognition
+    virtual ~RF24Wrapper() = default;
+
     std::tuple<bool, uint8_t> available_pipe()
     {
         uint8_t pipe = 7;

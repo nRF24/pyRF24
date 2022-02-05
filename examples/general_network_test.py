@@ -126,9 +126,9 @@ def emit(
         result = False
         start = time.monotonic_ns()
         if IS_MESH:  # write() is a little different for RF24Mesh vs RF24Network
-            result = mesh.write(node, message, "M")
+            result = mesh.write(message, ord("M"), node)
         else:
-            result = network.write(RF24NetworkHeader(node, "T"), message)
+            result = network.write(RF24NetworkHeader(node, ord("T")), message)
         end = time.monotonic_ns()
         failures += not result
         print(

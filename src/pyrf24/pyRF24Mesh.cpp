@@ -11,6 +11,9 @@ public:
     {
     }
 
+    // needed for polymorphic recognition
+    virtual ~RF24MeshWrapper() = default;
+
     bool write(py::object& buf, uint8_t msg_type, uint8_t nodeID = 0)
     {
         return RF24Mesh::write(
@@ -115,13 +118,13 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         // *****************************************************************************
 
-        .def_property("node_id", &RF24MeshWrapper::getNodeID, &RF24MeshWrapper::setNodeID, R"docstr(
+        .def_property("node_id", &RF24MeshWrapper::get_node_id, &RF24MeshWrapper::setNodeID, R"docstr(
             The instantiated RF24Mesh object's unique identifying number. This value must range [0, 255].
         )docstr")
 
         // *****************************************************************************
 
-        .def_readwrite("mesh_address", &RF24MeshWrapper::mesh_address, R"docstr(
+        .def_readonly("mesh_address", &RF24MeshWrapper::mesh_address, R"docstr(
             The assigned logical address (in octal) given to the node by the mesh network's master node.
         )docstr")
 
@@ -134,7 +137,7 @@ PYBIND11_MODULE(rf24_mesh, m)
         // *****************************************************************************
 
         .def("get_node_id", &RF24MeshWrapper::getNodeID, R"docstr(
-            get_node_id(address: int) -> int
+            get_node_id(address: int = 0xFFFF) -> int
 
             Translates a `node_id` into the corresponding `mesh_address`
 
@@ -147,7 +150,8 @@ PYBIND11_MODULE(rf24_mesh, m)
 
                   * ``-1`` means the given does not have an assigned `node_id`.
                   * ``-2`` means the mesh network's master node could not be reached to fetch the data.
-        )docstr")
+        )docstr",
+             py::arg("address") = 0xFFFF)
 
         // *****************************************************************************
 

@@ -21,7 +21,7 @@ ble = FakeBLE(22, 0)
 #                10 = bus 1, CE0  # enable SPI bus 2 prior to running this
 #                21 = bus 2, CE1  # enable SPI bus 1 prior to running this
 
-if not radio.begin():
+if not ble.begin():
     raise OSError("radio hardware not responding")
 
 # the name parameter is going to be its broadcasted BLE name

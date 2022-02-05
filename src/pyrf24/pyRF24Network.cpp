@@ -52,6 +52,9 @@ public:
     {
     }
 
+    // needed for polymorphic recognition
+    virtual ~RF24NetworkWrapper() = default;
+
     uint16_t peek_header(RF24NetworkHeader& header)
     {
         return RF24Network::peek(header);
@@ -135,7 +138,6 @@ PYBIND11_MODULE(rf24_network, m)
     m.attr("NETWORK_REQ_ADDRESS") = NETWORK_REQ_ADDRESS;
     m.attr("FLAG_FAST_FRAG") = FLAG_FAST_FRAG;
     m.attr("FLAG_NO_POLL") = FLAG_NO_POLL;
-
 
     // **************** RF24NetworkHeader exposed  *****************
     //

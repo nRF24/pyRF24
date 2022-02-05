@@ -313,8 +313,8 @@ class FakeBLE(RF24):
 
     def print_details(self):
         super().print_details()
-        print(f"BLE device name___________{str(self.name)}")
-        print(f"Broadcasting PA Level_____{self.show_pa_level}")
+        print(f"BLE device name           {str(self.name)}")
+        print(f"Broadcasting PA Level     {self.show_pa_level}")
 
     @RF24.channel.setter
     def channel(self, value: int):
