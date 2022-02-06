@@ -105,7 +105,7 @@ public:
     bool write(RF24NetworkHeader& header, py::object& buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
     {
         printf_P(
-            "called RF24NetworkWrapper::write(header:\"" PRIPSTR "\", buffer:\"" PRIPSTR "\", write_type: %o",
+            "called RF24NetworkWrapper::write(header:\"" PRIPSTR "\", buffer:\"" PRIPSTR "\", write_type: %o)\n",
             header.toString(), get_bytes_or_bytearray_str(buf), writeDirect
         );
         return RF24Network::write(

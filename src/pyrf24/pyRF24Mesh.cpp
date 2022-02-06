@@ -18,7 +18,7 @@ public:
     bool write(py::object& buf, uint8_t msg_type, uint8_t nodeID = 0)
     {
         printf_P(
-            "called RF24MeshWrapper::write(buffer:\"" PRIPSTR "\", msg_type: %u, node_id: %u",
+            "called RF24MeshWrapper::write(buffer:\"" PRIPSTR "\", msg_type: %u, node_id: %u)\n",
             get_bytes_or_bytearray_str(buf), static_cast<unsigned long>(msg_type), static_cast<unsigned long>(nodeID)
         );
         return RF24Mesh::write(
@@ -31,7 +31,7 @@ public:
     bool write(uint16_t to_node, py::object& buf, uint8_t msg_type)
     {
         printf_P(
-            "called RF24MeshWrapper::write(to_node: %o, buffer:\"" PRIPSTR "\", msg_type: %u",
+            "called RF24MeshWrapper::write(to_node: %o, buffer:\"" PRIPSTR "\", msg_type: %u)\n",
             to_node, get_bytes_or_bytearray_str(buf), static_cast<unsigned long>(msg_type)
         );
         return RF24Mesh::write(
