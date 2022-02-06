@@ -1,8 +1,8 @@
 #include <pybind11/pybind11.h>
 #include "pyRF24.cpp"
 #include <RF24Network.h>
-#include <queue>
-#include <pybind11/stl.h>
+// #include <queue>
+// #include <pybind11/stl.h>
 
 namespace py = pybind11;
 
@@ -77,7 +77,7 @@ public:
         return RF24Network::multicast(
             header,
             get_bytes_or_bytearray_str(buf),
-            static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)),
+            static_cast<uint16_t>(get_bytes_or_bytearray_ln(buf)),
             level);
     }
 
@@ -104,6 +104,10 @@ public:
 
     bool write(RF24NetworkHeader& header, py::object& buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
     {
+        printf_P(
+            "called RF24NetworkWrapper::write(header:\"" PRIPSTR "\", buffer:\"" PRIPSTR "\", write_type: %o",
+            header.toString(), get_bytes_or_bytearray_str(buf), writeDirect
+        );
         return RF24Network::write(
             header,
             get_bytes_or_bytearray_str(buf),
