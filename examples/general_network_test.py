@@ -85,10 +85,9 @@ def idle(timeout: int = 30):
     while (time.monotonic() - start_timer) < timeout:
         if IS_MESH:
             mesh.update()
+            mesh.dhcp()
         else:
             network.update()  # keep the network layer current
-        if THIS_NODE and IS_MESH:
-            mesh.dhcp()
         while network.available():
             start_timer = time.monotonic()  # reset timer
             header, payload = network.read()
