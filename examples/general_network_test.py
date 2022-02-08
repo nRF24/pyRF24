@@ -83,7 +83,10 @@ def idle(timeout: int = 30):
     print("idling for", timeout, "seconds")
     start_timer = time.monotonic()
     while (time.monotonic() - start_timer) < timeout:
-        network.update()  # keep the network layer current
+        if IS_MESH:
+            mesh.update()
+        else:
+            network.update()  # keep the network layer current
         if THIS_NODE and IS_MESH:
             mesh.dhcp()
         while network.available():
@@ -113,6 +116,7 @@ def emit(
     """
     failures = 0
     while failures < 6 and count:
+        # for this example, we use idle() to update() the network/mesh layer
         idle(interval)  # idle till its time to emit
         count -= 1
         packets_sent[0] += 1
@@ -147,7 +151,7 @@ def set_role():
         "*** Enter 'E <node number>' for emitter role.\n"
         "*** Enter 'E <node number> 1' to emit fragmented messages.\n"
     )
-    if IS_MESH:
+    if IS_MESH and not THIS_NODE:  # if a mesh node and a master node
         if mesh.mesh_address == MESH_DEFAULT_ADDRESS:
             prompt += "!!! Mesh node not connected.\n"
         prompt += "*** Enter 'C' to connect to to mesh master node.\n"

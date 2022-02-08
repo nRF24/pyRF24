@@ -211,7 +211,7 @@ PYBIND11_MODULE(rf24_network, m)
 
         // *****************************************************************************
 
-        .def_readwrite_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
+        .def_readwrite("next_id", &RF24NetworkHeader::next_id, R"docstr(
             The next sequential identifying number used for the next created frame. It is not
             advised to alter this attribute (unless creating a blank header without specifying
             any parameters to the constructor).
