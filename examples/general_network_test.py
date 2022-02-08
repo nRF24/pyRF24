@@ -150,7 +150,7 @@ def set_role():
         "*** Enter 'E <node number>' for emitter role.\n"
         "*** Enter 'E <node number> 1' to emit fragmented messages.\n"
     )
-    if IS_MESH and not THIS_NODE:  # if a mesh node and a master node
+    if IS_MESH and THIS_NODE:  # if a mesh node and not a master node
         if mesh.mesh_address == MESH_DEFAULT_ADDRESS:
             prompt += "!!! Mesh node not connected.\n"
         prompt += "*** Enter 'C' to connect to to mesh master node.\n"
