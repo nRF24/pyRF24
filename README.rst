@@ -5,7 +5,7 @@ This is the official home of the python wrappers for the RF24 stack. It is meant
 SoC boards like the Raspberry Pi.
 
 Pinout
-======
+~~~~~~
 
 .. image:: https://lastminuteengineers.com/wp-content/uploads/2018/07/Pinout-nRF24L01-Wireless-Transceiver-Module.png
     :target: https://lastminuteengineers.com/nrf24l01-arduino-wireless-communication/#nrf24l01-transceiver-module-pinout
@@ -49,7 +49,7 @@ The IRQ pin is not typically connected, and it is only used in the interrupt_con
         sudo apt install python3-rpi.gpio
 
 Installing from Source
-======================
+~~~~~~~~~~~~~~~~~~~~~~
 
 Installing from source will require CMake and CPython headers:
 
@@ -127,7 +127,7 @@ same version of CPython, CPU architecture, and C standard lib.
      On Raspberry Pi OS (32 bit), this will be ``armv7l``.
 
 Documentation
-=============
+~~~~~~~~~~~~~
 
 Before submitting contributions, you should make sure that any documentation changes builds
 successfully. This can be done locally.
@@ -135,8 +135,25 @@ successfully. This can be done locally.
 Documentation Dependencies
 --------------------------
 
-This package's documentation is built with the python package Sphinx and the readthedocs theme for
-sphinx.
+This package's documentation is built with the python package Sphinx and the sphinx-immaterial theme.
+It also uses the dot tool provided by the graphviz software to generate graphs.
+
+Install Graphviz
+****************
+
+On Windows, installing Graphviz library is done differently. Check out the
+`Graphviz downloads page <https://graphviz.org/download/>`_. Be sure that the ``graphviz/bin``
+directory is in the ``PATH`` environment variable (there's an option in the installer for this).
+After Graphviz is installed, reboot the PC so the updated ``PATH`` environment variable takes affect.
+
+On Linux, just run:
+
+.. code-block:: shell
+
+    sudo apt-get install graphviz
+
+Installing Sphinx necessities
+*****************************
 
 .. note::
     If you installed sphinx using ``apt``, then it is likely out-of-date and will override any virtual
@@ -158,7 +175,7 @@ sphinx.
     .. warning::
         This documentation's theme requires Sphinx v4.0+. So, it is not recommended to install
         sphinx from ``apt`` on Linux because the version distributed with the OS's PPA repository
-        may not be the most recent version of sphinx.
+        may not be the most recent version of Sphinx.
 
 Building the Documentation
 --------------------------
