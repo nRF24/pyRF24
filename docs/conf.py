@@ -6,7 +6,10 @@ list see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 # pylint: disable=invalid-name
-from importlib.metadata import version as get_version
+try:
+    from importlib.metadata import version as get_version
+except ImportError:  # for python v3.7 or older
+    from importlib_metadata import version as get_version  # type: ignore
 
 # -- Project information -----------------------------------------------------
 
