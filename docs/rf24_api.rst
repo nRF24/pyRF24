@@ -77,6 +77,7 @@ Configurable RF24 API
 .. autoattribute:: pyrf24.rf24.RF24.address_width
 
 .. automethod:: pyrf24.rf24.RF24.set_retries
+.. automethod:: pyrf24.rf24.RF24.get_arc
 
 .. autoattribute:: pyrf24.rf24.RF24.channel
 
@@ -96,7 +97,7 @@ Configurable RF24 API
 
 .. automethod:: pyrf24.RF24.set_radiation
 .. automethod:: pyrf24.rf24.RF24.set_pa_level
-.. automethod:: pyrf24.rf24.RF24.get_pa_level
+.. .. automethod:: pyrf24.rf24.RF24.get_pa_level
 .. autoattribute:: pyrf24.RF24.pa_level
 .. .. automethod:: pyrf24.rf24.RF24.set_data_rate
 .. .. automethod:: pyrf24.rf24.RF24.get_data_rate

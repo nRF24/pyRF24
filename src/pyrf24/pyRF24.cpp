@@ -83,8 +83,12 @@ public:
         RF24::openReadingPipe(number, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
-    py::bytearray read(const uint8_t length)
+    py::bytearray read(uint8_t length = 0)
     {
+        if (!length)
+            length = RF24::dynamic_payloads_enabled ? RF24::getDynamicPayloadSize() : RF24::getPayloadSize();
+        else
+            length = rf24_min(length, static_cast<uint8_t>(32));
         char* payload = new char[length + 1];
         RF24::read(payload, length);
         payload[length] = '\0';
@@ -340,11 +344,11 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        .def("get_pa_level", &RF24Wrapper::getPALevel, R"docstr(
-            get_pa_level() -> pyrf24.rf24.rf24_pa_dbm_e
+        // .def("get_pa_level", &RF24Wrapper::getPALevel, R"docstr(
+        //     get_pa_level() -> pyrf24.rf24.rf24_pa_dbm_e
 
-            Get the current setting of the radio's Power Amplitude Level.
-        )docstr")
+        //     Get the current setting of the radio's Power Amplitude Level.
+        // )docstr")
 
         // *****************************************************************************
 
@@ -486,6 +490,12 @@ PYBIND11_MODULE(rf24, m)
                 - index 0 represents a "data sent" event
                 - index 1 represents a "data failed" event
                 - index 2 represents a "data ready" event
+
+            .. note::
+                Calling this function also clears all status flags and resets the IRQ pin
+                to inactive high.
+            .. seealso::
+                :py:meth:`~pyrf24.rf24.RF24.mask_irq()`
         )docstr")
 
         // *****************************************************************************
@@ -503,6 +513,14 @@ PYBIND11_MODULE(rf24, m)
                   number is set to an invalid value of 7.
         )docstr")
 
+        .def("get_arc", &RF24Wrapper::getARC, R"docstr(
+            Returns automatic retransmission count (ARC_CNT)
+
+            Value resets with each new transmission. Allows roughly estimating signal strength.
+
+            :Returns: Returned values range from 0 to 15.
+        )docstr")
+
         // *****************************************************************************
         // **************************************** functions that take args
 
@@ -517,6 +535,12 @@ PYBIND11_MODULE(rf24, m)
                 `rf24_datarate_e` enum.
             :param bool lna_enable: A toggle for radio's that support controlling the Low Noise
                 Amplifier feature. This is always enabled by default and when not specified.
+
+            .. seealso::
+
+                - :py:meth:`~pyrf24.rf24.RF24.set_pa_level()`
+                - :py:attr:`~pyrf24.rf24.RF24.pa_level`
+                - :py:attr:`~pyrf24.rf24.RF24.data_rate`
         )docstr",
              py::arg("level"), py::arg("speed"), py::arg("lna_enable") = true)
 
@@ -644,6 +668,8 @@ PYBIND11_MODULE(rf24, m)
             Fetch data from the radio's RX FIFO.
 
             :param int length: The number of bytes to fetch from the radio's RX FIFO.
+                If this parameter is not specified, then the length of the next available payload
+                is used. The maximum number of bytes that can be fetched at once is 32 bytes.
 
                 - If the value specified by this parameter is less than the length of the next
                   available payload, then the payload will remain in the RX FIFO.
@@ -655,8 +681,14 @@ PYBIND11_MODULE(rf24, m)
                   length value is fulfilled.
             :Returns: A `bytearray` of the specified ``length`` containing the data from the
                 payload in the RX FIFO.
+
+            .. seealso::
+
+                - :py:attr:`~pyrf24.rf24.RF24.payload_size`
+                - :py:meth:`~pyrf24.rf24.RF24.get_dynamic_payload_size()`
+                - :py:meth:`~pyrf24.rf24.RF24.available()`
         )docstr",
-             py::arg("length"))
+             py::arg("length") = 0)
 
         // *****************************************************************************
         // ************************** functions that have overloads
@@ -689,7 +721,6 @@ PYBIND11_MODULE(rf24, m)
             begin(ce_pin: int = None, csn_pin: int = None) -> bool
 
             Initialize the radio's hardware.
-
         )docstr")
 
         // *****************************************************************************
@@ -712,6 +743,10 @@ PYBIND11_MODULE(rf24, m)
             Check if there is an available payload in the radio's RX FIFO.
 
             :Returns: `True` if there is a payload in the radio's RX FIFO, otherwise `False`.
+
+            .. seealso::
+                Use :py:meth:`~pyrf24.rf24.RF24.available_pipe()` to get the pipe number that received the
+                next availble payload.
         )docstr")
 
         // *****************************************************************************
@@ -873,7 +908,7 @@ PYBIND11_MODULE(rf24, m)
 
         .def_property("data_rate", &RF24Wrapper::get_data_rate, &RF24Wrapper::setDataRate, R"docstr(
             This attribute represents the radio's OTA data rate.
-            
+
             .. hint:: The units "BPS" stand for "Bits Per Second" (not Bytes per secend).
             .. seealso:: Accepted values are pre-defined in the `rf24_datarate_e` enum struct.
         )docstr")
@@ -897,12 +932,38 @@ PYBIND11_MODULE(rf24, m)
 
         .def_property("listen", &RF24Wrapper::isListening, &RF24Wrapper::listen, R"docstr(
             This `bool` attribute represents the radio's primary mode (RX/TX).
+
+            .. hint::
+
+                1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` first.
+                2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in this mode, without
+                    first setting :py:attr:`~pyrf24.rf24.RF24.listen` to `False`.
+                3. Call :py:meth:`~pyrf24.rf24.RF24.available()` to check for incoming traffic,
+                    and use :py:meth:`~pyrf24.rf24.RF24.read()` to get it.
+
+            .. important::
+                If there was a call to :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()`
+                about pipe 0 prior to setting this attribute to `False`, then this attribute
+                will re-write the address that was last set to reading pipe 0.
+                This is because :py:meth:`~pyrf24.rf24.RF24.open_tx_pipe()`
+                will overwrite the address to reading pipe 0 for proper auto-ack
+                functionality.
+            .. note::
+                When the ACK payloads feature is enabled, the TX FIFO buffers are
+                flushed when changing this attribute to `True`. This is meant to discard any ACK
+                payloads that were not appended to acknowledgment packets during TX mode.
+
         )docstr")
 
         // *****************************************************************************
 
         .def_property("dynamic_payloads", &RF24Wrapper::is_dynamic_payloads_enabled, &RF24Wrapper::dynamic_payloads, R"docstr(
             This `bool` attribute represents the radio's dynamic payload length feature for all data pipes.
+
+            .. note::
+                Since `ack_payloads` requires Dynamic Payload lengths,
+                `ack_payloads` are also disabled when setting this attribute
+                to `False`.
         )docstr")
 
         // *****************************************************************************
@@ -913,6 +974,9 @@ PYBIND11_MODULE(rf24, m)
 
             .. important::
                 To use acknowledgement payloads, the `dynamic_payloads` and auto-ack features must be enabled.
+
+                This attribute does not automatically enable the auto-ack feature
+                on pipe 0 because the auto_ack feature is enabled for all pipes by default.
             .. seealso::
                 Review `write_ack_payload()` and `set_auto_ack()`.
         )docstr")
@@ -920,21 +984,27 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property("address_width", &RF24Wrapper::get_address_width, &RF24Wrapper::setAddressWidth, R"docstr(
-            This `int` attribute represents length of addresses used on the radio's data pipes. Accepted values range [2, 5].
+            This `int` attribute represents length of addresses used on the radio's data pipes.
+            Accepted values range [2, 5].
+
+            .. warning::
+                Using an address width of 2 bytes is not officially supported by the nRF24L01.
+                This ability is exposed for advanced reverse engineering purposes.
         )docstr")
 
 #if defined(FAILURE_HANDLING)
         // *****************************************************************************
 
         .def_readwrite("failure_detected", &RF24Wrapper::failureDetected, R"docstr(
-            The number of accumulative transmission failures.
+            The number of accumulative transmission failures specific to the life
+            cycle of the `RF24` object.
         )docstr")
 #endif // defined (FAILURE_HANDLING)
 
         // *****************************************************************************
 
         .def_property_readonly("is_valid", &RF24Wrapper::isValid, R"docstr(
-            This attribute represents if the radio's CE & CSN pins are configured properly.
+            This read-only attribute represents if the radio's CE & CSN pins are configured properly.
         )docstr")
 
         // *****************************************************************************
@@ -947,6 +1017,11 @@ PYBIND11_MODULE(rf24, m)
 
         .def_property_readonly("rpd", &RF24Wrapper::testRPD, R"docstr(
             This attribute represents if the radio detected a signal above -64 dbm in RX mode.
+
+            .. hint::
+                RPD stands for "Received Power Detection". Non-plus variants of nRF24L01
+                call this attribute CD (short for "Carrier Detection") because this feature
+                was originally made available for government mandated hardware tests.
         )docstr")
 
         // *****************************************************************************
@@ -964,7 +1039,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property_readonly("is_chip_connected", &RF24Wrapper::isChipConnected, R"docstr(
-            Check if the SPI bus is working with the radio.
+            Check if the SPI bus is working with the radio. This attribute assumes that
+            :py:meth:`~pyrf24.rf24.RF24.begin()` returned `True`.
         )docstr")
 
         // *****************************************************************************

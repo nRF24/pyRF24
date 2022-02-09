@@ -175,3 +175,6 @@ compile_commands.json
 Makefile
 !docs/Makefile
 _skbuild
+
+# examples generate a list of assigned network addresses corresponding to mesh node IDs
+dhcplist.txt

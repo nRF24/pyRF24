@@ -92,10 +92,11 @@ same version of CPython, CPU architecture, and C standard lib.
 
 1. Because building wheels is not done in an isolated build environment, it is advised that
    some build-time dependencies be installed manually to ensure up-to-date stable releases are used.
+   Execute the following from the root directory of this repo:
 
    .. code-block:: bash
 
-       python -m pip install scikit-build ninja
+       python -m pip install -r requirements.txt
 
 2. Using the same directory that you cloned the pyrf24 library into:
 

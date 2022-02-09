@@ -6,16 +6,17 @@ list see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 # pylint: disable=invalid-name
+from importlib.metadata import version as get_version
 
 # -- Project information -----------------------------------------------------
 
 project = "pyrf24"
-copyright = "2020, TMRh20 Avamander 2bndy5"
+copyright = "2020, TMRh20 Avamander 2bndy5"  # pylint: disable=redefined-builtin
 author = "TMRh20 Avamander 2bndy5"
 language="en"
 
 # The full version, including alpha/beta/rc tags
-release = "http://github.com/nRF24/pyRF24/releases"
+release = get_version("pyrf24")
 
 
 # -- General configuration ---------------------------------------------------
@@ -27,6 +28,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx_immaterial",
+    "sphinx.ext.graphviz",
 ]
 
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}

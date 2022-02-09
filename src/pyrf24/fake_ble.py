@@ -102,7 +102,7 @@ EDDYSTONE_UUID = 0xFEAA  #: The Eddystone Service UUID number
 
 class QueueElement:
     """A data structure used for storing received & decoded BLE payloads in
-    the :attr:`~circuitpython_nrf24l01.fake_ble.FakeBLE.rx_queue`.
+    the :attr:`~pyrf24.fake_ble.FakeBLE.rx_queue`.
 
     :param bytes,bytearray buffer: the validated BLE payload (not including
         the CRC checksum). The buffer passed here is decoded into this class's
@@ -246,7 +246,7 @@ class FakeBLE:
     @property
     def show_pa_level(self) -> bool:
         """If this attribute is `True`, the payload will automatically include
-        the nRF24L01's :attr:`~circuitpython_nrf24l01.rf24.RF24.pa_level` in the
+        the nRF24L01's :attr:`~pyrf24.rf24.RF24.pa_level` in the
         advertisement."""
         return bool(self._show_dbm)
 
@@ -339,6 +339,14 @@ class FakeBLE:
                 # print("crc:", self.rx_cache[end: end + 3])
                 self.rx_queue.append(QueueElement(self.rx_cache))
         return bool(self.rx_queue)
+
+    def read(self) -> QueueElement:
+        """Get the First Out element from the queue."""
+        if self.rx_queue:
+            ret_val = self.rx_queue[0]
+            del self.rx_queue[0]
+            return ret_val
+        return None
 
 
 class ServiceData:

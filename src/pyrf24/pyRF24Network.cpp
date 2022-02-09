@@ -178,7 +178,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readwrite("from_node", &RF24NetworkHeader::from_node, R"docstr(
-            The origin of the frame. This is a logical address (set in octal format).
+            The origin of the frame. This is a `Logical Address <logical_address>` (set in octal format).
         )docstr")
 
         // *****************************************************************************
@@ -199,7 +199,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readwrite("to_node", &RF24NetworkHeader::to_node, R"docstr(
-            The destination of the frame. This is a logical address (set in octal format).
+            The destination of the frame. This is a `Logical Address <logical_address>` (set in octal format).
         )docstr")
 
         // *****************************************************************************
@@ -207,6 +207,9 @@ PYBIND11_MODULE(rf24_network, m)
         .def_readwrite("type", &RF24NetworkHeader::type, R"docstr(
             The type of frame sent. Users are encouraged to use an integer in range [0, 127]
             because integers in range [128, 255] are reserved for system usage.
+
+            .. seealso::
+                :ref:`reserved_sys_msgs`
         )docstr")
 
         // *****************************************************************************
@@ -221,7 +224,7 @@ PYBIND11_MODULE(rf24_network, m)
 
         .def("__repr__", [](RF24NetworkHeader& obj) { return std::string("<RF24NetworkHeader ") + std::string(obj.toString()) + std::string(">"); });
 
-    // *********************** RF24Network exposed ******************
+    // *********************** RF24NetworkFrame exposed ******************
     /*
     py::class_<RF24NetworkFrameWrapper>(m, "RF24NetworkFrame")
         .def(py::init<RF24NetworkHeader&, py::object&>(), R"docstr(
@@ -272,9 +275,9 @@ PYBIND11_MODULE(rf24_network, m)
         .def("begin", static_cast<void (RF24NetworkWrapper::*)(uint16_t)>(&RF24NetworkWrapper::begin), R"docstr(
             begin(node_address: int)
 
-            Give the instantiated network node a logical address.
+            Give the instantiated network node a `Logical Address <logical_address>`.
 
-            :param int node_addess: This is a logical address (typically an octal integer).
+            :param int node_addess: This is a `Logical Address <logical_address>` (typically an octal integer).
         )docstr",
              py::arg("node_address"))
 
@@ -287,14 +290,14 @@ PYBIND11_MODULE(rf24_network, m)
 
                 .. seealso:: Use :py:attr:`~pyrf24.rf24.RF24.channel` attribute to change the radio
                     channel.
-            :param int node_address: This is a logical address (typically an octal integer).
+            :param int node_address: This is a `Logical Address <logical_address>` (typically an octal integer).
         )docstr",
              py::arg("channel"), py::arg("node_address"))
 
         // *****************************************************************************
 
         .def_property("node_address", &RF24NetworkWrapper::get_node_address, static_cast<void (RF24NetworkWrapper::*)(uint16_t)>(&RF24NetworkWrapper::begin), R"docstr(
-            The instantiated network node's logical address. This is a 2-byte integer in octal format.
+            The instantiated network node's `Logical Address <logical_address>`. This is a 2-byte integer in octal format.
         )docstr")
 
         // *****************************************************************************
@@ -302,13 +305,16 @@ PYBIND11_MODULE(rf24_network, m)
         // .def("parent", &RF24NetworkWrapper::parent, R"docstr(
         //     parent -> int
 
-        //     The logical address (in octal) of the parent to the instantiated network node.
+        //     The `Logical Address <logical_address>` (in octal) of the parent to the instantiated network node.
         // )docstr")
 
         // *****************************************************************************
 
         .def_property_readonly("parent", &RF24NetworkWrapper::parent, R"docstr(
-            The logical address (in octal) of the parent to the instantiated network node.
+            The `Logical Address <logical_address>` (in octal) of the parent to the instantiated network node.
+
+            :Returns:
+                This node's parent address, or 65535 if this is the master node.
         )docstr")
 
         // *****************************************************************************
@@ -423,11 +429,11 @@ PYBIND11_MODULE(rf24_network, m)
         .def("is_address_valid", &RF24NetworkWrapper::is_valid_address, R"docstr(
             is_address_valid(address: int) -> bool
 
-            Use this function to verify if an integer can be used as a valid logical address for network nodes.
+            Use this function to verify if an integer can be used as a valid `Logical Address <logical_address>` for network nodes.
 
             :param int address: The integer to validate.
 
-            :Returns: `True` if the given integer is a valid logical address, otherwise `False`.
+            :Returns: `True` if the given integer is a valid `Logical Address <logical_address>`, otherwise `False`.
         )docstr",
              py::arg("address"))
 

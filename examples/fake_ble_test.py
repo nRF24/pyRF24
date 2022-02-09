@@ -137,7 +137,7 @@ def slave(timeout=6):
     end_timer = time.monotonic() + timeout
     while time.monotonic() <= end_timer:
         if ble.available():
-            result = ble.rx_queue.pop(0)
+            result = ble.read()
             print(
                 "received payload from MAC address",
                 address_repr(result.mac, delimit=":")

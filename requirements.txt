@@ -1,1 +1,3 @@
 scikit-build
+setuptools>=45
+setuptools_scm

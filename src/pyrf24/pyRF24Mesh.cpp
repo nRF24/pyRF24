@@ -7,7 +7,7 @@ namespace py = pybind11;
 class RF24MeshWrapper : public RF24Mesh
 {
 public:
-    RF24MeshWrapper(RF24Wrapper& _radio, RF24NetworkWrapper& _network) 
+    RF24MeshWrapper(RF24Wrapper& _radio, RF24NetworkWrapper& _network)
         : RF24Mesh(static_cast<RF24&>(_radio), static_cast<RF24Network&>(_network))
     {
     }
@@ -17,10 +17,6 @@ public:
 
     bool write(py::object& buf, uint8_t msg_type, uint8_t nodeID = 0)
     {
-        printf_P(
-            "called RF24MeshWrapper::write(buffer:\"" PRIPSTR "\", msg_type: %u, node_id: %u)\n",
-            get_bytes_or_bytearray_str(buf), static_cast<unsigned long>(msg_type), static_cast<unsigned long>(nodeID)
-        );
         return RF24Mesh::write(
             get_bytes_or_bytearray_str(buf),
             msg_type,
@@ -30,10 +26,6 @@ public:
 
     bool write(uint16_t to_node, py::object& buf, uint8_t msg_type)
     {
-        printf_P(
-            "called RF24MeshWrapper::write(to_node: %o, buffer:\"" PRIPSTR "\", msg_type: %u)\n",
-            to_node, get_bytes_or_bytearray_str(buf), static_cast<unsigned long>(msg_type)
-        );
         return RF24Mesh::write(
             to_node,
             get_bytes_or_bytearray_str(buf),
@@ -114,10 +106,10 @@ PYBIND11_MODULE(rf24_mesh, m)
         // *****************************************************************************
 
         .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, py::object&, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
-            When the network node's logical address is already known, the parameters to
-            Transmit a message to a specific logical address of a network node are as follows:
+            When the network node's `Logical Address <logical_address>` is already known, the parameters to
+            Transmit a message to a specific `Logical Address <logical_address>` of a network node are as follows:
 
-            :param int node_address: The destination node's logical address.
+            :param int node_address: The destination node's `Logical Address <logical_address>`.
             :param bytes,bytearray buf: The message to transmit.
             :param int message_type: The :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type` to
                 be used in the frame's header.
@@ -134,7 +126,7 @@ PYBIND11_MODULE(rf24_mesh, m)
         // *****************************************************************************
 
         .def_readonly("mesh_address", &RF24MeshWrapper::mesh_address, R"docstr(
-            The assigned logical address (in octal) given to the node by the mesh network's master node.
+            The assigned `Logical Address <logical_address>` (in octal) given to the node by the mesh network's master node.
         )docstr")
 
         // *****************************************************************************
@@ -150,7 +142,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             Translates a `node_id` into the corresponding `mesh_address`
 
-            :param int address: The logical address for which to the `node_id` is assigned.
+            :param int address: The `Logical Address <logical_address>` for which to the `node_id` is assigned.
 
             :Returns:
 
@@ -161,17 +153,6 @@ PYBIND11_MODULE(rf24_mesh, m)
                   * ``-2`` means the mesh network's master node could not be reached to fetch the data.
         )docstr",
              py::arg("address") = 0xFFFF)
-
-        // *****************************************************************************
-
-        .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
-            dhcp()
-
-            Keep the master node's list of assigned addresses up-to-date.
-
-            .. tip:: This function should be called on mesh network's master nodes only just after
-                calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
-        )docstr")
 
         // *****************************************************************************
 
@@ -190,13 +171,13 @@ PYBIND11_MODULE(rf24_mesh, m)
         .def("renew_address", &RF24MeshWrapper::renewAddress, R"docstr(
             renew_address(timeout: int = 7500) -> int
 
-            Attempt to get a new logical address assigned from the mesh network's master node.
+            Attempt to get a new `Logical Address <logical_address>` assigned from the mesh network's master node.
 
             :param int timeout: The maximum amount of time (in milliseconds) spent while attempting
                 to communicate with the mesh network's master node.
 
             :Returns:
-                - If successful, this function returns the newly assigned logical address.
+                - If successful, this function returns the newly assigned `Logical Address <logical_address>`.
                 - If unsuccessfull, the returned integer will be the default address used by any
                   node not connected to the mesh network. This default address is ``0o4444`` (or
                   ``2340`` in decimal).
@@ -208,7 +189,7 @@ PYBIND11_MODULE(rf24_mesh, m)
         .def("release_address", &RF24MeshWrapper::releaseAddress, R"docstr(
             release_address() -> bool
 
-            Use this function to manually expire a leased logical address from the mesh network's master node.
+            Use this function to manually expire a leased `Logical Address <logical_address>` from the mesh network's master node.
 
             .. tip:: This function allows re-use of the assigned address for other mesh network nodes.
                 Call this function from mesh network nodes that are going offline (or to sleep).
@@ -255,17 +236,31 @@ PYBIND11_MODULE(rf24_mesh, m)
         )docstr",
              py::arg("allow"))
 
+#if !defined(MESH_NOMASTER)
+
         // *****************************************************************************
 
         .def("set_address", &RF24MeshWrapper::setAddress, R"docstr(
             set_address(node_id: int, address: int, search_by_address: bool = False)
 
-            Call this function on a mesh network's master node to manually assign a logical
+            Only call this function on a mesh network's master node to manually assign a logical
             address to a unique `node_id`. This function is meant to include RF24Network nodes in
-            mesh networks.
+            mesh networks' :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.dhcp()` list.
 
+            .. code-block:: py
+                
+                # Set a static address for node 0o2, with nodeID 23, since it will just be
+                # a static routing node for example running on an ATTiny chip.
+                mesh.setAddress(23, 0o2);
+            
+            .. code-block:: py
+                
+                # Change or set the nodeID for an existing address
+                address = 0o12;
+                mesh.setAddress(3, address, True);
+            
             :param int node_id: The unique identifying number for the connected node.
-            :param int address: The logical address for the connected node.
+            :param int address: The `Logical Address <logical_address>` for the connected node.
             :param bool search_by_address: Set this parameter to `True` traverse the list of
                 assigned addresses by address. The default value of `False` traverses the list of
                 assigned addresses by node_id.
@@ -298,5 +293,18 @@ PYBIND11_MODULE(rf24_mesh, m)
             Call this function on the mesh network's master node to read and load the saved list of
             assigned addresses from a local binary text file. This is meant for persistence when the
             master node needs resumes operation after being offline.
+        )docstr")
+
+    // *****************************************************************************
+
+    .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
+            dhcp()
+
+            Keep the master node's list of assigned addresses up-to-date.
+
+            .. tip:: This function should be called on mesh network's master nodes only just after
+                calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
         )docstr");
+
+#endif // !defined(MESH_NOMASTER)
 }
