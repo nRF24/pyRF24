@@ -100,7 +100,7 @@ def send_temp(count=50):
             ble.advertise(temperature_service.buffer, data_type=0x16)
             ble.hop_channel()
             time.sleep(0.2)
-    ble.show_pa_level, ble.name = (False, None)
+    ble.name = None
 
 
 # use the Eddystone protocol from Google to broadcast a URL as
