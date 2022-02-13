@@ -35,7 +35,7 @@ RF24NetworkHeader class
 
 .. autoclass:: pyrf24.rf24_network.RF24NetworkHeader
     :members:
-    :special-members:
+    :special-members: __init__
 
 Constants
 ----------

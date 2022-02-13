@@ -38,6 +38,12 @@ jobs:
         working-directory: docs
         run: sphinx-build -E -W -b html . _build/html
 
+      - name: Save built docs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: "pyRF24_docs"
+          path: ${{ github.workspace }}/docs/_build/html
+
       - name: upload to github pages
         # if: ${{ github.event_name == 'release'}}
         uses: peaceiris/actions-gh-pages@v3

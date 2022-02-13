@@ -64,7 +64,7 @@ public:
     {
         RF24NetworkHeader header;
         maxlen = static_cast<uint8_t>(rf24_min(maxlen, RF24Network::peek(header)));
-        char* buf = new char[maxlen];
+        char* buf = new char[maxlen + 1];
         RF24Network::peek(header, buf, maxlen);
         py::bytearray py_ba = py::bytearray(buf, maxlen);
         delete[] buf;
@@ -104,10 +104,6 @@ public:
 
     bool write(RF24NetworkHeader& header, py::object& buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
     {
-        printf_P(
-            "called RF24NetworkWrapper::write(header:\"" PRIPSTR "\", buffer:\"" PRIPSTR "\", write_type: %o)\n",
-            header.toString(), get_bytes_or_bytearray_str(buf), writeDirect
-        );
         return RF24Network::write(
             header,
             get_bytes_or_bytearray_str(buf),
@@ -123,7 +119,7 @@ public:
 
 PYBIND11_MODULE(rf24_network, m)
 {
-    m.doc() = "A Python module that wraps all RF24Network C++ library's API";
+    m.doc() = "A Python module that wraps the RF24Network C++ library's API";
     py::options options;
     options.disable_function_signatures();
 
@@ -233,17 +229,29 @@ PYBIND11_MODULE(rf24_network, m)
             :param RF24NetworkHeader header: The RF24NetworkHeader associated with the frame.
             :param bytes,bytearray message: The 'message' or data.
         )docstr")
+
+        // *****************************************************************************
+
         .def(py::init<>(), R"docstr(
             .. tip::
                 Simply constructs a blank frame with no parameters. Frames are generally used internally.
                 See :py:class:`RF24NetworkHeader`.
         )docstr")
+
+        // *****************************************************************************
+
         .def_readwrite("header", &RF24NetworkFrameWrapper::header, R"docstr(
             The :py:class:`~pyrf24.rf24_network.RF24NetworkHeader` object about the frame's message.
         )docstr")
+
+        // *****************************************************************************
+
         .def_property("message_buffer", &RF24NetworkFrameWrapper::get_message, &RF24NetworkFrameWrapper::set_message, R"docstr(
             The frame's message buffer. This is typically a `bytearray`.
         )docstr")
+
+        // *****************************************************************************
+
         .def_readonly("message_size", &RF24NetworkFrameWrapper::message_size, R"docstr(
             A read-only attribute that returns the length of the message. This is set accordingly
             when the :py:attr:`~pyrf24.rf24_network.RF24NetworkFrame.message_buffer` is changed.

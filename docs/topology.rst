@@ -329,5 +329,5 @@ This process happens over a span of a few milliseconds. However,
   network through another non-master node.
 
 If you run into trouble with this connection process, then please
-`open an issue on github <https://github.com/nRF24/CircuitPython_nRF24L01/issues>`_
+`open an issue on github <https://github.com/nRF24/pyRF24/issues>`_
 and describe the situation with as much detail as possible.

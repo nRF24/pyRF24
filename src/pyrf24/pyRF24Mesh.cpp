@@ -41,7 +41,7 @@ public:
 
 PYBIND11_MODULE(rf24_mesh, m)
 {
-    m.doc() = "A Python module that wraps all RF24Mesh C++ library's API";
+    m.doc() = "A Python module that wraps the RF24Mesh C++ library's API";
     py::options options;
     options.disable_function_signatures();
 
