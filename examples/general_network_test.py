@@ -51,24 +51,22 @@ print("    radio hardware initialized")
 if IS_MESH:
     mesh.node_id = THIS_NODE
     if THIS_NODE:
-        print(f"    connecting to mesh network as node_id {THIS_NODE}")
+        print(f"Connecting to mesh network as node_id {THIS_NODE}...", end=" ")
     else:
-        print("    Acting as mesh master node.")
+        print("Acting as mesh master node.")
     # RF24Mesh C++ library uses channel 97 by default
     if not mesh.begin():
-        print(
-            "    could not connect to mesh network.\n",
-            "   Try again with mesh.renew_address()",
-        )
+        print("failed. Try again with mesh.renew_address()")
     elif THIS_NODE:
-        print(
-            "    connected to mesh network using",
-            f"assigned address {oct(mesh.mesh_address)}"
-        )
+        print(f"ok. Using assigned address {oct(mesh.mesh_address)}")
 else:
     # C++ examples use channel 90 for RF24Network library
     radio.channel = 90
     network.begin(THIS_NODE)
+    if THIS_NODE:
+        print(f"Using network address {oct(THIS_NODE)}.")
+    else:
+        print("Acting as network master node.")
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity
@@ -80,12 +78,6 @@ MAX_FRAG_SIZE = 24
 # using the python keyword global is bad practice. Instead we'll use a 1 item
 # list to store our number of the payloads sent
 packets_sent = [0]
-
-if THIS_NODE:  # if this node is not the network master node
-    if IS_MESH:  # mesh nodes need to bond with the master node
-        print("assigned address:", oct(mesh.mesh_address))
-else:
-    print("Acting as network master node.")
 
 
 def idle(timeout: int = 30, strict_timeout: bool = False):
@@ -179,7 +171,7 @@ def set_role():
         print(("assigned address " + oct(mesh.mesh_address)) if result else "failed.")
         return True
     if user_input[0].upper().startswith("I"):
-        idle(*[int(x) for x in user_input[1:2]])
+        idle(*[int(x) for x in user_input[1:3]])
         return True
     if user_input[0].upper().startswith("E"):
         emit(*[int(x) for x in user_input[1:5]])
