@@ -67,7 +67,7 @@ public:
         return std::tuple<bool, bool, bool>(ds, df, dr);
     }
 
-    void open_tx_pipe(py::object& address)
+    void open_tx_pipe(py::object address)
     {
         // if (PyLong_Check(address)) {
         //     return RF24::openWritingPipe(address.cast<uint64_t>());
@@ -75,7 +75,7 @@ public:
         RF24::openWritingPipe(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
-    void open_rx_pipe(uint8_t number, py::object& address)
+    void open_rx_pipe(uint8_t number, py::object address)
     {
         // if (PyLong_Check(address)) {
         //     return RF24::openReadingPipe(number, address.cast<uint64_t>());
@@ -97,7 +97,7 @@ public:
         return buf;
     }
 
-    void startFastWrite(py::object& buf, const bool multicast = false, bool startTx = true)
+    void startFastWrite(py::object buf, const bool multicast = false, bool startTx = true)
     {
         RF24::startFastWrite(
             get_bytes_or_bytearray_str(buf),
@@ -105,7 +105,7 @@ public:
             multicast, startTx);
     }
 
-    bool startWrite(py::object& buf, const bool multicast)
+    bool startWrite(py::object buf, const bool multicast)
     {
         return RF24::startWrite(
             get_bytes_or_bytearray_str(buf),
@@ -113,7 +113,7 @@ public:
             multicast);
     }
 
-    bool writeFast(py::object& buf, const bool multicast = false)
+    bool writeFast(py::object buf, const bool multicast = false)
     {
         return RF24::writeFast(
             get_bytes_or_bytearray_str(buf),
@@ -121,7 +121,7 @@ public:
             multicast);
     }
 
-    bool write(py::object& buf, const bool multicast = false)
+    bool write(py::object buf, const bool multicast = false)
     {
         return RF24::write(
             get_bytes_or_bytearray_str(buf),
@@ -129,7 +129,7 @@ public:
             multicast);
     }
 
-    bool writeBlocking(py::object& buf, uint32_t timeout)
+    bool writeBlocking(py::object buf, uint32_t timeout)
     {
         return RF24::writeBlocking(
             get_bytes_or_bytearray_str(buf),
@@ -137,7 +137,7 @@ public:
             timeout);
     }
 
-    bool writeAckPayload(uint8_t pipe, py::object& buf)
+    bool writeAckPayload(uint8_t pipe, py::object buf)
     {
         return RF24::writeAckPayload(
             pipe,

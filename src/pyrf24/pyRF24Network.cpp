@@ -23,7 +23,7 @@ struct RF24NetworkFrameWrapper : public RF24NetworkFrame
     {
     }
 
-    RF24NetworkFrameWrapper(RF24NetworkHeader& header, py::object& message)
+    RF24NetworkFrameWrapper(RF24NetworkHeader& header, py::object message)
     {
         RF24NetworkFrame::header = header;
         set_message(message);
@@ -38,7 +38,7 @@ struct RF24NetworkFrameWrapper : public RF24NetworkFrame
         return py_ba;
     }
 
-    void set_message(py::object& message)
+    void set_message(py::object message)
     {
         RF24NetworkFrame::message_size = static_cast<uint16_t>(get_bytes_or_bytearray_ln(message));
         memcpy(RF24NetworkFrame::message_buffer, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(message)), RF24NetworkFrame::message_size);
@@ -72,7 +72,7 @@ public:
     }
 
 #if defined(RF24NetworkMulticast)
-    bool multicast(RF24NetworkHeader header, py::object& buf, uint8_t level = 7)
+    bool multicast(RF24NetworkHeader header, py::object buf, uint8_t level = 7)
     {
         return RF24Network::multicast(
             header,
@@ -102,7 +102,7 @@ public:
         return std::tuple<RF24NetworkHeader, py::bytearray>(header, py_ba);
     }
 
-    bool write(RF24NetworkHeader& header, py::object& buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
+    bool write(RF24NetworkHeader& header, py::object buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
     {
         return RF24Network::write(
             header,
@@ -223,7 +223,7 @@ PYBIND11_MODULE(rf24_network, m)
     // *********************** RF24NetworkFrame exposed ******************
     /*
     py::class_<RF24NetworkFrameWrapper>(m, "RF24NetworkFrame")
-        .def(py::init<RF24NetworkHeader&, py::object&>(), R"docstr(
+        .def(py::init<RF24NetworkHeader&, py::object>(), R"docstr(
             __init__(header: RF24NetworkHeader = None, message: Union[bytes, bytearray] = None)
 
             :param RF24NetworkHeader header: The RF24NetworkHeader associated with the frame.

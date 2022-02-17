@@ -15,7 +15,7 @@ public:
     // needed for polymorphic recognition
     virtual ~RF24MeshWrapper() = default;
 
-    bool write(py::object& buf, uint8_t msg_type, uint8_t nodeID = 0)
+    bool write(py::object buf, uint8_t msg_type, uint8_t nodeID = 0)
     {
         return RF24Mesh::write(
             get_bytes_or_bytearray_str(buf),
@@ -24,7 +24,7 @@ public:
             nodeID);
     }
 
-    bool write(uint16_t to_node, py::object& buf, uint8_t msg_type)
+    bool write(uint16_t to_node, py::object buf, uint8_t msg_type)
     {
         return RF24Mesh::write(
             to_node,
@@ -88,7 +88,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         // *****************************************************************************
 
-        .def("write", static_cast<bool (RF24MeshWrapper::*)(py::object&, uint8_t, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
+        .def("write", static_cast<bool (RF24MeshWrapper::*)(py::object, uint8_t, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
             write(buf: bytes, message_type: int, to_node_id: int = 0) -> bool
 
             Transmit a message to a unique `node_id` of a mesh network node.
@@ -105,7 +105,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         // *****************************************************************************
 
-        .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, py::object&, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
+        .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, py::object, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
             When the network node's `Logical Address <logical_address>` is already known, the parameters to
             Transmit a message to a specific `Logical Address <logical_address>` of a network node are as follows:
 
