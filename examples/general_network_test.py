@@ -45,12 +45,26 @@ else:
     THIS_NODE = int(input("an octal int. Defaults to '0' ") or "0", 8)
 
 if not radio.begin():
+    # this is done with mesh.begin(), but it helps to check if the radio hardware is ok
     raise OSError("radio hardware not responding")
+print("    radio hardware initialized")
 if IS_MESH:
     mesh.node_id = THIS_NODE
+    if THIS_NODE:
+        print(f"    connecting to mesh network as node_id {THIS_NODE}")
+    else:
+        print("    Acting as mesh master node.")
     # RF24Mesh C++ library uses channel 97 by default
     if not mesh.begin():
-        raise OSError("could not connect to mesh network")
+        print(
+            "    could not connect to mesh network.\n",
+            "   Try again with mesh.renew_address()",
+        )
+    elif THIS_NODE:
+        print(
+            "    connected to mesh network using",
+            f"assigned address {oct(mesh.mesh_address)}"
+        )
 else:
     # C++ examples use channel 90 for RF24Network library
     radio.channel = 90
@@ -83,9 +97,9 @@ def idle(timeout: int = 30):
     print("idling for", timeout, "seconds")
     start_timer = time.monotonic()
     while (time.monotonic() - start_timer) < timeout:
-        if IS_MESH:
-            mesh.update()
-            mesh.dhcp()
+        if IS_MESH and mesh.update() and not mesh.node_id:
+            # if this is a mesh master node and update() returned a non-zero value
+            mesh.dhcp()  # only needed for master node
         else:
             network.update()  # keep the network layer current
         while network.available():
@@ -154,8 +168,7 @@ def set_role():
         if mesh.mesh_address == MESH_DEFAULT_ADDRESS:
             prompt += "!!! Mesh node not connected.\n"
         prompt += "*** Enter 'C' to connect to to mesh master node.\n"
-    user_input = input(prompt + "*** Enter 'Q' to quit example.\n") or "?"
-    user_input = user_input.split()
+    user_input = (input(prompt + "*** Enter 'Q' to quit example.\n") or "?").split()
     if user_input[0].upper().startswith("C") and IS_MESH:
         print("Connecting to mesh network...", end=" ")
         result = mesh.renew_address(*[int(x) for x in user_input[1:2]])
@@ -184,6 +197,6 @@ if __name__ == "__main__":
         print(" Keyboard Interrupt detected. Powering down radio...")
         radio.power = False
 elif IS_MESH and mesh.mesh_address != MESH_DEFAULT_ADDRESS:
-    print("    Run emit(<node number>) to transmit.")
     print("    Run idle() to receive or forward messages in the network.")
+    print("    Run emit(<node number>) to transmit.")
     print("    Pass keyword arg `frag=True` to emit() fragmented messages.")
