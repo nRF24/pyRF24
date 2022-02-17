@@ -88,11 +88,13 @@ else:
     print("Acting as network master node.")
 
 
-def idle(timeout: int = 30):
+def idle(timeout: int = 30, strict_timeout: bool = False):
     """Listen for any payloads and print the transaction
 
     :param int timeout: The number of seconds to wait (with no transmission)
         until exiting function.
+    :param bool strict_timeout: If set to True, then the timer is not reset when
+        processing incoming traffic
     """
     print("idling for", timeout, "seconds")
     start_timer = time.monotonic()
@@ -103,7 +105,8 @@ def idle(timeout: int = 30):
         else:
             network.update()  # keep the network layer current
         while network.available():
-            start_timer = time.monotonic()  # reset timer
+            if not strict_timeout:
+                start_timer = time.monotonic()  # reset timer
             header, payload = network.read()
             payload_len = len(payload)
             print("Received payload", end=" ")
@@ -130,7 +133,7 @@ def emit(
     failures = 0
     while failures < 6 and count:
         # for this example, we use idle() to update() the network/mesh layer
-        idle(interval)  # idle till its time to emit
+        idle(interval, True)  # idle till its time to emit
         count -= 1
         packets_sent[0] += 1
         # TMRh20's RF24Mesh examples use 1 long int containing a timestamp (in ms)
