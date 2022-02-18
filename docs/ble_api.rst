@@ -10,10 +10,11 @@ BLE Limitations
 ``fake_ble`` module helpers
 ---------------------------
 
+.. autofunction:: pyrf24.fake_ble.address_repr
 .. autofunction:: pyrf24.fake_ble.swap_bits
 .. autofunction:: pyrf24.fake_ble.reverse_bits
-.. autofunction:: pyrf24.fake_ble.chunk
 .. autofunction:: pyrf24.fake_ble.crc24_ble
+.. autofunction:: pyrf24.fake_ble.chunk
 .. autofunction:: pyrf24.fake_ble.whitener
 .. autodata:: pyrf24.fake_ble.BLE_FREQ
 

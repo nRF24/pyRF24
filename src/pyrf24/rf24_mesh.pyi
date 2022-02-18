@@ -2,6 +2,10 @@
 from typing import Union
 from .rf24 import RF24, rf24_datarate_e
 from .rf24_network import RF24Network
+MESH_DEFAULT_ADDRESS: int = 0o4444
+MESH_ADDR_LOOKUP: int = 196
+MESH_ADDR_RELEASE: int = 197
+MESH_ID_LOOKUP: int = 198
 
 class RF24Mesh:
     def __init__(self, radio: RF24, network: RF24Network) -> None: ...

@@ -33,12 +33,12 @@ IS_MESH = (
 # uniquely identify this radio.
 THIS_NODE = 0
 print(
-    "Remember, the master node always uses `0` as the node_address and node_id."
+    "Remember, the master node always uses `0` as the mesh_address and node_id."
     "\nWhich node is this? Enter",
     end=" ",
 )
 if IS_MESH:
-    # node_id must be less than 255
+    # node_id must be less than 256
     THIS_NODE = int(input("a unique int. Defaults to '0' ") or "0") & 0xFF
 else:
     # logical node_address is in octal
@@ -102,7 +102,7 @@ def idle(timeout: int = 30, strict_timeout: bool = False):
             header, payload = network.read()
             payload_len = len(payload)
             print("Received payload", end=" ")
-            # TMRh20 examples only use 1 or 2 long ints as small messages
+            # C++ examples only use 1 or 2 long ints as small messages
             if payload_len < MAX_FRAG_SIZE and payload_len % 4 == 0:
                 # if not a large fragmented message and multiple of 4 bytes
                 fmt = "<" + "L" * int(payload_len / 4)
@@ -122,8 +122,7 @@ def emit(
     :param int count: The max number of messages to transmit.
     :param int interval: time (in seconds) between transmitting messages.
     """
-    failures = 0
-    while failures < 6 and count:
+    while count:
         # for this example, we use idle() to update() the network/mesh layer
         idle(interval, True)  # idle till its time to emit
         count -= 1
@@ -142,7 +141,6 @@ def emit(
         else:
             result = network.write(RF24NetworkHeader(node, ord("T")), message)
         end = time.monotonic_ns()
-        failures += not result
         print(
             f"Sending {packets_sent[0]} (len {len(message)})...",
             "ok." if result else "failed.",
