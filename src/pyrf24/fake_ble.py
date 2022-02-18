@@ -81,7 +81,29 @@ from .rf24 import RF24, RF24_CRC_DISABLED
 
 
 def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
-    """Convert a buffer into a hexlified string."""
+    """Convert a buffer into a hexlified string.
+
+    This method is primarily used to display how the address is used by the radio.
+
+    .. code-block:: python
+
+        >>> from pyrf24.fake_ble import address_repr
+        >>> address_repr(b"1Node")
+        '65646F4E31'
+
+    :param bytes,bytearray buf: The buffer of bytes to convert into a hexlified
+        string.
+    :param bool reverse: A `bool` to control the resulting endianess. `True`
+        outputs the result as big endian. `False` outputs the result as little
+        endian. This parameter defaults to `True` since `bytearray` and `bytes`
+        objects are stored in big endian but written in little endian.
+    :param str delimit: A `chr` or `str` to use as a delimiter between bytes.
+        Defaults to an empty string.
+
+    :Returns:
+        A string of hexadecimal characters in big endian form of the
+        specified ``buf`` parameter.
+    """
     order = range(len(buf) - 1, -1, -1) if reverse else range(len(buf))
     # pylint: disable=consider-using-f-string
     return delimit.join(["%02X" % buf[byte] for byte in order])
