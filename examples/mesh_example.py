@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.
 """
@@ -22,7 +21,9 @@ mesh = RF24Mesh(radio, network)
 mesh.node_id = 4
 print("starting nodeID", mesh.node_id)
 if not mesh.begin():
-    raise OSError("failed to initialize radio or could not connect to mesh")
+    # if mesh.begin() returns false for a master node,
+    # then radio.begin() returned false.
+    raise OSError("Radio hardware not responding.")
 radio.print_pretty_details()
 
 TIMER = 0

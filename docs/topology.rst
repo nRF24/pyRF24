@@ -7,13 +7,13 @@ Network Levels
 Because of the hardware limitation's of the nRF24L01 transceiver, each network
 is arranged in a levels where a parent can have up to 5 children. And each child can also have
 up to 5 other children. This is not limitless because this network is designed for low-memory
-devices. Consequently, all node's :`Logical Address <logical_address>` are limited to 12-bit
+devices. Consequently, all node's `Logical Address <logical_address>` are limited to 12-bit
 integers and use an octal counting scheme.
 
-- The master node (designated with the :`Logical Address <logical_address>` ``0o0``)
+- The master node (designated with the `Logical Address <logical_address>` ``0o0``)
   is always the only node in the lowest level (denoted as level 0).
 - Child nodes are designated by the most significant octal digit in their
-  :`Logical Address <logical_address>`. A child node address' least significant digits are
+  `Logical Address <logical_address>`. A child node address' least significant digits are
   the inherited address of it's parent node. Nodes on level 1 only have 1 digit because they are
   children of the master node.
 
@@ -279,28 +279,31 @@ RF24Mesh connecting process
 
 As noted above, a single network *can* have up to 781 nodes. This number also includes
 up to 255 RF24Mesh nodes. The key difference from the user's perspective is that RF24Mesh
-API does not use a Logical Address. Instead the RF24Mesh API relies on a `node_id` number
-to identify a RF24Mesh node that may use a different Logical Address (which can change
-based on the node's physical location).
+API does not publicly use a `Logical Address <logical_address>`. Instead the RF24Mesh API
+relies on a :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id` number to identify a RF24Mesh node
+that may use a different  `Logical Address <logical_address>` (which can change based on
+the node's physical location).
 
 .. important::
     Any network that will use RF24mesh for a child node needs to have a RF24Mesh
     master node. This will not interfere with RF24Network nodes since the RF24Mesh API
     is layered on top of the RF24Network API.
 
-To better explain the difference between a node's `mesh_address` vs a node's `node_id`,
-we will examine the connecting process for a RF24Mesh node. These are the steps performed
-when calling `renew_address()`:
+To better explain the difference between a node's `mesh_address` vs a node's
+:attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id`, we will examine the connecting process for a
+RF24Mesh node. These are the steps performed when calling `renew_address()`:
 
-1. Any RF24Mesh node not connected to a network will use the Logical Address ``0o444``
-   (that's ``2340`` in decimal). It is up to the network administrator to ensure that
-   each RF24Mesh node has a unique `node_id` (which is limited to the range [0, 255]).
+1. Any RF24Mesh node not connected to a network will use the `Logical Address <logical_address>`
+   ``0o444`` (that's ``2340`` in decimal). It is up to the network administrator to ensure that
+   each RF24Mesh node has a unique :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id` (which is limited
+   to the range [0, 255]).
 
    .. hint::
-       Remember that ``0`` is reserved the master node's `node_id`.
-2. To get assigned a Logical Address, an unconnected node must poll the network for a
-   response (using a `NETWORK_POLL` message). Initially this happens on the network
-   level 1, but consecutive attempts will poll higher network levels (in order of low to
+       Remember that ``0`` is reserved the master node's
+       :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id`.
+2. To get assigned a `Logical Address <logical_address>`, an unconnected node must poll the
+   network for a response (using a `NETWORK_POLL` message). Initially this happens on the
+   network level 0, but consecutive attempts will poll higher network levels (in order of low to
    high) if this process fails.
 3. When a polling transmission is responded, the connecting mesh node sends an address
    request which gets forwarded to the master node when necessary (using a
@@ -308,9 +311,10 @@ when calling `renew_address()`:
 4. The master node will process the address request and respond with a `mesh_address`
    (using a `NETWORK_ADDR_RESPONSE` message). If there is no available occupancy on the
    network level from which the address request originated, then the master node will
-   respond with an invalid Logical Address.
+   respond with an invalid `Logical Address <logical_address>`.
 5. Once the requesting node receives the address response (and the assigned address is
-   valid), it assumes that as the `mesh_address` while maintaining its `node_id`.
+   valid), it assumes that as the `mesh_address` while maintaining its
+   :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id`.
 
    - The connecting node will verify its new address by calling `check_connection()`.
    - If the assigned address is invalid or `check_connection()` returns `False`, then

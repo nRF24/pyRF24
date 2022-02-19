@@ -1,11 +1,24 @@
 # pylint: skip-file
-from typing import Union, overload
+from typing import Union, overload, List
 from .rf24 import RF24, rf24_datarate_e
 from .rf24_network import RF24Network
 MESH_DEFAULT_ADDRESS: int = 0o4444
 MESH_ADDR_LOOKUP: int = 196
 MESH_ADDR_RELEASE: int = 197
 MESH_ID_LOOKUP: int = 198
+
+
+class AddrListStruct:
+    def __init__(self): ...
+    @property
+    def node_id(self) -> int: ...
+    @node_id.setter
+    def node_id(self, val: int): ...
+    @property
+    def address(self) -> int: ...
+    @address.setter
+    def address(self, val: int): ...
+
 
 class RF24Mesh:
     def __init__(self, radio: RF24, network: RF24Network) -> None: ...
@@ -44,3 +57,5 @@ class RF24Mesh:
     def node_id(self) -> int: ...
     @node_id.setter
     def node_id(self, number: int) -> None: ...
+    @property
+    def addr_list(self) -> List[AddrListStruct]: ...

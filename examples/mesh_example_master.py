@@ -9,7 +9,7 @@ radio = RF24(22, 0)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
 mesh.node_id = 0
-if not radio.begin() or not mesh.begin():
+if not mesh.begin():
     raise OSError("failed to initialize radio or could not connect to mesh")
 radio.print_pretty_details()
 

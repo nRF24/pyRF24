@@ -36,6 +36,7 @@ from .rf24_mesh import (
     MESH_ADDR_LOOKUP,
     MESH_ADDR_RELEASE,
     MESH_ID_LOOKUP,
+    AddrListStruct,
 )
 from .fake_ble import (
     address_repr,

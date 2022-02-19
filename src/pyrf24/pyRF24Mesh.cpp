@@ -50,6 +50,19 @@ PYBIND11_MODULE(rf24_mesh, m)
     m.attr("MESH_ADDR_RELEASE") = MESH_ADDR_RELEASE;
     m.attr("MESH_ID_LOOKUP") = MESH_ID_LOOKUP;
 
+    py::class_<RF24Mesh::addrListStruct>(m, "AddrListStruct")
+        .def(py::init<>())
+        .def_readwrite("node_id", &RF24Mesh::addrListStruct::nodeID, R"docstr(
+            This `int` attribute represents a node's unique ID number.
+        )docstr")
+        .def_readwrite("address", &RF24Mesh::addrListStruct::address, R"docstr(
+            This `int` represents the assigned `Logical Address <logical_address>` corresponding to the
+            :attr:`AddrListStruct.node_id`.
+        )docstr")
+        .def("__repr__", [](RF24Mesh::addrListStruct& obj) {
+            return std::string("<AddrListStruct id: ") + std::to_string(obj.nodeID) + std::string(" addr: ") + std::to_string(obj.address) + std::string(">");
+        });
+
     py::class_<RF24MeshWrapper>(m, "RF24Mesh")
         .def(py::init<RF24Wrapper&, RF24NetworkWrapper&>(), R"docstr(
             __init__(radio: RF24, network: RF24Network)
@@ -295,16 +308,27 @@ PYBIND11_MODULE(rf24_mesh, m)
             master node needs resumes operation after being offline.
         )docstr")
 
-    // *****************************************************************************
+        // *****************************************************************************
 
-    .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
+        .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
             dhcp()
 
             Keep the master node's list of assigned addresses up-to-date.
 
             .. tip:: This function should be called on mesh network's master nodes only just after
                 calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
-        )docstr");
+        )docstr")
+
+        // *****************************************************************************
+
+        .def_property_readonly("addr_list", [](RF24MeshWrapper& obj) {
+            py::list list;
+            for (uint8_t i = 0; i < obj.addrListTop; ++i) {
+                list.append(obj.addrList[i]);
+            }
+            return list;
+        });
 
 #endif // !defined(MESH_NOMASTER)
+    ;
 }
