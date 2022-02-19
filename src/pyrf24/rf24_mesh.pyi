@@ -1,5 +1,5 @@
 # pylint: skip-file
-from typing import Union
+from typing import Union, overload
 from .rf24 import RF24, rf24_datarate_e
 from .rf24_network import RF24Network
 MESH_DEFAULT_ADDRESS: int = 0o4444
@@ -30,9 +30,11 @@ class RF24Mesh:
     def set_channel(self, channel: int) -> None: ...
     def set_child(self, allow: bool) -> None: ...
     def update(self) -> int: ...
+    @overload
     def write(
         self, buf: Union[bytes, bytearray], message_type: int, to_node_id: int = 0
     ) -> bool: ...
+    @overload
     def write(
         self, to_node: int, buf: Union[bytes, bytearray], message_type: int
     ) -> bool: ...

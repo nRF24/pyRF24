@@ -292,12 +292,16 @@ PYBIND11_MODULE(rf24, m)
         // ***************************** functions that take no args & have no overloads
 
         .def("flush_tx", &RF24Wrapper::flush_tx, R"docstr(
+            flush_tx()
+
             Flush all 3 levels of the radio's TX FIFO.
         )docstr")
 
         // *****************************************************************************
 
         .def("flush_rx", &RF24Wrapper::flush_rx, R"docstr(
+            flush_rx()
+
             Flush all 3 levels of the radio's RX FIFO.
         )docstr")
 
@@ -369,6 +373,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("enable_dynamic_ack", &RF24Wrapper::enableDynamicAck, R"docstr(
+            enable_dynamic_ack()
+
             Enable the radio's Dynamic Ack feature.
 
             By default the multicast parameter to `write()` is ineffective unless this
@@ -406,12 +412,16 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("print_details", &RF24Wrapper::printDetails, R"docstr(
+            print_details()
+
             Print out details about the radio's configuration.
         )docstr")
 
         // *****************************************************************************
 
         .def("print_pretty_details", &RF24Wrapper::printPrettyDetails, R"docstr(
+            print_pretty_details()
+
             Print out details about the radio's configuration. This function differs from
             `print_details()` as the output for this function is more human-friendly/readable.
         )docstr")
@@ -430,6 +440,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("reuse_tx", &RF24Wrapper::reUseTX, R"docstr(
+            reuse_tx()
+
             Re-use the 1\ :sup:`st` level of the radio's TX FIFO.
         )docstr")
 
@@ -445,6 +457,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("stop_const_carrier", &RF24Wrapper::stopConstCarrier, R"docstr(
+            stop_const_carrier()
+
             End transmitting a constant carrier wave. This function also sets the `power` to `False`
             as recommended by the datasheet.
         )docstr")
@@ -483,6 +497,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("what_happened", &RF24Wrapper::what_happened, R"docstr(
+            what_happened() -> Tuple[bool, bool, bool]
+
             Call this function when the radio's IRQ pin is active LOW.
 
             :Returns: a 3-tuple of boolean values in which
@@ -501,6 +517,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("available_pipe", &RF24Wrapper::available_pipe, R"docstr(
+            available_pipe() -> Tuple[bool, int]
+
             Similar to :py:meth:`~pyrf24.rf24.RF24.available()`, but additionally returns the pipe
             number that received the next available payload.
 
@@ -613,6 +631,19 @@ PYBIND11_MODULE(rf24, m)
                 only 6 data pipes (identified by the numbers 0-5).
         )docstr",
              py::arg("pipe"))
+
+        // *****************************************************************************
+
+        .def("toggle_all_pipes", &RF24Wrapper::toggleAllPipes, R"docstr(
+            toggle_all_pipes(enable: bool)
+
+            Open or close all pipes with 1 SPI transaction. This does not alter the addresses assigned to
+            the data pipes (using `open_rx_pipe()` or `open_tx_pipe()`).
+
+            :param bool enable: `True` opens all data pipes for RX operation.
+                `False` closes all data pipes for RX operation.
+        )docstr",
+             py::arg("enable"))
 
         // *****************************************************************************
 
@@ -752,7 +783,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("open_rx_pipe", &RF24Wrapper::open_rx_pipe, R"docstr(
-            open_rx_pipe(pipe_number: int, address: bytes)
+            open_rx_pipe(pipe_number: int, address: Union[bytearray, bytes])
 
             Open a data pipe for receiving.
 
@@ -770,7 +801,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("open_tx_pipe", &RF24Wrapper::open_tx_pipe, R"docstr(
-            open_tx_pipe(address: bytes)
+            open_tx_pipe(address: Union[bytearray, bytes])
 
             Open data pipe 0 for transmitting to a specified address.
 
@@ -783,19 +814,6 @@ PYBIND11_MODULE(rf24, m)
         // .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
         //     For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
         // )docstr", py::arg("address"))
-
-        // *****************************************************************************
-
-        .def("toggle_all_pipes", &RF24Wrapper::toggleAllPipes, R"docstr(
-            toggle_all_pipes(enable: bool)
-
-            Open or close all pipes with 1 SPI transaction. This does not alter the addresses assigned to
-            the data pipes (using `open_rx_pipe()` or `open_tx_pipe()`).
-
-            :param bool enable: `True` opens all data pipes for RX operation.
-                `False` closes all data pipes for RX operation.
-        )docstr",
-             py::arg("enable"))
 
         // *****************************************************************************
 
@@ -856,6 +874,8 @@ PYBIND11_MODULE(rf24, m)
 
         .def("is_fifo", static_cast<bool (RF24Wrapper::*)(const bool, const bool)>(&RF24Wrapper::is_fifo), R"docstr(
             is_fifo(about_tx: bool, check_empty: bool = None) -> Union[bool, int]
+
+            Get information about a specified FIFO buffers.
 
             :param bool about_tx: Ensure the returned data is about the TX FIFO. Set this to `False`
                 to make returned data describe the RX FIFO.
@@ -976,9 +996,10 @@ PYBIND11_MODULE(rf24, m)
                 To use acknowledgement payloads, the `dynamic_payloads` and auto-ack features must be enabled.
 
                 This attribute does not automatically enable the auto-ack feature
-                on pipe 0 because the auto_ack feature is enabled for all pipes by default.
+                on pipe 0 because the auto-ack feature is enabled for all pipes by default.
             .. seealso::
-                Review `write_ack_payload()` and `set_auto_ack()`.
+                Review `write_ack_payload()` and `set_auto_ack()`. Use `~RF24.available()` and `~RF24.read()` to fetch
+                a received acknowledgement payload.
         )docstr")
 
         // *****************************************************************************
@@ -1032,7 +1053,7 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        .def_readwrite("cs_delay", &RF24Wrapper::failureDetected, R"docstr(
+        .def_readwrite("cs_delay", &RF24Wrapper::csDelay, R"docstr(
             The number of microseconds used as a delay when the radio's CSN pin is made active.
         )docstr")
 
