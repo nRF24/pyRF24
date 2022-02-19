@@ -998,8 +998,8 @@ PYBIND11_MODULE(rf24, m)
                 This attribute does not automatically enable the auto-ack feature
                 on pipe 0 because the auto-ack feature is enabled for all pipes by default.
             .. seealso::
-                Review `write_ack_payload()` and `set_auto_ack()`. Use `~RF24.available()` and `~RF24.read()` to fetch
-                a received acknowledgement payload.
+                Review `write_ack_payload()` and `set_auto_ack()`. Use :meth:`~RF24.available()` and
+                :meth:`~RF24.read()` to fetch a received acknowledgement payload.
         )docstr")
 
         // *****************************************************************************
