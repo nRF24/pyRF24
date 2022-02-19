@@ -66,9 +66,10 @@ Advanced RF24 API
 .. automethod:: pyrf24.rf24.RF24.flush_tx
 .. .. automethod:: pyrf24.rf24.RF24.test_rpd
 .. autoattribute:: pyrf24.rf24.RF24.rpd
-.. autoattribute:: pyrf24.rf24.RF24.is_valid
 .. automethod:: pyrf24.rf24.RF24.close_rx_pipe
 .. autoattribute:: pyrf24.rf24.RF24.is_plus_variant
+.. autoattribute:: pyrf24.rf24.RF24.is_valid
+.. autoattribute:: pyrf24.rf24.RF24.is_chip_connected
 
 Configurable RF24 API
 *********************

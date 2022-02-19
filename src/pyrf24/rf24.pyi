@@ -6,16 +6,29 @@ class rf24_crclength_e:
     RF24_CRC_8: int = 1
     RF24_CRC_16: int = 2
 
+RF24_CRC_DISABLED: int = rf24_crclength_e.RF24_CRC_DISABLED
+RF24_CRC_8: int = rf24_crclength_e.RF24_CRC_8
+RF24_CRC_16: int = rf24_crclength_e.RF24_CRC_16
+
 class rf24_datarate_e:
     RF24_1MBPS: int = 0
     RF24_2MBPS: int = 1
     RF24_250KBPS: int = 2
+
+RF24_1MBPS: int = rf24_datarate_e.RF24_1MBPS
+RF24_2MBPS: int = rf24_datarate_e.RF24_2MBPS
+RF24_250KBPS: int = rf24_datarate_e.RF24_250KBPS
 
 class rf24_pa_dbm_e:
     RF24_PA_MIN: int = 0
     RF24_PA_LOW: int = 1
     RF24_PA_HIGH: int = 2
     RF24_PA_MAX: int = 3
+
+RF24_PA_MIN: int = rf24_pa_dbm_e.RF24_PA_MIN
+RF24_PA_LOW: int = rf24_pa_dbm_e.RF24_PA_LOW
+RF24_PA_HIGH: int = rf24_pa_dbm_e.RF24_PA_HIGH
+RF24_PA_MAX: int = rf24_pa_dbm_e.RF24_PA_MAX
 
 class RF24:
     def __init__(

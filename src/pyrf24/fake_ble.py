@@ -77,7 +77,7 @@ here has been adapted to work with Python.
 from os import urandom
 import struct
 from typing import Union, List
-from .rf24 import RF24, RF24_CRC_DISABLED
+from .rf24 import RF24, RF24_CRC_DISABLED  # pylint: disable=import-error
 
 
 def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
