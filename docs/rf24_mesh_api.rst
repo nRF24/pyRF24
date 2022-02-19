@@ -23,9 +23,6 @@ Advanced RF24Mesh API
 .. automethod:: pyrf24.rf24_mesh.RF24Mesh.set_child
 .. autoattribute:: pyrf24.rf24_mesh.RF24Mesh.addr_list
 
-    The read-only `list` of addresses assigned to nodes' ID numbers.
-    Each element is a `AddrListStruct` object.
-
 AddrListStruct class
 --------------------
 

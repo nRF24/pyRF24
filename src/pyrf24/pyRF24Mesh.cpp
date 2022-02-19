@@ -37,6 +37,15 @@ public:
     {
         return RF24Mesh::_nodeID;
     }
+
+    py::list get_addrList()
+    {
+        py::list list;
+        for (uint8_t i = 0; i < RF24Mesh::addrListTop; ++i) {
+            list.append(RF24Mesh::addrList[i]);
+        }
+        return list;
+    }
 };
 
 PYBIND11_MODULE(rf24_mesh, m)
@@ -52,10 +61,10 @@ PYBIND11_MODULE(rf24_mesh, m)
 
     py::class_<RF24Mesh::addrListStruct>(m, "AddrListStruct")
         .def(py::init<>())
-        .def_readwrite("node_id", &RF24Mesh::addrListStruct::nodeID, R"docstr(
+        .def_readonly("node_id", &RF24Mesh::addrListStruct::nodeID, R"docstr(
             This `int` attribute represents a node's unique ID number.
         )docstr")
-        .def_readwrite("address", &RF24Mesh::addrListStruct::address, R"docstr(
+        .def_readonly("address", &RF24Mesh::addrListStruct::address, R"docstr(
             This `int` represents the assigned `Logical Address <logical_address>` corresponding to the
             :attr:`AddrListStruct.node_id`.
         )docstr")
@@ -130,6 +139,89 @@ PYBIND11_MODULE(rf24_mesh, m)
             :Returns: `True` if the message was successfully sent, otherwise `False`
         )docstr")
 
+#if !defined(MESH_NOMASTER)
+
+        // *****************************************************************************
+
+        .def("set_address", &RF24MeshWrapper::setAddress, R"docstr(
+            set_address(node_id: int, address: int, search_by_address: bool = False)
+
+            Only call this function on a mesh network's master node to manually assign a logical
+            address to a unique `node_id`. This function is meant to include RF24Network nodes in
+            mesh networks' :attr:`~pyrf24.rf24_mesh.RF24Mesh.addr_list` list.
+
+            .. code-block:: py
+                
+                # Set a static address for node 0o2, with nodeID 23, since it will just be
+                # a static routing node for example running on an ATTiny chip.
+                mesh.setAddress(23, 0o2);
+            
+            .. code-block:: py
+                
+                # Change or set the nodeID for an existing address
+                address = 0o12;
+                mesh.setAddress(3, address, True);
+            
+            :param int node_id: The unique identifying number for the connected node.
+            :param int address: The `Logical Address <logical_address>` for the connected node.
+            :param bool search_by_address: Set this parameter to `True` traverse the list of
+                assigned addresses by address. The default value of `False` traverses the list of
+                assigned addresses by node_id.
+        )docstr",
+             py::arg("node_id"), py::arg("address"), py::arg("search_by_address") = false)
+
+        // *****************************************************************************
+
+        .def("save_dhcp", &RF24MeshWrapper::saveDHCP, R"docstr(
+            save_dhcp()
+
+            Call this function on the mesh network's master node to save the current list of
+            assigned addresses to a local binary text file. This is meant for persistence when the
+            master node needs to go offline.
+        )docstr")
+
+        // *****************************************************************************
+
+        // .def("set_static_address", &RF24MeshWrapper::setStaticAddress, R"docstr(
+        //     set_static_address(node_id: int, address: int)
+
+        //     For backwards compatiblity, this function is similar to the `set_address()` function.
+        // )docstr", py::arg("node_id"), py::arg("address"))
+
+        // *****************************************************************************
+
+        .def("load_dhcp", &RF24MeshWrapper::loadDHCP, R"docstr(
+            load_dhcp()
+
+            Call this function on the mesh network's master node to read and load the saved list of
+            assigned addresses from a local binary text file. This is meant for persistence when the
+            master node needs resumes operation after being offline.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
+            dhcp()
+
+            Keep the master node's list of assigned addresses up-to-date.
+
+            .. tip:: This function should be called on mesh network's master nodes only just after
+                calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def_property_readonly("addr_list", &RF24MeshWrapper::get_addrList, R"docstr(
+            The read-only attribute returns a `list` of addresses assigned to nodes' ID numbers.
+            Each element is a `AddrListStruct` object. This attribute should only be used on the master node.
+
+            .. important:: 
+                Altering any values for elements contained in this list does not change anything.
+                Use `set_address()` instead.
+        )docstr")
+
+#endif // !defined(MESH_NOMASTER)
+
         // *****************************************************************************
 
         .def_property("node_id", &RF24MeshWrapper::get_node_id, &RF24MeshWrapper::setNodeID, R"docstr(
@@ -144,9 +236,9 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         // *****************************************************************************
 
-        .def("set_node_id", &RF24MeshWrapper::setNodeID, R"docstr(
-            Configure the `node_id` attribute.
-        )docstr")
+        // .def("set_node_id", &RF24MeshWrapper::setNodeID, R"docstr(
+        //     Configure the `node_id` attribute.
+        // )docstr")
 
         // *****************************************************************************
 
@@ -247,88 +339,5 @@ PYBIND11_MODULE(rf24_mesh, m)
             :param bool allow: Allow or disallow (`True`/`False`) the instantiated mesh network node
                 to respond to other mesh network nodes attempting to connect to the network.
         )docstr",
-             py::arg("allow"))
-
-#if !defined(MESH_NOMASTER)
-
-        // *****************************************************************************
-
-        .def("set_address", &RF24MeshWrapper::setAddress, R"docstr(
-            set_address(node_id: int, address: int, search_by_address: bool = False)
-
-            Only call this function on a mesh network's master node to manually assign a logical
-            address to a unique `node_id`. This function is meant to include RF24Network nodes in
-            mesh networks' :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.dhcp()` list.
-
-            .. code-block:: py
-                
-                # Set a static address for node 0o2, with nodeID 23, since it will just be
-                # a static routing node for example running on an ATTiny chip.
-                mesh.setAddress(23, 0o2);
-            
-            .. code-block:: py
-                
-                # Change or set the nodeID for an existing address
-                address = 0o12;
-                mesh.setAddress(3, address, True);
-            
-            :param int node_id: The unique identifying number for the connected node.
-            :param int address: The `Logical Address <logical_address>` for the connected node.
-            :param bool search_by_address: Set this parameter to `True` traverse the list of
-                assigned addresses by address. The default value of `False` traverses the list of
-                assigned addresses by node_id.
-        )docstr",
-             py::arg("node_id"), py::arg("address"), py::arg("search_by_address") = false)
-
-        // *****************************************************************************
-
-        .def("save_dhcp", &RF24MeshWrapper::saveDHCP, R"docstr(
-            save_dhcp()
-
-            Call this function on the mesh network's master node to save the current list of
-            assigned addresses to a local binary text file. This is meant for persistence when the
-            master node needs to go offline.
-        )docstr")
-
-        // *****************************************************************************
-
-        // .def("set_static_address", &RF24MeshWrapper::setStaticAddress, R"docstr(
-        //     set_static_address(node_id: int, address: int)
-
-        //     For backwards compatiblity, this function is similar to the `set_address()` function.
-        // )docstr", py::arg("node_id"), py::arg("address"))
-
-        // *****************************************************************************
-
-        .def("load_dhcp", &RF24MeshWrapper::loadDHCP, R"docstr(
-            load_dhcp()
-
-            Call this function on the mesh network's master node to read and load the saved list of
-            assigned addresses from a local binary text file. This is meant for persistence when the
-            master node needs resumes operation after being offline.
-        )docstr")
-
-        // *****************************************************************************
-
-        .def("dhcp", &RF24MeshWrapper::DHCP, R"docstr(
-            dhcp()
-
-            Keep the master node's list of assigned addresses up-to-date.
-
-            .. tip:: This function should be called on mesh network's master nodes only just after
-                calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
-        )docstr")
-
-        // *****************************************************************************
-
-        .def_property_readonly("addr_list", [](RF24MeshWrapper& obj) {
-            py::list list;
-            for (uint8_t i = 0; i < obj.addrListTop; ++i) {
-                list.append(obj.addrList[i]);
-            }
-            return list;
-        });
-
-#endif // !defined(MESH_NOMASTER)
-    ;
+             py::arg("allow"));
 }
