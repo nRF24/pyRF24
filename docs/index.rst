@@ -4,30 +4,21 @@
    self
 
 .. toctree::
-   :maxdepth: 2
    :caption: Examples
 
    examples
 
 .. toctree::
-   :maxdepth: 4
-   :caption: RF24 API
+   :caption: API Reference
 
    rf24_api
-
-
-.. toctree::
-   :maxdepth: 4
-   :caption: RF24Network API
-
+   ble_api
    rf24_network_api
-
+   rf24_mesh_api
 
 .. toctree::
-   :maxdepth: 4
-   :caption: RF24Mesh API
 
-   rf24_mesh_api
+   topology
 
 Indices and tables
 ==================

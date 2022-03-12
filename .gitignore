@@ -1,10 +1,8 @@
+#### ignores for Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
-*.so
 
 # Distribution / packaging
 .Python
@@ -130,3 +128,53 @@ dmypy.json
 
 # exclude local VSCode's settings folder
 .vscode/
+
+#### ignores for C++
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Cmake build-in-source generated stuff
+CMakeUserPresets.json
+CMakeCache.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CMakeFiles
+DEBIAN
+cmake_install.cmake
+compile_commands.json
+Makefile
+!docs/Makefile
+_skbuild
+
+# examples generate a list of assigned network addresses corresponding to mesh node IDs
+dhcplist.txt

@@ -1,0 +1,14 @@
+[build-system]
+requires = [
+    "setuptools>=45",
+    "wheel",
+    "pybind11>=2.7.1; sys_platform == 'linux'",
+    "scikit-build; sys_platform == 'linux'",
+    "cmake; sys_platform == 'linux'",
+    "ninja; sys_platform == 'linux'",
+    "setuptools_scm>=6.2"
+]
+
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]

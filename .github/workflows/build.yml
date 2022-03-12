@@ -6,29 +6,52 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up Python 3.6
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: Checkout Current Repo
-      uses: actions/checkout@v1
-      with:
-        submodules: true
-    - name: Install dependencies
-      run: |
-        sudo apt-get install python-dev libboost-python-dev python-setuptools
-        python -m pip install --upgrade pip
-        python -m pip install wheel
-    - name: Pip install pylint, RPi.GPIO, Sphinx, & sphinx-rtd-theme RPi.GPIO
-      run: |
-        pip install pylint Sphinx sphinx-rtd-theme
-    - name: Library version
-      run: git describe --dirty --always --tags
-    # - name: check python examples PEP8 compliance
-    #   run: |
-    #     pylint examples/*.py --disable=invalid-name,no-name-in-module,no-member,duplicate-code
-      # invalid-name,no-name-in-module,no-member are errors related to C++ wrapped into a python package; Applies to RPi.GPIO package as well.
-      # duplicate-code error gets flagged because some examples use similar code snippets
-    - name: Build docs
-      working-directory: docs
-      run: sphinx-build -E -W -b html . _build/html
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Checkout Current Repo
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install python3-dev graphviz
+          python3 -m pip install --upgrade pip pylint
+          python3 -m pip install -r docs/requirements.txt -r requirements.txt
+
+      - name: Build package for docs extraction and linting examples
+        id: wheel
+        run: |
+          python3 setup.py bdist_wheel
+          python3 -m pip install $(ls dist/pyrf24-*.whl)
+
+      - name: check python examples PEP8 compliance
+        run: |
+          pylint examples/*.py --disable=duplicate-code
+        # duplicate-code error gets flagged because some examples use similar code snippets
+
+      - name: Build docs
+        working-directory: docs
+        run: sphinx-build -E -W -b html . _build/html
+
+      - name: Save built docs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: "pyRF24_docs"
+          path: ${{ github.workspace }}/docs/_build/html
+
+      - name: upload to github pages
+        if: github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/html
+
+      - name: Validate distribution
+        run: |
+          python3 -m pip install twine
+          twine check dist/*
