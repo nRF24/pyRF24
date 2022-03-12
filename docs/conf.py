@@ -97,12 +97,8 @@ html_theme_options = {
     "repo_url": "https://github.com/nRF24/pyRF24/",
     "repo_name": "pyRF24",
     "repo_type": "github",
-    # Visible levels of the global TOC; -1 means unlimited
-    "globaltoc_depth": -1,
     # If False, expand all TOC entries
     "globaltoc_collapse": False,
-    # If True, show hidden TOC entries
-    "globaltoc_includehidden": True,
 }
 # Set link name generated in the top bar.
 html_title = "pyRF24 library"
