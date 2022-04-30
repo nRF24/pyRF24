@@ -181,7 +181,7 @@ def whitener(buf: Union[bytes, bytearray], coefficient: int) -> bytearray:
 
     :param bytes,bytearray buf: The BLE payloads data. This data should include the
         CRC24 checksum.
-    :param int coef: The whitening coefficient used to avoid repeating binary patterns.
+    :param int coefficient: The whitening coefficient used to avoid repeating binary patterns.
         This is the index (plus 37) of `BLE_FREQ` tuple for nRF24L01 channel that the
         payload transits.
 
