@@ -179,7 +179,7 @@ def whitener(buf: Union[bytes, bytearray], coefficient: int) -> bytearray:
     `FakeBLE` class to allow whitening and dewhitening a BLE payload without the
     hardcoded coefficient.
 
-    :param bytes,bytearray data: The BLE payloads data. This data should include the
+    :param bytes,bytearray buf: The BLE payloads data. This data should include the
         CRC24 checksum.
     :param int coef: The whitening coefficient used to avoid repeating binary patterns.
         This is the index (plus 37) of `BLE_FREQ` tuple for nRF24L01 channel that the
