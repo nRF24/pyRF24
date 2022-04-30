@@ -1,0 +1,17 @@
+# Prevent line ending conversions by default to avoid problems with binary files.
+* -text
+
+# Known text files should have LF line endings.
+*.py text eol=lf
+*.pyi text eol=lf
+*.rst text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.css text eol=lf
+*.svg text eol=lf
+*.png text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.bat text eol=crlf
+LICENSE text eol=lf
