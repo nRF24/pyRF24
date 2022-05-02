@@ -89,6 +89,12 @@ PYBIND11_MODULE(rf24_mesh, m)
         .def("begin", &RF24MeshWrapper::begin, R"docstr(
             begin(channel: int = 97, data_rate: pyrf24.rf24.rf24_datarate_e = RF24_1MBPS, timeout: int = 7500) -> bool
 
+            :param int channel: The :py:attr:`~pyrf24.rf24.RF24.channel` to use for the network.
+            :param ~pyrf24.rf24.rf24_datarate_e data_rate: The :py:attr:`~pyrf24.rf24.RF24.data_rate`
+                to use for the network.
+            :param int timeout: The timeout to use when connecting to the mesh network. This value is equivalent
+                to the ``timeout`` parameter in `renew_address()`
+
             :Returns: `True` if the radio's hardware was properly intialized and the node
                 successfully connected to the mesh network.
 
@@ -111,19 +117,20 @@ PYBIND11_MODULE(rf24_mesh, m)
         // *****************************************************************************
 
         .def("write", static_cast<bool (RF24MeshWrapper::*)(py::object, uint8_t, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
-            write(buf: bytes, message_type: int, to_node_id: int = 0) -> bool
-
-            Transmit a message to a unique `node_id` of a mesh network node.
+            write(buf: Union[bytes, bytearray], message_type: int, to_node_id: int = 0) -> bool \
+            write(to_node_address: int, buf: Union[bytes, bytearray], message_type: int) -> bool
 
             :param bytes,bytearray buf: The message to transmit.
             :param int message_type: The :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type` to
                 be used in the frame's header.
-            :param int node_id: The destination node's unique `node_id`. If this parameter is not
-                specified, then the message is sent to the mesh network's master node.
-
             :Returns: `True` if the message was successfully sent, otherwise `False`
+
+            Transmit a message to a unique `node_id` of a mesh network node.
+
+            :param int to_node_id: The destination node's unique `node_id`. If this parameter is not
+                specified, then the message is sent to the mesh network's master node.
         )docstr",
-             py::arg("buf"), py::arg("msg_type"), py::arg("node_id") = 0)
+             py::arg("buf"), py::arg("message_type"), py::arg("to_node_id") = 0)
 
         // *****************************************************************************
 
@@ -131,13 +138,10 @@ PYBIND11_MODULE(rf24_mesh, m)
             When the network node's `Logical Address <logical_address>` is already known, the parameters to
             Transmit a message to a specific `Logical Address <logical_address>` of a network node are as follows:
 
-            :param int node_address: The destination node's `Logical Address <logical_address>`.
-            :param bytes,bytearray buf: The message to transmit.
-            :param int message_type: The :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type` to
-                be used in the frame's header.
+            :param int to_node_address: The destination node's `Logical Address <logical_address>`.
+        )docstr",
+             py::arg("to_node_address"), py::arg("buf"), py::arg("message_type") = 0)
 
-            :Returns: `True` if the message was successfully sent, otherwise `False`
-        )docstr")
 
 #if !defined(MESH_NOMASTER)
 
@@ -310,6 +314,9 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             Translates a `node_id` into the corresponding `mesh_address`
 
+            :param int node_id: The identifying number of the mesh node for which to fetch the
+                corresponding :py:attr:`~pyrf24.rf24_network.RF24Network.node_address`.
+
             :Returns:
 
                 - A positive `int` that represents the assigned address.
@@ -324,8 +331,9 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         .def("set_channel", &RF24MeshWrapper::setChannel, R"docstr(
             set_channel(channel: int)
-
             This function controls the radio's configured `channel` (AKA frequency).
+
+            :param int channel: The desired :py:attr:`~pyrf24.rf24.RF24.channel` to be used for the network.
         )docstr",
              py::arg("channel"))
 

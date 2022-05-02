@@ -100,6 +100,17 @@ html_theme_options = {
     # If False, expand all TOC entries
     "globaltoc_collapse": False,
 }
+
+# turn off some features specific to sphinx-immaterial theme
+object_description_options = [
+    ("py:.*", dict(include_fields_in_toc=False, generate_synopses=None)),
+    ("py:parameter", dict(include_in_toc=False)),
+]
+
+python_type_aliases = {
+    "pyrf24.rf24.rf24_datarate_e": "rf24_datarate_e",
+}
+
 # Set link name generated in the top bar.
 html_title = "pyRF24 library"
 

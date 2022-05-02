@@ -115,7 +115,7 @@ For a message to travel from node ``0o124`` to node ``0o3``, it must be passed t
 network levels. So, the message flows ``0o124`` -> ``0o24`` -> ``0o4`` -> ``0o0`` -> ``0o3``.
 
 A single network can potentially have a maximum of 781 nodes (all operating on the same
-:attr:`~circuitpython_nrf24l01.rf24.RF24.channel`), but for readability reasons, the following
+:attr:`~pyrf24.rf24.RF24.channel`), but for readability reasons, the following
 graph only demonstrates
 
 - the master node (level 0) and it's 5 children (level 1)
