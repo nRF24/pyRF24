@@ -179,9 +179,9 @@ def whitener(buf: Union[bytes, bytearray], coefficient: int) -> bytearray:
     `FakeBLE` class to allow whitening and dewhitening a BLE payload without the
     hardcoded coefficient.
 
-    :param bytes,bytearray data: The BLE payloads data. This data should include the
+    :param bytes,bytearray buf: The BLE payloads data. This data should include the
         CRC24 checksum.
-    :param int coef: The whitening coefficient used to avoid repeating binary patterns.
+    :param int coefficient: The whitening coefficient used to avoid repeating binary patterns.
         This is the index (plus 37) of `BLE_FREQ` tuple for nRF24L01 channel that the
         payload transits.
 
@@ -376,18 +376,23 @@ class FakeBLE:
             This attribute is exposed for debugging purposes.
         """
 
-    def begin(self, ce_pin: int = None, csn: int = None) -> bool:
+    def begin(self, ce_pin: int = None, csn_pin: int = None) -> bool:
         """Initialize the radio using BLE specifications.
 
         Internally, this function also calls :meth:`~pyrf24.rf24.RF24.begin()`, so
         there's no need to initialized the radio's hardware before calling this
         function.
+
+        If dynamically specifying the radio's GPIO pins, then 2 positional arguments are supported.
+
+        :param int ce_pin: The pin number connected to the radio's CE pin.
+        :param int csn_pin: The pin number connected to the radio's CSN pin.
         """
         success = False
-        if ce_pin is None and csn is None:
+        if ce_pin is None and csn_pin is None:
             success = self._radio.begin()
         else:
-            success = self._radio.begin(ce_pin, csn)
+            success = self._radio.begin(ce_pin, csn_pin)
         if not success:
             return False
         self._radio.crc_length = RF24_CRC_DISABLED
@@ -454,7 +459,7 @@ class FakeBLE:
     @property
     def show_pa_level(self) -> bool:
         """If this attribute is `True`, the payload will automatically include
-        the nRF24L01's :attr:`~pyrf24.rf24.RF24.pa_level` in the
+        the nRF24L01's :py:attr:`~pyrf24.rf24.RF24.pa_level` in the
         advertisement.
 
         The default value of `False` will exclude this optional information.

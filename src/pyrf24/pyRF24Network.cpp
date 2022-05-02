@@ -143,7 +143,8 @@ PYBIND11_MODULE(rf24_network, m)
     //
     py::class_<RF24NetworkHeader>(m, "RF24NetworkHeader")
         .def(py::init<>(), R"docstr(
-            __init__(to_node: int = None, type: int = None)
+            __init__() \
+            __init__(to_node: int, type: int = 0)
         )docstr")
 
         // *****************************************************************************
@@ -153,13 +154,13 @@ PYBIND11_MODULE(rf24_network, m)
 
             :param int to_node: Set the header's `to_node` attribute.
             :param int type: Set the header's `type` attribute.
+                Default value is ``0`` if the ``to_node`` parameter is specified.
 
             .. hint:: These parameters can be left unspecified to create a blank object that can
-                be augmented after instantiation. However, the header's
-                :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.next_id`
+                be augmented after instantiation. However, the header's ``RF24NetworkHeader.next_id``
                 is not automatically incremented when no parameters are given.
         )docstr",
-             py::arg("to"), py::arg("type") = 0)
+             py::arg("to_node"), py::arg("type") = 0)
 
         // *****************************************************************************
 
@@ -204,16 +205,14 @@ PYBIND11_MODULE(rf24_network, m)
             The type of frame sent. Users are encouraged to use an integer in range [0, 127]
             because integers in range [128, 255] are reserved for system usage.
 
-            .. seealso::
-                :ref:`reserved_sys_msgs`
+            .. seealso:: :ref:`reserved_sys_msgs`
+
         )docstr")
 
         // *****************************************************************************
 
-        .def_readwrite_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
-            The next sequential identifying number used for the next created frame. It is not
-            advised to alter this attribute (unless creating a blank header without specifying
-            any parameters to the constructor).
+        .def_readonly_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
+            The next sequential identifying number used for the next created frame.
         )docstr")
 
         // *****************************************************************************
@@ -281,24 +280,23 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("begin", static_cast<void (RF24NetworkWrapper::*)(uint16_t)>(&RF24NetworkWrapper::begin), R"docstr(
-            begin(node_address: int)
+            begin(node_address: int) \
+            begin(channel: int, node_address: int)
 
             Give the instantiated network node a `Logical Address <logical_address>`.
 
-            :param int node_addess: This is a `Logical Address <logical_address>` (typically an octal integer).
+            :param int node_address: This is a `Logical Address <logical_address>` (typically an octal integer).
         )docstr",
              py::arg("node_address"))
 
         // *****************************************************************************
 
         .def("begin", static_cast<void (RF24NetworkWrapper::*)(uint8_t, uint16_t)>(&RF24NetworkWrapper::begin), R"docstr(
-            If using the deprecated form of this function, the parameters are as follows:
-
             :param int channel: The desired channel used by the network.
+                Using this parameter is the deprecated form of this function.
 
                 .. seealso:: Use :py:attr:`~pyrf24.rf24.RF24.channel` attribute to change the radio
                     channel.
-            :param int node_address: This is a `Logical Address <logical_address>` (typically an octal integer).
         )docstr",
              py::arg("channel"), py::arg("node_address"))
 
@@ -345,7 +343,8 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("peek", &RF24NetworkWrapper::peek_header, R"docstr(
-            peek(arg: Union[RF24NetworkHeader, int]) -> Union[int, Tuple[RF24NetworkHeader, bytearray]]
+            peek(header: RF24NetworkHeader) -> int \
+            peek(maxlen: int) -> Tuple[RF24NetworkHeader, bytearray]
             To fetch the next available frame's header received by the network node, the parameter and return type is as follows:
 
             :param RF24NetworkHeader header: The object to save the header information to.

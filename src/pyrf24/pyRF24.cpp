@@ -429,7 +429,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("sprintf_pretty_details", &RF24Wrapper::sprintfDetails, R"docstr(
-            sprintf_pretty_details() -> str:
+            sprintf_pretty_details() -> str
 
             Put details about the radio's configuration into a string. This function differs from
             `print_pretty_details()` as it does not use stdout output stream.
@@ -648,7 +648,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("start_const_carrier", &RF24Wrapper::startConstCarrier, R"docstr(
-            start_const_carrier(level: pyrf24.rf24.rf24_pa_dbm_e, channel: int)
+            start_const_carrier(level: rf24_pa_dbm_e, channel: int)
 
             Start a constant carrier wave. This is used (in conjunction with `rpd`) to test the
             radio's hardware.
@@ -725,7 +725,8 @@ PYBIND11_MODULE(rf24, m)
         // ************************** functions that have overloads
 
         .def(py::init<uint8_t, uint8_t, uint32_t>(), R"docstr(
-            __init__(ce_pin: int 0xFFFF, csn_pin: int 0xFFFF, spi_speed = 10000000)
+            __init__(ce_pin: int, csn_pin: int, spi_speed: int = 10000000)
+            __init__(spi_speed: int = 10000000)
 
             Create a RF24 object.
 
@@ -749,7 +750,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("begin", static_cast<bool (RF24Wrapper::*)()>(&RF24Wrapper::begin), R"docstr(
-            begin(ce_pin: int = None, csn_pin: int = None) -> bool
+            begin() -> bool \
+            begin(ce_pin: int, csn_pin: int) -> bool
 
             Initialize the radio's hardware.
         )docstr")
@@ -818,7 +820,8 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(bool)>(&RF24Wrapper::setAutoAck), R"docstr(
-            set_auto_ack(enable: bool)
+            set_auto_ack(enable: bool) \
+            set_auto_ack(pipe_number: int, enable: bool)
 
             Configure the radio's automatic acknowledgement feature for all data pipes.
 
@@ -829,12 +832,10 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck), R"docstr(
-            set_auto_ack(pipe_number: int, enable: bool)
 
             Configure the radio's automatic acknowledgement feature for a specific data pipe.
 
             :param int pipe_number: The pipe number for which the ``enable`` parameter is about. This value must be in range [0, 5].
-            :param bool enable: Enable/disable (`True`/`False`) the radio's auto-ack feature for the specified ``pipe_number``.
         )docstr",
              py::arg("pipe_number"), py::arg("enable"))
 
@@ -851,6 +852,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("tx_standby", static_cast<bool (RF24Wrapper::*)()>(&RF24Wrapper::txStandBy), R"docstr(
+            tx_standby() -> bool \
             tx_standby(timeout: int, start_tx: bool = True) -> bool
 
             When using `write_fast()` to fill the radio's TX FIFO, call this blocking function to allow the radio time to transmit.
@@ -957,9 +959,9 @@ PYBIND11_MODULE(rf24, m)
 
                 1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` first.
                 2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in this mode, without
-                    first setting :py:attr:`~pyrf24.rf24.RF24.listen` to `False`.
+                   first setting :py:attr:`~pyrf24.rf24.RF24.listen` to `False`.
                 3. Call :py:meth:`~pyrf24.rf24.RF24.available()` to check for incoming traffic,
-                    and use :py:meth:`~pyrf24.rf24.RF24.read()` to get it.
+                   and use :py:meth:`~pyrf24.rf24.RF24.read()` to get it.
 
             .. important::
                 If there was a call to :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()`
@@ -972,7 +974,6 @@ PYBIND11_MODULE(rf24, m)
                 When the ACK payloads feature is enabled, the TX FIFO buffers are
                 flushed when changing this attribute to `True`. This is meant to discard any ACK
                 payloads that were not appended to acknowledgment packets during TX mode.
-
         )docstr")
 
         // *****************************************************************************
