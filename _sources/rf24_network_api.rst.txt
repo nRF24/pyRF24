@@ -3,6 +3,7 @@ RF24Network API
 
 .. automodule:: pyrf24.rf24_network
     :members:
+    :special-members: next_id
 
 RF24Network class
 -----------------
