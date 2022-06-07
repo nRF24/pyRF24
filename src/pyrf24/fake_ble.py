@@ -77,7 +77,13 @@ here has been adapted to work with Python.
 from os import urandom
 import struct
 from typing import Union, List
-from .rf24 import RF24, RF24_CRC_DISABLED  # pylint: disable=import-error
+from .rf24 import (  # pylint: disable=import-error
+    RF24,
+    RF24_CRC_DISABLED,
+    RF24_PA_HIGH,
+    RF24_PA_LOW,
+    RF24_PA_MIN,
+)
 
 
 def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
@@ -527,7 +533,16 @@ class FakeBLE:
         buf += chunk(b"\x05", 1)
         pa_level = b""
         if self._show_dbm:
-            pa_level = chunk(struct.pack(">b", self._radio.pa_level), 0x0A)
+            lvl = self._radio.pa_level
+            # assume this radio is an actual nRF24L01 (& not a clone)
+            nordic_lvl = 0  # default to RF24_PA_MAX
+            if lvl == RF24_PA_HIGH:
+                nordic_lvl = -6
+            elif lvl == RF24_PA_LOW:
+                nordic_lvl = -12
+            elif lvl == RF24_PA_MIN:
+                nordic_lvl = -18
+            pa_level = chunk(struct.pack(">b", nordic_lvl), 0x0A)
         buf += pa_level
         if name_length:
             buf += chunk(self.name, 0x08)
