@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.425dc53b.min.css">
+      <link rel="stylesheet" href="_static/stylesheets/main.8674dc46.min.css">
       
         
         <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
@@ -603,8 +603,8 @@
                 
 
 
-  <h1 id="network-topology">Network Topology<a class="headerlink" href="#network-topology" title="Permalink to this headline">¶</a></h1>
-<h2 id="network-levels">Network Levels<a class="headerlink" href="#network-levels" title="Permalink to this headline">¶</a></h2>
+  <h1 id="network-topology">Network Topology<a class="headerlink" href="#network-topology" title="Permalink to this heading">¶</a></h1>
+<h2 id="network-levels">Network Levels<a class="headerlink" href="#network-levels" title="Permalink to this heading">¶</a></h2>
 <p>Because of the hardware limitation’s of the nRF24L01 transceiver, each network
 is arranged in a levels where a parent can have up to 5 children. And each child can also have
 up to 5 other children. This is not limitless because this network is designed for low-memory
@@ -780,7 +780,7 @@ graph only demonstrates</p>
     &quot;0o15&quot; -- &quot;0o415&quot; -- &quot;0o5415&quot;
     &quot;0o25&quot; -- &quot;0o425&quot; -- &quot;0o5425&quot;
 }" class="graphviz" /></div>
-<h2 id="physical-addresses-vs-logical-addresses"><span id="logical-address"></span><span id="physical-address"></span>Physical addresses vs Logical addresses<a class="headerlink" href="#physical-addresses-vs-logical-addresses" title="Permalink to this headline">¶</a></h2>
+<h2 id="physical-addresses-vs-logical-addresses"><span id="logical-address"></span><span id="physical-address"></span>Physical addresses vs Logical addresses<a class="headerlink" href="#physical-addresses-vs-logical-addresses" title="Permalink to this heading">¶</a></h2>
 <ul>
 <li><p>The Physical address is the 5-byte address assigned to the radio’s data pipes.</p></li>
 <li><p>The Logical address is the 12-bit integer representing a network node.
@@ -801,7 +801,7 @@ Since only data pipe 0 can be used to transmit, the other other data pipes 1-5 a
 devoted to receiving transmissions from other network nodes; data pipe 0 also receives
 multicasted messages about the node’s network level).</p>
 </div>
-<h3 id="translating-logical-to-physical">Translating Logical to Physical<a class="headerlink" href="#translating-logical-to-physical" title="Permalink to this headline">¶</a></h3>
+<h3 id="translating-logical-to-physical">Translating Logical to Physical<a class="headerlink" href="#translating-logical-to-physical" title="Permalink to this heading">¶</a></h3>
 <p>Before translating the Logical address, a single byte is used repetitively as the
 base case for all bytes of any Physical Address. This byte is the address prefix
 (stored internally and unexposed) in the <a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network" title="pyrf24.rf24_network.RF24Network (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24Network</span></code></a> class. By default the
@@ -817,10 +817,6 @@ data pipe number and child node’s most significant byte in its Physical Addres
 to a child node’s Physical address, the address suffix is used.</p>
 <p>The Logical address of the master node: <code class="docutils literal notranslate"><span class="pre">0o0</span></code></p>
 <table class="docutils data align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>pipe</p></th>
 <th class="head"><p>Physical Address (hexadecimal)</p></th>
@@ -846,10 +842,6 @@ to a child node’s Physical address, the address suffix is used.</p>
 </table>
 <p>The Logical address of the master node’s first child: <code class="docutils literal notranslate"><span class="pre">0o1</span></code></p>
 <table class="docutils data align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>pipe</p></th>
 <th class="head"><p>Physical Address (hexadecimal)</p></th>
@@ -875,10 +867,6 @@ to a child node’s Physical address, the address suffix is used.</p>
 </table>
 <p>The Logical address of the master node’s second child: <code class="docutils literal notranslate"><span class="pre">0o2</span></code></p>
 <table class="docutils data align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>pipe</p></th>
 <th class="head"><p>Physical Address (hexadecimal)</p></th>
@@ -904,10 +892,6 @@ to a child node’s Physical address, the address suffix is used.</p>
 </table>
 <p>The Logical address of the master node’s third child’s second child’s first child: <code class="docutils literal notranslate"><span class="pre">0o123</span></code></p>
 <table class="docutils data align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>pipe</p></th>
 <th class="head"><p>Physical Address (hexadecimal)</p></th>
@@ -933,7 +917,7 @@ to a child node’s Physical address, the address suffix is used.</p>
 </table>
 </dd>
 </dl>
-<h2 id="rf24mesh-connecting-process">RF24Mesh connecting process<a class="headerlink" href="#rf24mesh-connecting-process" title="Permalink to this headline">¶</a></h2>
+<h2 id="rf24mesh-connecting-process">RF24Mesh connecting process<a class="headerlink" href="#rf24mesh-connecting-process" title="Permalink to this heading">¶</a></h2>
 <p>As noted above, a single network <em>can</em> have up to 781 nodes. This number also includes
 up to 255 RF24Mesh nodes. The key difference from the user’s perspective is that RF24Mesh
 API does not publicly use a <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>. Instead the RF24Mesh API
@@ -981,7 +965,7 @@ the connecting node will re-start the process (step 1) on a different network le
 </ul>
 </li>
 </ol>
-<h3 id="points-of-failure">Points of failure<a class="headerlink" href="#points-of-failure" title="Permalink to this headline">¶</a></h3>
+<h3 id="points-of-failure">Points of failure<a class="headerlink" href="#points-of-failure" title="Permalink to this heading">¶</a></h3>
 <p>This process happens over a span of a few milliseconds. However,</p>
 <ul class="simple">
 <li><p>If the connecting node is physically moving throughout the network very quickly,
@@ -1045,7 +1029,7 @@ and describe the situation with as much detail as possible.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    4.5.0.
+    5.0.1.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1063,7 +1047,8 @@ and describe the situation with as much detail as possible.</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.e1858f29.min.js"></script>
+      <script src="_static/javascripts/bundle.37d1338f.min.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     
   </body>
 </html>

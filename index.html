@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.425dc53b.min.css">
+      <link rel="stylesheet" href="_static/stylesheets/main.8674dc46.min.css">
       
         
         <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
@@ -711,10 +711,10 @@
                 
 
 
-  <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+  <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
 <p>This is the official home of the python wrappers for the RF24 stack. It is meant for Linux-based
 SoC boards like the Raspberry Pi.</p>
-<h2 id="pinout">Pinout<a class="headerlink" href="#pinout" title="Permalink to this headline">¶</a></h2>
+<h2 id="pinout">Pinout<a class="headerlink" href="#pinout" title="Permalink to this heading">¶</a></h2>
 <a class="reference external image-reference" href="https://lastminuteengineers.com/nrf24l01-arduino-wireless-communication/#nrf24l01-transceiver-module-pinout"><img alt="https://lastminuteengineers.com/wp-content/uploads/2018/07/Pinout-nRF24L01-Wireless-Transceiver-Module.png" src="https://lastminuteengineers.com/wp-content/uploads/2018/07/Pinout-nRF24L01-Wireless-Transceiver-Module.png" /></a>
 <p>The nRF24L01’s CE and IRQ pins can be connected to other GPIO pins on the SoC. The MISO, MOSI, SCK
 are limited to the corresponding counterparts on the SoC’s SPI bus. The CSN pin is limited to the
@@ -722,10 +722,6 @@ chosen SPI bus’s “Chip Select” options (Also labeled as “CE” pins on m
 diagrams). The following table shows the default pins used in all the
 <a class="reference external" href="examples.html">examples</a> for this package.</p>
 <table class="docutils data align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
 <th class="head"><p>Raspberry Pi</p></th>
@@ -780,7 +776,7 @@ ultimately depends on the nature of your power supply’s stability.</p>
 </code></pre></div>
 </div>
 </div>
-<h2 id="installing-from-source">Installing from Source<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h2>
+<h2 id="installing-from-source">Installing from Source<a class="headerlink" href="#installing-from-source" title="Permalink to this heading">¶</a></h2>
 <p>Installing from source will require CMake and CPython headers:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo apt install python3-dev cmake
 </code></pre></div>
@@ -797,7 +793,7 @@ python -m pip install .
 on the step labeled “Building wheel for pyrf24 (pyproject.toml)”. Just wait for about
 5 minutes (maybe longer on older/slower variants of Raspberry Pi).</p>
 </div>
-<h3 id="using-a-specific-rf24-driver">Using a specific RF24 driver<a class="headerlink" href="#using-a-specific-rf24-driver" title="Permalink to this headline">¶</a></h3>
+<h3 id="using-a-specific-rf24-driver">Using a specific RF24 driver<a class="headerlink" href="#using-a-specific-rf24-driver" title="Permalink to this heading">¶</a></h3>
 <p>If you want to build the package using a different RF24 driver (like MRAA, RPi, wiringPi, etc), then
 it is appropriate to pass an additional argument to the install command:</p>
 <div class="admonition note">
@@ -807,7 +803,7 @@ it is appropriate to pass an additional argument to the install command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python setup.py install -DRF24_DRIVER<span class="o">=</span>RPi
 </code></pre></div>
 </div>
-<h3 id="building-a-wheel">Building a wheel<a class="headerlink" href="#building-a-wheel" title="Permalink to this headline">¶</a></h3>
+<h3 id="building-a-wheel">Building a wheel<a class="headerlink" href="#building-a-wheel" title="Permalink to this heading">¶</a></h3>
 <p>Building a somewhat portable binary distribution for python packages involves building a
 .whl file known as a wheel. This wheel can be used to install the pyrf24 package on systems using the
 same version of CPython, CPU architecture, and C standard lib.</p>
@@ -845,13 +841,13 @@ On Raspberry Pi OS (32 bit), this will be <code class="docutils literal notransl
 </ul>
 </li>
 </ol>
-<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
 <p>Before submitting contributions, you should make sure that any documentation changes builds
 successfully. This can be done locally.</p>
-<h3 id="documentation-dependencies">Documentation Dependencies<a class="headerlink" href="#documentation-dependencies" title="Permalink to this headline">¶</a></h3>
+<h3 id="documentation-dependencies">Documentation Dependencies<a class="headerlink" href="#documentation-dependencies" title="Permalink to this heading">¶</a></h3>
 <p>This package’s documentation is built with the python package Sphinx and the sphinx-immaterial theme.
 It also uses the dot tool provided by the graphviz software to generate graphs.</p>
-<h4 id="install-graphviz">Install Graphviz<a class="headerlink" href="#install-graphviz" title="Permalink to this headline">¶</a></h4>
+<h4 id="install-graphviz">Install Graphviz<a class="headerlink" href="#install-graphviz" title="Permalink to this heading">¶</a></h4>
 <p>On Windows, installing Graphviz library is done differently. Check out the
 <a class="reference external" href="https://graphviz.org/download/">Graphviz downloads page</a>. Be sure that the <code class="docutils literal notranslate"><span class="pre">graphviz/bin</span></code>
 directory is in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable (there’s an option in the installer for this).
@@ -860,7 +856,7 @@ After Graphviz is installed, reboot the PC so the updated <code class="docutils 
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>sudo apt-get install graphviz
 </code></pre></div>
 </div>
-<h4 id="installing-sphinx-necessities">Installing Sphinx necessities<a class="headerlink" href="#installing-sphinx-necessities" title="Permalink to this headline">¶</a></h4>
+<h4 id="installing-sphinx-necessities">Installing Sphinx necessities<a class="headerlink" href="#installing-sphinx-necessities" title="Permalink to this heading">¶</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you installed sphinx using <code class="docutils literal notranslate"><span class="pre">apt</span></code>, then it is likely out-of-date and will override any virtual
@@ -884,7 +880,7 @@ sphinx from <code class="docutils literal notranslate"><span class="pre">apt</sp
 may not be the most recent version of Sphinx.</p>
 </div>
 </div>
-<h3 id="building-the-documentation">Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<h3 id="building-the-documentation">Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this heading">¶</a></h3>
 <p>To build the documentation locally, the pyrf24 package needs to be installed first. Then run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> docs
 sphinx-build -E -W . _build
@@ -1214,7 +1210,7 @@ rendered correctly.</p>
 </li>
 </ul>
 </div>
-<h1 id="indices-and-tables">Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h1 id="indices-and-tables">Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -1271,7 +1267,7 @@ rendered correctly.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    4.5.0.
+    5.0.1.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1289,7 +1285,8 @@ rendered correctly.</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.e1858f29.min.js"></script>
+      <script src="_static/javascripts/bundle.37d1338f.min.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     
   </body>
 </html>

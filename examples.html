@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.425dc53b.min.css">
+      <link rel="stylesheet" href="_static/stylesheets/main.8674dc46.min.css">
       
         
         <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
@@ -703,9 +703,9 @@
                 
 
 
-  <h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<h2 id="rf24-examples">RF24 examples<a class="headerlink" href="#rf24-examples" title="Permalink to this headline">¶</a></h2>
-<h3 id="getting-started">getting_started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+  <h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h1>
+<h2 id="rf24-examples">RF24 examples<a class="headerlink" href="#rf24-examples" title="Permalink to this heading">¶</a></h2>
+<h3 id="getting-started">getting_started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the RF24 class</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -924,7 +924,7 @@ examples/getting_started.py<a class="headerlink" href="#id1" title="Permalink to
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="acknowledgement-payloads">acknowledgement_payloads<a class="headerlink" href="#acknowledgement-payloads" title="Permalink to this headline">¶</a></h3>
+<h3 id="acknowledgement-payloads">acknowledgement_payloads<a class="headerlink" href="#acknowledgement-payloads" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the RF24 class to attach an Acknowledgement (ACK) payload the automatically generated ACK packet.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -1181,7 +1181,7 @@ examples/acknowledgement_payloads.py<a class="headerlink" href="#id2" title="Per
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="manual-acknowledgements">manual_acknowledgements<a class="headerlink" href="#manual-acknowledgements" title="Permalink to this headline">¶</a></h3>
+<h3 id="manual-acknowledgements">manual_acknowledgements<a class="headerlink" href="#manual-acknowledgements" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the RF24 class to receive a payload and then send a responding payload as an Acknowledgement. This functionality is similar to using the nRF24L01’s ACK payload feature, but doe not append ACK payloads to the ACK packets.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -1486,7 +1486,7 @@ examples/manual_acknowledgements.py<a class="headerlink" href="#id3" title="Perm
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="multiceiver-demo">multiceiver_demo<a class="headerlink" href="#multiceiver-demo" title="Permalink to this headline">¶</a></h3>
+<h3 id="multiceiver-demo">multiceiver_demo<a class="headerlink" href="#multiceiver-demo" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the RF24 class to receive data from multiple transmitting nRF24L01 transceivers. This technique is trademarked by Nordic Semiconductors as “Multiceiver<sup>TM</sup>”</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -1709,7 +1709,7 @@ examples/multiceiver_demo.py<a class="headerlink" href="#id4" title="Permalink t
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="streaming-data">streaming_data<a class="headerlink" href="#streaming-data" title="Permalink to this headline">¶</a></h3>
+<h3 id="streaming-data">streaming_data<a class="headerlink" href="#streaming-data" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the RF24 class to stream data.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -1928,7 +1928,7 @@ examples/streaming_data.py<a class="headerlink" href="#id5" title="Permalink to 
                 <span class="k">if</span> <span class="n">failures</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="ow">and</span> <span class="n">buf_iter</span> <span class="o">&lt;</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="c1"># we need to prevent an infinite loop</span>
                     <span class="nb">print</span><span class="p">(</span>
-                        <span class="s2">&quot;Make sure slave() node is listening.&quot;</span> <span class="s2">&quot; Quiting master_fifo()&quot;</span>
+                        <span class="s2">&quot;Make sure slave() node is listening. Quitting master_fifo()&quot;</span>
                     <span class="p">)</span>
                     <span class="n">buf_iter</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># be sure to exit the while loop</span>
                     <span class="n">radio</span><span class="o">.</span><span class="n">flush_tx</span><span class="p">()</span>  <span class="c1"># discard all payloads in TX FIFO</span>
@@ -1955,7 +1955,7 @@ examples/streaming_data.py<a class="headerlink" href="#id5" title="Permalink to 
     <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">start_timer</span> <span class="o">+</span> <span class="n">timeout</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">available</span><span class="p">():</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="c1"># retreive the received packet&#39;s payload</span>
+            <span class="c1"># retrieve the received packet&#39;s payload</span>
             <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">get_dynamic_payload_size</span><span class="p">()</span>
             <span class="n">receive_payload</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received: </span><span class="si">{</span><span class="n">receive_payload</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1968,7 +1968,7 @@ examples/streaming_data.py<a class="headerlink" href="#id5" title="Permalink to 
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="interrupt-configure">interrupt_configure<a class="headerlink" href="#interrupt-configure" title="Permalink to this headline">¶</a></h3>
+<h3 id="interrupt-configure">interrupt_configure<a class="headerlink" href="#interrupt-configure" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the nRF24L01’s IRQ pin to catch different interrupt request events.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -2319,7 +2319,7 @@ examples/interrupt_configure.py<a class="headerlink" href="#id6" title="Permalin
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h2 id="fake-ble-example">Fake BLE example<a class="headerlink" href="#fake-ble-example" title="Permalink to this headline">¶</a></h2>
+<h2 id="fake-ble-example">Fake BLE example<a class="headerlink" href="#fake-ble-example" title="Permalink to this heading">¶</a></h2>
 <p>A simple example of using the nRF24L01 as fake BLE beacon.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -2638,8 +2638,8 @@ examples/fake_ble_test.py<a class="headerlink" href="#id7" title="Permalink to t
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h2 id="networking-examples">Networking examples<a class="headerlink" href="#networking-examples" title="Permalink to this headline">¶</a></h2>
-<h3 id="rf24network-examples">RF24Network examples<a class="headerlink" href="#rf24network-examples" title="Permalink to this headline">¶</a></h3>
+<h2 id="networking-examples">Networking examples<a class="headerlink" href="#networking-examples" title="Permalink to this heading">¶</a></h2>
+<h3 id="rf24network-examples">RF24Network examples<a class="headerlink" href="#rf24network-examples" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the nRF24L01 as network child (non-master) node.</p>
 <div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -2832,7 +2832,7 @@ examples/network_helloworld_rx.py<a class="headerlink" href="#id9" title="Permal
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="rf24mesh-examples">RF24Mesh examples<a class="headerlink" href="#rf24mesh-examples" title="Permalink to this headline">¶</a></h3>
+<h3 id="rf24mesh-examples">RF24Mesh examples<a class="headerlink" href="#rf24mesh-examples" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the nRF24L01 as mesh network child (non-master) node.</p>
 <div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -2999,7 +2999,7 @@ examples/mesh_example_master.py<a class="headerlink" href="#id11" title="Permali
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
-<h3 id="generic-network-example">Generic Network example<a class="headerlink" href="#generic-network-example" title="Permalink to this headline">¶</a></h3>
+<h3 id="generic-network-example">Generic Network example<a class="headerlink" href="#generic-network-example" title="Permalink to this heading">¶</a></h3>
 <p>A generic example demonstrating the differences in code for using RF24Network or RF24Mesh API.</p>
 <div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption highlight"><span class="caption-text filename">
@@ -3372,7 +3372,7 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    4.5.0.
+    5.0.1.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -3390,7 +3390,8 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.e1858f29.min.js"></script>
+      <script src="_static/javascripts/bundle.37d1338f.min.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     
   </body>
 </html>
