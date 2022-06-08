@@ -4,7 +4,6 @@
    self
 
 .. toctree::
-   :caption: Examples
 
    examples
 
