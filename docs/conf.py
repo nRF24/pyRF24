@@ -130,7 +130,7 @@ html_css_files = ["custom_material.css"]
 html_favicon = "_static/new_favicon.ico"
 
 # project logo
-html_logo = "_static/Logo large.png"
+html_logo = "_static/Logo_large.png"
 
 # split site index page into 2 pages:
 # 1 with only alphabet-like links to partial lists, 1 with full listing
