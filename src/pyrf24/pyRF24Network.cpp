@@ -172,6 +172,10 @@ PYBIND11_MODULE(rf24_network, m)
             :Returns: A `str` representing the header's `from_node`, `to_node`, `id`, and `type` attributes.
         )docstr")
 
+        .def("toString", &RF24NetworkHeader::toString, R"docstr(
+            toString() -> str
+        )docstr")
+
         // *****************************************************************************
 
         .def_readwrite("from_node", &RF24NetworkHeader::from_node, R"docstr(
@@ -308,19 +312,15 @@ PYBIND11_MODULE(rf24_network, m)
 
         // *****************************************************************************
 
-        // .def("parent", &RF24NetworkWrapper::parent, R"docstr(
-        //     parent -> int
-
-        //     The `Logical Address <logical_address>` (in octal) of the parent to the instantiated network node.
-        // )docstr")
-
-        // *****************************************************************************
-
         .def_property_readonly("parent", &RF24NetworkWrapper::parent, R"docstr(
             The `Logical Address <logical_address>` (in octal) of the parent to the instantiated network node.
 
             :Returns:
                 This node's parent address, or 65535 if this is the master node.
+        )docstr")
+
+        .def("parent", &RF24NetworkWrapper::parent, R"docstr(
+            parent() -> int
         )docstr")
 
         // *****************************************************************************
@@ -437,10 +437,7 @@ PYBIND11_MODULE(rf24_network, m)
             Defaults to `False`.
         )docstr")
 
-        .def_readwrite("multicastRelay", &RF24NetworkWrapper::multicastRelay, R"docstr(
-            This `bool` attribute determines if any received multicasted messages should be forwarded to the next highest network level.
-            Defaults to `False`.
-        )docstr")
+        .def_readwrite("multicastRelay", &RF24NetworkWrapper::multicastRelay)
 #endif // defined RF24NetworkMulticast
 
         // *****************************************************************************

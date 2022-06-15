@@ -143,7 +143,6 @@ PYBIND11_MODULE(rf24_mesh, m)
         )docstr",
              py::arg("to_node_address"), py::arg("buf"), py::arg("message_type") = 0)
 
-
 #if !defined(MESH_NOMASTER)
 
         // *****************************************************************************
@@ -182,6 +181,15 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         // *****************************************************************************
 
+        .def("setStaticAddress", &RF24MeshWrapper::setStaticAddress, R"docstr(
+            setStaticAddress(node_id: int, address: int)
+
+            For backwards compatiblity only, this function is similar to the `set_address()` function.
+        )docstr",
+             py::arg("node_id"), py::arg("address"))
+
+        // *****************************************************************************
+
         .def("save_dhcp", &RF24MeshWrapper::saveDHCP, R"docstr(
             save_dhcp()
 
@@ -193,14 +201,6 @@ PYBIND11_MODULE(rf24_mesh, m)
         .def("saveDHCP", &RF24MeshWrapper::saveDHCP, R"docstr(
             saveDHCP()
         )docstr")
-
-        // *****************************************************************************
-
-        .def("setStaticAddress", &RF24MeshWrapper::setStaticAddress, R"docstr(
-            setStaticAddress(node_id: int, address: int)
-
-            For backwards compatiblity, this function is similar to the `set_address()` function.
-        )docstr", py::arg("node_id"), py::arg("address"))
 
         // *****************************************************************************
 
