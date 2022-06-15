@@ -129,11 +129,11 @@ same version of CPython, CPU architecture, and C standard lib.
 Differences in API
 ~~~~~~~~~~~~~~~~~~
 
-This package intentionally adhere's to PEP8 standards as much as possible.
+This package intentionally adheres to `PEP8 <https://pep8.org/>`_ standards as much as possible.
 This means that class members' names use snake casing  (eg. ``get_dynamic_payload_size()``)
 instead of using the C++ conventional camel casing (eg. ``getDynamicPayloadSize()``). However,
 the older python wrappers provided with each C++ library (RF24, RF24Network, & RF24Mesh) had used
-camel casing. So, the API provided by this package provides both snake cased and camel cased
+camel casing. So, the API provided by this package exposes both snake cased and camel cased
 versions of the API. The camel cased API is not documented to avoid duplicate and
 complicated documentation.
 
