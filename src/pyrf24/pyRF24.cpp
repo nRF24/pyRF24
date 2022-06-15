@@ -368,7 +368,7 @@ PYBIND11_MODULE(rf24, m)
             Configure the radio's static payload size (outgoing and incoming) for all data pipes.
 
             :param int length: The length of static payloads used for all data pipes.
-        )docstr", py::arg("length"))
+        )docstr")
 
         // *****************************************************************************
 
