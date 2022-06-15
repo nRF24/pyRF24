@@ -358,6 +358,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#differences-in-api" class="md-nav__link">
+    <span class="md-ellipsis">Differences in API</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Differences in API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-type-hints" class="md-nav__link">
+    <span class="md-ellipsis">Python Type Hints</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">Documentation</span>
   </a>
@@ -608,6 +628,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#differences-in-api" class="md-nav__link">
+    <span class="md-ellipsis">Differences in API</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Differences in API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-type-hints" class="md-nav__link">
+    <span class="md-ellipsis">Python Type Hints</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">Documentation</span>
   </a>
@@ -809,6 +849,34 @@ On Raspberry Pi OS (32 bit), this will be <code class="docutils literal notransl
 </ul>
 </li>
 </ol>
+<h2 id="differences-in-api">Differences in API<a class="headerlink" href="#differences-in-api" title="Permalink to this heading">¶</a></h2>
+<p>This package intentionally adhere’s to PEP8 standards as much as possible.
+This means that class members’ names use snake casing  (eg. <code class="docutils literal notranslate"><span class="pre">get_dynamic_payload_size()</span></code>)
+instead of using the C++ conventional camel casing (eg. <code class="docutils literal notranslate"><span class="pre">getDynamicPayloadSize()</span></code>). However,
+the older python wrappers provided with each C++ library (RF24, RF24Network, &amp; RF24Mesh) had used
+camel casing. So, the API provided by this package provides both snake cased and camel cased
+versions of the API. The camel cased API is not documented to avoid duplicate and
+complicated documentation.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><code><span class="n">radio</span><span class="o">.</span><span class="n">print_details</span><span class="p">()</span>  <span class="c1"># documented</span>
+<span class="c1"># can also be invoked as</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">printDetails</span><span class="p">()</span>  <span class="c1"># not documented</span>
+</code></pre></div>
+</div>
+<p>Some of the C++ functions that do not accept arguments are wrapped as a class property. But, the C++
+style functions are still exposed. For example:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><code><span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1"># is equivalent to</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">stopListening</span><span class="p">()</span>  <span class="c1"># not documented</span>
+
+<span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># is equivalent to</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">startListening</span><span class="p">()</span>  <span class="c1"># not documented</span>
+</code></pre></div>
+</div>
+<h3 id="python-type-hints">Python Type Hints<a class="headerlink" href="#python-type-hints" title="Permalink to this heading">¶</a></h3>
+<p>This package is designed to only function on Linux devices. But, it is possible to install this
+package on non-Linux devices to get the stub files which help auto-completion and type checking
+in various development environments.</p>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
 <p>Before submitting contributions, you should make sure that any documentation changes builds
 successfully. This can be done locally.</p>
