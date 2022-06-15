@@ -399,6 +399,13 @@ PYBIND11_MODULE(rf24_network, m)
             default value set by `begin()` or `node_address`.
         )docstr")
 
+        .def("multicastLevel", &RF24NetworkWrapper::multicastLevel, R"docstr(
+            multicastLevel(level: int)
+
+            Set the network level of the instantiated network node used for multicasted frames. This will override the
+            default value set by `begin()` or `node_address`.
+        )docstr")
+
         // *****************************************************************************
 
         // .def("set_multicast_level", &RF24NetworkWrapper::multicastLevel, R"docstr(
@@ -429,6 +436,11 @@ PYBIND11_MODULE(rf24_network, m)
             This `bool` attribute determines if any received multicasted messages should be forwarded to the next highest network level.
             Defaults to `False`.
         )docstr")
+
+        .def_readwrite("multicastRelay", &RF24NetworkWrapper::multicastRelay, R"docstr(
+            This `bool` attribute determines if any received multicasted messages should be forwarded to the next highest network level.
+            Defaults to `False`.
+        )docstr")
 #endif // defined RF24NetworkMulticast
 
         // *****************************************************************************
@@ -444,17 +456,26 @@ PYBIND11_MODULE(rf24_network, m)
         )docstr",
              py::arg("address"))
 
+        .def("is_valid_address", &RF24NetworkWrapper::is_valid_address, R"docstr(
+            is_valid_address(address: int) -> bool
+        )docstr",
+             py::arg("address"))
+
         // *****************************************************************************
 
         .def_readwrite("tx_timeout", &RF24NetworkWrapper::txTimeout, R"docstr(
             The timeout `int` value (in milliseconds) to ensure a frame is properly sent. Defaults to 25.
         )docstr")
 
+        .def_readwrite("txTimeout", &RF24NetworkWrapper::txTimeout)
+
         // *****************************************************************************
 
         .def_readwrite("route_timeout", &RF24Network::routeTimeout, R"docstr(
             The timeout `int` value (in milliseconds) used to wait for a Network ACK message. Defaults to 75.
         )docstr")
+
+        .def_readwrite("routeTimeout", &RF24Network::routeTimeout)
 
         // *****************************************************************************
 
@@ -478,6 +499,8 @@ PYBIND11_MODULE(rf24_network, m)
                 There's a more complete list (with behavioral descriptions) of the :ref:`reserved_sys_msgs`.
         )docstr")
 
+        .def_readwrite("returnSysMsgs", &RF24Network::returnSysMsgs)
+
         // *****************************************************************************
 
         /// TODO: need to write a custom type caster for std::queue to expose the external_queue member
@@ -499,5 +522,7 @@ PYBIND11_MODULE(rf24_network, m)
 
                 :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Replaces the fastFragTransfer variable and allows for faster transfers between directly connected nodes.
                 :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables NETWORK_POLL responses on a node-by-node basis.
-        )docstr");
+        )docstr")
+
+        .def_readwrite("networkFlags", &RF24Network::networkFlags);
 }
