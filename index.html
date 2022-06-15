@@ -850,11 +850,11 @@ On Raspberry Pi OS (32 bit), this will be <code class="docutils literal notransl
 </li>
 </ol>
 <h2 id="differences-in-api">Differences in API<a class="headerlink" href="#differences-in-api" title="Permalink to this heading">¶</a></h2>
-<p>This package intentionally adhere’s to PEP8 standards as much as possible.
+<p>This package intentionally adheres to <a class="reference external" href="https://pep8.org/">PEP8</a> standards as much as possible.
 This means that class members’ names use snake casing  (eg. <code class="docutils literal notranslate"><span class="pre">get_dynamic_payload_size()</span></code>)
 instead of using the C++ conventional camel casing (eg. <code class="docutils literal notranslate"><span class="pre">getDynamicPayloadSize()</span></code>). However,
 the older python wrappers provided with each C++ library (RF24, RF24Network, &amp; RF24Mesh) had used
-camel casing. So, the API provided by this package provides both snake cased and camel cased
+camel casing. So, the API provided by this package exposes both snake cased and camel cased
 versions of the API. The camel cased API is not documented to avoid duplicate and
 complicated documentation.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><code><span class="n">radio</span><span class="o">.</span><span class="n">print_details</span><span class="p">()</span>  <span class="c1"># documented</span>
