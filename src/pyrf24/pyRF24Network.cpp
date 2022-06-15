@@ -517,8 +517,8 @@ PYBIND11_MODULE(rf24_network, m)
             .. csv-table::
                 :header: Flags, Value, Description
 
-                :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Replaces the fastFragTransfer variable and allows for faster transfers between directly connected nodes.
-                :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables NETWORK_POLL responses on a node-by-node basis.
+                :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Allows for faster transfers between directly connected nodes.
+                :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables :py:attr:`~pyrf24.rf24_network.NETWORK_POLL` responses on a node-by-node basis.
         )docstr")
 
         .def_readwrite("networkFlags", &RF24Network::networkFlags);
