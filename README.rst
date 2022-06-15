@@ -126,6 +126,43 @@ same version of CPython, CPU architecture, and C standard lib.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.
      On Raspberry Pi OS (32 bit), this will be ``armv7l``.
 
+Differences in API
+~~~~~~~~~~~~~~~~~~
+
+This package intentionally adhere's to PEP8 standards as much as possible.
+This means that class members' names use snake casing  (eg. ``get_dynamic_payload_size()``)
+instead of using the C++ conventional camel casing (eg. ``getDynamicPayloadSize()``). However,
+the older python wrappers provided with each C++ library (RF24, RF24Network, & RF24Mesh) had used
+camel casing. So, the API provided by this package provides both snake cased and camel cased
+versions of the API. The camel cased API is not documented to avoid duplicate and
+complicated documentation.
+
+.. code-block:: py
+
+    radio.print_details()  # documented
+    # can also be invoked as
+    radio.printDetails()  # not documented
+
+Some of the C++ functions that do not accept arguments are wrapped as a class property. But, the C++
+style functions are still exposed. For example:
+
+.. code-block:: py
+    
+    radio.listen = False
+    # is equivalent to
+    radio.stopListening()  # not documented
+
+    radio.listen = True
+    # is equivalent to
+    radio.startListening()  # not documented
+
+Python Type Hints
+-----------------
+
+This package is designed to only function on Linux devices. But, it is possible to install this
+package on non-Linux devices to get the stub files which help auto-completion and type checking
+in various development environments.
+
 Documentation
 ~~~~~~~~~~~~~
 
