@@ -96,7 +96,7 @@ PYBIND11_MODULE(rf24_mesh, m)
             :param int timeout: The timeout to use when connecting to the mesh network. This value is equivalent
                 to the ``timeout`` parameter in `renew_address()`
 
-            :Returns: `True` if the radio's hardware was properly intialized and the node
+            :Returns: `True` if the radio's hardware was properly initalized and the node
                 successfully connected to the mesh network.
 
                 .. seealso:: Use `renew_address()` in the event that the node becomes disconnected

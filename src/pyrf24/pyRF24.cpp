@@ -264,22 +264,62 @@ PYBIND11_MODULE(rf24, m)
 
     // ********************** Enum structs
     py::enum_<rf24_crclength_e>(m, "rf24_crclength_e")
-        .value("RF24_CRC_DISABLED", RF24_CRC_DISABLED)
-        .value("RF24_CRC_8", RF24_CRC_8)
-        .value("RF24_CRC_16", RF24_CRC_16)
+        .value("RF24_CRC_DISABLED", RF24_CRC_DISABLED, R"docstr(
+            to disable using CRC checksums
+        )docstr")
+        .value("RF24_CRC_8", RF24_CRC_8, R"docstr(
+            to use 8-bit checksums
+        )docstr")
+        .value("RF24_CRC_16", RF24_CRC_16, R"docstr(
+            to use 16-bit checksums
+        )docstr")
         .export_values();
 
     py::enum_<rf24_datarate_e>(m, "rf24_datarate_e")
-        .value("RF24_1MBPS", RF24_1MBPS)
-        .value("RF24_2MBPS", RF24_2MBPS)
-        .value("RF24_250KBPS", RF24_250KBPS)
+        .value("RF24_1MBPS", RF24_1MBPS, R"docstr(
+            for 1 Mbps
+        )docstr")
+        .value("RF24_2MBPS", RF24_2MBPS, R"docstr(
+            for 2 Mbps
+        )docstr")
+        .value("RF24_250KBPS", RF24_250KBPS, R"docstr(
+            for 250 kbps
+        )docstr")
         .export_values();
 
     py::enum_<rf24_pa_dbm_e>(m, "rf24_pa_dbm_e")
-        .value("RF24_PA_MIN", RF24_PA_MIN)
-        .value("RF24_PA_LOW", RF24_PA_LOW)
-        .value("RF24_PA_HIGH", RF24_PA_HIGH)
-        .value("RF24_PA_MAX", RF24_PA_MAX)
+        .value("RF24_PA_MIN", RF24_PA_MIN, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      -18 dBm         |      6 dBm         |     -12 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
+        .value("RF24_PA_LOW", RF24_PA_LOW, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      -12 dBm         |      0 dBm         |      -4 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
+        .value("RF24_PA_HIGH", RF24_PA_HIGH, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      -6 dBm          |      3 dBm         |       1 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
+        .value("RF24_PA_MAX", RF24_PA_MAX, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      0 dBm           |      7 dBm         |       4 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
         // .value("RF24_PA_ERROR", RF24_PA_ERROR)
         .export_values();
 
@@ -831,7 +871,7 @@ PYBIND11_MODULE(rf24, m)
 
             :param int ce_pin: The pin number connected to the radio's CE pin.
             :param int csn_pin: The pin number connected to the radio's CSN pin.
-            :param int spi_speed: The SPI bus speed (in Hz). Deafaults to 10 MHz when not specified.
+            :param int spi_speed: The SPI bus speed (in Hz). Defaults to 10 MHz when not specified.
         )docstr",
              py::arg("ce_pin") = 0xFFFF, py::arg("csn_pin") = 0xFFFF, py::arg("spi_speed") = 10000000)
 
@@ -1057,7 +1097,7 @@ PYBIND11_MODULE(rf24, m)
         .def_property("data_rate", &RF24Wrapper::get_data_rate, &RF24Wrapper::setDataRate, R"docstr(
             This attribute represents the radio's OTA data rate.
 
-            .. hint:: The units "BPS" stand for "Bits Per Second" (not Bytes per secend).
+            .. hint:: The units "BPS" stand for "Bits Per Second" (not Bytes per second).
             .. seealso:: Accepted values are pre-defined in the `rf24_datarate_e` enum struct.
         )docstr")
 
@@ -1083,8 +1123,9 @@ PYBIND11_MODULE(rf24, m)
 
             .. hint::
 
-                1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` first.
-                2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in this mode, without
+                1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` before
+                   setting :py:attr:`~pyrf24.rf24.RF24.listen` to `True`.
+                2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in RX mode, without
                    first setting :py:attr:`~pyrf24.rf24.RF24.listen` to `False`.
                 3. Call :py:meth:`~pyrf24.rf24.RF24.available()` to check for incoming traffic,
                    and use :py:meth:`~pyrf24.rf24.RF24.read()` to get it.
@@ -1092,14 +1133,15 @@ PYBIND11_MODULE(rf24, m)
             .. important::
                 If there was a call to :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()`
                 about pipe 0 prior to setting this attribute to `False`, then this attribute
-                will re-write the address that was last set to reading pipe 0.
+                will re-write the address that was last set to RX pipe 0.
                 This is because :py:meth:`~pyrf24.rf24.RF24.open_tx_pipe()`
-                will overwrite the address to reading pipe 0 for proper auto-ack
+                will overwrite the address to RX pipe 0 for proper auto-ack
                 functionality.
             .. note::
                 When the ACK payloads feature is enabled, the TX FIFO buffers are
-                flushed when changing this attribute to `True`. This is meant to discard any ACK
-                payloads that were not appended to acknowledgment packets during TX mode.
+                flushed when changing this attribute to `True` (RX mode). This is meant to
+                discard any ACK payloads that were not appended to acknowledgment packets
+                during TX mode.
         )docstr")
 
         // *****************************************************************************
