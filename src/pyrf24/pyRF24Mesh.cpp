@@ -209,7 +209,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             Call this function on the mesh network's master node to read and load the saved list of
             assigned addresses from a local binary text file. This is meant for persistence when the
-            master node needs resumes operation after being offline.
+            master node resumes operation after being offline.
         )docstr")
 
         .def("loadDHCP", &RF24MeshWrapper::loadDHCP, R"docstr(
@@ -223,8 +223,8 @@ PYBIND11_MODULE(rf24_mesh, m)
 
             Keep the master node's list of assigned addresses up-to-date.
 
-            .. tip:: This function should be called on mesh network's master nodes only just after
-                calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
+            .. tip:: This function should be called on a mesh network's master node immediately
+                after calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
         )docstr")
 
         .def("DHCP", &RF24MeshWrapper::DHCP, R"docstr(
@@ -238,7 +238,7 @@ PYBIND11_MODULE(rf24_mesh, m)
             Each element is a `AddrListStruct` object. This attribute should only be used on the master node.
 
             .. important:: 
-                Altering any values for elements contained in this list does not change anything.
+                Altering any values for elements contained in this list is prohibited.
                 Use `set_address()` instead.
         )docstr")
 
