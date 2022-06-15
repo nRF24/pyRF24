@@ -157,8 +157,8 @@ PYBIND11_MODULE(rf24_network, m)
                 Default value is ``0`` if the ``to_node`` parameter is specified.
 
             .. hint:: These parameters can be left unspecified to create a blank object that can
-                be augmented after instantiation. However, the header's ``RF24NetworkHeader.next_id``
-                is not automatically incremented when no parameters are given.
+                be augmented after instantiation. However, the header's `next_id` is not
+                automatically incremented when no parameters are given.
         )docstr",
              py::arg("to_node"), py::arg("type") = 0)
 
@@ -216,7 +216,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readonly_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
-            The next sequential identifying number used for the next created frame.
+            The next sequential identifying number used for the next created header's `id`.
         )docstr")
 
         // *****************************************************************************

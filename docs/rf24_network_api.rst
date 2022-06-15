@@ -42,6 +42,11 @@ RF24NetworkHeader class
     :members:
     :special-members: __init__
 
+    .. property:: next_id
+        :classmethod:
+
+        The next sequential identifying number used for the next created header's `id`.
+
 Constants
 ----------
 
