@@ -39,7 +39,7 @@ RF24NetworkHeader class
     easily pass an instantiated `RF24NetworkHeader` object to the :py:func:`print()` function.
 
 .. autoclass:: pyrf24.rf24_network.RF24NetworkHeader
-    :members:
+    :members: to_node, type, from_node, id, reserved, to_string
     :special-members: __init__
 
     .. property:: next_id
