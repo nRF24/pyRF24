@@ -33,7 +33,7 @@ kwargs = {
     "zip_safe": False,
     "license": "GNU General Public License v2 (GPLv2)",
     "classifiers": [
-        "Development Status :: 3 - Alpha",  # TODO change this when ready
+        "Development Status :: 3 - Beta",  # TODO change this when ready
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries",
         "Topic :: System :: Hardware",
