@@ -6,7 +6,7 @@ IS_LINUX = platform.system().title() == "Linux"
 if IS_LINUX:
     from skbuild import setup
 else:
-    from distutils.core import setup
+    from distutils.core import setup  # pylint: disable=deprecated-module
 
 
 long_description = ""  # pylint: disable=invalid-name

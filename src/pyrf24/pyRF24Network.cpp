@@ -319,9 +319,9 @@ PYBIND11_MODULE(rf24_network, m)
                 This node's parent address, or 65535 if this is the master node.
         )docstr")
 
-        .def("parent", &RF24NetworkWrapper::parent, R"docstr(
-            parent() -> int
-        )docstr")
+        // .def("parent", &RF24NetworkWrapper::parent, R"docstr(
+        //     parent() -> int
+        // )docstr")
 
         // *****************************************************************************
 
