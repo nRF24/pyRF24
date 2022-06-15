@@ -1050,6 +1050,8 @@ PYBIND11_MODULE(rf24, m)
                 (which is disabled by default).
         )docstr")
 
+        .def_property("payloadSize", &RF24Wrapper::getPayloadSize, &RF24Wrapper::setPayloadSize)
+
         // *****************************************************************************
 
         .def_property("data_rate", &RF24Wrapper::get_data_rate, &RF24Wrapper::setDataRate, R"docstr(
