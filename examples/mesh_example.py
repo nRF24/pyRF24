@@ -46,7 +46,7 @@ try:
 
             if not mesh.write(struct.pack("L", TIMER), ord("M")):
                 # If a write fails, check connectivity to the mesh network
-                if not mesh.check_connection():
+                if not mesh.check_connection:
                     # The address could be refreshed per a specified time frame
                     # or only when sequential writes fail, etc.
                     print("Send fail. Renewing Address...")
