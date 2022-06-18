@@ -22,7 +22,7 @@ mesh = RF24Mesh(radio, network)
 mesh.node_id = 4
 print("starting nodeID", mesh.node_id)
 if not mesh.begin():
-    if radio.is_chip_connected():
+    if radio.is_chip_connected:
         try:
             print("Could not connect to network.\nConnecting to mesh...")
             while mesh.renew_address() == MESH_DEFAULT_ADDRESS:
@@ -46,7 +46,7 @@ try:
 
             if not mesh.write(struct.pack("L", TIMER), ord("M")):
                 # If a write fails, check connectivity to the mesh network
-                if not mesh.check_connection:
+                if not mesh.check_connection():
                     # The address could be refreshed per a specified time frame
                     # or only when sequential writes fail, etc.
                     print("Send fail. Renewing Address...")
