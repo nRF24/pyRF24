@@ -45,6 +45,7 @@ try:
             PACKETS_SENT += 1
             payload = struct.pack("<LL", now, PACKETS_SENT)
             ok = network.write(RF24NetworkHeader(OTHER_NODE), payload)
-            print("Sending...", ("ok" if ok else "failed"))
+            print(f"Sending {PACKETS_SENT}...", ("ok" if ok else "failed"))
 except KeyboardInterrupt:
-    radio.power = False  # power radio down before exiting
+    print("powering down radio and exiting.")
+    radio.power = False

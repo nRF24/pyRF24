@@ -10,7 +10,9 @@ network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
 mesh.node_id = 0
 if not mesh.begin():
-    raise OSError("failed to initialize radio or could not connect to mesh")
+    # if mesh.begin() returns false for a master node,
+    # then radio.begin() returned false.
+    raise OSError("Radio hardware not responding.")
 radio.print_pretty_details()
 
 try:
@@ -22,4 +24,5 @@ try:
             header, payload = network.read()
             print(f"Received message {header.to_string()}")
 except KeyboardInterrupt:
-    radio.power = False  # power radio down before exiting
+    print("powering down radio and exiting.")
+    radio.power = False
