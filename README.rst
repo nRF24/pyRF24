@@ -113,84 +113,109 @@ same version of CPython, CPU architecture, and C standard lib.
            rm -r _skbuild/
 
 3. To install a built wheel, simply pass the wheel's path and file name to ``pip install``:
-   
+
    .. code-block:: bash
 
        python -m pip install dist/pyrf24-MAJOR.MINOR.PATCH-cp3X-cp3X-linux_ARCH.whl
 
    Where the following would be replaced accordingly:
-   
+
    - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package
    - ``cp3X`` is the version of python used to build the wheel (ie ``cp39`` for CPython 3.9)
      The second occurrence of ``cp3X`` describes the CPython ABI compatibility.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.
      On Raspberry Pi OS (32 bit), this will be ``armv7l``.
 
+Differences in API
+~~~~~~~~~~~~~~~~~~
+
+This package intentionally adheres to `PEP8 <https://pep8.org/>`_ standards as much as possible.
+This means that class members' names use snake casing  (eg. ``get_dynamic_payload_size()``)
+instead of using the C++ conventional camel casing (eg. ``getDynamicPayloadSize()``). However,
+the older python wrappers provided with each C++ library (RF24, RF24Network, & RF24Mesh) had used
+camel casing. So, the API provided by this package exposes both snake cased and camel cased
+versions of the API. The camel cased API is not documented to avoid duplicate and
+complicated documentation.
+
+.. code-block:: py
+
+    radio.print_details()  # documented
+    # can also be invoked as
+    radio.printDetails()  # not documented
+
+Some of the C++ functions that do not accept arguments are wrapped as a class property. But, the C++
+style functions are still exposed. For example:
+
+.. code-block:: py
+
+    radio.listen = False
+    # is equivalent to
+    radio.stopListening()  # not documented
+
+    radio.listen = True
+    # is equivalent to
+    radio.startListening()  # not documented
+
+Python Type Hints
+-----------------
+
+This package is designed to only function on Linux devices. But, it is possible to install this
+package on non-Linux devices to get the stub files which help auto-completion and type checking
+in various development environments.
+
 Documentation
 ~~~~~~~~~~~~~
 
 Before submitting contributions, you should make sure that any documentation changes builds
-successfully. This can be done locally.
-
-Documentation Dependencies
---------------------------
+successfully. This can be done locally but **on Linux only**. The documentation of API requires
+this package (& all its latest changes) be installed.
 
 This package's documentation is built with the python package Sphinx and the sphinx-immaterial theme.
 It also uses the dot tool provided by the graphviz software to generate graphs.
 
-Install Graphviz
-****************
+1. Install Graphviz
 
-On Windows, installing Graphviz library is done differently. Check out the
-`Graphviz downloads page <https://graphviz.org/download/>`_. Be sure that the ``graphviz/bin``
-directory is in the ``PATH`` environment variable (there's an option in the installer for this).
-After Graphviz is installed, reboot the PC so the updated ``PATH`` environment variable takes affect.
+   .. code-block:: shell
 
-On Linux, just run:
+       sudo apt-get install graphviz
 
-.. code-block:: shell
+2. Installing Sphinx necessities
 
-    sudo apt-get install graphviz
+   .. note::
+       If you installed sphinx using ``apt``, then it is likely out-of-date and will override any virtual
+       python environments installation of Sphinx. Simply uninstall sphinx (using ``apt``) will remedy
+       this problem.
 
-Installing Sphinx necessities
-*****************************
+   .. code-block:: bash
 
-.. note::
-    If you installed sphinx using ``apt``, then it is likely out-of-date and will override any virtual
-    python environments installation of Sphinx. Simply uninstall sphinx (using ``apt``) will remedy
-    this problem.
+       python -m pip install -r docs/requirements.txt
 
-.. code-block:: bash
+   .. important::
+       If pip outputs a warning about your ``path/to/Python/Python3x/Scripts`` folder not
+       added to your OS environment variable ``PATH``, then you will likely get an error message like
+       ``sphinx-build command not found`` when building the documentation. For more information on
+       installing sphinx, see the
+       `official Sphinx install instructions
+       <https://www.sphinx-doc.org/en/master/usage/installation.html>`_.
 
-    python -m pip install -r docs/requirements.txt
+       .. warning::
+           This documentation's theme requires Sphinx v4.0+. So, it is not recommended to install
+           sphinx from ``apt`` on Linux because the version distributed with the OS's PPA repository
+           may not be the most recent version of Sphinx.
 
-.. important::
-    If pip outputs a warning about your ``path/to/Python/Python3x/Scripts`` folder not
-    added to your OS environment variable ``PATH``, then you will likely get an error message like
-    ``sphinx-build command not found`` when building the documentation. For more information on
-    installing sphinx, see the
-    `official Sphinx install instructions
-    <https://www.sphinx-doc.org/en/master/usage/installation.html>`_.
+3. Building the Documentation
 
-    .. warning::
-        This documentation's theme requires Sphinx v4.0+. So, it is not recommended to install
-        sphinx from ``apt`` on Linux because the version distributed with the OS's PPA repository
-        may not be the most recent version of Sphinx.
+   To build the documentation locally, the pyrf24 package needs to be installed first. Then run:
 
-Building the Documentation
---------------------------
+   .. code-block:: bash
 
-To build the documentation locally, the pyrf24 package needs to be installed first. Then run:
+       cd docs
+       sphinx-build -E -W . _build
 
-.. code-block:: bash
+   The ``docs/_build`` folder should now contain the html files that would be hosted on deployment.
+   Direct your internet browser to the html files in this folder to make sure your changes have been
+   rendered correctly.
 
-    cd docs
-    sphinx-build -E -W . _build
-
-The ``docs/_build`` folder should now contain the html files that would be hosted on deployment.
-Direct your internet browser to the html files in this folder to make sure your changes have been
-rendered correctly.
-
-.. note::
-    The flags ``-E`` and ``-W`` will ensure the docs fail to build on any error or warning
-    (just like it does when deploying the docs online).
+   .. note::
+       The flags ``-E`` and ``-W`` will ensure the docs fail to build on any error or warning
+       (just like it does when deploying the docs online).

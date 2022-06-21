@@ -34,9 +34,18 @@ External Systems or Applications
 RF24NetworkHeader class
 -----------------------
 
+.. hint::
+    The `RF24NetworkHeader` class supports the python "magic method" :py:func:`repr()`. So, you can
+    easily pass an instantiated `RF24NetworkHeader` object to the :py:func:`print()` function.
+
 .. autoclass:: pyrf24.rf24_network.RF24NetworkHeader
-    :members:
+    :members: to_node, type, from_node, id, reserved, to_string
     :special-members: __init__
+
+    .. property:: next_id
+        :classmethod:
+
+        The next sequential identifying number used for the next created header's `id`.
 
 Constants
 ----------

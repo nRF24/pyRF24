@@ -33,8 +33,9 @@ try:
             print("payload length ", len(payload))
             millis, packet_count = struct.unpack("<LL", payload[:EXPECTED_SIZE])
             print(
-                f"Received payload {packet_count} at {millis}",
+                f"Received payload {packet_count} at (origin's timestamp) {millis}.",
                 f"Header details {header.to_string()}",
             )
 except KeyboardInterrupt:
-    radio.power = False  # power radio down before exiting
+    print("powering down radio and exiting.")
+    radio.power = False

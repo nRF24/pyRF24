@@ -264,22 +264,62 @@ PYBIND11_MODULE(rf24, m)
 
     // ********************** Enum structs
     py::enum_<rf24_crclength_e>(m, "rf24_crclength_e")
-        .value("RF24_CRC_DISABLED", RF24_CRC_DISABLED)
-        .value("RF24_CRC_8", RF24_CRC_8)
-        .value("RF24_CRC_16", RF24_CRC_16)
+        .value("RF24_CRC_DISABLED", RF24_CRC_DISABLED, R"docstr(
+            to disable using CRC checksums
+        )docstr")
+        .value("RF24_CRC_8", RF24_CRC_8, R"docstr(
+            to use 8-bit checksums
+        )docstr")
+        .value("RF24_CRC_16", RF24_CRC_16, R"docstr(
+            to use 16-bit checksums
+        )docstr")
         .export_values();
 
     py::enum_<rf24_datarate_e>(m, "rf24_datarate_e")
-        .value("RF24_1MBPS", RF24_1MBPS)
-        .value("RF24_2MBPS", RF24_2MBPS)
-        .value("RF24_250KBPS", RF24_250KBPS)
+        .value("RF24_1MBPS", RF24_1MBPS, R"docstr(
+            for 1 Mbps
+        )docstr")
+        .value("RF24_2MBPS", RF24_2MBPS, R"docstr(
+            for 2 Mbps
+        )docstr")
+        .value("RF24_250KBPS", RF24_250KBPS, R"docstr(
+            for 250 kbps
+        )docstr")
         .export_values();
 
     py::enum_<rf24_pa_dbm_e>(m, "rf24_pa_dbm_e")
-        .value("RF24_PA_MIN", RF24_PA_MIN)
-        .value("RF24_PA_LOW", RF24_PA_LOW)
-        .value("RF24_PA_HIGH", RF24_PA_HIGH)
-        .value("RF24_PA_MAX", RF24_PA_MAX)
+        .value("RF24_PA_MIN", RF24_PA_MIN, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      -18 dBm         |      6 dBm         |     -12 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
+        .value("RF24_PA_LOW", RF24_PA_LOW, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      -12 dBm         |      0 dBm         |      -4 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
+        .value("RF24_PA_HIGH", RF24_PA_HIGH, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      -6 dBm          |      3 dBm         |       1 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
+        .value("RF24_PA_MAX", RF24_PA_MAX, R"docstr(
+            +----------------------+--------------------+--------------------+
+            | nRF24L01 description | Si24R1 description | Si24R1 description |
+            |                      | when LNA enabled   | when LNA disabled  |
+            +======================+====================+====================+
+            |      0 dBm           |      7 dBm         |       4 dBm        |
+            +----------------------+--------------------+--------------------+
+        )docstr")
         // .value("RF24_PA_ERROR", RF24_PA_ERROR)
         .export_values();
 
@@ -307,68 +347,76 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        // .def("disable_crc", &RF24Wrapper::disableCRC, R"docstr(
-        //     Disable the radio's CRC feature.
+        .def("disableCRC", &RF24Wrapper::disableCRC, R"docstr(
+            disableCRC()
 
-        //     .. note:: Enabling the radio's auto-ack feature will automatically enable the radio's
-        //         CRC feature.
-        // )docstr")
+            Disable the radio's CRC feature.
 
-        // *****************************************************************************
-
-        // .def("get_crc_length", &RF24Wrapper::getCRCLength, R"docstr(
-        //     get_crc_length() -> int
-
-        //     Get the current setting of the radio's CRC Length.
-        // )docstr")
-
-        // *****************************************************************************
-
-        // .def("get_channel", &RF24Wrapper::getChannel, R"docstr(
-        //     get_channel() -> int
-
-        //     Get the current setting of the radio's channel.
-        // )docstr")
-
-        // *****************************************************************************
-
-        // .def("get_data_rate", &RF24Wrapper::getDataRate, R"docstr(
-        //     get_data_rate() -> pyrf24.rf24.rf24_datarate_e
-
-        //     Get the current setting of the radio's Data Rate.
-        // )docstr")
-
-        // *****************************************************************************
-
-        .def("get_dynamic_payload_size", &RF24Wrapper::getDynamicPayloadSize, R"docstr(
-            get_dynamic_payload_size() -> bool
-
-            Get the current setting of the radio's Dynamic Payload Size.
+            .. note:: Enabling the radio's auto-ack feature will automatically enable the radio's
+                CRC feature.
         )docstr")
 
         // *****************************************************************************
 
-        // .def("get_pa_level", &RF24Wrapper::getPALevel, R"docstr(
-        //     get_pa_level() -> pyrf24.rf24.rf24_pa_dbm_e
+        .def("getCRCLength", &RF24Wrapper::getCRCLength, R"docstr(
+            getCRCLength() -> pyrf24.rf24.rf24_crclength_e
 
-        //     Get the current setting of the radio's Power Amplitude Level.
-        // )docstr")
-
-        // *****************************************************************************
-
-        // .def("get_payload_size", &RF24Wrapper::getPayloadSize), R"docstr(
-        //     get_payload_size() -> int
-
-        //     Configure the radio's static payload size (outgoing and incoming) for all data pipes.
-
-        //     :param int length: The length of static payloads used for all data pipes.
-        // )docstr", py::arg("length"))
+            Get the current setting of the radio's CRC Length.
+        )docstr")
 
         // *****************************************************************************
 
-        // .def("enable_ack_payload", &RF24Wrapper::enableAckPayload, R"docstr(
-        //     Enable the radio's Ack Payload feature.
-        // )docstr")
+        .def("getChannel", &RF24Wrapper::getChannel, R"docstr(
+            getChannel() -> int
+
+            Get the current setting of the radio's channel.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("getDataRate", &RF24Wrapper::getDataRate, R"docstr(
+            getDataRate() -> pyrf24.rf24.rf24_datarate_e
+
+            Get the current setting of the radio's Data Rate.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("get_dynamic_payload_size", &RF24Wrapper::getDynamicPayloadSize, R"docstr(
+            get_dynamic_payload_size() -> int
+
+            Get the Dynamic Payload Size of the next available payload in the radio's RX FIFO.
+        )docstr")
+
+        .def("getDynamicPayloadSize", &RF24Wrapper::getDynamicPayloadSize, R"docstr(
+            getDynamicPayloadSize() -> int
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("getPALevel", &RF24Wrapper::getPALevel, R"docstr(
+            getPALevel() -> pyrf24.rf24.rf24_pa_dbm_e
+
+            Get the current setting of the radio's Power Amplitude Level.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("getPayloadSize", &RF24Wrapper::getPayloadSize, R"docstr(
+            getPayloadSize() -> int
+
+            Configure the radio's static payload size (outgoing and incoming) for all data pipes.
+
+            :param int length: The length of static payloads used for all data pipes.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("enableAckPayload", &RF24Wrapper::enableAckPayload, R"docstr(
+            enableAckPayload()
+
+            Enable the radio's Ack Payload feature.
+        )docstr")
 
         // *****************************************************************************
 
@@ -382,32 +430,44 @@ PYBIND11_MODULE(rf24, m)
             the cheap chinese Si24R1 clones.
         )docstr")
 
-        // *****************************************************************************
-
-        // .def("enable_dynamic_payloads", &RF24Wrapper::enableDynamicPayloads, R"docstr(
-        //     Enable the radio's Dynamic Payloads feature.
-        // )docstr")
+        .def("enableDynamicAck", &RF24Wrapper::enableDynamicAck, R"docstr(
+            enableDynamicAck()
+        )docstr")
 
         // *****************************************************************************
 
-        // .def("disable_dynamic_payloads", &RF24Wrapper::disableDynamicPayloads, R"docstr(
-        //     Disable the radio's Dynamic Payloads feature.
-        // )docstr")
+        .def("enableDynamicPayloads", &RF24Wrapper::enableDynamicPayloads, R"docstr(
+            enableDynamicPayloads()
+
+            Enable the radio's Dynamic Payloads feature.
+        )docstr")
 
         // *****************************************************************************
 
-        // .def("power_down", &RF24Wrapper::powerDown, R"docstr(
-        //     Power down the radio.
+        .def("disableDynamicPayloads", &RF24Wrapper::disableDynamicPayloads, R"docstr(
+            disableDynamicPayloads()
 
-        //     .. important::
-        //         No transmissions can be received or transmitted when the radio is powered down.
-        // )docstr")
+            Disable the radio's Dynamic Payloads feature.
+        )docstr")
 
         // *****************************************************************************
 
-        // .def("power_up", &RF24Wrapper::powerUp, R"docstr(
-        //     Power up the radio.
-        // )docstr")
+        .def("powerDown", &RF24Wrapper::powerDown, R"docstr(
+            powerDown()
+
+            Power down the radio.
+
+            .. important::
+                No transmissions can be received or transmitted when the radio is powered down.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("powerUp", &RF24Wrapper::powerUp, R"docstr(
+            powerUp()
+
+            Power up the radio.
+        )docstr")
 
         // *****************************************************************************
 
@@ -417,6 +477,10 @@ PYBIND11_MODULE(rf24, m)
             Print out details about the radio's configuration.
         )docstr")
 
+        .def("printDetails", &RF24Wrapper::printDetails, R"docstr(
+            printDetails()
+        )docstr")
+
         // *****************************************************************************
 
         .def("print_pretty_details", &RF24Wrapper::printPrettyDetails, R"docstr(
@@ -424,6 +488,10 @@ PYBIND11_MODULE(rf24, m)
 
             Print out details about the radio's configuration. This function differs from
             `print_details()` as the output for this function is more human-friendly/readable.
+        )docstr")
+
+        .def("printPrettyDetails", &RF24Wrapper::printPrettyDetails, R"docstr(
+            printPrettyDetails()
         )docstr")
 
         // *****************************************************************************
@@ -437,6 +505,10 @@ PYBIND11_MODULE(rf24, m)
             :Returns: A string that describes the radio's details.
         )docstr")
 
+        .def("sprintfPrettyDetails", &RF24Wrapper::sprintfDetails, R"docstr(
+            sprintfPrettyDetails() -> str
+        )docstr")
+
         // *****************************************************************************
 
         .def("reuse_tx", &RF24Wrapper::reUseTX, R"docstr(
@@ -445,14 +517,25 @@ PYBIND11_MODULE(rf24, m)
             Re-use the 1\ :sup:`st` level of the radio's TX FIFO.
         )docstr")
 
+        .def("reUseTX", &RF24Wrapper::reUseTX, R"docstr(
+            reUseTX()
+        )docstr")
+
         // *****************************************************************************
 
-        // .def("start_listening", &RF24Wrapper::startListening, R"docstr(
-        //     Put the radio into RX mode.
-        // )docstr")
-        // .def("stop_listening", &RF24Wrapper::stopListening, R"docstr(
-        //     Put the radio into TX mode.
-        // )docstr")
+        .def("startListening", &RF24Wrapper::startListening, R"docstr(
+            startListening()
+
+            Put the radio into RX mode.
+        )docstr")
+
+        // *****************************************************************************
+        
+        .def("stopListening", &RF24Wrapper::stopListening, R"docstr(
+            stopListening()
+
+            Put the radio into TX mode.
+        )docstr")
 
         // *****************************************************************************
 
@@ -463,36 +546,46 @@ PYBIND11_MODULE(rf24, m)
             as recommended by the datasheet.
         )docstr")
 
-        // *****************************************************************************
-
-        // .def("is_valid", &RF24Wrapper::isValid, R"docstr(
-        //     is_valid() -> bool
-
-        //     Verify the configured pin numbers are indeed valid.
-
-        //     :Returns: `True` if the radio's CE & CSN pins have been configured (using the
-        //         RF24 class' constructor or :py:meth:`~pyrf24.rf24.RF24.begin()` function)
-        // )docstr")
+        .def("stopConstCarrier", &RF24Wrapper::stopConstCarrier, R"docstr(
+            stopConstCarrier()
+        )docstr")
 
         // *****************************************************************************
 
-        // .def("is_plus_variant", &RF24Wrapper::isPVariant, R"docstr(
-        //     Is the detected radio compatible with the nRF24L01+ family?
+        .def("isValid", &RF24Wrapper::isValid, R"docstr(
+            isValid() -> bool
 
-        //     :Returns: `True` of the radio is a nRF24L01+ model (or compatible), otherwise `False`.
-        // )docstr")
+            Verify the configured pin numbers are indeed valid.
 
-        // *****************************************************************************
-
-        // .def("test_rpd", &RF24Wrapper::testRPD, R"docstr(
-        //     :Returns: `True` if a signal (above -64 dbm) was detected in RX mode, otherwise `False`.
-        // )docstr")
+            :Returns: `True` if the radio's CE & CSN pins have been configured (using the
+                RF24 class' constructor or :py:meth:`~pyrf24.rf24.RF24.begin()` function)
+        )docstr")
 
         // *****************************************************************************
 
-        // .def("rx_fifo_full", &RF24Wrapper::rxFifoFull, R"docstr(
-        //     :Returns: `True` if all 3 levels of the radio's RX FIFO are occupied, otherwaise `False`.
-        // )docstr")
+        .def("isPVariant", &RF24Wrapper::isPVariant, R"docstr(
+            isPVariant() -> bool
+
+            Is the detected radio compatible with the nRF24L01+ family?
+
+            :Returns: `True` of the radio is a nRF24L01+ model (or compatible), otherwise `False`.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("testRPD", &RF24Wrapper::testRPD, R"docstr(
+            testRPD() -> bool
+
+            :Returns: `True` if a signal (above -64 dbm) was detected in RX mode, otherwise `False`.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("rxFifoFull", &RF24Wrapper::rxFifoFull, R"docstr(
+            rxFifoFull() -> bool
+
+            :Returns: `True` if all 3 levels of the radio's RX FIFO are occupied, otherwise `False`.
+        )docstr")
 
         // *****************************************************************************
 
@@ -514,6 +607,10 @@ PYBIND11_MODULE(rf24, m)
                 :py:meth:`~pyrf24.rf24.RF24.mask_irq()`
         )docstr")
 
+        .def("whatHappened", &RF24Wrapper::what_happened, R"docstr(
+            whatHappened() -> Tuple[bool, bool, bool]
+        )docstr")
+
         // *****************************************************************************
 
         .def("available_pipe", &RF24Wrapper::available_pipe, R"docstr(
@@ -531,12 +628,20 @@ PYBIND11_MODULE(rf24, m)
                   number is set to an invalid value of 7.
         )docstr")
 
+        // *****************************************************************************
+
         .def("get_arc", &RF24Wrapper::getARC, R"docstr(
+            get_arc() -> int
+
             Returns automatic retransmission count (ARC_CNT)
 
             Value resets with each new transmission. Allows roughly estimating signal strength.
 
             :Returns: Returned values range from 0 to 15.
+        )docstr")
+
+        .def("getARC", &RF24Wrapper::getARC, R"docstr(
+            getARC() -> int
         )docstr")
 
         // *****************************************************************************
@@ -562,6 +667,11 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("level"), py::arg("speed"), py::arg("lna_enable") = true)
 
+        .def("setRadiation", &RF24Wrapper::set_radiation, R"docstr(
+            setRadiation(level: rf24_pa_dbm_e, speed: rf24_datarate_e, lna_enable: bool = True)
+        )docstr",
+             py::arg("level"), py::arg("speed"), py::arg("lna_enable") = true)
+
         // *****************************************************************************
 
         .def("set_retries", &RF24Wrapper::setRetries, R"docstr(
@@ -577,48 +687,53 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("delay"), py::arg("count"))
 
-        // *****************************************************************************
-
-        // .def("set_crc_length", &RF24Wrapper::setCRCLength, R"docstr(
-        //     set_crc_length(length: rf24_crclength_e)
-
-        //     Configure the radio's CRC Length feature.
-
-        //     :param int,rf24_crclength_e length: The number of bytes used in the radio's CRC checksum.
-
-        //         .. seealso:: Values accepted by the parameter are predefined in the
-        //             `rf24_crclength_e` enum struct.
-        // )docstr", py::arg("length"))
+        .def("setRetries", &RF24Wrapper::setRetries, R"docstr(
+            setRetries(delay: int, count: int)
+        )docstr",
+             py::arg("delay"), py::arg("count"))
 
         // *****************************************************************************
 
-        // .def("set_channel", &RF24Wrapper::setChannel, R"docstr(
-        //     set_channel(channel: int)
+        .def("setCRCLength", &RF24Wrapper::setCRCLength, R"docstr(
+            setCRCLength(length: rf24_crclength_e)
 
-        //     Set the current setting of the radio's channel.
-        // )docstr", py::arg("channel"))
+            Configure the radio's CRC Length feature.
 
-        // *****************************************************************************
+            :param rf24_crclength_e length: The number of bytes used in the radio's CRC checksum.
 
-        // .def("set_data_rate", &RF24Wrapper::setDataRate, R"docstr(
-        //     set_data_rate(rate: rf24_datarate_e)
-
-        //     Configure the radio's Data Rate feature.
-
-        //     :param rf24_datarate_e rate: The speed in which the radio send out data over the air. Values
-        //         accepted for this parameter are pre-defined in the `rf24_datarate_e` enum struct.
-        // )docstr", py::arg("rate"))
+                .. seealso:: Values accepted by the parameter are predefined in the
+                    `rf24_crclength_e` enum struct.
+        )docstr", py::arg("length"))
 
         // *****************************************************************************
 
-        // .def("set_address_width", &RF24Wrapper::setAddressWidth, R"docstr(
-        //     set_address_width(width: int)
+        .def("setChannel", &RF24Wrapper::setChannel, R"docstr(
+            setChannel(channel: int)
 
-        //     Configure the radio's Address Width feature.
+            Set the current setting of the radio's channel.
+        )docstr", py::arg("channel"))
 
-        //     :param int width: The number of bytes used for address' length assigned to the data
-        //         pipes. Accepted values are clamped to range [3, 5].
-        // )docstr", py::arg("width"))
+        // *****************************************************************************
+
+        .def("setDataRate", &RF24Wrapper::setDataRate, R"docstr(
+            setDataRate(rate: rf24_datarate_e)
+
+            Configure the radio's Data Rate feature.
+
+            :param rf24_datarate_e rate: The speed in which the radio send out data over the air. Values
+                accepted for this parameter are pre-defined in the `rf24_datarate_e` enum struct.
+        )docstr", py::arg("rate"))
+
+        // *****************************************************************************
+
+        .def("setAddressWidth", &RF24Wrapper::setAddressWidth, R"docstr(
+            setAddressWidth(width: int)
+
+            Configure the radio's Address Width feature.
+
+            :param int width: The number of bytes used for address' length assigned to the data
+                pipes. Accepted values are clamped to range [3, 5].
+        )docstr", py::arg("width"))
 
         // *****************************************************************************
 
@@ -629,6 +744,11 @@ PYBIND11_MODULE(rf24, m)
 
             :param int pipe: The identifying data pipe number to close. Remember there are
                 only 6 data pipes (identified by the numbers 0-5).
+        )docstr",
+             py::arg("pipe"))
+
+        .def("closeReadingPipe", &RF24Wrapper::closeReadingPipe, R"docstr(
+            closeReadingPipe(pipe: int)
         )docstr",
              py::arg("pipe"))
 
@@ -645,6 +765,11 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("enable"))
 
+        .def("toggleAllPipes", &RF24Wrapper::toggleAllPipes, R"docstr(
+            toggleAllPipes(enable: bool)
+        )docstr",
+             py::arg("enable"))
+
         // *****************************************************************************
 
         .def("start_const_carrier", &RF24Wrapper::startConstCarrier, R"docstr(
@@ -656,6 +781,10 @@ PYBIND11_MODULE(rf24, m)
             :param rf24_pa_dbm_e level: The value used to configure Power Amplitude level. Accepted
                 values are pre-defined in the `rf24_pa_dbm_e` enum struct.
             :param int channel: The  channel to broadcast on.
+        )docstr")
+
+        .def("startConstCarrier", &RF24Wrapper::startConstCarrier, R"docstr(
+            startConstCarrier(level: rf24_pa_dbm_e, channel: int)
         )docstr")
 
         // *****************************************************************************
@@ -670,6 +799,11 @@ PYBIND11_MODULE(rf24, m)
             :param bool lna_enable: This parameter configures the LNA (Low Noise Amplifier)
                 feature of the radio. This feature can only be configured on non-plus models of
                 the nRF24L01 (or the Si24R1 clone).
+        )docstr",
+             py::arg("level"), py::arg("lna_enable") = true)
+
+        .def("setPALevel", &RF24Wrapper::setPALevel, R"docstr(
+            setPALevel(level: rf24_pa_dbm_e, lna_enable: bool = True)
         )docstr",
              py::arg("level"), py::arg("lna_enable") = true)
 
@@ -688,6 +822,11 @@ PYBIND11_MODULE(rf24, m)
                 "data failed" event on the IRQ pin.
             :param bool rx_ready: `True` ignores the "data ready" event, `False` reflects the
                 "data ready" event on the IRQ pin.
+        )docstr",
+             py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
+
+        .def("maskIRQ", &RF24Wrapper::maskIRQ, R"docstr(
+            maskIRQ(tx_ok: bool, tx_fail: bool, rx_ready: bool)
         )docstr",
              py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
 
@@ -732,7 +871,7 @@ PYBIND11_MODULE(rf24, m)
 
             :param int ce_pin: The pin number connected to the radio's CE pin.
             :param int csn_pin: The pin number connected to the radio's CSN pin.
-            :param int spi_speed: The SPI bus speed (in Hz). Deafaults to 10 MHz when not specified.
+            :param int spi_speed: The SPI bus speed (in Hz). Defaults to 10 MHz when not specified.
         )docstr",
              py::arg("ce_pin") = 0xFFFF, py::arg("csn_pin") = 0xFFFF, py::arg("spi_speed") = 10000000)
 
@@ -779,7 +918,7 @@ PYBIND11_MODULE(rf24, m)
 
             .. seealso::
                 Use :py:meth:`~pyrf24.rf24.RF24.available_pipe()` to get the pipe number that received the
-                next availble payload.
+                next available payload.
         )docstr")
 
         // *****************************************************************************
@@ -791,6 +930,11 @@ PYBIND11_MODULE(rf24, m)
 
             :param int pipe_number: The pipe number to use for receiving transmissions. This value should be in range [0, 5].
             :param bytes,bytearray address: The address assigned to the specified data pipe for receiving transmissions.
+        )docstr",
+             py::arg("pipe_number"), py::arg("address"))
+
+        .def("openReadingPipe", &RF24Wrapper::open_rx_pipe, R"docstr(
+            openReadingPipe(pipe_number: int, address: Union[bytearray, bytes])
         )docstr",
              py::arg("pipe_number"), py::arg("address"))
 
@@ -811,6 +955,11 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("address"))
 
+        .def("openWritingPipe", &RF24Wrapper::open_tx_pipe, R"docstr(
+            openWritingPipe(address: Union[bytearray, bytes])
+        )docstr",
+             py::arg("address"))
+
         // *****************************************************************************
 
         // .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
@@ -823,31 +972,37 @@ PYBIND11_MODULE(rf24, m)
             set_auto_ack(enable: bool) \
             set_auto_ack(pipe_number: int, enable: bool)
 
-            Configure the radio's automatic acknowledgement feature for all data pipes.
+            Configure the radio's automatic acknowledgement feature for all data pipes or a specific data pipe.
 
-            :param bool enable: Enable/disable (`True`/`False`) the radio's auto-ack feature for all data pipes.
+            :param bool enable: Enable/disable (`True`/`False`) the radio's auto-ack feature for all data pipes or for the specified
+                ``pipe_number``.
+            :param int pipe_number: The pipe number for which the ``enable`` parameter is about. This value must be in range [0, 5].
+        )docstr",
+             py::arg("enable"))
+
+        .def("setAutoAck", static_cast<void (RF24Wrapper::*)(bool)>(&RF24Wrapper::setAutoAck), R"docstr(
+            setAutoAck(enable: bool) \
+            setAutoAck(pipe_number: int, enable: bool)
         )docstr",
              py::arg("enable"))
 
         // *****************************************************************************
 
-        .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck), R"docstr(
+        .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck),
+             py::arg("pipe_number"), py::arg("enable"))
 
-            Configure the radio's automatic acknowledgement feature for a specific data pipe.
-
-            :param int pipe_number: The pipe number for which the ``enable`` parameter is about. This value must be in range [0, 5].
-        )docstr",
+        .def("setAutoAck", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck),
              py::arg("pipe_number"), py::arg("enable"))
 
         // *****************************************************************************
 
-        // .def("set_payload_size", &RF24Wrapper::setPayloadSize), R"docstr(
-        //     set_payload_size(length: int)
+        .def("setPayloadSize", &RF24Wrapper::setPayloadSize, R"docstr(
+            setPayloadSize(length: int)
 
-        //     Configure the radio's static payload size (outgoing and incoming) for all data pipes.
+            Configure the radio's static payload size (outgoing and incoming) for all data pipes.
 
-        //     :param int length: The length of static payloads used for all data pipes.
-        // )docstr", py::arg("length"))
+            :param int length: The length of static payloads used for all data pipes.
+        )docstr", py::arg("length"))
 
         // *****************************************************************************
 
@@ -861,6 +1016,10 @@ PYBIND11_MODULE(rf24, m)
             transmitted or timeout occurs.
         )docstr")
 
+        .def("txStandBy", static_cast<bool (RF24Wrapper::*)()>(&RF24Wrapper::txStandBy), R"docstr(
+            txStandBy() -> bool
+        )docstr")
+
         // *****************************************************************************
 
         .def("tx_standby", static_cast<bool (RF24Wrapper::*)(uint32_t, bool)>(&RF24Wrapper::txStandBy), R"docstr(
@@ -869,6 +1028,11 @@ PYBIND11_MODULE(rf24, m)
             :param int timeout: The maximum time (in milliseconds) to allow for transmission. This value is added to the
                 default 95 milliseconds.
             :param bool start_tx: Set this parameter to `False` if the radio's CE pin is already active. This parameter is optional.
+        )docstr",
+             py::arg("timeout"), py::arg("start_tx") = true)
+
+        .def("txStandBy", static_cast<bool (RF24Wrapper::*)(uint32_t, bool)>(&RF24Wrapper::txStandBy), R"docstr(
+            txStandBy(timeout: int, start_tx: bool = True) -> bool
         )docstr",
              py::arg("timeout"), py::arg("start_tx") = true)
 
@@ -926,12 +1090,14 @@ PYBIND11_MODULE(rf24, m)
                 (which is disabled by default).
         )docstr")
 
+        .def_property("payloadSize", &RF24Wrapper::getPayloadSize, &RF24Wrapper::setPayloadSize)
+
         // *****************************************************************************
 
         .def_property("data_rate", &RF24Wrapper::get_data_rate, &RF24Wrapper::setDataRate, R"docstr(
             This attribute represents the radio's OTA data rate.
 
-            .. hint:: The units "BPS" stand for "Bits Per Second" (not Bytes per secend).
+            .. hint:: The units "BPS" stand for "Bits Per Second" (not Bytes per second).
             .. seealso:: Accepted values are pre-defined in the `rf24_datarate_e` enum struct.
         )docstr")
 
@@ -957,8 +1123,9 @@ PYBIND11_MODULE(rf24, m)
 
             .. hint::
 
-                1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` first.
-                2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in this mode, without
+                1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` before
+                   setting :py:attr:`~pyrf24.rf24.RF24.listen` to `True`.
+                2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in RX mode, without
                    first setting :py:attr:`~pyrf24.rf24.RF24.listen` to `False`.
                 3. Call :py:meth:`~pyrf24.rf24.RF24.available()` to check for incoming traffic,
                    and use :py:meth:`~pyrf24.rf24.RF24.read()` to get it.
@@ -966,14 +1133,15 @@ PYBIND11_MODULE(rf24, m)
             .. important::
                 If there was a call to :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()`
                 about pipe 0 prior to setting this attribute to `False`, then this attribute
-                will re-write the address that was last set to reading pipe 0.
+                will re-write the address that was last set to RX pipe 0.
                 This is because :py:meth:`~pyrf24.rf24.RF24.open_tx_pipe()`
-                will overwrite the address to reading pipe 0 for proper auto-ack
+                will overwrite the address to RX pipe 0 for proper auto-ack
                 functionality.
             .. note::
                 When the ACK payloads feature is enabled, the TX FIFO buffers are
-                flushed when changing this attribute to `True`. This is meant to discard any ACK
-                payloads that were not appended to acknowledgment packets during TX mode.
+                flushed when changing this attribute to `True` (RX mode). This is meant to
+                discard any ACK payloads that were not appended to acknowledgment packets
+                during TX mode.
         )docstr")
 
         // *****************************************************************************
@@ -1021,6 +1189,11 @@ PYBIND11_MODULE(rf24, m)
             The number of accumulative transmission failures specific to the life
             cycle of the `RF24` object.
         )docstr")
+
+        .def_readwrite("failureDetected", &RF24Wrapper::failureDetected, R"docstr(
+            The number of accumulative transmission failures specific to the life
+            cycle of the `RF24` object.
+        )docstr")
 #endif // defined (FAILURE_HANDLING)
 
         // *****************************************************************************
@@ -1048,9 +1221,9 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        // .def_property_readonly("rx_fifo_full", &RF24Wrapper::rxFifoFull, R"docstr(
-        //     This attribute represents if all 3 levels of the radio's RX FIFO are occupied.
-        // )docstr")
+        .def_property_readonly("rx_fifo_full", &RF24Wrapper::rxFifoFull, R"docstr(
+            This attribute represents if all 3 levels of the radio's RX FIFO are occupied.
+        )docstr")
 
         // *****************************************************************************
 
@@ -1063,6 +1236,10 @@ PYBIND11_MODULE(rf24, m)
         .def_property_readonly("is_chip_connected", &RF24Wrapper::isChipConnected, R"docstr(
             Check if the SPI bus is working with the radio. This attribute assumes that
             :py:meth:`~pyrf24.rf24.RF24.begin()` returned `True`.
+        )docstr")
+
+        .def("isChipConnected", &RF24Wrapper::isChipConnected, R"docstr(
+            isChipConnected() -> bool
         )docstr")
 
         // *****************************************************************************
@@ -1090,6 +1267,11 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("buf"), py::arg("multicast") = false, py::arg("start_tx") = true)
 
+        .def("startFastWrite", &RF24Wrapper::startFastWrite, R"docstr(
+            startFastWrite(buf: Union[bytearray, bytes], multicast: bool = False, start_tx: bool = True) -> None
+        )docstr",
+             py::arg("buf"), py::arg("multicast") = false, py::arg("start_tx") = true)
+
         // *****************************************************************************
 
         .def("start_write", &RF24Wrapper::startWrite, R"docstr(
@@ -1106,6 +1288,11 @@ PYBIND11_MODULE(rf24, m)
                     is called at least once prior to calling this function.
 
             :Returns: `True` if the payload was loaded into the radio's TX FIFO, otherwise `False`.
+        )docstr",
+             py::arg("buf"), py::arg("multicast") = false)
+
+        .def("startWrite", &RF24Wrapper::startWrite, R"docstr(
+            startWrite(buf: Union[bytearray, bytes], multicast: bool = False) -> bool
         )docstr",
              py::arg("buf"), py::arg("multicast") = false)
 
@@ -1144,6 +1331,11 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("pipe"), py::arg("buf"))
 
+        .def("writeAckPayload", &RF24Wrapper::writeAckPayload, R"docstr(
+            writeAckPayload(pipe: int, buf: Union[bytearray, bytes]) -> bool
+        )docstr",
+             py::arg("pipe"), py::arg("buf"))
+
         // *****************************************************************************
 
         .def("write_blocking", &RF24Wrapper::writeBlocking, R"docstr(
@@ -1158,6 +1350,11 @@ PYBIND11_MODULE(rf24, m)
                 available level in the TX FIFO.
 
             :Returns: `True` if the payload was loaded into the radio's TX FIFO, otherwise `False`.
+        )docstr",
+             py::arg("buf"), py::arg("timeout"))
+
+        .def("writeBlocking", &RF24Wrapper::writeBlocking, R"docstr(
+            writeBlocking(buf: Union[bytearray, bytes], timeout: int) -> bool
         )docstr",
              py::arg("buf"), py::arg("timeout"))
 
@@ -1181,5 +1378,11 @@ PYBIND11_MODULE(rf24, m)
 
             :Returns: `True` if the payload was loaded into the radio's TX FIFO, otherwise `False`.
         )docstr",
-             py::arg("buf"), py::arg("multicast") = false);
+             py::arg("buf"), py::arg("multicast") = false)
+
+        .def("writeFast", &RF24Wrapper::writeFast, R"docstr(
+            writeFast(buf: Union[bytearray, bytes], multicast: bool = False) -> bool
+        )docstr",
+             py::arg("buf"), py::arg("multicast") = false)
+        ;
 }

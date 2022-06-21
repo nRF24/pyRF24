@@ -4,33 +4,14 @@ RF24 API
 Enum classes
 ------------
 
-.. class:: pyrf24.rf24.rf24_crclength_e
+.. autoclass:: pyrf24.rf24.rf24_crclength_e
+    :members: RF24_CRC_DISABLED, RF24_CRC_8, RF24_CRC_16
 
-    .. csv-table::
-        :header: "length (enum value)", description
+.. autoclass:: pyrf24.rf24.rf24_datarate_e
+    :members: RF24_1MBPS, RF24_2MBPS, RF24_250KBPS
 
-        "RF24_CRC_DISABLED (0)", "to disable using CRC checksums"
-        "RF24_CRC_8 (1)", "to use 8-bit checksums"
-        "RF24_CRC_16 (2)", "to use 16-bit checksums"
-
-.. class:: pyrf24.rf24.rf24_datarate_e
-
-    .. csv-table::
-        :header: "speed (enum value)", description
-
-        "RF24_1MBPS (0)", "for 1 Mbps"
-        "RF24_2MBPS (1)", "for 2 Mbps"
-        "RF24_250KBPS (2)", "for 250 kbps"
-
-.. class:: pyrf24.rf24.rf24_pa_dbm_e
-
-    .. csv-table::
-        :header: "level (enum value)", "nRF24L01 description", "Si24R1 description when LNA enabled", "Si24R1 description when LNA disabled"
-
-        "RF24_PA_MIN (0)", "-18 dBm", "-6 dBm", "-12 dBm"
-        "RF24_PA_LOW (1)", "-12 dBm", "-0 dBm", "-4 dBm"
-        "RF24_PA_HIGH (2)", "-6 dBm", "3 dBm", "1 dBm"
-        "RF24_PA_MAX (3)", "0 dBm", "7 dBm", "4 dBm"
+.. autoclass:: pyrf24.rf24.rf24_pa_dbm_e
+    :members: RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
 
 RF24 class
 ----------

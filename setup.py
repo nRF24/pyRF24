@@ -6,7 +6,7 @@ IS_LINUX = platform.system().title() == "Linux"
 if IS_LINUX:
     from skbuild import setup
 else:
-    from distutils.core import setup
+    from distutils.core import setup  # pylint: disable=deprecated-module
 
 
 long_description = ""  # pylint: disable=invalid-name
@@ -33,7 +33,7 @@ kwargs = {
     "zip_safe": False,
     "license": "GNU General Public License v2 (GPLv2)",
     "classifiers": [
-        "Development Status :: 3 - Alpha",  # TODO change this when ready
+        "Development Status :: 3 - Beta",  # TODO change this when ready
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries",
         "Topic :: System :: Hardware",

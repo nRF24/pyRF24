@@ -157,8 +157,8 @@ PYBIND11_MODULE(rf24_network, m)
                 Default value is ``0`` if the ``to_node`` parameter is specified.
 
             .. hint:: These parameters can be left unspecified to create a blank object that can
-                be augmented after instantiation. However, the header's ``RF24NetworkHeader.next_id``
-                is not automatically incremented when no parameters are given.
+                be augmented after instantiation. However, the header's `next_id` is not
+                automatically incremented when no parameters are given.
         )docstr",
              py::arg("to_node"), py::arg("type") = 0)
 
@@ -170,6 +170,10 @@ PYBIND11_MODULE(rf24_network, m)
             A convenience function to represent most of the header's publicly-used attributes as a `str`.
 
             :Returns: A `str` representing the header's `from_node`, `to_node`, `id`, and `type` attributes.
+        )docstr")
+
+        .def("toString", &RF24NetworkHeader::toString, R"docstr(
+            toString() -> str
         )docstr")
 
         // *****************************************************************************
@@ -212,7 +216,7 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def_readonly_static("next_id", &RF24NetworkHeader::next_id, R"docstr(
-            The next sequential identifying number used for the next created frame.
+            The next sequential identifying number used for the next created header's `id`.
         )docstr")
 
         // *****************************************************************************
@@ -308,20 +312,16 @@ PYBIND11_MODULE(rf24_network, m)
 
         // *****************************************************************************
 
-        // .def("parent", &RF24NetworkWrapper::parent, R"docstr(
-        //     parent -> int
-
-        //     The `Logical Address <logical_address>` (in octal) of the parent to the instantiated network node.
-        // )docstr")
-
-        // *****************************************************************************
-
         .def_property_readonly("parent", &RF24NetworkWrapper::parent, R"docstr(
             The `Logical Address <logical_address>` (in octal) of the parent to the instantiated network node.
 
             :Returns:
                 This node's parent address, or 65535 if this is the master node.
         )docstr")
+
+        // .def("parent", &RF24NetworkWrapper::parent, R"docstr(
+        //     parent() -> int
+        // )docstr")
 
         // *****************************************************************************
 
@@ -399,6 +399,13 @@ PYBIND11_MODULE(rf24_network, m)
             default value set by `begin()` or `node_address`.
         )docstr")
 
+        .def("multicastLevel", &RF24NetworkWrapper::multicastLevel, R"docstr(
+            multicastLevel(level: int)
+
+            Set the network level of the instantiated network node used for multicasted frames. This will override the
+            default value set by `begin()` or `node_address`.
+        )docstr")
+
         // *****************************************************************************
 
         // .def("set_multicast_level", &RF24NetworkWrapper::multicastLevel, R"docstr(
@@ -429,6 +436,8 @@ PYBIND11_MODULE(rf24_network, m)
             This `bool` attribute determines if any received multicasted messages should be forwarded to the next highest network level.
             Defaults to `False`.
         )docstr")
+
+        .def_readwrite("multicastRelay", &RF24NetworkWrapper::multicastRelay)
 #endif // defined RF24NetworkMulticast
 
         // *****************************************************************************
@@ -444,17 +453,26 @@ PYBIND11_MODULE(rf24_network, m)
         )docstr",
              py::arg("address"))
 
+        .def("is_valid_address", &RF24NetworkWrapper::is_valid_address, R"docstr(
+            is_valid_address(address: int) -> bool
+        )docstr",
+             py::arg("address"))
+
         // *****************************************************************************
 
         .def_readwrite("tx_timeout", &RF24NetworkWrapper::txTimeout, R"docstr(
             The timeout `int` value (in milliseconds) to ensure a frame is properly sent. Defaults to 25.
         )docstr")
 
+        .def_readwrite("txTimeout", &RF24NetworkWrapper::txTimeout)
+
         // *****************************************************************************
 
         .def_readwrite("route_timeout", &RF24Network::routeTimeout, R"docstr(
             The timeout `int` value (in milliseconds) used to wait for a Network ACK message. Defaults to 75.
         )docstr")
+
+        .def_readwrite("routeTimeout", &RF24Network::routeTimeout)
 
         // *****************************************************************************
 
@@ -478,6 +496,8 @@ PYBIND11_MODULE(rf24_network, m)
                 There's a more complete list (with behavioral descriptions) of the :ref:`reserved_sys_msgs`.
         )docstr")
 
+        .def_readwrite("returnSysMsgs", &RF24Network::returnSysMsgs)
+
         // *****************************************************************************
 
         /// TODO: need to write a custom type caster for std::queue to expose the external_queue member
@@ -497,7 +517,9 @@ PYBIND11_MODULE(rf24_network, m)
             .. csv-table::
                 :header: Flags, Value, Description
 
-                :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Replaces the fastFragTransfer variable and allows for faster transfers between directly connected nodes.
-                :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables NETWORK_POLL responses on a node-by-node basis.
-        )docstr");
+                :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Allows for faster transfers between directly connected nodes.
+                :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables :py:attr:`~pyrf24.rf24_network.NETWORK_POLL` responses on a node-by-node basis.
+        )docstr")
+
+        .def_readwrite("networkFlags", &RF24Network::networkFlags);
 }
