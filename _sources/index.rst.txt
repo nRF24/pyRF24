@@ -1,13 +1,17 @@
 .. include:: ../README.rst
 
 .. toctree::
+   :hidden:
+
    self
 
 .. toctree::
+   :hidden:
 
    examples
 
 .. toctree::
+   :hidden:
    :caption: API Reference
 
    rf24_api
@@ -16,6 +20,7 @@
    rf24_mesh_api
 
 .. toctree::
+   :hidden:
 
    topology
 

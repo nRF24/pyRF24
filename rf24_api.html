@@ -1368,83 +1368,105 @@
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24.rf24_crclength_e">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyrf24.rf24.</span></span><span class="sig-name descname"><span class="pre">rf24_crclength_e</span></span><a class="headerlink" href="#pyrf24.rf24.rf24_crclength_e" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils data align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>length (enum value)</p></th>
-<th class="head"><p>description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>RF24_CRC_DISABLED (0)</p></td>
-<td><p>to disable using CRC checksums</p></td>
-</tr>
-<tr class="row-odd"><td><p>RF24_CRC_8 (1)</p></td>
-<td><p>to use 8-bit checksums</p></td>
-</tr>
-<tr class="row-even"><td><p>RF24_CRC_16 (2)</p></td>
-<td><p>to use 16-bit checksums</p></td>
-</tr>
-</tbody>
-</table>
+<dd><p>Members:</p>
+<dl class="simple">
+<dt>RF24_CRC_DISABLED<span class="classifier"></span></dt><dd><p>to disable using CRC checksums</p>
+</dd>
+<dt>RF24_CRC_8<span class="classifier"></span></dt><dd><p>to use 8-bit checksums</p>
+</dd>
+<dt>RF24_CRC_16<span class="classifier"></span></dt><dd><p>to use 16-bit checksums</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24.rf24_datarate_e">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyrf24.rf24.</span></span><span class="sig-name descname"><span class="pre">rf24_datarate_e</span></span><a class="headerlink" href="#pyrf24.rf24.rf24_datarate_e" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils data align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>speed (enum value)</p></th>
-<th class="head"><p>description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>RF24_1MBPS (0)</p></td>
-<td><p>for 1 Mbps</p></td>
-</tr>
-<tr class="row-odd"><td><p>RF24_2MBPS (1)</p></td>
-<td><p>for 2 Mbps</p></td>
-</tr>
-<tr class="row-even"><td><p>RF24_250KBPS (2)</p></td>
-<td><p>for 250 kbps</p></td>
-</tr>
-</tbody>
-</table>
+<dd><p>Members:</p>
+<dl class="simple">
+<dt>RF24_1MBPS<span class="classifier"></span></dt><dd><p>for 1 Mbps</p>
+</dd>
+<dt>RF24_2MBPS<span class="classifier"></span></dt><dd><p>for 2 Mbps</p>
+</dd>
+<dt>RF24_250KBPS<span class="classifier"></span></dt><dd><p>for 250 kbps</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24.rf24_pa_dbm_e">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyrf24.rf24.</span></span><span class="sig-name descname"><span class="pre">rf24_pa_dbm_e</span></span><a class="headerlink" href="#pyrf24.rf24.rf24_pa_dbm_e" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils data align-default">
+<dd><p>Members:</p>
+<dl>
+<dt>RF24_PA_MIN<span class="classifier"></span></dt><dd><table class="docutils data align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>level (enum value)</p></th>
-<th class="head"><p>nRF24L01 description</p></th>
-<th class="head"><p>Si24R1 description when LNA enabled</p></th>
-<th class="head"><p>Si24R1 description when LNA disabled</p></th>
+<tr class="row-odd"><th class="head"><p>nRF24L01 description</p></th>
+<th class="head"><p>Si24R1 description
+when LNA enabled</p></th>
+<th class="head"><p>Si24R1 description
+when LNA disabled</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>RF24_PA_MIN (0)</p></td>
-<td><p>-18 dBm</p></td>
-<td><p>-6 dBm</p></td>
+<tr class="row-even"><td><p>-18 dBm</p></td>
+<td><p>6 dBm</p></td>
 <td><p>-12 dBm</p></td>
 </tr>
-<tr class="row-odd"><td><p>RF24_PA_LOW (1)</p></td>
-<td><p>-12 dBm</p></td>
-<td><p>-0 dBm</p></td>
+</tbody>
+</table>
+</dd>
+<dt>RF24_PA_LOW<span class="classifier"></span></dt><dd><table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>nRF24L01 description</p></th>
+<th class="head"><p>Si24R1 description
+when LNA enabled</p></th>
+<th class="head"><p>Si24R1 description
+when LNA disabled</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-12 dBm</p></td>
+<td><p>0 dBm</p></td>
 <td><p>-4 dBm</p></td>
 </tr>
-<tr class="row-even"><td><p>RF24_PA_HIGH (2)</p></td>
-<td><p>-6 dBm</p></td>
+</tbody>
+</table>
+</dd>
+<dt>RF24_PA_HIGH<span class="classifier"></span></dt><dd><table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>nRF24L01 description</p></th>
+<th class="head"><p>Si24R1 description
+when LNA enabled</p></th>
+<th class="head"><p>Si24R1 description
+when LNA disabled</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-6 dBm</p></td>
 <td><p>3 dBm</p></td>
 <td><p>1 dBm</p></td>
 </tr>
-<tr class="row-odd"><td><p>RF24_PA_MAX (3)</p></td>
-<td><p>0 dBm</p></td>
+</tbody>
+</table>
+</dd>
+<dt>RF24_PA_MAX<span class="classifier"></span></dt><dd><table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>nRF24L01 description</p></th>
+<th class="head"><p>Si24R1 description
+when LNA enabled</p></th>
+<th class="head"><p>Si24R1 description
+when LNA disabled</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 dBm</p></td>
 <td><p>7 dBm</p></td>
 <td><p>4 dBm</p></td>
 </tr>
 </tbody>
 </table>
+</dd>
+</dl>
 </dd></dl>
 
 <h2 id="rf24-class">RF24 class<a class="headerlink" href="#rf24-class" title="Permalink to this heading">¶</a></h2>
@@ -1465,7 +1487,7 @@
 </dd>
 <dt id="pyrf24.rf24.RF24.__init__.csn_pin"><span class="sig-name descname">csn_pin</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.__init__.csn_pin" title="Permalink to this definition">¶</a></dt><dd><p>The pin number connected to the radio’s CSN pin.</p>
 </dd>
-<dt id="pyrf24.rf24.RF24.__init__.spi_speed"><span class="sig-name descname">spi_speed</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.__init__.spi_speed" title="Permalink to this definition">¶</a></dt><dd><p>The SPI bus speed (in Hz). Deafaults to 10 MHz when not specified.</p>
+<dt id="pyrf24.rf24.RF24.__init__.spi_speed"><span class="sig-name descname">spi_speed</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.__init__.spi_speed" title="Permalink to this definition">¶</a></dt><dd><p>The SPI bus speed (in Hz). Defaults to 10 MHz when not specified.</p>
 </dd>
 </dl>
 </dd>
@@ -1524,8 +1546,9 @@ next available payload.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <ol class="arabic simple">
-<li><p>Be sure to call <a class="reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe" title="pyrf24.rf24.RF24.open_rx_pipe (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open_rx_pipe()</span></code></a> first.</p></li>
-<li><p>Do not call <a class="reference internal" href="#pyrf24.rf24.RF24.write" title="pyrf24.rf24.RF24.write (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> while in this mode, without
+<li><p>Be sure to call <a class="reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe" title="pyrf24.rf24.RF24.open_rx_pipe (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open_rx_pipe()</span></code></a> before
+setting <a class="reference internal" href="#pyrf24.rf24.RF24.listen" title="pyrf24.rf24.RF24.listen (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">listen</span></code></a> to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
+<li><p>Do not call <a class="reference internal" href="#pyrf24.rf24.RF24.write" title="pyrf24.rf24.RF24.write (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> while in RX mode, without
 first setting <a class="reference internal" href="#pyrf24.rf24.RF24.listen" title="pyrf24.rf24.RF24.listen (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">listen</span></code></a> to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
 <li><p>Call <a class="reference internal" href="#pyrf24.rf24.RF24.available" title="pyrf24.rf24.RF24.available (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">available()</span></code></a> to check for incoming traffic,
 and use <a class="reference internal" href="#pyrf24.rf24.RF24.read" title="pyrf24.rf24.RF24.read (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> to get it.</p></li>
@@ -1535,16 +1558,17 @@ and use <a class="reference internal" href="#pyrf24.rf24.RF24.read" title="pyrf2
 <p class="admonition-title">Important</p>
 <p>If there was a call to <a class="reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe" title="pyrf24.rf24.RF24.open_rx_pipe (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open_rx_pipe()</span></code></a>
 about pipe 0 prior to setting this attribute to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>, then this attribute
-will re-write the address that was last set to reading pipe 0.
+will re-write the address that was last set to RX pipe 0.
 This is because <a class="reference internal" href="#pyrf24.rf24.RF24.open_tx_pipe" title="pyrf24.rf24.RF24.open_tx_pipe (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open_tx_pipe()</span></code></a>
-will overwrite the address to reading pipe 0 for proper auto-ack
+will overwrite the address to RX pipe 0 for proper auto-ack
 functionality.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When the ACK payloads feature is enabled, the TX FIFO buffers are
-flushed when changing this attribute to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a>. This is meant to discard any ACK
-payloads that were not appended to acknowledgment packets during TX mode.</p>
+flushed when changing this attribute to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> (RX mode). This is meant to
+discard any ACK payloads that were not appended to acknowledgment packets
+during TX mode.</p>
 </div>
 </dd></dl>
 
@@ -2192,7 +2216,7 @@ the nRF24L01 (or the Si24R1 clone).</p>
 <dd><p>This attribute represents the radio’s OTA data rate.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The units “BPS” stand for “Bits Per Second” (not Bytes per secend).</p>
+<p>The units “BPS” stand for “Bits Per Second” (not Bytes per second).</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -2326,7 +2350,7 @@ as recommended by the datasheet.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.0.1.
+    5.0.2.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   

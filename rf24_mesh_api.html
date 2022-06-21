@@ -995,7 +995,7 @@ to the <code class="docutils literal notranslate"><span class="pre">timeout</spa
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the radio’s hardware was properly intialized and the node
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the radio’s hardware was properly initalized and the node
 successfully connected to the mesh network.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -1248,12 +1248,19 @@ to respond to other mesh network nodes attempting to connect to the network.</p>
 Each element is a <a class="reference internal" href="#pyrf24.rf24_mesh.AddrListStruct" title="pyrf24.rf24_mesh.AddrListStruct (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">AddrListStruct</span></code></a> object. This attribute should only be used on the master node.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Altering any values for elements contained in this list does not change anything.
+<p>Altering any values for elements contained in this list is prohibited.
 Use <a class="reference internal" href="#pyrf24.rf24_mesh.RF24Mesh.set_address" title="pyrf24.rf24_mesh.RF24Mesh.set_address (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">set_address()</span></code></a> instead.</p>
 </div>
 </dd></dl>
 
 <h2 id="addrliststruct-class">AddrListStruct class<a class="headerlink" href="#addrliststruct-class" title="Permalink to this heading">¶</a></h2>
+<p>The properties of this class are read-only because they can only be set by the master node upon
+successful connection to a child node.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <a class="reference internal" href="#pyrf24.rf24_mesh.AddrListStruct" title="pyrf24.rf24_mesh.AddrListStruct (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">AddrListStruct</span></code></a> class supports the python “magic method” <a class="reference external" href="https://docs.python.org/3/library/functions.html#repr" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>. So, you can
+easily pass an instantiated <a class="reference internal" href="#pyrf24.rf24_mesh.AddrListStruct" title="pyrf24.rf24_mesh.AddrListStruct (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">AddrListStruct</span></code></a> object to the <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function.</p>
+</div>
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_mesh.AddrListStruct">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyrf24.rf24_mesh.</span></span><span class="sig-name descname"><span class="pre">AddrListStruct</span></span><a class="headerlink" href="#pyrf24.rf24_mesh.AddrListStruct" title="Permalink to this definition">¶</a></dt>
@@ -1374,7 +1381,7 @@ network. It is used to unassign the Logical Address allocated the mesh node’s
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.0.1.
+    5.0.2.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   

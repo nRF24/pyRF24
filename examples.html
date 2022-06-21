@@ -2659,7 +2659,8 @@ examples/network_helloworld_tx.py<a class="headerlink" href="#id8" title="Permal
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
-<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest possible example of using RF24Network.</span>
 
@@ -2706,9 +2707,10 @@ examples/network_helloworld_tx.py<a class="headerlink" href="#id8" title="Permal
             <span class="n">PACKETS_SENT</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">payload</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;LL&quot;</span><span class="p">,</span> <span class="n">now</span><span class="p">,</span> <span class="n">PACKETS_SENT</span><span class="p">)</span>
             <span class="n">ok</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">RF24NetworkHeader</span><span class="p">(</span><span class="n">OTHER_NODE</span><span class="p">),</span> <span class="n">payload</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sending...&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;ok&quot;</span> <span class="k">if</span> <span class="n">ok</span> <span class="k">else</span> <span class="s2">&quot;failed&quot;</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending </span><span class="si">{</span><span class="n">PACKETS_SENT</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;ok&quot;</span> <span class="k">if</span> <span class="n">ok</span> <span class="k">else</span> <span class="s2">&quot;failed&quot;</span><span class="p">))</span>
 <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># power radio down before exiting</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;powering down radio and exiting.&quot;</span><span class="p">)</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2755,7 +2757,8 @@ examples/network_helloworld_rx.py<a class="headerlink" href="#id9" title="Permal
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest possible example of using RF24Network</span>
 
@@ -2790,11 +2793,12 @@ examples/network_helloworld_rx.py<a class="headerlink" href="#id9" title="Permal
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;payload length &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
             <span class="n">millis</span><span class="p">,</span> <span class="n">packet_count</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&lt;LL&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[:</span><span class="n">EXPECTED_SIZE</span><span class="p">])</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Received payload </span><span class="si">{</span><span class="n">packet_count</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="n">millis</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Received payload </span><span class="si">{</span><span class="n">packet_count</span><span class="si">}</span><span class="s2"> at (origin&#39;s timestamp) </span><span class="si">{</span><span class="n">millis</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
                 <span class="sa">f</span><span class="s2">&quot;Header details </span><span class="si">{</span><span class="n">header</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">)</span>
 <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># power radio down before exiting</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;powering down radio and exiting.&quot;</span><span class="p">)</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2854,12 +2858,23 @@ examples/mesh_example.py<a class="headerlink" href="#id10" title="Permalink to t
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span>
+<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">MESH_DEFAULT_ADDRESS</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -2877,9 +2892,16 @@ examples/mesh_example.py<a class="headerlink" href="#id10" title="Permalink to t
 <span class="n">mesh</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;starting nodeID&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">mesh</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
-    <span class="c1"># if mesh.begin() returns false for a master node,</span>
-    <span class="c1"># then radio.begin() returned false.</span>
-    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;Radio hardware not responding.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">is_chip_connected</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not connect to network.</span><span class="se">\n</span><span class="s2">Connecting to mesh...&quot;</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">mesh</span><span class="o">.</span><span class="n">renew_address</span><span class="p">()</span> <span class="o">==</span> <span class="n">MESH_DEFAULT_ADDRESS</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not connect to network.</span><span class="se">\n</span><span class="s2">Connecting to mesh...&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;Radio hardware not responding or could not connect to mesh.&quot;</span><span class="p">)</span>
 <span class="n">radio</span><span class="o">.</span><span class="n">print_pretty_details</span><span class="p">()</span>
 
 <span class="n">TIMER</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2895,17 +2917,19 @@ examples/mesh_example.py<a class="headerlink" href="#id10" title="Permalink to t
             <span class="k">if</span> <span class="ow">not</span> <span class="n">mesh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="n">TIMER</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">)):</span>
                 <span class="c1"># If a write fails, check connectivity to the mesh network</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">mesh</span><span class="o">.</span><span class="n">check_connection</span><span class="p">():</span>
-                    <span class="c1"># The address could be refreshed per a specified timeframe</span>
+                    <span class="c1"># The address could be refreshed per a specified time frame</span>
                     <span class="c1"># or only when sequential writes fail, etc.</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Renewing Address&quot;</span><span class="p">)</span>
-                    <span class="n">mesh</span><span class="o">.</span><span class="n">renew_address</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Send fail. Renewing Address...&quot;</span><span class="p">)</span>
+                    <span class="k">while</span> <span class="n">mesh</span><span class="o">.</span><span class="n">renew_address</span><span class="p">()</span> <span class="o">==</span> <span class="n">MESH_DEFAULT_ADDRESS</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Renewing Address...&quot;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Send fail, Test OK&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Send OK:&quot;</span><span class="p">,</span> <span class="n">TIMER</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># delay 1 ms</span>
 <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># power radio down before exiting</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;powering down radio and exiting.&quot;</span><span class="p">)</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2937,7 +2961,10 @@ examples/mesh_example_master.py<a class="headerlink" href="#id11" title="Permali
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example of using the rf24_mesh module to operate the nRF24L01 transceiver as</span>
 <span class="sd">a Mesh network master node.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -2949,7 +2976,9 @@ examples/mesh_example_master.py<a class="headerlink" href="#id11" title="Permali
 <span class="n">mesh</span> <span class="o">=</span> <span class="n">RF24Mesh</span><span class="p">(</span><span class="n">radio</span><span class="p">,</span> <span class="n">network</span><span class="p">)</span>
 <span class="n">mesh</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">mesh</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
-    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;failed to initialize radio or could not connect to mesh&quot;</span><span class="p">)</span>
+    <span class="c1"># if mesh.begin() returns false for a master node,</span>
+    <span class="c1"># then radio.begin() returned false.</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;Radio hardware not responding.&quot;</span><span class="p">)</span>
 <span class="n">radio</span><span class="o">.</span><span class="n">print_pretty_details</span><span class="p">()</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -2961,7 +2990,8 @@ examples/mesh_example_master.py<a class="headerlink" href="#id11" title="Permali
             <span class="n">header</span><span class="p">,</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received message </span><span class="si">{</span><span class="n">header</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># power radio down before exiting</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;powering down radio and exiting.&quot;</span><span class="p">)</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -3338,7 +3368,7 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.0.1.
+    5.0.2.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   

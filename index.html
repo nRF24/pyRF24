@@ -382,46 +382,6 @@
     <span class="md-ellipsis">Documentation</span>
   </a>
   
-    <nav class="md-nav" aria-label="Documentation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#documentation-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">Documentation Dependencies</span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Documentation Dependencies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-graphviz" class="md-nav__link">
-    <span class="md-ellipsis">Install Graphviz</span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-sphinx-necessities" class="md-nav__link">
-    <span class="md-ellipsis">Installing Sphinx necessities</span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#building-the-documentation" class="md-nav__link">
-    <span class="md-ellipsis">Building the Documentation</span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -652,46 +612,6 @@
     <span class="md-ellipsis">Documentation</span>
   </a>
   
-    <nav class="md-nav" aria-label="Documentation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#documentation-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">Documentation Dependencies</span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Documentation Dependencies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-graphviz" class="md-nav__link">
-    <span class="md-ellipsis">Install Graphviz</span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-sphinx-necessities" class="md-nav__link">
-    <span class="md-ellipsis">Installing Sphinx necessities</span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#building-the-documentation" class="md-nav__link">
-    <span class="md-ellipsis">Building the Documentation</span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -879,20 +799,17 @@ package on non-Linux devices to get the stub files which help auto-completion an
 in various development environments.</p>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
 <p>Before submitting contributions, you should make sure that any documentation changes builds
-successfully. This can be done locally.</p>
-<h3 id="documentation-dependencies">Documentation Dependencies<a class="headerlink" href="#documentation-dependencies" title="Permalink to this heading">¶</a></h3>
+successfully. This can be done locally but <strong>on Linux only</strong>. The documentation of API requires
+this package (&amp; all its latest changes) be installed.</p>
 <p>This package’s documentation is built with the python package Sphinx and the sphinx-immaterial theme.
 It also uses the dot tool provided by the graphviz software to generate graphs.</p>
-<h4 id="install-graphviz">Install Graphviz<a class="headerlink" href="#install-graphviz" title="Permalink to this heading">¶</a></h4>
-<p>On Windows, installing Graphviz library is done differently. Check out the
-<a class="reference external" href="https://graphviz.org/download/">Graphviz downloads page</a>. Be sure that the <code class="docutils literal notranslate"><span class="pre">graphviz/bin</span></code>
-directory is in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable (there’s an option in the installer for this).
-After Graphviz is installed, reboot the PC so the updated <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable takes affect.</p>
-<p>On Linux, just run:</p>
+<ol class="arabic">
+<li><p>Install Graphviz</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>sudo apt-get install graphviz
 </code></pre></div>
 </div>
-<h4 id="installing-sphinx-necessities">Installing Sphinx necessities<a class="headerlink" href="#installing-sphinx-necessities" title="Permalink to this heading">¶</a></h4>
+</li>
+<li><p>Installing Sphinx necessities</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you installed sphinx using <code class="docutils literal notranslate"><span class="pre">apt</span></code>, then it is likely out-of-date and will override any virtual
@@ -916,7 +833,8 @@ sphinx from <code class="docutils literal notranslate"><span class="pre">apt</sp
 may not be the most recent version of Sphinx.</p>
 </div>
 </div>
-<h3 id="building-the-documentation">Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this heading">¶</a></h3>
+</li>
+<li><p>Building the Documentation</p>
 <p>To build the documentation locally, the pyrf24 package needs to be installed first. Then run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> docs
 sphinx-build -E -W . _build
@@ -930,321 +848,15 @@ rendered correctly.</p>
 <p>The flags <code class="docutils literal notranslate"><span class="pre">-E</span></code> and <code class="docutils literal notranslate"><span class="pre">-W</span></code> will ensure the docs fail to build on any error or warning
 (just like it does when deploying the docs online).</p>
 </div>
+</li>
+</ol>
 <div class="toctree-wrapper compound">
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#rf24-examples">RF24 examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#getting-started">getting_started</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#acknowledgement-payloads">acknowledgement_payloads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#manual-acknowledgements">manual_acknowledgements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#multiceiver-demo">multiceiver_demo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#streaming-data">streaming_data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#interrupt-configure">interrupt_configure</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#fake-ble-example">Fake BLE example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#networking-examples">Networking examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#rf24network-examples">RF24Network examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#rf24mesh-examples">RF24Mesh examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#generic-network-example">Generic Network example</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="rf24_api.html">RF24 API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rf24_api.html#enum-classes">Enum classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.rf24_crclength_e">pyrf24.rf24.rf24_crclength_e</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.rf24_datarate_e">pyrf24.rf24.rf24_datarate_e</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.rf24_pa_dbm_e">pyrf24.rf24.rf24_pa_dbm_e</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rf24_api.html#rf24-class">RF24 class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_api.html#basic-rf24-api">Basic RF24 API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24">pyrf24.rf24.RF24</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.__init__">__init__</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.available">available</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.begin">begin</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.listen">listen</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.open_rx_pipe">open_rx_pipe</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.open_tx_pipe">open_tx_pipe</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.read">read</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.write">write</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_api.html#advanced-rf24-api">Advanced RF24 API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.failure_detected">RF24.failure_detected</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.print_details">RF24.print_details</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.print_pretty_details">RF24.print_pretty_details</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.sprintf_pretty_details">RF24.sprintf_pretty_details</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.available_pipe">RF24.available_pipe</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.is_fifo">RF24.is_fifo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.power">RF24.power</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.write_fast">RF24.write_fast</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.write_blocking">RF24.write_blocking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.tx_standby">RF24.tx_standby</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.write_ack_payload">RF24.write_ack_payload</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.what_happened">RF24.what_happened</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.start_fast_write">RF24.start_fast_write</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.start_write">RF24.start_write</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.reuse_tx">RF24.reuse_tx</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.flush_rx">RF24.flush_rx</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.flush_tx">RF24.flush_tx</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.rpd">RF24.rpd</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.close_rx_pipe">RF24.close_rx_pipe</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.is_plus_variant">RF24.is_plus_variant</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.is_valid">RF24.is_valid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.is_chip_connected">RF24.is_chip_connected</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_api.html#configurable-rf24-api">Configurable RF24 API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.address_width">RF24.address_width</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.set_retries">RF24.set_retries</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.get_arc">RF24.get_arc</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.channel">RF24.channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.payload_size">RF24.payload_size</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.get_dynamic_payload_size">RF24.get_dynamic_payload_size</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.dynamic_payloads">RF24.dynamic_payloads</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.ack_payloads">RF24.ack_payloads</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.enable_dynamic_ack">RF24.enable_dynamic_ack</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.set_auto_ack">RF24.set_auto_ack</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.RF24.toggle_all_pipes">RF24.toggle_all_pipes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.RF24.set_radiation">RF24.set_radiation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.set_pa_level">RF24.set_pa_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.pa_level">RF24.pa_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.data_rate">RF24.data_rate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.crc_length">RF24.crc_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.mask_irq">RF24.mask_irq</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.start_const_carrier">RF24.start_const_carrier</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.stop_const_carrier">RF24.stop_const_carrier</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ble_api.html">BLE API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ble_api.html#module-pyrf24.fake_ble">BLE Limitations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ble_api.html#fake-ble-module-helpers"><code class="docutils literal notranslate"><span class="pre">fake_ble</span></code> module helpers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.address_repr">pyrf24.fake_ble.address_repr</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.swap_bits">pyrf24.fake_ble.swap_bits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.reverse_bits">pyrf24.fake_ble.reverse_bits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.crc24_ble">pyrf24.fake_ble.crc24_ble</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.chunk">pyrf24.fake_ble.chunk</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.whitener">pyrf24.fake_ble.whitener</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.BLE_FREQ">pyrf24.fake_ble.BLE_FREQ</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ble_api.html#queueelement-class">QueueElement class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.QueueElement">pyrf24.fake_ble.QueueElement</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.QueueElement.data">data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.QueueElement.mac">mac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.QueueElement.name">name</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.QueueElement.pa_level">pa_level</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ble_api.html#fakeble-class">FakeBLE class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE">pyrf24.fake_ble.FakeBLE</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.advertise">advertise</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.available">available</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.begin">begin</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.hop_channel">hop_channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.len_available">len_available</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.mac">mac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.name">name</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.read">read</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.rx_cache">rx_cache</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.rx_queue">rx_queue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.show_pa_level">show_pa_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.FakeBLE.whiten">whiten</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#restricted-rf24-functionality">Restricted RF24 functionality</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ble_api.html#service-related-classes">Service related classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#abstract-parent">Abstract Parent</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.ServiceData">pyrf24.fake_ble.ServiceData</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.ServiceData.__len__">__len__</a></li>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.ServiceData.__repr__">__repr__</a></li>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.ServiceData.buffer">buffer</a></li>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.ServiceData.data">data</a></li>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.ServiceData.uuid">uuid</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#service-data-uuid-numbers">Service data UUID numbers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.TEMPERATURE_UUID">pyrf24.fake_ble.TEMPERATURE_UUID</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.BATTERY_UUID">pyrf24.fake_ble.BATTERY_UUID</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.EDDYSTONE_UUID">pyrf24.fake_ble.EDDYSTONE_UUID</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ble_api.html#derivative-children">Derivative Children</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.TemperatureServiceData">pyrf24.fake_ble.TemperatureServiceData</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.TemperatureServiceData.data">data</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.BatteryServiceData">pyrf24.fake_ble.BatteryServiceData</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.BatteryServiceData.data">data</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.UrlServiceData">pyrf24.fake_ble.UrlServiceData</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.UrlServiceData.data">data</a></li>
-<li class="toctree-l5"><a class="reference internal" href="ble_api.html#pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter">pa_level_at_1_meter</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rf24_network_api.html">RF24Network API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rf24_network_api.html#rf24network-class">RF24Network class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#basic-rf24network-api">Basic RF24Network API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network">pyrf24.rf24_network.RF24Network</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.__init__">__init__</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.available">available</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.begin">begin</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.node_address">node_address</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.peek">peek</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.read">read</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.update">update</a></li>
-<li class="toctree-l5"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.write">write</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#advanced-rf24network-api">Advanced RF24Network API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.multicast">RF24Network.multicast</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.is_address_valid">RF24Network.is_address_valid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.multicast_relay">RF24Network.multicast_relay</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.tx_timeout">RF24Network.tx_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.route_timeout">RF24Network.route_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.multicast_level">RF24Network.multicast_level</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#external-systems-or-applications">External Systems or Applications</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.return_sys_msgs">RF24Network.return_sys_msgs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.network_flags">RF24Network.network_flags</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rf24_network_api.html#rf24networkheader-class">RF24NetworkHeader class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader">pyrf24.rf24_network.RF24NetworkHeader</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.__init__">__init__</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.from_node">from_node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.id">id</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.reserved">reserved</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.toString">toString</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.to_node">to_node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.to_string">to_string</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24NetworkHeader.type">type</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rf24_network_api.html#constants">Constants</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.MAX_USER_DEFINED_HEADER_TYPE">rf24_network.MAX_USER_DEFINED_HEADER_TYPE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.MAX_PAYLOAD_SIZE">rf24_network.MAX_PAYLOAD_SIZE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#reserved-system-message-types">Reserved System Message Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_ADDR_RESPONSE">rf24_network.NETWORK_ADDR_RESPONSE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_PING">rf24_network.NETWORK_PING</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.EXTERNAL_DATA_TYPE">rf24_network.EXTERNAL_DATA_TYPE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_FIRST_FRAGMENT">rf24_network.NETWORK_FIRST_FRAGMENT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_MORE_FRAGMENTS">rf24_network.NETWORK_MORE_FRAGMENTS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_LAST_FRAGMENT">rf24_network.NETWORK_LAST_FRAGMENT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_ACK">rf24_network.NETWORK_ACK</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_POLL">rf24_network.NETWORK_POLL</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_REQ_ADDRESS">rf24_network.NETWORK_REQ_ADDRESS</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_network_api.html#network-flag-mnemonics">Network flag mnemonics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.FLAG_FAST_FRAG">rf24_network.FLAG_FAST_FRAG</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.FLAG_NO_POLL">rf24_network.FLAG_NO_POLL</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rf24_mesh_api.html">RF24Mesh API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rf24_mesh_api.html#basic-rf24mesh-api">Basic RF24Mesh API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh">pyrf24.rf24_mesh.RF24Mesh</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.__init__">__init__</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.begin">begin</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id">node_id</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.renew_address">renew_address</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.update">update</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.write">write</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rf24_mesh_api.html#advanced-rf24mesh-api">Advanced RF24Mesh API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.check_connection">RF24Mesh.check_connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.mesh_address">RF24Mesh.mesh_address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.release_address">RF24Mesh.release_address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.get_node_id">RF24Mesh.get_node_id</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.get_address">RF24Mesh.get_address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.set_address">RF24Mesh.set_address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.set_channel">RF24Mesh.set_channel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.set_child">RF24Mesh.set_child</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.addr_list">RF24Mesh.addr_list</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rf24_mesh_api.html#addrliststruct-class">AddrListStruct class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.AddrListStruct">pyrf24.rf24_mesh.AddrListStruct</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.AddrListStruct.address">address</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.AddrListStruct.node_id">node_id</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rf24_mesh_api.html#mesh-constants">Mesh Constants</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.MESH_DEFAULT_ADDRESS">rf24_mesh.MESH_DEFAULT_ADDRESS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf24_mesh_api.html#reserved-system-message-types">Reserved System Message Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.MESH_ADDR_LOOKUP">rf24_mesh.MESH_ADDR_LOOKUP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.MESH_ID_LOOKUP">rf24_mesh.MESH_ID_LOOKUP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.MESH_ADDR_RELEASE">rf24_mesh.MESH_ADDR_RELEASE</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topology.html">Network Topology</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="topology.html#network-levels">Network Levels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="topology.html#physical-addresses-vs-logical-addresses">Physical addresses vs Logical addresses</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topology.html#translating-logical-to-physical">Translating Logical to Physical</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topology.html#rf24mesh-connecting-process">RF24Mesh connecting process</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topology.html#points-of-failure">Points of failure</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 </div>
 <h1 id="indices-and-tables">Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
@@ -1303,7 +915,7 @@ rendered correctly.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.0.1.
+    5.0.2.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   

@@ -26,6 +26,13 @@ Advanced RF24Mesh API
 AddrListStruct class
 --------------------
 
+The properties of this class are read-only because they can only be set by the master node upon
+successful connection to a child node.
+
+.. hint::
+    The `AddrListStruct` class supports the python "magic method" :py:func:`repr()`. So, you can
+    easily pass an instantiated `AddrListStruct` object to the :py:func:`print()` function.
+
 .. autoclass:: pyrf24.rf24_mesh.AddrListStruct
     :members:
 
