@@ -52,7 +52,7 @@ kwargs = {
 
 if IS_LINUX:
     kwargs["cmake_install_dir"] = "src/pyrf24"
-    kwargs["cmake_args"] = ["-DRF24_DRIVER=SPIDEV", "-DRF24_NO_INTERRUPT=0"]
+    kwargs["cmake_args"] = ["-DRF24_DRIVER=SPIDEV"]
     kwargs["cmake_process_manifest_hook"] = exclude_rf24_utility_folder
 
 setup(**kwargs)
