@@ -21,15 +21,10 @@ option(DISABLE_DYNAMIC_PAYLOADS "force usage of static payload size for RF24Netw
 option(MESH_NOMASTER "exclude compiling code that is strictly for master nodes for RF24Mesh lib" OFF)
 option(MESH_DEBUG "enable/disable debugging output for RF24Mesh lib" OFF)
 option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh lib" OFF)
-option(RF24_NO_INTERRUPT "disable use of pigpio for IRQ features" ON)
 
 ###############################################
 # function to apply flags to applicable targets
 function(apply_flags target)
-    # This should be always done because
-    # IRQ support can be handled in python with different libs.
-    target_compile_definitions(${target} PUBLIC RF24_NO_INTERRUPT)
-
     # apply RF24 flags to all targets
     if(RF24_DEBUG)
         message(STATUS "RF24_DEBUG asserted for ${target}")
