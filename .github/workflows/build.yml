@@ -27,7 +27,7 @@ jobs:
         env:
           # configure cibuildwheel to build native archs ('auto'), and some
           # emulated ones
-          CIBW_ARCHS_LINUX: aarch64 arm
+          CIBW_ARCHS_LINUX: aarch64 armv6
           # armhf is 32 bit and not supported by qemu
           # not sure if these are applicable to Linux-enabled SoCs:
           # ppc64le s390x
