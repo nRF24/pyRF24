@@ -7,13 +7,10 @@ if(SKBUILD)
   message(STATUS "This project is being built using scikit-build & pybind11")
 endif()
 
-# Disabling IRQ support should be always done because
-# IRQ support can be handled in python with different libs.
-set(RF24_NO_INTERRUPT ON)  # does not affect pigpio driver though
+include(cmake/using_flags.cmake)
 
 add_subdirectory(pybind11)
 add_subdirectory(RF24/utility) # configure the RF24_DRIVER
-include(cmake/using_flags.cmake)
 
 ################################# RF24 #############################
 
