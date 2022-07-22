@@ -81,7 +81,7 @@ it is appropriate to pass an additional argument to the install command:
 
 .. code-block:: bash
 
-    python setup.py install -DRF24_DRIVER=RPi
+    python setup.py bdist_wheel -DRF24_DRIVER=RPi
 
 Building a wheel
 -----------------
@@ -110,7 +110,7 @@ same version of CPython, CPU architecture, and C standard lib.
 
        .. code-block:: bash
 
-           rm -r _skbuild/
+           rm -r _skbuild/ dist/
 
 3. To install a built wheel, simply pass the wheel's path and file name to ``pip install``:
 
@@ -120,7 +120,12 @@ same version of CPython, CPU architecture, and C standard lib.
 
    Where the following would be replaced accordingly:
 
-   - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package
+   - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package.
+     
+     - If not building a tagged commit, then the ``PATCH`` portion will describe the commit's
+       SHA and number of commits since the latest tag. For example, ``0.1.dev138+gff659b5`` is
+       the commit who's SHA starts with ``gff659b5`` and is ``138`` commits ahead of the tagged
+       version ``0.1``.
    - ``cp3X`` is the version of python used to build the wheel (ie ``cp39`` for CPython 3.9)
      The second occurrence of ``cp3X`` describes the CPython ABI compatibility.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.
