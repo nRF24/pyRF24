@@ -9,13 +9,32 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: 3.7
 
       - name: Checkout Current Repo
         uses: actions/checkout@v2
         with:
           submodules: true
           fetch-depth: 0
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: all
+
+      - name: Build wheels with cibuildwheels
+        uses: pypa/cibuildwheel@v2.8.1
+        env:
+          # configure cibuildwheel to build native archs ('auto'), and some
+          # emulated ones
+          CIBW_ARCHS_LINUX: auto armhf aarch64
+          # not sure if these are applicable to Linux-enabled SoCs:
+          # ppc64le s390x
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: "pyrf24_wheels"
+          path: ./wheelhouse/*.whl
 
       - name: Install dependencies
         run: |
@@ -39,7 +58,7 @@ jobs:
         run: sphinx-build -E -W -b html . _build/html
 
       - name: Save built docs as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "pyRF24_docs"
           path: ${{ github.workspace }}/docs/_build/html
