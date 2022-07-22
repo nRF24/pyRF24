@@ -41,7 +41,7 @@ kwargs = {
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Operating System :: POSIX :: Linux",
     ],
-    "python_requires": ">=3.7",
+    "python_requires": ">=3.6",
     "keywords": "nrf24l01 nRF24L01+ raspberry pi driver radio transceiver",
     # Extra links for the sidebar on pypi
     "project_urls": {
