@@ -20,14 +20,14 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
-          platforms: arm,aarch64
+          platforms: aarch64
 
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.8.1
         env:
           # configure cibuildwheel to build native archs ('auto'), and some
           # emulated ones
-          CIBW_ARCHS_LINUX: aarch64 armv6
+          CIBW_ARCHS_LINUX: aarch64
           # armhf is 32 bit and not supported by qemu
           # not sure if these are applicable to Linux-enabled SoCs:
           # ppc64le s390x
