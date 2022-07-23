@@ -45,7 +45,7 @@ jobs:
 
       - name: build binary distributable wheel
         # sdist for non-supprted platforms will serve as a stub lib install
-        run: python setup.py sdist bdist_wheel
+        run: python setup.py sdist
 
       - name: Save distributable wheels as artifacts
         uses: actions/upload-artifact@v2
