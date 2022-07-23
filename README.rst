@@ -66,7 +66,7 @@ To build this python package locally, you need to have cloned this library's rep
     python -m pip install . -v
 
 .. note::
-    THe ``-v`` is optional. Here, we use it to show that pip isn't frozen during the
+    The ``-v`` is optional. Here, we use it to show that pip isn't frozen during the
     build process.
 
     Installing the package can take a long time, and you might think that pip is frozen
