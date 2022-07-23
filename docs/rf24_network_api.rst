@@ -8,22 +8,29 @@ RF24Network API
 RF24Network class
 -----------------
 
-Basic RF24Network API
-*********************
 
 .. autoclass:: pyrf24.rf24_network.RF24Network
-    :members: begin, update, available, peek, read, write, node_address
-    :special-members: __init__
+    
+    Basic RF24Network API
+    *********************
 
-Advanced RF24Network API
-************************
+    .. automethod:: begin
+    .. automethod:: update
+    .. automethod:: available
+    .. automethod:: peek
+    .. automethod:: read
+    .. automethod:: write
+    .. autoattribute:: node_address
 
-.. automethod:: pyrf24.rf24_network.RF24Network.multicast
-.. automethod:: pyrf24.rf24_network.RF24Network.is_address_valid
-.. autoattribute:: pyrf24.rf24_network.RF24Network.multicast_relay
-.. autoattribute:: pyrf24.rf24_network.RF24Network.tx_timeout
-.. autoattribute:: pyrf24.rf24_network.RF24Network.route_timeout
-.. autoattribute:: pyrf24.rf24_network.RF24Network.multicast_level
+    Advanced RF24Network API
+    ************************
+
+    .. automethod:: multicast
+    .. automethod:: is_address_valid
+    .. autoattribute:: multicast_relay
+    .. autoattribute:: tx_timeout
+    .. autoattribute:: route_timeout
+    .. autoattribute:: multicast_level
 
 External Systems or Applications
 ********************************
@@ -39,8 +46,13 @@ RF24NetworkHeader class
     easily pass an instantiated `RF24NetworkHeader` object to the :py:func:`print()` function.
 
 .. autoclass:: pyrf24.rf24_network.RF24NetworkHeader
-    :members: to_node, type, from_node, id, reserved, to_string
-    :special-members: __init__
+    
+    .. autoattribute:: to_node
+    .. autoattribute:: type
+    .. autoattribute:: from_node
+    .. autoattribute:: id
+    .. autoattribute:: reserved
+    .. autoattribute:: to_string
 
     .. property:: next_id
         :classmethod:

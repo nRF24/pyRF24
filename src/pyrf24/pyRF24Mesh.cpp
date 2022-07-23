@@ -155,17 +155,17 @@ PYBIND11_MODULE(rf24_mesh, m)
             mesh networks' :attr:`~pyrf24.rf24_mesh.RF24Mesh.addr_list` list.
 
             .. code-block:: py
-                
+
                 # Set a static address for node 0o2, with nodeID 23, since it will just be
                 # a static routing node for example running on an ATTiny chip.
                 mesh.setAddress(23, 0o2);
-            
+
             .. code-block:: py
-                
+
                 # Change or set the nodeID for an existing address
                 address = 0o12;
                 mesh.setAddress(3, address, True);
-            
+
             :param int node_id: The unique identifying number for the connected node.
             :param int address: The `Logical Address <logical_address>` for the connected node.
             :param bool search_by_address: Set this parameter to `True` traverse the list of
@@ -237,7 +237,7 @@ PYBIND11_MODULE(rf24_mesh, m)
             The read-only attribute returns a `list` of addresses assigned to nodes' ID numbers.
             Each element is a `AddrListStruct` object. This attribute should only be used on the master node.
 
-            .. important:: 
+            .. important::
                 Altering any values for elements contained in this list is prohibited.
                 Use `set_address()` instead.
         )docstr")
@@ -264,7 +264,7 @@ PYBIND11_MODULE(rf24_mesh, m)
 
         .def("setNodeID", &RF24MeshWrapper::setNodeID, R"docstr(
             setNodeID(nodeID: int)
-            
+
             Configure the `node_id` attribute.
         )docstr",
              py::arg("nodeID"))

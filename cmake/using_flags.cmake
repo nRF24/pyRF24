@@ -22,11 +22,18 @@ option(MESH_NOMASTER "exclude compiling code that is strictly for master nodes f
 option(MESH_DEBUG "enable/disable debugging output for RF24Mesh lib" OFF)
 option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh lib" OFF)
 
+# Disabling IRQ support should be always done because
+# IRQ support can be handled in python with different libs.
+option(RF24_NO_INTERRUPT "disable IRQ support (dependent on pigpio)" ON)
+# does not affect pigpio driver though
 
 ###############################################
 # function to apply flags to applicable targets
 function(apply_flags target)
     # apply RF24 flags to all targets
+    if(RF24_NO_INTERRUPT)
+        target_compile_definitions(${target} PUBLIC RF24_NO_INTERRUPT)
+    endif()
     if(RF24_DEBUG)
         message(STATUS "RF24_DEBUG asserted for ${target}")
         target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)

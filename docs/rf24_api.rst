@@ -15,81 +15,114 @@ Enum classes
 
 RF24 class
 ----------
-Basic RF24 API
-**************
 
 .. autoclass:: pyrf24.rf24.RF24
-    :members: begin, listen, available, read, write, open_tx_pipe, open_rx_pipe
-    :special-members: __init__
 
-Advanced RF24 API
-*****************
+    Basic RF24 API
+    **************
+    
+    .. automethod:: __init__
 
-.. autoattribute:: pyrf24.rf24.RF24.failure_detected
-.. automethod:: pyrf24.rf24.RF24.print_details
-.. automethod:: pyrf24.rf24.RF24.print_pretty_details
-.. automethod:: pyrf24.rf24.RF24.sprintf_pretty_details
-.. automethod:: pyrf24.rf24.RF24.available_pipe
-.. automethod:: pyrf24.rf24.RF24.is_fifo
-.. .. autoattribute:: pyrf24.rf24.RF24.rx_fifo_full
-.. .. automethod:: pyrf24.rf24.RF24.power_up
-.. .. automethod:: pyrf24.rf24.RF24.power_down
-.. autoattribute:: pyrf24.rf24.RF24.power
-.. automethod:: pyrf24.rf24.RF24.write_fast
-.. automethod:: pyrf24.rf24.RF24.write_blocking
-.. automethod:: pyrf24.rf24.RF24.tx_standby
-.. automethod:: pyrf24.rf24.RF24.write_ack_payload
-.. automethod:: pyrf24.rf24.RF24.what_happened
-.. automethod:: pyrf24.rf24.RF24.start_fast_write
-.. automethod:: pyrf24.rf24.RF24.start_write
-.. automethod:: pyrf24.rf24.RF24.reuse_tx
-.. automethod:: pyrf24.rf24.RF24.flush_rx
-.. automethod:: pyrf24.rf24.RF24.flush_tx
-.. .. automethod:: pyrf24.rf24.RF24.test_rpd
-.. autoattribute:: pyrf24.rf24.RF24.rpd
-.. automethod:: pyrf24.rf24.RF24.close_rx_pipe
-.. autoattribute:: pyrf24.rf24.RF24.is_plus_variant
-.. autoattribute:: pyrf24.rf24.RF24.is_valid
-.. autoattribute:: pyrf24.rf24.RF24.is_chip_connected
+    .. automethod:: begin
+    .. autoattribute:: listen
+    .. automethod:: available
+    .. automethod:: read
+    .. automethod:: write
+    .. automethod:: open_tx_pipe
+    .. automethod:: open_rx_pipe
 
-Configurable RF24 API
-*********************
+    Advanced RF24 API
+    *****************
 
-.. .. automethod:: pyrf24.rf24.RF24.set_address_width
-.. autoattribute:: pyrf24.rf24.RF24.address_width
+    .. automethod:: toggle_all_pipes
+    .. autoattribute:: is_valid
+    .. autoattribute:: is_chip_connected
+    .. autoattribute:: is_plus_variant
+    .. automethod:: what_happened
 
-.. automethod:: pyrf24.rf24.RF24.set_retries
-.. automethod:: pyrf24.rf24.RF24.get_arc
+    Debugging Helpers
+    ~~~~~~~~~~~~~~~~~
 
-.. autoattribute:: pyrf24.rf24.RF24.channel
+    .. autoattribute:: failure_detected
+    .. automethod:: print_details
+    .. automethod:: print_pretty_details
+    .. automethod:: sprintf_pretty_details
+    .. automethod:: get_arc
+    
+    Advanced Transmission
+    ~~~~~~~~~~~~~~~~~~~~~
 
-.. autoattribute:: pyrf24.rf24.RF24.payload_size
-.. automethod:: pyrf24.rf24.RF24.get_dynamic_payload_size
-.. .. automethod:: pyrf24.rf24.RF24.enable_ack_payload
-.. .. automethod:: pyrf24.rf24.RF24.disable_ack_payload
-.. .. automethod:: pyrf24.rf24.RF24.enable_dynamic_payloads
-.. .. automethod:: pyrf24.rf24.RF24.disable_dynamic_payloads
-.. autoattribute:: pyrf24.rf24.RF24.dynamic_payloads
-.. autoattribute:: pyrf24.rf24.RF24.ack_payloads
+    .. automethod:: write_ack_payload
+    .. automethod:: write_fast
+    .. automethod:: reuse_tx
+    .. automethod:: write_blocking
+    .. automethod:: start_fast_write
+    .. automethod:: start_write
+    .. automethod:: tx_standby
 
-.. automethod:: pyrf24.rf24.RF24.enable_dynamic_ack
-.. automethod:: pyrf24.rf24.RF24.set_auto_ack
+    Power Management
+    ~~~~~~~~~~~~~~~~
 
-.. automethod:: pyrf24.RF24.toggle_all_pipes
+    .. autoattribute:: power
 
-.. automethod:: pyrf24.RF24.set_radiation
-.. automethod:: pyrf24.rf24.RF24.set_pa_level
-.. .. automethod:: pyrf24.rf24.RF24.get_pa_level
-.. autoattribute:: pyrf24.rf24.RF24.pa_level
-.. .. automethod:: pyrf24.rf24.RF24.set_data_rate
-.. .. automethod:: pyrf24.rf24.RF24.get_data_rate
-.. autoattribute:: pyrf24.rf24.RF24.data_rate
+    FIFO Management
+    ~~~~~~~~~~~~~~~
 
-.. .. automethod:: pyrf24.rf24.RF24.set_crc_length
-.. .. automethod:: pyrf24.rf24.RF24.get_crc_length
-.. autoattribute:: pyrf24.rf24.RF24.crc_length
+    .. autoattribute:: rx_fifo_full
+    .. automethod:: flush_tx
+    .. automethod:: flush_rx
+    .. automethod:: is_fifo
 
-.. automethod:: pyrf24.rf24.RF24.mask_irq
+    Ambiguous Signal Detection
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automethod:: pyrf24.rf24.RF24.start_const_carrier
-.. automethod:: pyrf24.rf24.RF24.stop_const_carrier
+    .. autoattribute:: rpd
+    .. automethod:: start_const_carrier
+    .. automethod:: stop_const_carrier
+    
+    .. automethod:: available_pipe
+    .. automethod:: close_rx_pipe
+
+    Configurable RF24 API
+    *********************
+
+    .. autoattribute:: address_width
+    .. automethod:: set_retries
+    .. automethod:: mask_irq
+
+    Channel (Frequency)
+    ~~~~~~~~~~~~~~~~~~~
+
+    .. autoattribute:: channel
+
+    Dynamic Delays
+    ~~~~~~~~~~~~~~
+
+    .. autoattribute:: tx_delay
+
+    Payload Sizes
+    ~~~~~~~~~~~~~
+
+    .. autoattribute:: payload_size
+    .. autoattribute:: dynamic_payloads
+    .. automethod:: get_dynamic_payload_size
+    
+    Auto-Acknowledgement
+    ~~~~~~~~~~~~~~~~~~~~
+
+    .. automethod:: set_auto_ack
+    .. autoattribute:: ack_payloads
+    .. automethod:: enable_dynamic_ack
+
+    Radiation Options
+    ~~~~~~~~~~~~~~~~~
+
+    .. automethod:: set_pa_level
+    .. autoattribute:: pa_level
+    .. autoattribute:: data_rate
+    .. automethod:: set_radiation
+
+    CRC Lengths
+    ~~~~~~~~~~~
+
+    .. autoattribute:: crc_length

@@ -46,7 +46,7 @@ class RF24NetworkHeader:
     @property
     def next_id(self) -> int: ...
 
-# RF24NetworkFrame is not exposed as is not needed
+# RF24NetworkFrame is not exposed as it is not needed
 # class RF24NetworkFrame:
 #     def __init__(
 #         self, header: RF24NetworkHeader = None, message: Union[bytes, bytearray] = None

@@ -145,17 +145,6 @@ public:
             static_cast<uint8_t>(get_bytes_or_bytearray_ln(buf)));
     }
 
-    // complete FIFO info helper; this replaces isRxFifoFull()
-    uint8_t is_fifo(const bool about_tx)
-    {
-        return static_cast<uint8_t>((read_register(FIFO_STATUS) >> (4 * about_tx)) & 3);
-    }
-
-    bool is_fifo(const bool about_tx, const bool check_empty)
-    {
-        return static_cast<bool>(is_fifo(about_tx) & _BV(!check_empty));
-    }
-
     char* sprintfDetails()
     {
         char* debug_info = new char[870];
@@ -530,7 +519,7 @@ PYBIND11_MODULE(rf24, m)
         )docstr")
 
         // *****************************************************************************
-        
+
         .def("stopListening", &RF24Wrapper::stopListening, R"docstr(
             stopListening()
 
@@ -703,7 +692,8 @@ PYBIND11_MODULE(rf24, m)
 
                 .. seealso:: Values accepted by the parameter are predefined in the
                     `rf24_crclength_e` enum struct.
-        )docstr", py::arg("length"))
+        )docstr",
+             py::arg("length"))
 
         // *****************************************************************************
 
@@ -711,7 +701,8 @@ PYBIND11_MODULE(rf24, m)
             setChannel(channel: int)
 
             Set the current setting of the radio's channel.
-        )docstr", py::arg("channel"))
+        )docstr",
+             py::arg("channel"))
 
         // *****************************************************************************
 
@@ -722,7 +713,8 @@ PYBIND11_MODULE(rf24, m)
 
             :param rf24_datarate_e rate: The speed in which the radio send out data over the air. Values
                 accepted for this parameter are pre-defined in the `rf24_datarate_e` enum struct.
-        )docstr", py::arg("rate"))
+        )docstr",
+             py::arg("rate"))
 
         // *****************************************************************************
 
@@ -733,7 +725,8 @@ PYBIND11_MODULE(rf24, m)
 
             :param int width: The number of bytes used for address' length assigned to the data
                 pipes. Accepted values are clamped to range [3, 5].
-        )docstr", py::arg("width"))
+        )docstr",
+             py::arg("width"))
 
         // *****************************************************************************
 
@@ -781,7 +774,8 @@ PYBIND11_MODULE(rf24, m)
             :param rf24_pa_dbm_e level: The value used to configure Power Amplitude level. Accepted
                 values are pre-defined in the `rf24_pa_dbm_e` enum struct.
             :param int channel: The  channel to broadcast on.
-        )docstr")
+        )docstr",
+             py::arg("level"), py::arg("channel"))
 
         .def("startConstCarrier", &RF24Wrapper::startConstCarrier, R"docstr(
             startConstCarrier(level: rf24_pa_dbm_e, channel: int)
@@ -1002,7 +996,8 @@ PYBIND11_MODULE(rf24, m)
             Configure the radio's static payload size (outgoing and incoming) for all data pipes.
 
             :param int length: The length of static payloads used for all data pipes.
-        )docstr", py::arg("length"))
+        )docstr",
+             py::arg("length"))
 
         // *****************************************************************************
 
@@ -1038,8 +1033,10 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        .def("is_fifo", static_cast<bool (RF24Wrapper::*)(const bool, const bool)>(&RF24Wrapper::is_fifo), R"docstr(
-            is_fifo(about_tx: bool, check_empty: bool = None) -> Union[bool, int]
+        .def("is_fifo", static_cast<bool (RF24Wrapper::*)(bool, bool)>(&RF24Wrapper::isFifo), R"docstr(
+            is_fifo(about_tx: bool, check_empty: bool) -> bool \
+            is_fifo(about_tx: bool) -> int
+
 
             Get information about a specified FIFO buffers.
 
@@ -1050,9 +1047,14 @@ PYBIND11_MODULE(rf24, m)
         )docstr",
              py::arg("about_tx"), py::arg("check_empty"))
 
+        .def("isFifo", static_cast<bool (RF24Wrapper::*)(bool, bool)>(&RF24Wrapper::isFifo), R"docstr(
+            isFifo(about_tx: bool, check_empty: bool) -> bool
+        )docstr",
+             py::arg("about_tx"), py::arg("check_empty"))
+
         // *****************************************************************************
 
-        .def("is_fifo", static_cast<uint8_t (RF24Wrapper::*)(const bool)>(&RF24Wrapper::is_fifo), R"docstr(
+        .def("is_fifo", static_cast<uint8_t (RF24Wrapper::*)(bool)>(&RF24Wrapper::isFifo), R"docstr(
             :Returns:
                 - A `bool` describing if the specified FIFO is empty or full.
                 - An `int` if the ``check_empty`` parameter was unspecified. In which case, the return integer is
@@ -1060,6 +1062,11 @@ PYBIND11_MODULE(rf24, m)
                   - ``0`` if the specified FIFO is neither full nor empty.
                   - ``1`` if the specified FIFO is empty.
                   - ``2`` if the specified FIFO is full.
+        )docstr",
+             py::arg("about_tx"))
+
+        .def("isFifo", static_cast<uint8_t (RF24Wrapper::*)(bool)>(&RF24Wrapper::isFifo), R"docstr(
+            isFifo(about_tx: bool) -> int
         )docstr",
              py::arg("about_tx"))
 
@@ -1107,6 +1114,9 @@ PYBIND11_MODULE(rf24, m)
             This attribute represents the radio's CRC checksum length (in bits).
 
             .. seealso:: Accepted values are predefined in the `rf24_crclength_e` enum struct.
+            .. note::
+                The radio automatically uses CRC checksums when the auto-ack feature is enabled.
+                This attribute may not reflect this situation if CRC is disabled when auto-ack is enabled.
         )docstr")
 
         // *****************************************************************************
@@ -1151,8 +1161,7 @@ PYBIND11_MODULE(rf24, m)
 
             .. note::
                 Since `ack_payloads` requires Dynamic Payload lengths,
-                `ack_payloads` are also disabled when setting this attribute
-                to `False`.
+                `ack_payloads` are also disabled when setting this attribute is set to `False`.
         )docstr")
 
         // *****************************************************************************
@@ -1205,13 +1214,13 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property_readonly("is_plus_variant", &RF24Wrapper::isPVariant, R"docstr(
-            This read-only attribute represents if the detected radio is a nRF24L01+ model.
+            This read-only `bool` attribute represents if the detected radio is a nRF24L01+ model.
         )docstr")
 
         // *****************************************************************************
 
         .def_property_readonly("rpd", &RF24Wrapper::testRPD, R"docstr(
-            This attribute represents if the radio detected a signal above -64 dbm in RX mode.
+            This read-only `bool` attribute represents if the radio detected a signal above -64 dbm in RX mode.
 
             .. hint::
                 RPD stands for "Received Power Detection". Non-plus variants of nRF24L01
@@ -1222,25 +1231,42 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property_readonly("rx_fifo_full", &RF24Wrapper::rxFifoFull, R"docstr(
-            This attribute represents if all 3 levels of the radio's RX FIFO are occupied.
+            This `bool` attribute represents if all 3 levels of the radio's RX FIFO are occupied.
         )docstr")
 
         // *****************************************************************************
 
         .def_readwrite("cs_delay", &RF24Wrapper::csDelay, R"docstr(
-            The number of microseconds used as a delay when the radio's CSN pin is made active.
+            The `int` number of microseconds used as a delay when the radio's CSN pin is made active.
         )docstr")
 
         // *****************************************************************************
 
         .def_property_readonly("is_chip_connected", &RF24Wrapper::isChipConnected, R"docstr(
-            Check if the SPI bus is working with the radio. This attribute assumes that
+            Check if the SPI bus is working with the radio. This read-only `bool` attribute assumes that
             :py:meth:`~pyrf24.rf24.RF24.begin()` returned `True`.
         )docstr")
 
         .def("isChipConnected", &RF24Wrapper::isChipConnected, R"docstr(
             isChipConnected() -> bool
         )docstr")
+
+        // *****************************************************************************
+
+        .def_readwrite("tx_delay", &RF24Wrapper::txDelay, R"docstr(
+            The driver will delay for this duration (`int` in microseconds) when `listen` is set to `False`.
+
+            When responding to payloads, faster devices like ARM(RPi) are much faster than Arduino:
+
+            1. Arduino sends data to RPi, switches to RX mode
+            2. The RPi receives the data, switches to TX mode and sends before the Arduino radio is in RX mode
+            3. If AutoACK is disabled, this can be set as low as 0. If AutoACK enabled, set to 100uS minimum on RPi
+
+            .. warning::
+                If set to 0, ensure 130uS delay after `listen` is set to `False` before any transmitting.
+        )docstr")
+
+        .def_readwrite("txDelay", &RF24Wrapper::txDelay)
 
         // *****************************************************************************
         // **************** functions that accept python's buffer protocol objects (bytes, bytearray)
@@ -1383,6 +1409,5 @@ PYBIND11_MODULE(rf24, m)
         .def("writeFast", &RF24Wrapper::writeFast, R"docstr(
             writeFast(buf: Union[bytearray, bytes], multicast: bool = False) -> bool
         )docstr",
-             py::arg("buf"), py::arg("multicast") = false)
-        ;
+             py::arg("buf"), py::arg("multicast") = false);
 }

@@ -63,9 +63,20 @@ To build this python package locally, you need to have cloned this library's rep
 
     git clone --recurse-submodules https://github.com/nRF24/pyRF24.git
     cd pyRF24
-    python -m pip install .
+    python -m pip install . -v
+
+.. hint::
+    For consecutive build attempts, it is recommended to delete any previous build artifacts
+    before attempting to build again.
+
+    .. code-block:: bash
+
+        rm -r _skbuild/ dist/
 
 .. note::
+    The ``-v`` is optional. Here, we use it to show that pip isn't frozen during the
+    build process.
+
     Installing the package can take a long time, and you might think that pip is frozen
     on the step labeled "Building wheel for pyrf24 (pyproject.toml)". Just wait for about
     5 minutes (maybe longer on older/slower variants of Raspberry Pi).
@@ -81,7 +92,7 @@ it is appropriate to pass an additional argument to the install command:
 
 .. code-block:: bash
 
-    python setup.py install -DRF24_DRIVER=RPi
+    python setup.py bdist_wheel -DRF24_DRIVER=RPi
 
 Building a wheel
 -----------------
@@ -110,7 +121,7 @@ same version of CPython, CPU architecture, and C standard lib.
 
        .. code-block:: bash
 
-           rm -r _skbuild/
+           rm -r _skbuild/ dist/
 
 3. To install a built wheel, simply pass the wheel's path and file name to ``pip install``:
 
@@ -120,7 +131,12 @@ same version of CPython, CPU architecture, and C standard lib.
 
    Where the following would be replaced accordingly:
 
-   - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package
+   - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package.
+     
+     - If not building a tagged commit, then the version will describe the commit relative to
+       the number of commits since the latest tag. For example, ``0.1.1.post1.dev3`` is
+       the third commit (``dev3``) since the first "post release" (``post1``) after the
+       tagged version ``0.1.1``. This adhere's to `PEP440 <https://peps.python.org/pep-0440>`_.
    - ``cp3X`` is the version of python used to build the wheel (ie ``cp39`` for CPython 3.9)
      The second occurrence of ``cp3X`` describes the CPython ABI compatibility.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.

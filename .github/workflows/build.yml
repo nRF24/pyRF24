@@ -1,13 +1,13 @@
 name: Build CI
 
-on: [pull_request, push]
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
@@ -18,40 +18,67 @@ jobs:
           fetch-depth: 0
 
       - name: Install dependencies
+        # cmake ships with the ubuntu-latest runner
         run: |
           sudo apt-get install python3-dev graphviz
-          python3 -m pip install --upgrade pip pylint
+          python3 -m pip install --upgrade pip pylint mypy
           python3 -m pip install -r docs/requirements.txt -r requirements.txt
 
       - name: Build package for docs extraction and linting examples
-        id: wheel
         run: |
-          python3 setup.py bdist_wheel
-          python3 -m pip install $(ls dist/pyrf24-*.whl)
+          python3 setup.py sdist bdist_wheel
+          python3 -m pip install dist/pyrf24-*.whl
+
+      - name: check python typing
+        run: mypy src
 
       - name: check python examples PEP8 compliance
-        run: |
-          pylint examples/*.py --disable=duplicate-code
         # duplicate-code error gets flagged because some examples use similar code snippets
+        run: pylint examples/*.py src/pyrf24/*.py --disable=duplicate-code --output-format=json:pylint.json
+
+      - name: Match pylint problems to diff via github annotations
+        run: python ./.github/workflows/pylint_matcher.py pylint.json
 
       - name: Build docs
         working-directory: docs
         run: sphinx-build -E -W -b html . _build/html
 
       - name: Save built docs as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "pyRF24_docs"
           path: ${{ github.workspace }}/docs/_build/html
 
       - name: upload to github pages
+        # only publish doc changes from main branch
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/_build/html
 
+      - name: Save distributable wheels as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: "pyRF24_pkg_dist"
+          path: ${{ github.workspace }}/dist
+
+      - name: Create sdist for testPyPi
+        # Doing this again to ensure a fresh build env.
+        # We don't need to upload a bdist as we can check that locally, but
+        # sdist is used by the piwheels project to create a bdist for RPi OS
+        run: |
+          rm -r dist/ _skbuild
+          python3 setup.py sdist
+
       - name: Validate distribution
         run: |
           python3 -m pip install twine
-          twine check dist/*
+          python3 -m twine check dist/*
+
+      - name: upload to test PyPi
+        if: github.event_name == 'push' && github.repository == 'nRF24/pyRF24' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.test_pypi_token }}
+        run: python3 -m twine upload -r testpypi dist/*

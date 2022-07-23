@@ -1,14 +1,22 @@
 [build-system]
+# building cmake from pypi releases requires openssl-dev installed, so
+# just require users install cmake from apt when getting python-dev (CPython headers)
 requires = [
     "setuptools>=45",
     "wheel",
     "pybind11>=2.7.1; sys_platform == 'linux'",
     "scikit-build; sys_platform == 'linux'",
-    "cmake; sys_platform == 'linux'",
-    "ninja; sys_platform == 'linux'",
     "setuptools_scm>=6.2"
 ]
 
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
+# pypi does not accept version strings with commit SHA in it. See PEP440
+local_scheme = "no-local-version"
+fallback_version = "0.0.0"
+version_scheme = "no-guess-dev"
+
+[tool.mypy]
+show_error_codes = true
+pretty = true
