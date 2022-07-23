@@ -1,4 +1,6 @@
 [build-system]
+# building cmake from pypi releases requires openssl-dev installed, so
+# just require users install cmake from apt when getting python-dev (CPython headers)
 requires = [
     "setuptools>=45",
     "wheel",
