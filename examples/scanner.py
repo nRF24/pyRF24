@@ -29,9 +29,12 @@ radio.set_retries(0, 0)
 
 # use reverse engineering tactics for a better "snapshot"
 radio.address_width = 2
-radio.open_rx_pipe(1, b"\0\x55")
-radio.open_rx_pipe(0, b"\0\xAA")
-
+radio.open_rx_pipe(0, b"\x55\x55")
+radio.open_rx_pipe(1, b"\xAA\xAA")
+radio.open_rx_pipe(2, b"\xA0\xAA")
+radio.open_rx_pipe(3, b"\x0A\xAA")
+radio.open_rx_pipe(4, b"\xA5\xAA")
+radio.open_rx_pipe(5, b"\x5A\xAA")
 
 def scan(timeout: int = 30):
     """Traverse the spectrum of accessible frequencies and print any detection
@@ -53,12 +56,17 @@ def scan(timeout: int = 30):
     start_timer = time.monotonic()  # start the timer
     while time.monotonic() - start_timer < timeout:
         radio.channel = curr_channel
-        if radio.available():
-            radio.flush_rx()  # flush the RX FIFO because it asserts the RPD flag
         radio.listen = 1  # start a RX session
         time.sleep(0.00013)  # wait 130 microseconds
-        signals[curr_channel] += radio.rpd  # if interference is present
+        found_signal = radio.rpd
         radio.listen = 0  # end the RX session
+        found_signal = found_signal or radio.rpd or radio.available()
+
+        # count signal as interference
+        signals[curr_channel] += found_signal
+        # clear the RX FIFO if a signal was detected/captured
+        if found_signal:
+            radio.flush_rx()  # flush the RX FIFO because it asserts the RPD flag
         curr_channel = curr_channel + 1 if curr_channel < 125 else 0
 
         # output the signal counts per channel
