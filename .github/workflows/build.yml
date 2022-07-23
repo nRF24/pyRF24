@@ -1,15 +1,15 @@
 name: Build CI
 
-on: [pull_request, push]
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          python-version: 3.9
 
       - name: Checkout Current Repo
         uses: actions/checkout@v2
@@ -17,43 +17,24 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-        with:
-          platforms: aarch64
-
-      - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.8.1
-        env:
-          # configure cibuildwheel to build native archs ('auto'), and some
-          # emulated ones
-          CIBW_ARCHS_LINUX: aarch64
-          # armhf is 32 bit and not supported by qemu
-          # not sure if these are applicable to Linux-enabled SoCs:
-          # ppc64le s390x
-          CIBW_SKIP: cp36* pp* cp311*
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: "pyrf24_wheels"
-          path: ./wheelhouse/*.whl
-
       - name: Install dependencies
+        # cmake ships with the ubuntu-latest runner
         run: |
           sudo apt-get install python3-dev graphviz
           python3 -m pip install --upgrade pip pylint
           python3 -m pip install -r docs/requirements.txt -r requirements.txt
 
       - name: Build package for docs extraction and linting examples
-        id: wheel
         run: |
           python3 setup.py bdist_wheel
           python3 -m pip install $(ls dist/pyrf24-*.whl)
 
       - name: check python examples PEP8 compliance
-        run: |
-          pylint examples/*.py --disable=duplicate-code
         # duplicate-code error gets flagged because some examples use similar code snippets
+        run: pylint examples/*.py --disable=duplicate-code --output-format=json:pylint.json
+
+      - name: Match pylint problems to diff via github annotations
+        run: python ./.github/workflows/pylint_matcher.py pylint.json
 
       - name: Build docs
         working-directory: docs
@@ -66,6 +47,7 @@ jobs:
           path: ${{ github.workspace }}/docs/_build/html
 
       - name: upload to github pages
+        # only publish doc changes from main branch
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
