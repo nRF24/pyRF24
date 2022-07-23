@@ -12,7 +12,7 @@ recursive-exclude */cmake/toolchains *.cmake
 recursive-exclude RF24/utility/AT* *.h *.cpp *.c
 recursive-exclude RF24/utility/Teensy *.h
 recursive-exclude RF24/utility/Template* *.h
-recursive-exclude RF24/utility/rp2 *.h *.cpp *.c *.txt
+recursive-exclude RF24/utility/rp2 *.h *.cpp *.txt
 recursive-exclude RF24*/pyRF24* *
 recursive-exclude RF24Network/RPi/pyRF24Network *
 global-exclude .clang-format .clang-tidy .git* library.json library.properties Doxyfile keywords.txt Makefile* doxygen-custom.css **.yml **.yaml *.pdf
