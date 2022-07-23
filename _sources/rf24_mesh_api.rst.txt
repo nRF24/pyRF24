@@ -3,25 +3,33 @@ RF24Mesh API
 
 .. automodule:: pyrf24.rf24_mesh
 
-Basic RF24Mesh API
-------------------
+RF24Mesh class
+**************
 
 .. autoclass:: pyrf24.rf24_mesh.RF24Mesh
-    :members: begin, update, write, node_id, renew_address
-    :special-members: __init__
 
-Advanced RF24Mesh API
----------------------
+    Basic RF24Mesh API
+    ------------------
 
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.check_connection
-.. autoattribute:: pyrf24.rf24_mesh.RF24Mesh.mesh_address
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.release_address
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.get_node_id
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.get_address
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.set_address
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.set_channel
-.. automethod:: pyrf24.rf24_mesh.RF24Mesh.set_child
-.. autoattribute:: pyrf24.rf24_mesh.RF24Mesh.addr_list
+    .. automethod:: __init__
+    .. automethod:: begin
+    .. automethod:: update
+    .. automethod:: write
+    .. autoattribute:: node_id
+    .. automethod:: renew_address
+
+    Advanced RF24Mesh API
+    ---------------------
+
+    .. automethod:: check_connection
+    .. autoattribute:: mesh_address
+    .. automethod:: release_address
+    .. automethod:: get_node_id
+    .. automethod:: get_address
+    .. automethod:: set_address
+    .. automethod:: set_channel
+    .. automethod:: set_child
+    .. autoattribute:: addr_list
 
 AddrListStruct class
 --------------------
@@ -34,7 +42,9 @@ successful connection to a child node.
     easily pass an instantiated `AddrListStruct` object to the :py:func:`print()` function.
 
 .. autoclass:: pyrf24.rf24_mesh.AddrListStruct
-    :members:
+    
+    .. autoattribute:: node_id
+    .. autoattribute:: address
 
 Mesh Constants
 ----------------

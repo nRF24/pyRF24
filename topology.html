@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.8674dc46.min.css">
+      <link rel="stylesheet" href="_static/stylesheets/main.2014a6d7.min.css">
       
         
         <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
@@ -235,7 +235,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="" class="md-tabs__link md-tabs__link--active">
+    <a href="#" class="md-tabs__link md-tabs__link--active">
       <span title="topology (document)" class="md-ellipsis">Network Topology</span>
     </a>
   </li>
@@ -289,6 +289,7 @@
   
   
   
+  
     <li class="md-nav__item">
       <a href="index.html" class="md-nav__link">
         <span title="index (document)" class="md-ellipsis">Introduction</span>
@@ -301,6 +302,7 @@
       
       
 
+  
   
   
   
@@ -344,6 +346,7 @@
   
   
   
+  
     <li class="md-nav__item">
       <a href="rf24_api.html" class="md-nav__link">
         <span title="rf24_api (document)" class="md-ellipsis">RF24 API</span>
@@ -355,6 +358,7 @@
           
             
               
+  
   
   
   
@@ -372,6 +376,7 @@
   
   
   
+  
     <li class="md-nav__item">
       <a href="rf24_network_api.html" class="md-nav__link">
         <span title="rf24_network_api (document)" class="md-ellipsis">RF24Network API</span>
@@ -383,6 +388,7 @@
           
             
               
+  
   
   
   
@@ -399,6 +405,7 @@
       </nav>
     </li>
   
+  
 
     
       
@@ -406,11 +413,14 @@
       
 
   
+  
+    
   
     
   
   
     <li class="md-nav__item md-nav__item--active">
+      
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
@@ -419,13 +429,16 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="" class="md-nav__link md-nav__link--active">
+      <a href="#" class="md-nav__link md-nav__link--active">
         <span title="topology (document)" class="md-ellipsis">Network Topology</span>
       </a>
       
         
 
 <nav class="md-nav md-nav--secondary">
+  
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -503,6 +516,7 @@
                     
 
 <nav class="md-nav md-nav--secondary">
+  
   
   
     <label class="md-nav__title" for="__toc">
@@ -889,7 +903,7 @@ to a child node’s Physical address, the address suffix is used.</p>
 <p>As noted above, a single network <em>can</em> have up to 781 nodes. This number also includes
 up to 255 RF24Mesh nodes. The key difference from the user’s perspective is that RF24Mesh
 API does not publicly use a <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>. Instead the RF24Mesh API
-relies on a <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> number to identify a RF24Mesh node
+relies on a <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> number to identify a RF24Mesh node
 that may use a different  <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a> (which can change based on
 the node’s physical location).</p>
 <div class="admonition important">
@@ -899,17 +913,17 @@ master node. This will not interfere with RF24Network nodes since the RF24Mesh A
 is layered on top of the RF24Network API.</p>
 </div>
 <p>To better explain the difference between a node’s <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.mesh_address" title="pyrf24.rf24_mesh.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a> vs a node’s
-<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>, we will examine the connecting process for a
+<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>, we will examine the connecting process for a
 RF24Mesh node. These are the steps performed when calling <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.renew_address" title="pyrf24.rf24_mesh.RF24Mesh.renew_address (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">renew_address()</span></code></a>:</p>
 <ol class="arabic">
 <li><p>Any RF24Mesh node not connected to a network will use the <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>
 <code class="docutils literal notranslate"><span class="pre">0o444</span></code> (that’s <code class="docutils literal notranslate"><span class="pre">2340</span></code> in decimal). It is up to the network administrator to ensure that
-each RF24Mesh node has a unique <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> (which is limited
+each RF24Mesh node has a unique <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> (which is limited
 to the range [0, 255]).</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Remember that <code class="docutils literal notranslate"><span class="pre">0</span></code> is reserved the master node’s
-<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
+<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
 </div>
 </li>
 <li><p>To get assigned a <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>, an unconnected node must poll the
@@ -925,7 +939,7 @@ network level from which the address request originated, then the master node wi
 respond with an invalid <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>.</p></li>
 <li><p>Once the requesting node receives the address response (and the assigned address is
 valid), it assumes that as the <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.mesh_address" title="pyrf24.rf24_mesh.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a> while maintaining its
-<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python property)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
+<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
 <ul class="simple">
 <li><p>The connecting node will verify its new address by calling <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.check_connection" title="pyrf24.rf24_mesh.RF24Mesh.check_connection (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">check_connection()</span></code></a>.</p></li>
 <li><p>If the assigned address is invalid or <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.check_connection" title="pyrf24.rf24_mesh.RF24Mesh.check_connection (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">check_connection()</span></code></a> returns <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>, then
@@ -1015,8 +1029,7 @@ and describe the situation with as much detail as possible.</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.37d1338f.min.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script src="_static/javascripts/bundle.dc1bded0.min.js"></script>
     
   </body>
 </html>
