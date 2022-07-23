@@ -13,3 +13,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
+# pypi does not accept version strings with commit SHA in it. See PEP440
+local_scheme = "no-local-version"
+fallback_version = "0.0.0"
+version_scheme = "no-guess-dev"

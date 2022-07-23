@@ -122,10 +122,10 @@ same version of CPython, CPU architecture, and C standard lib.
 
    - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package.
      
-     - If not building a tagged commit, then the ``PATCH`` portion will describe the commit's
-       SHA and number of commits since the latest tag. For example, ``0.1.dev138+gff659b5`` is
-       the commit who's SHA starts with ``gff659b5`` and is ``138`` commits ahead of the tagged
-       version ``0.1``.
+     - If not building a tagged commit, then the version will describe the commit relative to
+       the number of commits since the latest tag. For example, ``0.1.1.post1.dev3`` is
+       the third commit (``dev3``) since the first "post release" (``post1``) after the
+       tagged version ``0.1.1``. This adhere's to `PEP440 <https://peps.python.org/pep-0440>`_.
    - ``cp3X`` is the version of python used to build the wheel (ie ``cp39`` for CPython 3.9)
      The second occurrence of ``cp3X`` describes the CPython ABI compatibility.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.
