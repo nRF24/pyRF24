@@ -32,7 +32,7 @@ def annotate_pylint_note(obj: Dict[str, Union[int, str]]) -> str:
                 "message": "invalid syntax (<unknown>, line 3)",
                 "message-id": "E0001"
             }
-clang_autodoc\clang_parse.py:92: error: Argument 1 to "serialize_src_loc" of "ClangParse" has incompatible type "int"; expected "SourceLocation"
+
     :Returns:
         A `str` that can be used by github's workflow log commands.
     """

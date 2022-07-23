@@ -65,6 +65,13 @@ To build this python package locally, you need to have cloned this library's rep
     cd pyRF24
     python -m pip install . -v
 
+.. hint::
+    For consecutive build attempts, it is recommended to delete any previous build artifacts.
+
+    .. code-block:: bash
+
+        rm -r _skbuild/ dist/
+
 .. note::
     The ``-v`` is optional. Here, we use it to show that pip isn't frozen during the
     build process.

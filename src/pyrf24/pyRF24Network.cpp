@@ -6,7 +6,7 @@
 
 namespace py = pybind11;
 
-/* 
+/*
 namespace pybind11 {
 namespace detail {
 
@@ -486,12 +486,12 @@ PYBIND11_MODULE(rf24_network, m)
             .. csv-table::
                 :header: Message Name, Numeric Value, Additional Context
 
-                :py:attr:`~pyrf24.rf24_network.NETWORK_ADDR_RESPONSE`, 128, 
+                :py:attr:`~pyrf24.rf24_network.NETWORK_ADDR_RESPONSE`, 128,
                 :py:attr:`~pyrf24.rf24_network.NETWORK_ACK`, 193,
                 :py:attr:`~pyrf24.rf24_network.NETWORK_PING`, 130,
                 :py:attr:`~pyrf24.rf24_network.NETWORK_POLL`, 194,  With multicast enabled (which is enabled by default)
                 :py:attr:`~pyrf24.rf24_network.NETWORK_REQ_ADDRESS`, 195,
-            
+
             .. seealso::
                 There's a more complete list (with behavioral descriptions) of the :ref:`reserved_sys_msgs`.
         )docstr")

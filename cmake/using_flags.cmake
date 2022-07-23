@@ -21,6 +21,7 @@ option(DISABLE_DYNAMIC_PAYLOADS "force usage of static payload size for RF24Netw
 option(MESH_NOMASTER "exclude compiling code that is strictly for master nodes for RF24Mesh lib" OFF)
 option(MESH_DEBUG "enable/disable debugging output for RF24Mesh lib" OFF)
 option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh lib" OFF)
+
 # Disabling IRQ support should be always done because
 # IRQ support can be handled in python with different libs.
 option(RF24_NO_INTERRUPT "disable IRQ support (dependent on pigpio)" ON)

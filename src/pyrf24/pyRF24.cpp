@@ -1114,6 +1114,9 @@ PYBIND11_MODULE(rf24, m)
             This attribute represents the radio's CRC checksum length (in bits).
 
             .. seealso:: Accepted values are predefined in the `rf24_crclength_e` enum struct.
+            .. note::
+                The radio automatically uses CRC checksums when the auto-ack feature is enabled.
+                This attribute may not reflect this situation if CRC is disabled when auto-ack is enabled.
         )docstr")
 
         // *****************************************************************************
@@ -1158,8 +1161,7 @@ PYBIND11_MODULE(rf24, m)
 
             .. note::
                 Since `ack_payloads` requires Dynamic Payload lengths,
-                `ack_payloads` are also disabled when setting this attribute
-                to `False`.
+                `ack_payloads` are also disabled when setting this attribute is set to `False`.
         )docstr")
 
         // *****************************************************************************
@@ -1212,13 +1214,13 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property_readonly("is_plus_variant", &RF24Wrapper::isPVariant, R"docstr(
-            This read-only attribute represents if the detected radio is a nRF24L01+ model.
+            This read-only `bool` attribute represents if the detected radio is a nRF24L01+ model.
         )docstr")
 
         // *****************************************************************************
 
         .def_property_readonly("rpd", &RF24Wrapper::testRPD, R"docstr(
-            This attribute represents if the radio detected a signal above -64 dbm in RX mode.
+            This read-only `bool` attribute represents if the radio detected a signal above -64 dbm in RX mode.
 
             .. hint::
                 RPD stands for "Received Power Detection". Non-plus variants of nRF24L01
@@ -1229,19 +1231,19 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property_readonly("rx_fifo_full", &RF24Wrapper::rxFifoFull, R"docstr(
-            This attribute represents if all 3 levels of the radio's RX FIFO are occupied.
+            This `bool` attribute represents if all 3 levels of the radio's RX FIFO are occupied.
         )docstr")
 
         // *****************************************************************************
 
         .def_readwrite("cs_delay", &RF24Wrapper::csDelay, R"docstr(
-            The number of microseconds used as a delay when the radio's CSN pin is made active.
+            The `int` number of microseconds used as a delay when the radio's CSN pin is made active.
         )docstr")
 
         // *****************************************************************************
 
         .def_property_readonly("is_chip_connected", &RF24Wrapper::isChipConnected, R"docstr(
-            Check if the SPI bus is working with the radio. This attribute assumes that
+            Check if the SPI bus is working with the radio. This read-only `bool` attribute assumes that
             :py:meth:`~pyrf24.rf24.RF24.begin()` returned `True`.
         )docstr")
 
@@ -1252,7 +1254,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_readwrite("tx_delay", &RF24Wrapper::txDelay, R"docstr(
-            The driver will delay for this duration when `listen` is set to `False`.
+            The driver will delay for this duration (`int` in microseconds) when `listen` is set to `False`.
 
             When responding to payloads, faster devices like ARM(RPi) are much faster than Arduino:
 
@@ -1265,18 +1267,6 @@ PYBIND11_MODULE(rf24, m)
         )docstr")
 
         .def_readwrite("txDelay", &RF24Wrapper::txDelay)
-
-        // *****************************************************************************
-
-        // .def_property("cs_delay", &RF24Wrapper::csDelay, R"docstr(
-        //     On all devices but Linux and ATTiny, a small delay is added to the CSN toggling function.
-        //     This is intended to minimize the speed of SPI polling due to radio commands.
-
-        //     If using interrupts or timed requests, this can be set to 0. Default value is 5 (microseconds).
-
-        // )docstr")
-
-        // .def_property("csDelay", &RF24Wrapper::csDelay)
 
         // *****************************************************************************
         // **************** functions that accept python's buffer protocol objects (bytes, bytearray)
