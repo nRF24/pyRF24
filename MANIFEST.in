@@ -15,6 +15,6 @@ recursive-exclude RF24/utility/Template* *.h
 recursive-exclude RF24/utility/rp2 *.h *.cpp *.txt
 recursive-exclude RF24*/pyRF24* *
 recursive-exclude RF24Network/RPi/pyRF24Network *
-global-exclude .clang-format .clang-tidy .git* library.json library.properties Doxyfile keywords.txt Makefile* doxygen-custom.css **.yml **.yaml *.pdf
+global-exclude .clang-format .clang-tidy .git* library.json library.properties Doxyfile keywords.txt Makefile* doxygen-custom.css **.yml **.yaml *.pdf .pylintrc
 exclude */*.md */README* RF24/utility/includes.h RF24/configure
 include pyproject.toml setup.py CMakeLists.txt

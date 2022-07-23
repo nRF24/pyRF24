@@ -76,7 +76,7 @@ here has been adapted to work with Python.
 # pylint: disable=too-few-public-methods,missing-docstring,too-many-instance-attributes
 from os import urandom
 import struct
-from typing import Union, List, Optional, cast
+from typing import Union, List, Optional
 from .rf24 import (  # pylint: disable=import-error
     RF24,
     RF24_CRC_DISABLED,
@@ -851,6 +851,7 @@ class UrlServiceData(ServiceData):
 
     def __repr__(self) -> str:
         return "Advertised URL: " + self.data
+
 
 # A type alias to explain the funky inheritance
 ServiceDataType = Union[BatteryServiceData, TemperatureServiceData, UrlServiceData]
