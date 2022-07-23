@@ -63,9 +63,12 @@ To build this python package locally, you need to have cloned this library's rep
 
     git clone --recurse-submodules https://github.com/nRF24/pyRF24.git
     cd pyRF24
-    python -m pip install .
+    python -m pip install . -v
 
 .. note::
+    THe ``-v`` is optional. Here, we use it to show that pip isn't frozen during the
+    build process.
+
     Installing the package can take a long time, and you might think that pip is frozen
     on the step labeled "Building wheel for pyrf24 (pyproject.toml)". Just wait for about
     5 minutes (maybe longer on older/slower variants of Raspberry Pi).
