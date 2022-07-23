@@ -76,7 +76,7 @@ here has been adapted to work with Python.
 # pylint: disable=too-few-public-methods,missing-docstring,too-many-instance-attributes
 from os import urandom
 import struct
-from typing import Union, List
+from typing import Union, List, Optional, cast
 from .rf24 import (  # pylint: disable=import-error
     RF24,
     RF24_CRC_DISABLED,
@@ -134,7 +134,7 @@ def swap_bits(original: int) -> int:
     return reverse
 
 
-def reverse_bits(original: bytearray) -> bytearray:
+def reverse_bits(original: Union[bytes, bytearray]) -> bytearray:
     """This function reverses the bit order for an entire buffer protocol object.
 
     :returns:
@@ -275,17 +275,17 @@ class QueueElement:
     def __init__(self, buffer: Union[bytes, bytearray]):
         #: The transmitting BLE device's MAC address as a `bytes` object.
         self.mac: bytes = bytes(buffer[2:8])
-        self.name: bytes = None
+        self.name: Optional[Union[bytes, str]] = None
         """The transmitting BLE device's name. This will be a `str`, `bytes` object (if
         a `UnicodeError` was caught), or `None` (if not included in the received
         payload)."""
-        self.pa_level: int = None
+        self.pa_level: Optional[int] = None
         """The transmitting device's PA Level (if included in the received payload)
         as an `int`.
 
         .. note:: This value does not represent the received signal strength.
             The nRF24L01 will receive anything over a -64 dbm threshold."""
-        self.data: List[Union[bytearray, bytes, ServiceData]] = []
+        self.data: List[Union[bytearray, bytes, ServiceDataType]] = []
         """A `list` of the transmitting device's data structures (if any).
         If an element in this `list` is not an instance (or descendant) of the
         `ServiceData` class, then it is likely a custom, user-defined, or unsupported
@@ -320,18 +320,19 @@ class QueueElement:
             self.data.append(buf)  # return the raw buffer as a value
         if buf[0] == 0x16:  # if it is service data
             service_data_uuid = struct.unpack("<H", buf[1:3])[0]
+            service: ServiceDataType
             if service_data_uuid == TEMPERATURE_UUID:
                 service = TemperatureServiceData()
-                service.data = buf[3:]
+                service.data = buf[3:]  # type: ignore
                 self.data.append(service)
             elif service_data_uuid == BATTERY_UUID:
                 service = BatteryServiceData()
-                service.data = buf[3:]
+                service.data = buf[3:]  # type: ignore
                 self.data.append(service)
             elif service_data_uuid == EDDYSTONE_UUID:
                 service = UrlServiceData()
-                service.pa_level_at_1_meter = buf[4:5]
-                service.data = buf[5:]
+                service.pa_level_at_1_meter = buf[4:5]  # type: ignore
+                service.data = buf[5:]  # type: ignore
                 self.data.append(service)
             else:
                 self.data.append(buf)
@@ -357,9 +358,9 @@ class FakeBLE:
         self._radio = radio
         self._curr_freq = 2
         self._show_dbm = False
-        self._ble_name: Union[bytes, bytearray] = None
+        self._ble_name: Optional[Union[bytes, bytearray]] = None
         self._mac = urandom(6)
-        self.rx_queue = []
+        self.rx_queue: List[QueueElement] = []
         """The internal queue of received BLE payloads' data.
 
         Each Element in this queue is a `QueueElement` object whose members are set
@@ -668,7 +669,7 @@ class FakeBLE:
                 self.rx_queue.append(QueueElement(self.rx_cache))
         return bool(self.rx_queue)
 
-    def read(self) -> QueueElement:
+    def read(self) -> Optional[QueueElement]:
         """Get the First Out element from the queue.
 
         :Returns:
@@ -705,12 +706,12 @@ class ServiceData:
         return self._type
 
     @property
-    def data(self) -> bytes:
+    def data(self) -> Union[float, int, str, bytes, bytearray]:
         """This attribute is a `bytearray` or `bytes` object."""
         return self._data
 
     @data.setter
-    def data(self, value):
+    def data(self, value: Union[float, int, str, bytes, bytearray]):
         self._data = value
 
     @property
@@ -752,7 +753,7 @@ class TemperatureServiceData(ServiceData):
         return struct.unpack("<i", self._data[:3] + b"\0")[0] * 10**-2
 
     @data.setter
-    def data(self, value: float):
+    def data(self, value: Union[bytes, bytearray, float]):
         if isinstance(value, float):
             value = struct.pack("<i", int(value * 100) & 0xFFFFFF)
             self._data = value[:3] + bytes([0xFE])
@@ -782,7 +783,7 @@ class BatteryServiceData(ServiceData):
         return int(self._data[0])
 
     @data.setter
-    def data(self, value: int):
+    def data(self, value: Union[bytes, bytearray, int]):
         if isinstance(value, int):
             self._data = struct.pack("B", value)
         elif isinstance(value, (bytes, bytearray)):
@@ -817,7 +818,7 @@ class UrlServiceData(ServiceData):
         return struct.unpack(">b", self._type[-1:])[0]
 
     @pa_level_at_1_meter.setter
-    def pa_level_at_1_meter(self, value):
+    def pa_level_at_1_meter(self, value: Union[bytes, bytearray, int]):
         if isinstance(value, int):
             self._type = self._type[:-1] + struct.pack(">b", int(value))
         elif isinstance(value, (bytes, bytearray)):
@@ -838,7 +839,7 @@ class UrlServiceData(ServiceData):
         return value
 
     @data.setter
-    def data(self, value: str):
+    def data(self, value: Union[bytes, bytearray, str]):
         if isinstance(value, str):
             for i, b_code in enumerate(UrlServiceData.codex_prefix):
                 value = value.replace(b_code, chr(i), 1)
@@ -850,3 +851,6 @@ class UrlServiceData(ServiceData):
 
     def __repr__(self) -> str:
         return "Advertised URL: " + self.data
+
+# A type alias to explain the funky inheritance
+ServiceDataType = Union[BatteryServiceData, TemperatureServiceData, UrlServiceData]

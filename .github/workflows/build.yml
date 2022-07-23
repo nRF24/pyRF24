@@ -21,13 +21,16 @@ jobs:
         # cmake ships with the ubuntu-latest runner
         run: |
           sudo apt-get install python3-dev graphviz
-          python3 -m pip install --upgrade pip pylint
+          python3 -m pip install --upgrade pip pylint mypy
           python3 -m pip install -r docs/requirements.txt -r requirements.txt
 
       - name: Build package for docs extraction and linting examples
         run: |
           python3 setup.py sdist bdist_wheel
           python3 -m pip install dist/pyrf24-*.whl
+
+      - name: check python typing
+        run: mypy src
 
       - name: check python examples PEP8 compliance
         # duplicate-code error gets flagged because some examples use similar code snippets
