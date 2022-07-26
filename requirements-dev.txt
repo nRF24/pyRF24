@@ -1,0 +1,3 @@
+pylint
+mypy
+git+https://github.com/cpp-linter/cpp-linter-action@v1

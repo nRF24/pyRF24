@@ -21,8 +21,20 @@ jobs:
         # cmake ships with the ubuntu-latest runner
         run: |
           sudo apt-get install python3-dev graphviz
-          python3 -m pip install --upgrade pip pylint mypy
-          python3 -m pip install -r docs/requirements.txt -r requirements.txt
+          python3 -m pip install -r docs/requirements.txt -r requirements.txt -r requirements-dev.txt
+
+      - name: Run cpp-linter as a py pkg
+        id: linter
+        run: |
+          cpp-linter \
+          --version=12 \
+          --style=file \
+          --tidy-checks='-*' \
+          --files-changed-only='false'
+
+      - name: C++ Linter checks failed?
+        if: steps.linter.outputs.checks-failed > 0
+        run: exit 1
 
       - name: Build package for docs extraction and linting examples
         run: |
