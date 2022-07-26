@@ -43,7 +43,7 @@ jobs:
           mkdir -p dist
           mv ./wheelhouse/*.whl ${{ github.workspace }}/dist/
 
-      - name: build binary distributable wheel
+      - name: build source distributable wheel
         # sdist for non-supprted platforms will serve as a stub lib install
         run: python setup.py sdist
 
