@@ -6,6 +6,7 @@ recursive-exclude */.github *
 recursive-exclude */docs *
 recursive-exclude */examples* *
 recursive-exclude _skbuild *
+recursive-exclude .github *
 recursive-exclude docs *
 recursive-exclude examples* *
 recursive-exclude */images *
