@@ -176,7 +176,6 @@ package using a different RF24 driver (like RPi, MRAA, wiringPi, etc), then
 it is necessary to pass an additional argument to the install command:
 
 .. code-block:: bash
-    :caption: Building a binary distributable wheel with a non-default RF24 driver.
 
     python setup.py bdist_wheel -DRF24_DRIVER=RPi
 
