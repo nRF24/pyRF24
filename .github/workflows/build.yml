@@ -63,14 +63,6 @@ jobs:
           name: "pyRF24_pkg_dist"
           path: ${{ github.workspace }}/dist
 
-      - name: Create sdist for testPyPi
-        # Doing this again to ensure a fresh build env.
-        # We don't need to upload a bdist as we can check that locally, but
-        # sdist is used by the piwheels project to create a bdist for RPi OS
-        run: |
-          rm -r dist/ _skbuild
-          python3 setup.py sdist
-
       - name: Validate distribution
         run: |
           python3 -m pip install twine
