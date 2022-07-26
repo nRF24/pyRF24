@@ -5,6 +5,9 @@ recursive-include pybind11 *
 recursive-exclude */.github *
 recursive-exclude */docs *
 recursive-exclude */examples* *
+recursive-exclude _skbuild *
+recursive-exclude docs *
+recursive-exclude examples* *
 recursive-exclude */images *
 recursive-exclude */tests *
 recursive-exclude */build *
