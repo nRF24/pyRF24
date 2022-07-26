@@ -3,7 +3,6 @@ RF24Network API
 
 .. automodule:: pyrf24.rf24_network
     :members:
-    :special-members: next_id
 
 RF24Network class
 -----------------
@@ -14,6 +13,7 @@ RF24Network class
     Basic RF24Network API
     *********************
 
+    .. automethod:: __init__
     .. automethod:: begin
     .. automethod:: update
     .. automethod:: available

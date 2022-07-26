@@ -126,7 +126,7 @@ PYBIND11_MODULE(rf24_mesh, m)
                 be used in the frame's header.
             :Returns: `True` if the message was successfully sent, otherwise `False`
 
-            Transmit a message to a unique `node_id` of a mesh network node.
+            Transmit a message to a unique `node_id` of a mesh network node, use the following parameter:
 
             :param int to_node_id: The destination node's unique `node_id`. If this parameter is not
                 specified, then the message is sent to the mesh network's master node.
@@ -136,8 +136,7 @@ PYBIND11_MODULE(rf24_mesh, m)
         // *****************************************************************************
 
         .def("write", static_cast<bool (RF24MeshWrapper::*)(uint16_t, py::buffer, uint8_t)>(&RF24MeshWrapper::write), R"docstr(
-            When the network node's `Logical Address <logical_address>` is already known, the parameters to
-            Transmit a message to a specific `Logical Address <logical_address>` of a network node are as follows:
+            When the network node's `Logical Address <logical_address>` is already known, use the following parameter:
 
             :param int to_node_address: The destination node's `Logical Address <logical_address>`.
         )docstr",

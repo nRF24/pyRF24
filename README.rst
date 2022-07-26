@@ -1,3 +1,19 @@
+.. image:: https://img.shields.io/piwheels/v/pyrf24
+    :target: https://www.piwheels.org/project/pyrf24/
+    :alt: piwheels
+.. image:: https://img.shields.io/badge/dynamic/json?style=plastic&label=piwheels%20Downloads&query=%24[%3F(%40[0]%3D%3D%22pyrf24%22)][2]&url=https%3A%2F%2Fwww.piwheels.org%2Fpackages.json
+    :target: https://www.piwheels.org/project/pyrf24/
+    :alt: piwheels Downloads
+.. image:: https://img.shields.io/pypi/v/pyrf24?style=plastic
+    :target: https://pypi.org/project/pyrf24/
+    :alt: PyPI
+.. image:: https://static.pepy.tech/personalized-badge/pyrf24?period=total&units=none&left_color=grey&right_color=blue&left_text=PyPI%20Downloads
+    :target: https://pepy.tech/project/pyrf24
+    :alt: PyPI Downloads
+.. image:: https://github.com/nRF24/pyRF24/actions/workflows/build.yml/badge.svg
+    :target: https://github.com/nRF24/pyRF24/actions/workflows/build.yml
+    :alt: Build CI
+
 Introduction
 ============
 
@@ -48,7 +64,30 @@ The IRQ pin is not typically connected, and it is only used in the interrupt_con
 
         sudo apt install python3-rpi.gpio
 
-Installing from Source
+Installing from PyPI
+~~~~~~~~~~~~~~~~~~~~
+
+Simply use:
+
+.. code-block:: python
+
+    python -m pip install pyrf24
+
+We have distributed binary wheels to pypi.org for easy installation and automated dependency.
+These wheels specifically target any Linux platform on ``aarch64`` architecture.
+If you're using Raspberry Pi OS (32 bit), then the above command will fetch ``armv7l`` binary
+wheels from the piwheels index (which is already configured for use in the Raspberry Pi OS).
+
+.. note::
+    If you're installing from a Linux machine that is not using an architecture ``aarch64``
+    or ``armv7l``, then pip will try to build the package from source code.
+    In this case, you'll likely need to install some build dependencies:
+
+    .. code-block:: bash
+
+        sudo apt install python3-dev cmake
+
+Installing from Github
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Installing from source will require CMake and CPython headers:
@@ -80,19 +119,6 @@ To build this python package locally, you need to have cloned this library's rep
     Installing the package can take a long time, and you might think that pip is frozen
     on the step labeled "Building wheel for pyrf24 (pyproject.toml)". Just wait for about
     5 minutes (maybe longer on older/slower variants of Raspberry Pi).
-
-Using a specific RF24 driver
-----------------------------
-
-If you want to build the package using a different RF24 driver (like MRAA, RPi, wiringPi, etc), then
-it is appropriate to pass an additional argument to the install command:
-
-.. note::
-    This approach cannot be done with the ``pip install .`` command.
-
-.. code-block:: bash
-
-    python setup.py bdist_wheel -DRF24_DRIVER=RPi
 
 Building a wheel
 -----------------
@@ -142,6 +168,22 @@ same version of CPython, CPU architecture, and C standard lib.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.
      On Raspberry Pi OS (32 bit), this will be ``armv7l``.
 
+Using a specific RF24 driver
+----------------------------
+
+By default, this package is built using the RF24 driver SPIDEV. If you want to build the
+package using a different RF24 driver (like RPi, MRAA, wiringPi, etc), then
+it is necessary to pass an additional argument to the install command:
+
+.. code-block:: bash
+    :caption: Building a binary distributable wheel with a non-default RF24 driver.
+
+    python setup.py bdist_wheel -DRF24_DRIVER=RPi
+
+.. note::
+    This approach cannot be done with the ``pip install .`` command.
+    It needs to be done from the ``python setup.py`` command
+
 Differences in API
 ~~~~~~~~~~~~~~~~~~
 
@@ -171,6 +213,41 @@ style functions are still exposed. For example:
     radio.listen = True
     # is equivalent to
     radio.startListening()  # not documented
+
+Migrating to pyrf24
+-------------------
+
+If you have a project that uses code from the older individually installed wrappers,
+then you can use this package as a drop-in replacement. You only need to change the
+import statements in your project's source. Everything from the old individual wrappers
+is exposed through the ``pyrf24`` package.
+
+.. list-table::
+    :header-rows: 1
+
+    * - Using the old individual wrappers
+      - Using the pyrf24 package
+    * - .. code-block:: python
+
+            from RF24 import RF24, RF24_PA_LOW
+      - .. code-block:: python
+
+            from pyrf24 import RF24, RF24_PA_LOW
+    * - .. code-block:: python
+
+            from RF24 import RF24
+            from RF24Network import RF24Network, RF24NetworkHeader
+      - .. code-block:: python
+
+            from pyrf24 import RF24, RF24Network, RF24NetworkHeader
+    * - .. code-block:: python
+
+            from RF24 import RF24
+            from RF24Network import RF24Network
+            from RF24Mesh import RF24Mesh
+      - .. code-block:: python
+
+            from pyrf24 import RF24, RF24Network, RF24Mesh
 
 Python Type Hints
 -----------------
