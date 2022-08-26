@@ -1,10 +1,13 @@
 recursive-include RF24* *
 recursive-include cmake *
-recursive-include src/pyrf24 *.cpp *.typed
+recursive-include src *.cpp *.typed
 recursive-include pybind11 *
 recursive-exclude */.github *
 recursive-exclude */docs *
 recursive-exclude */examples* *
+recursive-exclude .github *
+recursive-exclude docs *
+recursive-exclude examples* *
 recursive-exclude */images *
 recursive-exclude */tests *
 recursive-exclude */build *

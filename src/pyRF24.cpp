@@ -67,19 +67,13 @@ public:
         return std::tuple<bool, bool, bool>(ds, df, dr);
     }
 
-    void open_tx_pipe(py::object address)
+    void open_tx_pipe(py::buffer address)
     {
-        // if (PyLong_Check(address)) {
-        //     return RF24::openWritingPipe(address.cast<uint64_t>());
-        // }
         RF24::openWritingPipe(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
-    void open_rx_pipe(uint8_t number, py::object address)
+    void open_rx_pipe(uint8_t number, py::buffer address)
     {
-        // if (PyLong_Check(address)) {
-        //     return RF24::openReadingPipe(number, address.cast<uint64_t>());
-        // }
         RF24::openReadingPipe(number, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
@@ -97,7 +91,7 @@ public:
         return buf;
     }
 
-    void startFastWrite(py::object buf, const bool multicast = false, bool startTx = true)
+    void startFastWrite(py::buffer buf, const bool multicast = false, bool startTx = true)
     {
         RF24::startFastWrite(
             get_bytes_or_bytearray_str(buf),
@@ -105,7 +99,7 @@ public:
             multicast, startTx);
     }
 
-    bool startWrite(py::object buf, const bool multicast)
+    bool startWrite(py::buffer buf, const bool multicast)
     {
         return RF24::startWrite(
             get_bytes_or_bytearray_str(buf),
@@ -113,7 +107,7 @@ public:
             multicast);
     }
 
-    bool writeFast(py::object buf, const bool multicast = false)
+    bool writeFast(py::buffer buf, const bool multicast = false)
     {
         return RF24::writeFast(
             get_bytes_or_bytearray_str(buf),
@@ -121,7 +115,7 @@ public:
             multicast);
     }
 
-    bool write(py::object buf, const bool multicast = false)
+    bool write(py::buffer buf, const bool multicast = false)
     {
         return RF24::write(
             get_bytes_or_bytearray_str(buf),
@@ -129,7 +123,7 @@ public:
             multicast);
     }
 
-    bool writeBlocking(py::object buf, uint32_t timeout)
+    bool writeBlocking(py::buffer buf, uint32_t timeout)
     {
         return RF24::writeBlocking(
             get_bytes_or_bytearray_str(buf),
@@ -137,7 +131,7 @@ public:
             timeout);
     }
 
-    bool writeAckPayload(uint8_t pipe, py::object buf)
+    bool writeAckPayload(uint8_t pipe, py::buffer buf)
     {
         return RF24::writeAckPayload(
             pipe,
@@ -918,12 +912,12 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("open_rx_pipe", &RF24Wrapper::open_rx_pipe, R"docstr(
-            open_rx_pipe(pipe_number: int, address: Union[bytearray, bytes])
+            open_rx_pipe(pipe_number: int, address: Union[bytearray, bytes, int])
 
             Open a data pipe for receiving.
 
             :param int pipe_number: The pipe number to use for receiving transmissions. This value should be in range [0, 5].
-            :param bytes,bytearray address: The address assigned to the specified data pipe for receiving transmissions.
+            :param bytes,bytearray,int address: The address assigned to the specified data pipe for receiving transmissions.
         )docstr",
              py::arg("pipe_number"), py::arg("address"))
 
@@ -934,18 +928,24 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        // .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
-        //     For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
-        // )docstr", py::arg("pipe_number"), py::arg("address"))
+        .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
+            For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
+        )docstr",
+             py::arg("pipe_number"), py::arg("address"))
+
+        .def("openReadingPipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
+            openReadingPipe(pipe_number: int, address: int)
+        )docstr",
+             py::arg("pipe_number"), py::arg("address"))
 
         // *****************************************************************************
 
         .def("open_tx_pipe", &RF24Wrapper::open_tx_pipe, R"docstr(
-            open_tx_pipe(address: Union[bytearray, bytes])
+            open_tx_pipe(address: Union[bytearray, bytes, int])
 
             Open data pipe 0 for transmitting to a specified address.
 
-            :param bytes,bytearray address: The address assigned to data pipe 0 for outgoing transmissions.
+            :param bytes,bytearray,int address: The address assigned to data pipe 0 for outgoing transmissions.
         )docstr",
              py::arg("address"))
 
@@ -956,9 +956,15 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        // .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
-        //     For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
-        // )docstr", py::arg("address"))
+        .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
+            For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
+        )docstr",
+             py::arg("address"))
+
+        .def("openWritingPipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
+            openWritingPipe(address: int)
+        )docstr",
+             py::arg("address"))
 
         // *****************************************************************************
 

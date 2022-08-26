@@ -48,7 +48,7 @@ struct RF24NetworkFrameWrapper : public RF24NetworkFrame
 class RF24NetworkWrapper : public RF24Network
 {
 public:
-    RF24NetworkWrapper(RF24Wrapper& _radio) : RF24Network(_radio)
+    RF24NetworkWrapper(RF24Wrapper& _radio) : RF24Network(static_cast<RF24&>(_radio))
     {
     }
 
@@ -72,7 +72,7 @@ public:
     }
 
 #if defined(RF24NetworkMulticast)
-    bool multicast(RF24NetworkHeader header, py::object buf, uint8_t level = 7)
+    bool multicast(RF24NetworkHeader header, py::buffer buf, uint8_t level = 7)
     {
         return RF24Network::multicast(
             header,
@@ -102,7 +102,7 @@ public:
         return std::tuple<RF24NetworkHeader, py::bytearray>(header, py_ba);
     }
 
-    bool write(RF24NetworkHeader& header, py::object buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
+    bool write(RF24NetworkHeader& header, py::buffer buf, uint16_t writeDirect = NETWORK_AUTO_ROUTING)
     {
         return RF24Network::write(
             header,

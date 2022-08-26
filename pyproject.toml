@@ -2,14 +2,46 @@
 # building cmake from pypi releases requires openssl-dev installed, so
 # just require users install cmake from apt when getting python-dev (CPython headers)
 requires = [
-    "setuptools>=45",
+    "setuptools>=61",
     "wheel",
-    "pybind11>=2.7.1; sys_platform == 'linux'",
-    "scikit-build; sys_platform == 'linux'",
-    "setuptools_scm>=6.2"
+    "setuptools_scm[toml]>=6.2"
 ]
-
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrf24"
+description = "A python package for the wrapping nRF24 related C++ libraries."
+readme = "README.rst"
+keywords = ["nrf24l01", "nRF24L01+", "raspberry", "pi", "driver", "radio", "transceiver"]
+license = {text = "GPLv2"}
+authors = [
+    { name = "Brendan Doherty", email = "2bndy5@gmail.com" },
+]
+classifiers = [
+    # https://pypi.org/pypi?%3Aaction=list_classifiers
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Hardware",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+    "Topic :: System :: Networking",
+    "Typing :: Typed",
+]
+requires-python = ">=3.7"
+dynamic = ["version"]
+
+[project.urls]
+Documentation = "http://nRF24.github.io/pyRF24"
+Source =  "https://github.com/nRF24/pyRF24"
+Tracker = "https://github.com/nRF24/pyRF24/issues"
 
 [tool.setuptools_scm]
 # pypi does not accept version strings with commit SHA in it. See PEP440

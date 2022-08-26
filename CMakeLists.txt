@@ -14,7 +14,7 @@ add_subdirectory(RF24/utility) # configure the RF24_DRIVER
 
 ################################# RF24 #############################
 
-pybind11_add_module(rf24 src/pyrf24/pyRF24.cpp)
+pybind11_add_module(rf24 src/pyRF24.cpp)
 target_include_directories(rf24 PUBLIC
     RF24
     RF24/utility
@@ -31,7 +31,7 @@ apply_flags(rf24)
 
 ################################# RF24NETWORK #############################
 
-pybind11_add_module(rf24_network src/pyrf24/pyRF24Network.cpp)
+pybind11_add_module(rf24_network src/pyRF24Network.cpp)
 target_include_directories(rf24_network PUBLIC
     RF24
     RF24Network
@@ -55,7 +55,7 @@ apply_flags(rf24_network)
 
 ################################# RF24MESH #############################
 
-pybind11_add_module(rf24_mesh src/pyrf24/pyRF24Mesh.cpp)
+pybind11_add_module(rf24_mesh src/pyRF24Mesh.cpp)
 target_include_directories(rf24_mesh PUBLIC
     RF24
     RF24Network

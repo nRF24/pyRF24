@@ -1,6 +1,8 @@
 RF24 API
 ========
 
+.. automodule:: pyrf24.rf24
+
 Enum classes
 ------------
 

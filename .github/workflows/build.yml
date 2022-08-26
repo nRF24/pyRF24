@@ -1,6 +1,10 @@
 name: Build CI
 
-on: [pull_request, push, workflow_dispatch]
+on: 
+  pull_request:
+    types: [opened, reopened]
+  push:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -21,8 +25,21 @@ jobs:
         # cmake ships with the ubuntu-latest runner
         run: |
           sudo apt-get install python3-dev graphviz
-          python3 -m pip install --upgrade pip pylint mypy
-          python3 -m pip install -r docs/requirements.txt -r requirements.txt
+          python3 -m pip install -r docs/requirements.txt -r requirements.txt -r requirements-dev.txt
+
+      - name: Run cpp-linter as a py pkg
+        id: linter
+        run: |
+          cpp-linter \
+          --version=12 \
+          --style=file \
+          --tidy-checks='-*' \
+          --files-changed-only='false' \
+          --ignore='!src|'
+
+      - name: C++ Linter checks failed?
+        if: steps.linter.outputs.checks-failed > 0
+        run: exit 1
 
       - name: Build package for docs extraction and linting examples
         run: |
@@ -50,8 +67,7 @@ jobs:
           path: ${{ github.workspace }}/docs/_build/html
 
       - name: upload to github pages
-        # only publish doc changes from main branch
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        if: github.event_name !='pull_request'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,22 +79,7 @@ jobs:
           name: "pyRF24_pkg_dist"
           path: ${{ github.workspace }}/dist
 
-      - name: Create sdist for testPyPi
-        # Doing this again to ensure a fresh build env.
-        # We don't need to upload a bdist as we can check that locally, but
-        # sdist is used by the piwheels project to create a bdist for RPi OS
-        run: |
-          rm -r dist/ _skbuild
-          python3 setup.py sdist
-
       - name: Validate distribution
         run: |
           python3 -m pip install twine
           python3 -m twine check dist/*
-
-      - name: upload to test PyPi
-        if: github.event_name == 'push' && github.repository == 'nRF24/pyRF24' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.test_pypi_token }}
-        run: python3 -m twine upload -r testpypi dist/*
