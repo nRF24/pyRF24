@@ -1,10 +1,7 @@
 .. image:: https://img.shields.io/piwheels/v/pyrf24
     :target: https://www.piwheels.org/project/pyrf24/
     :alt: piwheels
-.. image:: https://img.shields.io/badge/dynamic/json?style=plastic&label=piwheels%20Downloads&query=%24[%3F(%40[0]%3D%3D%22pyrf24%22)][2]&url=https%3A%2F%2Fwww.piwheels.org%2Fpackages.json
-    :target: https://www.piwheels.org/project/pyrf24/
-    :alt: piwheels Downloads
-.. image:: https://img.shields.io/pypi/v/pyrf24?style=plastic
+.. image:: https://img.shields.io/pypi/v/pyrf24
     :target: https://pypi.org/project/pyrf24/
     :alt: PyPI
 .. image:: https://static.pepy.tech/personalized-badge/pyrf24?period=total&units=none&left_color=grey&right_color=blue&left_text=PyPI%20Downloads
@@ -80,8 +77,8 @@ wheels from the piwheels index (which is already configured for use in the Raspb
 
 .. note::
     If you're installing from a Linux machine that is not using an architecture ``aarch64``
-    or ``armv7l``, then pip will try to build the package from source code.
-    In this case, you'll likely need to install some build dependencies:
+    or ``armv7l``, then pip may try to build the package from source code.
+    In this case, you'll likely need to install some extra build dependencies:
 
     .. code-block:: bash
 
@@ -135,11 +132,14 @@ same version of CPython, CPU architecture, and C standard lib.
 
        python -m pip install -r requirements.txt
 
+   .. note::
+       This step only needs to be done once.
+
 2. Using the same directory that you cloned the pyrf24 library into:
 
    .. code-block:: bash
 
-       python setup.py bdist_wheel
+       python -m pip wheel -w dist .
 
 
    .. important::
@@ -158,7 +158,7 @@ same version of CPython, CPU architecture, and C standard lib.
    Where the following would be replaced accordingly:
 
    - ``MAJOR.MINOR.PATCH`` is the current version of the pyrf24 package.
-     
+
      - If not building a tagged commit, then the version will describe the commit relative to
        the number of commits since the latest tag. For example, ``0.1.1.post1.dev3`` is
        the third commit (``dev3``) since the first "post release" (``post1``) after the
