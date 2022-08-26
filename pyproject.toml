@@ -19,13 +19,21 @@ authors = [
 ]
 classifiers = [
     # https://pypi.org/pypi?%3Aaction=list_classifiers
-    "Development Status :: 4 - Beta",  # TODO change this when ready
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Topic :: Software Development :: Libraries",
-    "Topic :: System :: Hardware",
-    "Programming Language :: Python :: 3",
     "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     "Operating System :: POSIX :: Linux",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Hardware",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+    "Topic :: System :: Networking",
+    "Typing :: Typed",
 ]
 requires-python = ">=3.7"
 dynamic = ["version"]

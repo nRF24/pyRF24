@@ -1,4 +1,4 @@
-.. image:: https://img.shields.io/piwheels/v/pyrf24
+.. image:: https://img.shields.io/piwheels/v/pyrf24?color=informational
     :target: https://www.piwheels.org/project/pyrf24/
     :alt: piwheels
 .. image:: https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&logo=readthedocs&logoColor=white
