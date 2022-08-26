@@ -1,7 +1,15 @@
 
 ####################### DEBUG (& EXTRA) FLAGS ######################
 
+# RF24 core specific options
 option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
+
+# Disabling IRQ support should be always done because
+# IRQ support can be handled in python with different libs.
+option(RF24_NO_INTERRUPT "disable IRQ support (dependent on pigpio)" ON)
+# does not affect pigpio driver though
+
+# RF24Network specific options
 option(SERIAL_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
 option(SERIAL_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Network lib" OFF)
 option(SERIAL_DEBUG_ROUTING
@@ -18,14 +26,36 @@ option(SERIAL_DEBUG_FRAGMENTATION_L2
 )
 option(DISABLE_FRAGMENTATION "disable message fragmentation for RF24Network lib" OFF)
 option(DISABLE_DYNAMIC_PAYLOADS "force usage of static payload size for RF24Network lib" OFF)
+# options with default values:
+# SLOW_ADDR_POLL_RESPONSE
+#    This can be useful to set a custom delay (in microseconds) for the master node when a
+#    connecting child node is slow to execute.
+# MAX_PAYLOAD_SIZE
+#     This can be used to increase/decrease the maximum size of a message (before fragmentation).
+#     A value <= 24 is a less efficient alternative to DISABLE_FRAGMENTATION option.
+
+# RF24Mesh specific options
 option(MESH_NOMASTER "exclude compiling code that is strictly for master nodes for RF24Mesh lib" OFF)
 option(MESH_DEBUG "enable/disable debugging output for RF24Mesh lib" OFF)
 option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh lib" OFF)
+# options with default values:
+# MESH_MAX_CHILDREN
+#     This can be used to prevent mesh child nodes from occupying all available pipes on network layers.
+#     Only recommended if combining RF24Network nodes w/ RF24Mesh nodes on the same network.
+# MESH_DEFAULT_CHANNEL
+#     A compile time alternative to using radio.setChannel() at runtime. Accepted values range [0, 125].
+# MESH_RENEWAL_TIMEOUT
+#     A compile time alternative to using the timeout parameter to mesh.renew_address() at runtime.
+# MESH_MEM_ALLOC_SIZE
+#     Advanced usage only! This controls the initial allocated memory for the master node's DHCP list.
+# MESH_LOOKUP_TIMEOUT
+#     This can be used to increase/decrease the time spent waiting for master node's respond to
+#     a lookup message.
+# MESH_WRITE_TIMEOUT
+#     This can be used to increase/decrease the time spent ensuring success during
+#     mesh.write() (only when using node_id instead of a node's logical address).
+#     This is cumulative to MESH_LOOKUP_TIMEOUT.
 
-# Disabling IRQ support should be always done because
-# IRQ support can be handled in python with different libs.
-option(RF24_NO_INTERRUPT "disable IRQ support (dependent on pigpio)" ON)
-# does not affect pigpio driver though
 
 ###############################################
 # function to apply flags to applicable targets
