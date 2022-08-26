@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.2014a6d7.min.css">
+      <link rel="stylesheet" href="_static/stylesheets/main.a280224b.min.css">
       
         
         <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
@@ -198,7 +198,7 @@
 
   <li class="md-tabs__item">
     <a href="index.html" class="md-tabs__link">
-      <span title="index (document)" class="md-ellipsis">Introduction</span>
+      <span class="md-ellipsis">Introduction</span>
     </a>
   </li>
 
@@ -210,7 +210,7 @@
 
   <li class="md-tabs__item">
     <a href="examples.html" class="md-tabs__link">
-      <span title="examples (document)" class="md-ellipsis">Examples</span>
+      <span class="md-ellipsis">Examples</span>
     </a>
   </li>
 
@@ -236,7 +236,7 @@
 
   <li class="md-tabs__item">
     <a href="topology.html" class="md-tabs__link">
-      <span title="topology (document)" class="md-ellipsis">Network Topology</span>
+      <span class="md-ellipsis">Network Topology</span>
     </a>
   </li>
 
@@ -292,7 +292,7 @@
   
     <li class="md-nav__item">
       <a href="index.html" class="md-nav__link">
-        <span title="index (document)" class="md-ellipsis">Introduction</span>
+        <span class="md-ellipsis">Introduction</span>
       </a>
     </li>
   
@@ -308,7 +308,7 @@
   
     <li class="md-nav__item">
       <a href="examples.html" class="md-nav__link">
-        <span title="examples (document)" class="md-ellipsis">Examples</span>
+        <span class="md-ellipsis">Examples</span>
       </a>
     </li>
   
@@ -358,12 +358,12 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          <span title="rf24_api (document)" class="md-ellipsis">RF24 API</span>
+          <span class="md-ellipsis">RF24 API</span>
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="#" class="md-nav__link md-nav__link--active">
-        <span title="rf24_api (document)" class="md-ellipsis">RF24 API</span>
+        <span class="md-ellipsis">RF24 API</span>
       </a>
       
         
@@ -996,7 +996,7 @@
   
     <li class="md-nav__item">
       <a href="ble_api.html" class="md-nav__link">
-        <span title="ble_api (document)" class="md-ellipsis">BLE API</span>
+        <span class="md-ellipsis">BLE API</span>
       </a>
     </li>
   
@@ -1011,7 +1011,7 @@
   
     <li class="md-nav__item">
       <a href="rf24_network_api.html" class="md-nav__link">
-        <span title="rf24_network_api (document)" class="md-ellipsis">RF24Network API</span>
+        <span class="md-ellipsis">RF24Network API</span>
       </a>
     </li>
   
@@ -1026,7 +1026,7 @@
   
     <li class="md-nav__item">
       <a href="rf24_mesh_api.html" class="md-nav__link">
-        <span title="rf24_mesh_api (document)" class="md-ellipsis">RF24Mesh API</span>
+        <span class="md-ellipsis">RF24Mesh API</span>
       </a>
     </li>
   
@@ -1050,7 +1050,7 @@
   
     <li class="md-nav__item">
       <a href="topology.html" class="md-nav__link">
-        <span title="topology (document)" class="md-ellipsis">Network Topology</span>
+        <span class="md-ellipsis">Network Topology</span>
       </a>
     </li>
   
@@ -1691,7 +1691,8 @@
                 
 
 
-  <h1 id="rf24-api">RF24 API<a class="headerlink" href="#rf24-api" title="Permalink to this heading">¶</a></h1>
+  <h1 id="module-pyrf24.rf24"><span id="rf24-api"></span>RF24 API<a class="headerlink" href="#module-pyrf24.rf24" title="Permalink to this heading">¶</a></h1>
+<p>A Python module that wraps all RF24 C++ library’s API</p>
 <h2 id="enum-classes">Enum classes<a class="headerlink" href="#enum-classes" title="Permalink to this heading">¶</a></h2>
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24.rf24_crclength_e">
@@ -1968,32 +1969,34 @@ is called at least once prior to calling this function.</p>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24.RF24.open_tx_pipe">
-<span class="sig-name descname"><span class="pre">open_tx_pipe</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24.RF24.open_tx_pipe.address" title="pyrf24.rf24.RF24.open_tx_pipe.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#pyrf24.rf24.RF24.open_tx_pipe" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open_tx_pipe</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24.RF24.open_tx_pipe.address" title="pyrf24.rf24.RF24.open_tx_pipe.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#pyrf24.rf24.RF24.open_tx_pipe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open data pipe 0 for transmitting to a specified address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="pyrf24.rf24.RF24.open_tx_pipe.address"><span class="sig-name descname">address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)">bytearray</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.open_tx_pipe.address" title="Permalink to this definition">¶</a></dt><dd><p>The address assigned to data pipe 0 for outgoing transmissions.</p>
+<dt id="pyrf24.rf24.RF24.open_tx_pipe.address"><span class="sig-name descname">address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)">bytearray</a>,<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.open_tx_pipe.address" title="Permalink to this definition">¶</a></dt><dd><p>The address assigned to data pipe 0 for outgoing transmissions.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p>For backward compatibility, this function’s <code class="docutils literal notranslate"><span class="pre">address</span></code> parameter can also take a 64-bit integer.</p>
 </dd></dl>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24.RF24.open_rx_pipe">
-<span class="sig-name descname"><span class="pre">open_rx_pipe</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe.pipe_number" title="pyrf24.rf24.RF24.open_rx_pipe.pipe_number (Python parameter)"><span class="n"><span class="pre">pipe_number</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe.address" title="pyrf24.rf24.RF24.open_rx_pipe.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a></span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#pyrf24.rf24.RF24.open_rx_pipe" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open_rx_pipe</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe.pipe_number" title="pyrf24.rf24.RF24.open_rx_pipe.pipe_number (Python parameter)"><span class="n"><span class="pre">pipe_number</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24.RF24.open_rx_pipe.address" title="pyrf24.rf24.RF24.open_rx_pipe.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#pyrf24.rf24.RF24.open_rx_pipe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open a data pipe for receiving.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
 <dt id="pyrf24.rf24.RF24.open_rx_pipe.pipe_number"><span class="sig-name descname">pipe_number</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.open_rx_pipe.pipe_number" title="Permalink to this definition">¶</a></dt><dd><p>The pipe number to use for receiving transmissions. This value should be in range [0, 5].</p>
 </dd>
-<dt id="pyrf24.rf24.RF24.open_rx_pipe.address"><span class="sig-name descname">address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)">bytearray</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.open_rx_pipe.address" title="Permalink to this definition">¶</a></dt><dd><p>The address assigned to the specified data pipe for receiving transmissions.</p>
+<dt id="pyrf24.rf24.RF24.open_rx_pipe.address"><span class="sig-name descname">address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)">bytearray</a>,<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24.RF24.open_rx_pipe.address" title="Permalink to this definition">¶</a></dt><dd><p>The address assigned to the specified data pipe for receiving transmissions.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p>For backward compatibility, this function’s <code class="docutils literal notranslate"><span class="pre">address</span></code> parameter can also take a 64-bit integer.</p>
 </dd></dl>
 
 <h3 id="advanced-rf24-api">Advanced RF24 API<a class="headerlink" href="#advanced-rf24-api" title="Permalink to this heading">¶</a></h3>
@@ -2717,7 +2720,7 @@ This attribute may not reflect this situation if CRC is disabled when auto-ack i
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.0.2.
+    5.1.1.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   

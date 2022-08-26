@@ -32,7 +32,7 @@ RF24Mesh class
     .. autoattribute:: addr_list
 
 AddrListStruct class
---------------------
+********************
 
 The properties of this class are read-only because they can only be set by the master node upon
 successful connection to a child node.
@@ -47,7 +47,7 @@ successful connection to a child node.
     .. autoattribute:: address
 
 Mesh Constants
-----------------
+**************
 
 These are the pre-defined constants provided for convenience and code readability.
 
@@ -56,7 +56,7 @@ These are the pre-defined constants provided for convenience and code readabilit
     A reserved valid address for use with RF24Mesh (when a mesh node requests an assigned address)
 
 Reserved System Message Types
-*****************************
+-----------------------------
 
 .. autoattribute:: pyrf24.rf24_mesh.MESH_ADDR_LOOKUP
 
