@@ -53,6 +53,13 @@ jobs:
           name: "pyRF24_pkg_dist"
           path: ${{ github.workspace }}/dist
 
+      - name: Publish package (to TestPyPI)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+        run: twine upload --repository testpypi dist/*
+
       - name: Publish to PyPi
         # only upload distributions to PyPi when triggered by a published release
         if: github.event_name == 'release'
