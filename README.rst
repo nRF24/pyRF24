@@ -107,7 +107,7 @@ To build this python package locally, you need to have cloned this library's rep
 
     .. code-block:: bash
 
-        rm -r _skbuild/ dist/
+        rm -r build/ dist/
 
 .. note::
     The ``-v`` is optional. Here, we use it to show that pip isn't frozen during the
@@ -147,7 +147,7 @@ same version of CPython, CPU architecture, and C standard lib.
 
        .. code-block:: bash
 
-           rm -r _skbuild/ dist/
+           rm -r build/ dist/
 
 3. To install a built wheel, simply pass the wheel's path and file name to ``pip install``:
 
@@ -172,16 +172,30 @@ Using a specific RF24 driver
 ----------------------------
 
 By default, this package is built using the RF24 driver SPIDEV. If you want to build the
-package using a different RF24 driver (like RPi, MRAA, wiringPi, etc), then
-it is necessary to pass an additional argument to the install command:
+package using a different RF24 driver (like ``RPi``, ``MRAA``, ``wiringPi``, etc), then
+it is necessary to use an environment variable containing additional arguments for CMake:
 
 .. code-block:: bash
 
-    python setup.py bdist_wheel -DRF24_DRIVER=RPi
+    export CMAKE_ARGS="-DRF4_DRIVER=RPi"
 
-.. note::
-    This approach cannot be done with the ``pip install .`` command.
-    It needs to be done from the ``python setup.py`` command
+.. hint::
+    You can also use this environment variable to enable debug output from different
+    layers of the RF24 stack. For a list of supported options, look at the script in
+    `this repository's cmake/using_flags.cmake <https://github.com/nRF24/pyRF24/blob/main/cmake/using_flags.cmake>`_.
+
+    The following value will turn on debug output for the RF24Mesh and RF24Network
+    classes (respectively).
+
+    .. code-block:: bash
+
+        export CMAKE_ARGS="-DMESH_DEBUG=ON -DSERIAL_DEBUG=ON"
+
+Then just build and install the package from source as usual.
+
+.. code-block:: bash
+
+    python -m pip install . -v
 
 Differences in API
 ~~~~~~~~~~~~~~~~~~
