@@ -118,6 +118,7 @@ def set_role():
         input(
             "*** Enter 'R' for receiver role.\n"
             "*** Enter 'T' for transmitter role.\n"
+            "    Use 'T n' to transmit as node n; n must be in range [0, 5].\n"
             "*** Enter 'Q' to quit example.\n"
         )
         or "?"
