@@ -1,9 +1,9 @@
 .. image:: https://img.shields.io/piwheels/v/pyrf24
     :target: https://www.piwheels.org/project/pyrf24/
     :alt: piwheels
-.. image:: https://img.shields.io/pypi/v/pyrf24
-    :target: https://pypi.org/project/pyrf24/
-    :alt: PyPI
+.. image:: https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&logo=readthedocs&logoColor=white
+    :target: https://pyrf24.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 .. image:: https://static.pepy.tech/personalized-badge/pyrf24?period=total&units=none&left_color=grey&right_color=blue&left_text=PyPI%20Downloads
     :target: https://pepy.tech/project/pyrf24
     :alt: PyPI Downloads
