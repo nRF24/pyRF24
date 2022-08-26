@@ -62,11 +62,11 @@ PYBIND11_MODULE(rf24_mesh, m)
     py::class_<RF24Mesh::addrListStruct>(m, "AddrListStruct")
         .def(py::init<>())
         .def_readonly("node_id", &RF24Mesh::addrListStruct::nodeID, R"docstr(
-            This `int` attribute represents a node's unique ID number.
+            This (read-only) `int` attribute represents a node's unique ID number.
         )docstr")
         .def_readonly("nodeID", &RF24Mesh::addrListStruct::nodeID)
         .def_readonly("address", &RF24Mesh::addrListStruct::address, R"docstr(
-            This `int` represents the assigned `Logical Address <logical_address>` corresponding to the
+            This (read-only) `int` represents the assigned `Logical Address <logical_address>` corresponding to the
             :attr:`AddrListStruct.node_id`.
         )docstr")
         .def("__repr__", [](RF24Mesh::addrListStruct& obj) {

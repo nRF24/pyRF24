@@ -2,7 +2,6 @@ RF24Network API
 ===============
 
 .. automodule:: pyrf24.rf24_network
-    :members:
 
 RF24Network class
 -----------------
