@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.a280224b.min.css">
+      <link rel="stylesheet" href="_static/stylesheets/main.30c392bc.min.css">
       
         
         <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
@@ -29,12 +29,11 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
         <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+        <link rel="stylesheet" type="text/css" href="_static/google_fonts.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
     <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -576,7 +575,7 @@ SoC boards like the Raspberry Pi.</p>
 are limited to the corresponding counterparts on the SoC’s SPI bus. The CSN pin is limited to the
 chosen SPI bus’s “Chip Select” options (Also labeled as “CE” pins on many Raspberry Pi pinout
 diagrams). The following table shows the default pins used in all the
-<a class="reference external" href="examples.html">examples</a> for this package.</p>
+<a class="reference external" href="https://pyrf24.readthedocs.io/en/latest/examples.html">examples</a> for this package.</p>
 <table class="docutils data align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
@@ -626,7 +625,9 @@ ultimately depends on the nature of your power supply’s stability.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Notice that RPi.GPIO (for python) is used to manage the GPIO pins on the Raspberry Pi
-(exclusively during the <a class="reference external" href="examples.html#interrupt-configure">interrupt_configure.py</a> example).</p>
+(exclusively during the
+<a class="reference external" href="https://pyrf24.readthedocs.io/en/latest/examples.html#interrupt-configure">interrupt_configure.py</a>
+example).</p>
 <p>RPi.GPIO is not required for normal usage (when not using the radio’s IRQ pin).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo apt install python3-rpi.gpio
 </code></pre></div>
@@ -937,7 +938,7 @@ rendered correctly.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.1.1.
+    5.3.0.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -956,6 +957,7 @@ rendered correctly.</p>
     
     
       <script src="_static/javascripts/bundle.dc1bded0.min.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     
   </body>
 </html>
