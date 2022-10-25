@@ -27,7 +27,7 @@ The nRF24L01's CE and IRQ pins can be connected to other GPIO pins on the SoC. T
 are limited to the corresponding counterparts on the SoC's SPI bus. The CSN pin is limited to the
 chosen SPI bus's "Chip Select" options (Also labeled as "CE" pins on many Raspberry Pi pinout
 diagrams). The following table shows the default pins used in all the
-`examples <examples.html>`_ for this package.
+`examples <https://pyrf24.readthedocs.io/en/latest/examples.html>`_ for this package.
 
 .. csv-table::
     :header: nRF24L01, Raspberry Pi
@@ -53,7 +53,9 @@ The IRQ pin is not typically connected, and it is only used in the interrupt_con
 
 .. note::
     Notice that RPi.GPIO (for python) is used to manage the GPIO pins on the Raspberry Pi
-    (exclusively during the `interrupt_configure.py <examples.html#interrupt-configure>`_ example).
+    (exclusively during the
+    `interrupt_configure.py <https://pyrf24.readthedocs.io/en/latest/examples.html#interrupt-configure>`_
+    example).
 
     RPi.GPIO is not required for normal usage (when not using the radio's IRQ pin).
 
