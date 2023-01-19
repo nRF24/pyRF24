@@ -107,6 +107,42 @@ object_description_options = [
     ("py:parameter", dict(include_in_toc=False)),
 ]
 
+sphinx_immaterial_custom_admonitions = [
+    {
+        "name": "warning",
+        "color": (255, 66, 66),
+        "icon": "octicons/alert-24",
+        "override": True,
+    },
+    {
+        "name": "note",
+        "icon": "octicons/pencil-24",
+        "override": True,
+    },
+    {
+        "name": "seealso",
+        "color": (255, 66, 252),
+        "icon": "octicons/eye-24",
+        "title": "See Also",
+        "override": True,
+    },
+    {
+        "name": "hint",
+        "icon": "material/school",
+        "override": True,
+    },
+    {
+        "name": "tip",
+        "icon": "material/school",
+        "override": True,
+    },
+    {
+        "name": "important",
+        "icon": "material/school",
+        "override": True,
+    },
+]
+
 python_type_aliases = {
     "pyrf24.rf24.rf24_datarate_e": "rf24_datarate_e",
 }

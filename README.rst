@@ -15,7 +15,7 @@ Introduction
 ============
 
 This is the official home of the python wrappers for the RF24 stack. It is meant for Linux-based
-SoC boards like the Raspberry Pi.
+SoC boards like the Raspberry Pi. Documentation is hosted at http://pyrf24.rtfd.io/.
 
 Pinout
 ~~~~~~
@@ -25,7 +25,7 @@ Pinout
 
 The nRF24L01's CE and IRQ pins can be connected to other GPIO pins on the SoC. The MISO, MOSI, SCK
 are limited to the corresponding counterparts on the SoC's SPI bus. The CSN pin is limited to the
-chosen SPI bus's "Chip Select" options (Also labeled as "CE" pins on many Raspberry Pi pinout
+chosen SPI bus's "Chip Select" options (also labeled as "CE" pins on many Raspberry Pi pinout
 diagrams). The following table shows the default pins used in all the
 `examples <https://pyrf24.readthedocs.io/en/latest/examples.html>`_ for this package.
 
@@ -274,7 +274,9 @@ in various development environments.
 Documentation
 ~~~~~~~~~~~~~
 
-Before submitting contributions, you should make sure that any documentation changes builds
+Each release has corresponding documentation hosted at http://pyrf24.rtfd.io/.
+
+Before submitting contributions, you should make sure that any documentation changes build
 successfully. This can be done locally but **on Linux only**. The documentation of API requires
 this package (& all its latest changes) be installed.
 

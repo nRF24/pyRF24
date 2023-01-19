@@ -60,10 +60,10 @@ public:
         return RF24Network::peek(header);
     }
 
-    std::tuple<RF24NetworkHeader, py::bytearray> peek_frame(uint8_t maxlen = MAX_PAYLOAD_SIZE)
+    std::tuple<RF24NetworkHeader, py::bytearray> peek_frame(uint16_t maxlen = MAX_PAYLOAD_SIZE)
     {
         RF24NetworkHeader header;
-        maxlen = static_cast<uint8_t>(rf24_min(maxlen, RF24Network::peek(header)));
+        maxlen = static_cast<uint16_t>(rf24_min(maxlen, RF24Network::peek(header)));
         char* buf = new char[maxlen + 1];
         RF24Network::peek(header, buf, maxlen);
         py::bytearray py_ba = py::bytearray(buf, maxlen);
@@ -326,12 +326,13 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("read", &RF24NetworkWrapper::read, R"docstr(
-            read(maxlen: int = 144) -> Tuple[RF24NetworkHeader, bytearray]
+            read(maxlen: int = MAX_PAYLOAD_SIZE) -> Tuple[RF24NetworkHeader, bytearray]
 
             Fetch the next available frame received by the network node. This differs from `peek()` as it removes the frame from the queue.
 
-            :param int maxlen: The maximum length of the frame's message to be returned. If this parameter is unspecified, then the entire
-                length of the frame's message is returned.
+            :param int maxlen: The maximum length of the frame's message to be returned. If this parameter is unspecified or greater than
+                the actual frame's message size, then only the frame's full message size is used. Defaults to
+                :py:attr:`~pyrf24.rf24_network.MAX_PAYLOAD_SIZE`.
 
             :Returns: A `tuple` in which
 
@@ -344,7 +345,7 @@ PYBIND11_MODULE(rf24_network, m)
 
         .def("peek", &RF24NetworkWrapper::peek_header, R"docstr(
             peek(header: RF24NetworkHeader) -> int \
-            peek(maxlen: int) -> Tuple[RF24NetworkHeader, bytearray]
+            peek(maxlen: int = MAX_PAYLOAD_SIZE) -> Tuple[RF24NetworkHeader, bytearray]
             To fetch the next available frame's header received by the network node, the parameter and return type is as follows:
 
             :param RF24NetworkHeader header: The object to save the header information to.
@@ -358,7 +359,8 @@ PYBIND11_MODULE(rf24_network, m)
             To fetch the next available frame received by the network node, the parameter and return type is as follows:
 
             :param int maxlen: The maximum length of the message to fetch. If this parameter is unspecified or greater than
-                the actual frame's message size, then only the frame's full message size is used.
+                the actual frame's message size, then only the frame's full message size is used. Defaults to
+                :py:attr:`~pyrf24.rf24_network.MAX_PAYLOAD_SIZE`.
 
             :Returns: A 2-tuple containing the frame's header (of type `RF24NetworkHeader`) and the frame's message (of type `bytearray`).
         )docstr",

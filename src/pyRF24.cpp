@@ -1097,7 +1097,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def_property("payload_size", &RF24Wrapper::getPayloadSize, &RF24Wrapper::setPayloadSize, R"docstr(
-            This `int` attribute represents the radio's static payload lengths.
+            This `int` attribute represents the radio's static payload lengths. Maximum length is 32 bytes; minimum is 1 byte.
 
             .. note:: This attribute is only used when the radio's `dynamic_payloads` feature is disabled
                 (which is disabled by default).
