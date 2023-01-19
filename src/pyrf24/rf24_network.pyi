@@ -3,7 +3,7 @@ from typing import Tuple, Union, List, overload, Optional
 from .rf24 import RF24
 
 MAX_USER_DEFINED_HEADER_TYPE: int = 127
-MAX_PAYLOAD_SIZE: int = 144
+MAX_PAYLOAD_SIZE: int = 1514
 NETWORK_ADDR_RESPONSE: int = 128
 NETWORK_PING: int = 130
 EXTERNAL_DATA_TYPE: int = 131
@@ -80,7 +80,7 @@ class RF24Network:
     def peek(self, header: RF24NetworkHeader) -> int: ...
     @overload
     def peek(
-        self, maxlen: Optional[int] = None
+        self, maxlen: int = MAX_PAYLOAD_SIZE
     ) -> Tuple[RF24NetworkHeader, bytearray]: ...
     def read(
         self, maxlen: Optional[int] = None
