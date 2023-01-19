@@ -326,12 +326,13 @@ PYBIND11_MODULE(rf24_network, m)
         // *****************************************************************************
 
         .def("read", &RF24NetworkWrapper::read, R"docstr(
-            read(maxlen: int = 144) -> Tuple[RF24NetworkHeader, bytearray]
+            read(maxlen: int = MAX_PAYLOAD_SIZE) -> Tuple[RF24NetworkHeader, bytearray]
 
             Fetch the next available frame received by the network node. This differs from `peek()` as it removes the frame from the queue.
 
-            :param int maxlen: The maximum length of the frame's message to be returned. If this parameter is unspecified, then the entire
-                length of the frame's message is returned.
+            :param int maxlen: The maximum length of the frame's message to be returned. If this parameter is unspecified or greater than
+                the actual frame's message size, then only the frame's full message size is used. Defaults to
+                :py:attr:`~pyrf24.rf24_network.MAX_PAYLOAD_SIZE`.
 
             :Returns: A `tuple` in which
 
