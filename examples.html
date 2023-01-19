@@ -17,12 +17,12 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.30c392bc.min.css">
       
         
-        <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
         
       
+      
+
     
     
     
@@ -34,11 +34,13 @@
     
         <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
         <link rel="stylesheet" type="text/css" href="_static/google_fonts.css" />
+        <link rel="stylesheet" type="text/css" href="_static/stylesheets/sphinx_immaterial_theme.a53d1d38a4817af62.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -78,7 +80,9 @@
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="pyRF24 library" class="md-header__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
-      <img src="_static/Logo_large.jpg" alt="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
@@ -138,11 +142,11 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -166,7 +170,7 @@
         <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -262,7 +266,9 @@
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="pyRF24 library" class="md-nav__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
-      <img src="_static/Logo_large.jpg" alt="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
     </a>
     pyRF24 library
   </label>
@@ -271,7 +277,7 @@
       <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -677,12 +683,13 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset" role="main">
-                
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
 
 
-  <h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h1>
+<h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h1>
 <h2 id="rf24-examples">RF24 examples<a class="headerlink" href="#rf24-examples" title="Permalink to this heading">¶</a></h2>
 <h3 id="getting-started">getting_started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h3>
 <p>A simple example of using the RF24 class</p>
@@ -854,7 +861,7 @@ examples/getting_started.py<a class="headerlink" href="#id1" title="Permalink to
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
-    <span class="sd">&quot;&quot;&quot;Transmits an incrementing float every second&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits an incrementing float every second&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ensures the nRF24L01 is in TX mode</span>
 
     <span class="k">while</span> <span class="n">count</span><span class="p">:</span>
@@ -870,7 +877,7 @@ examples/getting_started.py<a class="headerlink" href="#id1" title="Permalink to
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">&quot;Transmission successful! Time to Transmit:&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="si">}</span><span class="s2"> us. Sent: </span><span class="si">{</span><span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2"> us. Sent: </span><span class="si">{</span><span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.01</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -878,7 +885,7 @@ examples/getting_started.py<a class="headerlink" href="#id1" title="Permalink to
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span>
 <span class="sd">    after 6 seconds of no received transmission.&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># put radio into RX mode and power up</span>
 
@@ -1092,7 +1099,7 @@ examples/acknowledgement_payloads.py<a class="headerlink" href="#id2" title="Per
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
-    <span class="sd">&quot;&quot;&quot;Transmits a payload every second and prints the ACK payload&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits a payload every second and prints the ACK payload&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># put radio in TX mode</span>
 
     <span class="k">while</span> <span class="n">count</span><span class="p">:</span>
@@ -1107,7 +1114,7 @@ examples/acknowledgement_payloads.py<a class="headerlink" href="#id2" title="Per
             <span class="c1"># print timer results upon transmission success</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">&quot;Transmission successful! Time to transmit:&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2"> us. Sent:&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2"> us. Sent:&quot;</span><span class="p">,</span>
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">buffer</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}{</span><span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
             <span class="p">)</span>
@@ -1125,7 +1132,7 @@ examples/acknowledgement_payloads.py<a class="headerlink" href="#id2" title="Per
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Prints the received value and sends an ACK payload&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints the received value and sends an ACK payload&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># put radio into RX mode, power it up</span>
 
     <span class="c1"># setup the first transmission&#39;s ACK payload</span>
@@ -1377,7 +1384,7 @@ examples/manual_acknowledgements.py<a class="headerlink" href="#id3" title="Perm
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transmits a message and an incrementing integer every second&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits a message and an incrementing integer every second&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ensures the nRF24L01 is in TX mode</span>
 
     <span class="k">while</span> <span class="n">count</span><span class="p">:</span>  <span class="c1"># only transmit `count` packets</span>
@@ -1416,14 +1423,14 @@ examples/manual_acknowledgements.py<a class="headerlink" href="#id3" title="Perm
                 <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&lt;b&quot;</span><span class="p">,</span> <span class="n">ack</span><span class="p">[</span><span class="mi">7</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="nb">print</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;Received: </span><span class="si">{</span><span class="n">response</span><span class="si">}{</span><span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">. Roundtrip delay:&quot;</span><span class="p">,</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="si">}</span><span class="s2"> us.&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2"> us.&quot;</span><span class="p">,</span>
                 <span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># make example readable by slowing down transmissions</span>
         <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span>
 <span class="sd">    after 6 seconds of no received transmission&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># put radio into RX mode and power up</span>
 
@@ -1449,7 +1456,7 @@ examples/manual_acknowledgements.py<a class="headerlink" href="#id3" title="Perm
             <span class="c1"># print the payload received and the response&#39;s payload</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Received </span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s2"> bytes on pipe </span><span class="si">{</span><span class="n">pipe_number</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">received</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}{</span><span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">received</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}{</span><span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
                 <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">response</span><span class="p">:</span>
@@ -1627,7 +1634,7 @@ examples/multiceiver_demo.py<a class="headerlink" href="#id4" title="Permalink t
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">node_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;start transmitting to the base station.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;start transmitting to the base station.</span>
 
 <span class="sd">    :param int node_number: the node&#39;s identifying index (from the</span>
 <span class="sd">        the `addresses` list). This is a required parameter</span>
@@ -1655,7 +1662,7 @@ examples/multiceiver_demo.py<a class="headerlink" href="#id4" title="Permalink t
         <span class="k">if</span> <span class="n">report</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Transmission of payloadID </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2"> as node </span><span class="si">{</span><span class="n">node_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;successfull! Transmission time: </span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;successfull! Transmission time: </span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;us&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1664,7 +1671,7 @@ examples/multiceiver_demo.py<a class="headerlink" href="#id4" title="Permalink t
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Use the nRF24L01 as a base station for listening to all nodes&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use the nRF24L01 as a base station for listening to all nodes&quot;&quot;&quot;</span>
     <span class="c1"># write the addresses to all pipes.</span>
     <span class="k">for</span> <span class="n">pipe_n</span><span class="p">,</span> <span class="n">addr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">addresses</span><span class="p">):</span>
         <span class="n">radio</span><span class="o">.</span><span class="n">open_rx_pipe</span><span class="p">(</span><span class="n">pipe_n</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
@@ -1868,7 +1875,7 @@ examples/streaming_data.py<a class="headerlink" href="#id5" title="Permalink to 
 
 
 <span class="k">def</span> <span class="nf">make_buffer</span><span class="p">(</span><span class="n">buf_iter</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;return a list of payloads&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;return a list of payloads&quot;&quot;&quot;</span>
     <span class="c1"># we&#39;ll use `size` for the number of payloads in the list and the</span>
     <span class="c1"># payloads&#39; length</span>
     <span class="c1"># prefix payload with a sequential letter to indicate which</span>
@@ -1882,7 +1889,7 @@ examples/streaming_data.py<a class="headerlink" href="#id5" title="Permalink to 
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Uses all 3 levels of the TX FIFO `RF24.writeFast()`&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uses all 3 levels of the TX FIFO `RF24.writeFast()`&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting size to 6;&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="s2">&quot;is not allowed for this test.&quot;</span><span class="p">)</span>
         <span class="n">size</span> <span class="o">=</span> <span class="mi">6</span>
@@ -1915,13 +1922,13 @@ examples/streaming_data.py<a class="headerlink" href="#id5" title="Permalink to 
             <span class="n">buf_iter</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># end timer</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Transmission took </span><span class="si">{</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="si">}</span><span class="s2"> ms with&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Transmission took </span><span class="si">{</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="si">}</span><span class="s2"> ms with&quot;</span><span class="p">,</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">failures</span><span class="si">}</span><span class="s2"> failures detected.&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Stops listening after a `timeout` with no response&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stops listening after a `timeout` with no response&quot;&quot;&quot;</span>
     <span class="c1"># set address of TX node into an RX pipe. NOTE you MUST specify</span>
 
     <span class="c1"># save on transmission time by setting the radio to only transmit the</span>
@@ -2191,7 +2198,7 @@ examples/interrupt_configure.py<a class="headerlink" href="#id6" title="Permalin
 
 
 <span class="k">def</span> <span class="nf">interrupt_handler</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;This function is called when IRQ pin is detected active LOW&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function is called when IRQ pin is detected active LOW&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IRQ pin went active LOW.&quot;</span><span class="p">)</span>
     <span class="n">tx_ds</span><span class="p">,</span> <span class="n">tx_df</span><span class="p">,</span> <span class="n">rx_dr</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">what_happened</span><span class="p">()</span>  <span class="c1"># update IRQ status flags</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">tx_ds: </span><span class="si">{</span><span class="n">tx_ds</span><span class="si">}</span><span class="s2">, tx_df: </span><span class="si">{</span><span class="n">tx_df</span><span class="si">}</span><span class="s2">, rx_dr: </span><span class="si">{</span><span class="n">rx_dr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2210,7 +2217,7 @@ examples/interrupt_configure.py<a class="headerlink" href="#id6" title="Permalin
 
 
 <span class="k">def</span> <span class="nf">_wait_for_irq</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Wait till IRQ_PIN goes active then inactive.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wait till IRQ_PIN goes active then inactive.</span>
 <span class="sd">    IRQ pin is LOW when activated. Otherwise it is always HIGH</span>
 
 <span class="sd">    In this example, the &quot;data fail&quot; event is always configured to</span>
@@ -2227,7 +2234,7 @@ examples/interrupt_configure.py<a class="headerlink" href="#id6" title="Permalin
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Transmits 3 times: successfully receive ACK payload first, successfully</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits 3 times: successfully receive ACK payload first, successfully</span>
 <span class="sd">    transmit on second, and intentionally fail transmit on the third&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ensures the nRF24L01 is in TX mode</span>
 
@@ -2270,7 +2277,7 @@ examples/interrupt_configure.py<a class="headerlink" href="#id6" title="Permalin
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># will listen for 6 seconds before timing out</span>
-    <span class="sd">&quot;&quot;&quot;Only listen for 3 payload from the master node&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Only listen for 3 payload from the master node&quot;&quot;&quot;</span>
     <span class="c1"># setup radio to receive pings, fill TX FIFO with ACK payloads</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">write_ack_payload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">write_ack_payload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -2516,7 +2523,7 @@ examples/fake_ble_test.py<a class="headerlink" href="#id7" title="Permalink to t
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sends out the device information.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends out the device information.&quot;&quot;&quot;</span>
     <span class="c1"># using the &quot;with&quot; statement is highly recommended if the nRF24L01 is</span>
     <span class="c1"># to be used for more than a BLE configuration</span>
     <span class="n">ble</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;nRF24L01&quot;</span>
@@ -2546,7 +2553,7 @@ examples/fake_ble_test.py<a class="headerlink" href="#id7" title="Permalink to t
 
 
 <span class="k">def</span> <span class="nf">send_temp</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sends out a fake temperature.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends out a fake temperature.&quot;&quot;&quot;</span>
     <span class="n">ble</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;nRF24L01&quot;</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="s2">&quot;available bytes in next payload:&quot;</span><span class="p">,</span>
@@ -2575,7 +2582,7 @@ examples/fake_ble_test.py<a class="headerlink" href="#id7" title="Permalink to t
 
 
 <span class="k">def</span> <span class="nf">send_url</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sends out a URL.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends out a URL.&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="s2">&quot;available bytes in next payload:&quot;</span><span class="p">,</span>
         <span class="n">ble</span><span class="o">.</span><span class="n">len_available</span><span class="p">(</span><span class="n">chunk</span><span class="p">(</span><span class="n">url_service</span><span class="o">.</span><span class="n">buffer</span><span class="p">)),</span>
@@ -2592,7 +2599,7 @@ examples/fake_ble_test.py<a class="headerlink" href="#id7" title="Permalink to t
 
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;read and decipher BLE payloads for `timeout` seconds.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;read and decipher BLE payloads for `timeout` seconds.&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># ensure radio is in RX mode</span>
     <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
     <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">end_timer</span><span class="p">:</span>
@@ -2893,7 +2900,7 @@ examples/mesh_example.py<a class="headerlink" href="#id10" title="Permalink to t
 
 
 <span class="k">def</span> <span class="nf">millis</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;:Returns: Delta time since started example in milliseconds. Wraps value around</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;:Returns: Delta time since started example in milliseconds. Wraps value around</span>
 <span class="sd">    the width of a ``long`` integer.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">)</span>
 
@@ -3245,7 +3252,7 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
 
 
 <span class="k">def</span> <span class="nf">idle</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">strict_timeout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Listen for any payloads and print the transaction</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Listen for any payloads and print the transaction</span>
 
 <span class="sd">    :param int timeout: The number of seconds to wait (with no transmission)</span>
 <span class="sd">        until exiting function.</span>
@@ -3277,7 +3284,7 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
 <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span>
     <span class="n">node</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">THIS_NODE</span><span class="p">,</span> <span class="n">frag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transmits 1 (or 2) integers or a large buffer</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits 1 (or 2) integers or a large buffer</span>
 
 <span class="sd">    :param int node: The target node for network transmissions.</span>
 <span class="sd">        If using RF24Mesh, this is a unique node_id.</span>
@@ -3308,7 +3315,7 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
         <span class="nb">print</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Sending </span><span class="si">{</span><span class="n">packets_sent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (len </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ok.&quot;</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">&quot;failed.&quot;</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s2">&quot;Transmission took </span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">)</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Transmission took </span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000000</span><span class="p">)</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
 
@@ -3318,12 +3325,17 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
 
 
 
-              
-            </article>
-          </div>
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
           </a>
@@ -3332,7 +3344,8 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
         <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
@@ -3381,7 +3394,7 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.3.0.
+    6.1.3.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -3396,10 +3409,11 @@ examples/general_network_test.py<a class="headerlink" href="#id12" title="Permal
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
+    
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.dc1bded0.min.js"></script>
+      <script src="_static/javascripts/bundle.444abb77.min.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     
   </body>

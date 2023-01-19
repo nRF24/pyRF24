@@ -17,12 +17,12 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.30c392bc.min.css">
       
         
-        <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
         
       
+      
+
     
     
     
@@ -34,11 +34,13 @@
     
         <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
         <link rel="stylesheet" type="text/css" href="_static/google_fonts.css" />
+        <link rel="stylesheet" type="text/css" href="_static/stylesheets/sphinx_immaterial_theme.a53d1d38a4817af62.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -78,7 +80,9 @@
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="pyRF24 library" class="md-header__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
-      <img src="_static/Logo_large.jpg" alt="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
@@ -138,11 +142,11 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -166,7 +170,7 @@
         <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -262,7 +266,9 @@
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="pyRF24 library" class="md-nav__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
-      <img src="_static/Logo_large.jpg" alt="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
     </a>
     pyRF24 library
   </label>
@@ -271,7 +277,7 @@
       <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -1251,12 +1257,13 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset" role="main">
-                
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
 
 
-  <h1 id="module-pyrf24.rf24_network"><span id="rf24network-api"></span>RF24Network API<a class="headerlink" href="#module-pyrf24.rf24_network" title="Permalink to this heading">¶</a></h1>
+<h1 id="module-pyrf24.rf24_network"><span id="rf24network-api"></span>RF24Network API<a class="headerlink" href="#module-pyrf24.rf24_network" title="Permalink to this heading">¶</a></h1>
 <p>A Python module that wraps the RF24Network C++ library’s API</p>
 <h2 id="rf24network-class">RF24Network class<a class="headerlink" href="#rf24network-class" title="Permalink to this heading">¶</a></h2>
 <dl class="py class objdesc">
@@ -1279,19 +1286,19 @@
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.begin">
-<span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.begin.node_address" title="pyrf24.rf24_network.RF24Network.begin.node_address (Python parameter)"><span class="n"><span class="pre">node_address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.begin" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.begin.node_address" title="pyrf24.rf24_network.RF24Network.begin.node_address (Python parameter)"><span class="n"><span class="pre">node_address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.begin" title="Permalink to this definition">¶</a></dt>
 <dt class="sig sig-object highlight py">
-<span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.begin.channel" title="pyrf24.rf24_network.RF24Network.begin.channel (Python parameter)"><span class="n"><span class="pre">channel</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.begin.node_address" title="pyrf24.rf24_network.RF24Network.begin.node_address (Python parameter)"><span class="n"><span class="pre">node_address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span></span></dt>
+<span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.begin.channel" title="pyrf24.rf24_network.RF24Network.begin.channel (Python parameter)"><span class="n"><span class="pre">channel</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.begin.node_address" title="pyrf24.rf24_network.RF24Network.begin.node_address (Python parameter)"><span class="n"><span class="pre">node_address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span></span></dt>
 <dd><p>Give the instantiated network node a <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="pyrf24.rf24_network.RF24Network.begin.node_address"><span class="sig-name descname">node_address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.begin.node_address" title="Permalink to this definition">¶</a></dt><dd><p>This is a <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a> (typically an octal integer).</p>
+<dt id="pyrf24.rf24_network.RF24Network.begin.node_address"><span class="sig-name descname">node_address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.begin.node_address" title="Permalink to this definition">¶</a></dt><dd><p>This is a <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a> (typically an octal integer).</p>
 </dd>
-<dt id="pyrf24.rf24_network.RF24Network.begin.channel"><span class="sig-name descname">channel</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.begin.channel" title="Permalink to this definition">¶</a></dt><dd><p><p>The desired channel used by the network.
+<dt id="pyrf24.rf24_network.RF24Network.begin.channel"><span class="sig-name descname">channel</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.begin.channel" title="Permalink to this definition">¶</a></dt><dd><p><p>The desired channel used by the network.
 Using this parameter is the deprecated form of this function.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
 <p>Use <a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.channel" title="pyrf24.rf24.RF24.channel (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">channel</span></code></a> attribute to change the radio
 channel.</p>
 </div>
@@ -1304,31 +1311,31 @@ channel.</p>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.update" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keep the network layer current. This function should be called regularly in the application.
 For applications that have a long-running operations in 1 “loop”/iteration, then it is advised to call this function more than once.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a> of the last received header’s <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader.type" title="pyrf24.rf24_network.RF24NetworkHeader.type (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">type</span></code></a></p>
+<dd class="field-odd"><p>The <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a> of the last received header’s <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader.type" title="pyrf24.rf24_network.RF24NetworkHeader.type (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">type</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.available">
-<span class="sig-name descname"><span class="pre">available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.available" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.available" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if there is a frame in the queue, otherwise <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if there is a frame in the queue, otherwise <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.peek">
-<span class="sig-name descname"><span class="pre">peek</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.peek.header" title="pyrf24.rf24_network.RF24Network.peek.header (Python parameter)"><span class="n"><span class="pre">header</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.peek" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">peek</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.peek.header" title="pyrf24.rf24_network.RF24Network.peek.header (Python parameter)"><span class="n"><span class="pre">header</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.peek" title="Permalink to this definition">¶</a></dt>
 <dt class="sig sig-object highlight py">
-<span class="sig-name descname"><span class="pre">peek</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.peek.maxlen" title="pyrf24.rf24_network.RF24Network.peek.maxlen (Python parameter)"><span class="n"><span class="pre">maxlen</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></span></span></dt>
+<span class="sig-name descname"><span class="pre">peek</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.peek.maxlen" title="pyrf24.rf24_network.RF24Network.peek.maxlen (Python parameter)"><span class="n"><span class="pre">maxlen</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></span></span></dt>
 <dd><p>To fetch the next available frame’s header received by the network node, the parameter and return type is as follows:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1345,34 +1352,34 @@ For applications that have a long-running operations in 1 “loop”/iteration, 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="pyrf24.rf24_network.RF24Network.peek.maxlen"><span class="sig-name descname">maxlen</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.peek.maxlen" title="Permalink to this definition">¶</a></dt><dd><p>The maximum length of the message to fetch. If this parameter is unspecified or greater than
+<dt id="pyrf24.rf24_network.RF24Network.peek.maxlen"><span class="sig-name descname">maxlen</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.peek.maxlen" title="Permalink to this definition">¶</a></dt><dd><p>The maximum length of the message to fetch. If this parameter is unspecified or greater than
 the actual frame’s message size, then only the frame’s full message size is used.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A 2-tuple containing the frame’s header (of type <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a>) and the frame’s message (of type <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">bytearray</span></code></a>).</p>
+<dd class="field-even"><p>A 2-tuple containing the frame’s header (of type <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a>) and the frame’s message (of type <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">bytearray</span></code></a>).</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.read.maxlen" title="pyrf24.rf24_network.RF24Network.read.maxlen (Python parameter)"><span class="n"><span class="pre">maxlen</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">144</span></code></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.read.maxlen" title="pyrf24.rf24_network.RF24Network.read.maxlen (Python parameter)"><span class="n"><span class="pre">maxlen</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">144</span></code></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch the next available frame received by the network node. This differs from <a class="reference internal" href="#pyrf24.rf24_network.RF24Network.peek" title="pyrf24.rf24_network.RF24Network.peek (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">peek()</span></code></a> as it removes the frame from the queue.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="pyrf24.rf24_network.RF24Network.read.maxlen"><span class="sig-name descname">maxlen</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.read.maxlen" title="Permalink to this definition">¶</a></dt><dd><p>The maximum length of the frame’s message to be returned. If this parameter is unspecified, then the entire
+<dt id="pyrf24.rf24_network.RF24Network.read.maxlen"><span class="sig-name descname">maxlen</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.read.maxlen" title="Permalink to this definition">¶</a></dt><dd><p>The maximum length of the frame’s message to be returned. If this parameter is unspecified, then the entire
 length of the frame’s message is returned.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> in which</p>
+<dd class="field-even"><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> in which</p>
 <ul class="simple">
 <li><p>index 0 is the frame’s <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a></p></li>
-<li><p>index 1 is the frame’s message (as a mutable <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">bytearray</span></code></a>)</p></li>
+<li><p>index 1 is the frame’s message (as a mutable <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">bytearray</span></code></a>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1380,22 +1387,22 @@ length of the frame’s message is returned.</p>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="pyrf24.rf24_network.RF24Network.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.write.header" title="pyrf24.rf24_network.RF24Network.write.header (Python parameter)"><span class="n"><span class="pre">header</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.write.buf" title="pyrf24.rf24_network.RF24Network.write.buf (Python parameter)"><span class="n"><span class="pre">buf</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.write.write_direct" title="pyrf24.rf24_network.RF24Network.write.write_direct (Python parameter)"><span class="n"><span class="pre">write_direct</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><code class="code python default_value docutils literal highlight highlight-python"><span class="mo">0o70</span></code></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.write.header" title="pyrf24.rf24_network.RF24Network.write.header (Python parameter)"><span class="n"><span class="pre">header</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.write.buf" title="pyrf24.rf24_network.RF24Network.write.buf (Python parameter)"><span class="n"><span class="pre">buf</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)"><span class="pre">bytearray</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.write.write_direct" title="pyrf24.rf24_network.RF24Network.write.write_direct (Python parameter)"><span class="n"><span class="pre">write_direct</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><code class="code python default_value docutils literal highlight highlight-python"><span class="mo">0o70</span></code></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send an outgoing frame over the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
 <dt id="pyrf24.rf24_network.RF24Network.write.header"><span class="sig-name descname">header</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)">RF24NetworkHeader</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write.header" title="Permalink to this definition">¶</a></dt><dd><p>The outgoing frame’s <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a> about the outgoing message.</p>
 </dd>
-<dt id="pyrf24.rf24_network.RF24Network.write.buf"><span class="sig-name descname">buf</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)">bytearray</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write.buf" title="Permalink to this definition">¶</a></dt><dd><p>The outgoing frame’s message (AKA buffer).</p>
+<dt id="pyrf24.rf24_network.RF24Network.write.buf"><span class="sig-name descname">buf</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)">bytearray</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write.buf" title="Permalink to this definition">¶</a></dt><dd><p>The outgoing frame’s message (AKA buffer).</p>
 </dd>
-<dt id="pyrf24.rf24_network.RF24Network.write.write_direct"><span class="sig-name descname">write_direct</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write.write_direct" title="Permalink to this definition">¶</a></dt><dd><p>An optional parameter to route the message directly to a specified node.
+<dt id="pyrf24.rf24_network.RF24Network.write.write_direct"><span class="sig-name descname">write_direct</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.write.write_direct" title="Permalink to this definition">¶</a></dt><dd><p>An optional parameter to route the message directly to a specified node.
 The default value will invoke automatic routing.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the frame was successfully sent or otherwise <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the frame was successfully sent or otherwise <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1409,7 +1416,7 @@ The default value will invoke automatic routing.</p>
 <h3 id="advanced-rf24network-api">Advanced RF24Network API<a class="headerlink" href="#advanced-rf24network-api" title="Permalink to this heading">¶</a></h3>
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="pyrf24.rf24_network.RF24Network.multicast">
-<span class="sig-name descname"><span class="pre">multicast</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.multicast.header" title="pyrf24.rf24_network.RF24Network.multicast.header (Python parameter)"><span class="n"><span class="pre">header</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.multicast.buf" title="pyrf24.rf24_network.RF24Network.multicast.buf (Python parameter)"><span class="n"><span class="pre">buf</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.multicast.level" title="pyrf24.rf24_network.RF24Network.multicast.level (Python parameter)"><span class="n"><span class="pre">level</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">7</span></code></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">multicast</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.multicast.header" title="pyrf24.rf24_network.RF24Network.multicast.header (Python parameter)"><span class="n"><span class="pre">header</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><span class="pre">RF24NetworkHeader</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.multicast.buf" title="pyrf24.rf24_network.RF24Network.multicast.buf (Python parameter)"><span class="n"><span class="pre">buf</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)"><span class="pre">bytearray</span></a></span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.multicast.level" title="pyrf24.rf24_network.RF24Network.multicast.level (Python parameter)"><span class="n"><span class="pre">level</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">7</span></code></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast" title="Permalink to this definition">¶</a></dt>
 <dd><p>Broadcast a message to all nodes in a network level.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1417,32 +1424,32 @@ The default value will invoke automatic routing.</p>
 <dt id="pyrf24.rf24_network.RF24Network.multicast.header"><span class="sig-name descname">header</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)">RF24NetworkHeader</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast.header" title="Permalink to this definition">¶</a></dt><dd><p>The outgoing frame’s header. The only value of this
 object that is not overridden by this function is the <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader.type" title="pyrf24.rf24_network.RF24NetworkHeader.type (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">RF24NetworkHeader.type</span></code></a> attribute.</p>
 </dd>
-<dt id="pyrf24.rf24_network.RF24Network.multicast.buf"><span class="sig-name descname">buf</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.10)">bytearray</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast.buf" title="Permalink to this definition">¶</a></dt><dd><p>The outgoing frame’s message (AKA buffer).</p>
+<dt id="pyrf24.rf24_network.RF24Network.multicast.buf"><span class="sig-name descname">buf</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)">bytes</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytearray" title="(in Python v3.11)">bytearray</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast.buf" title="Permalink to this definition">¶</a></dt><dd><p>The outgoing frame’s message (AKA buffer).</p>
 </dd>
-<dt id="pyrf24.rf24_network.RF24Network.multicast.level"><span class="sig-name descname">level</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast.level" title="Permalink to this definition">¶</a></dt><dd><p>The network level to broadcast the message to. If this parameter is not specified,
+<dt id="pyrf24.rf24_network.RF24Network.multicast.level"><span class="sig-name descname">level</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast.level" title="Permalink to this definition">¶</a></dt><dd><p>The network level to broadcast the message to. If this parameter is not specified,
 then the current network level of the instantiated node is used (see <a class="reference internal" href="#pyrf24.rf24_network.RF24Network.multicast_level" title="pyrf24.rf24_network.RF24Network.multicast_level (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">multicast_level</span></code></a>).</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>This function will always return <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> as multicasted messages do not use the radio’s auto-ack feature.</p>
+<dd class="field-even"><p>This function will always return <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> as multicasted messages do not use the radio’s auto-ack feature.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.is_address_valid">
-<span class="sig-name descname"><span class="pre">is_address_valid</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.is_address_valid.address" title="pyrf24.rf24_network.RF24Network.is_address_valid.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.is_address_valid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">is_address_valid</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.rf24_network.RF24Network.is_address_valid.address" title="pyrf24.rf24_network.RF24Network.is_address_valid.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.is_address_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this function to verify if an integer can be used as a valid <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a> for network nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="pyrf24.rf24_network.RF24Network.is_address_valid.address"><span class="sig-name descname">address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.is_address_valid.address" title="Permalink to this definition">¶</a></dt><dd><p>The integer to validate.</p>
+<dt id="pyrf24.rf24_network.RF24Network.is_address_valid.address"><span class="sig-name descname">address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.is_address_valid.address" title="Permalink to this definition">¶</a></dt><dd><p>The integer to validate.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the given integer is a valid <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a>, otherwise <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the given integer is a valid <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a>, otherwise <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1450,20 +1457,20 @@ then the current network level of the instantiated node is used (see <a class="r
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.multicast_relay">
 <span class="sig-name descname"><span class="pre">multicast_relay</span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.multicast_relay" title="Permalink to this definition">¶</a></dt>
-<dd><p>This <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">bool</span></code></a> attribute determines if any received multicasted messages should be forwarded to the next highest network level.
-Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dd><p>This <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">bool</span></code></a> attribute determines if any received multicasted messages should be forwarded to the next highest network level.
+Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.tx_timeout">
 <span class="sig-name descname"><span class="pre">tx_timeout</span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.tx_timeout" title="Permalink to this definition">¶</a></dt>
-<dd><p>The timeout <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a> value (in milliseconds) to ensure a frame is properly sent. Defaults to 25.</p>
+<dd><p>The timeout <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a> value (in milliseconds) to ensure a frame is properly sent. Defaults to 25.</p>
 </dd></dl>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.route_timeout">
 <span class="sig-name descname"><span class="pre">route_timeout</span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.route_timeout" title="Permalink to this definition">¶</a></dt>
-<dd><p>The timeout <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a> value (in milliseconds) used to wait for a Network ACK message. Defaults to 75.</p>
+<dd><p>The timeout <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a> value (in milliseconds) used to wait for a Network ACK message. Defaults to 75.</p>
 </dd></dl>
 
 <dl class="py attribute objdesc">
@@ -1479,7 +1486,7 @@ default value set by <a class="reference internal" href="#pyrf24.rf24_network.RF
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24Network.return_sys_msgs">
 <span class="sig-prename descclassname"><span class="pre">RF24Network.</span></span><span class="sig-name descname"><span class="pre">return_sys_msgs</span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24Network.return_sys_msgs" title="Permalink to this definition">¶</a></dt>
-<dd><p>This <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">bool</span></code></a> attribute is used by RF24Mesh to force <a class="reference internal" href="#pyrf24.rf24_network.RF24Network.update" title="pyrf24.rf24_network.RF24Network.update (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update()</span></code></a>
+<dd><p>This <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">bool</span></code></a> attribute is used by RF24Mesh to force <a class="reference internal" href="#pyrf24.rf24_network.RF24Network.update" title="pyrf24.rf24_network.RF24Network.update (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update()</span></code></a>
 to return when handling a frame containing a system message.</p>
 <p>When this attribute is enabled, the following system messages are not returned because they are handled
 internally.</p>
@@ -1513,8 +1520,8 @@ internally.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
 <p>There’s a more complete list (with behavioral descriptions) of the <a class="reference internal" href="#reserved-sys-msgs"><span class="std std-ref">Reserved System Message Types</span></a>.</p>
 </div>
 </dd></dl>
@@ -1544,10 +1551,10 @@ internally.</p>
 </dd></dl>
 
 <h2 id="rf24networkheader-class">RF24NetworkHeader class<a class="headerlink" href="#rf24networkheader-class" title="Permalink to this heading">¶</a></h2>
-<div class="admonition hint">
+<div class="hint admonition">
 <p class="admonition-title">Hint</p>
-<p>The <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a> class supports the python “magic method” <a class="reference external" href="https://docs.python.org/3/library/functions.html#repr" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>. So, you can
-easily pass an instantiated <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a> object to the <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function.</p>
+<p>The <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a> class supports the python “magic method” <a class="reference external" href="https://docs.python.org/3/library/functions.html#repr" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>. So, you can
+easily pass an instantiated <a class="reference internal" href="#pyrf24.rf24_network.RF24NetworkHeader" title="pyrf24.rf24_network.RF24NetworkHeader (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24NetworkHeader</span></code></a> object to the <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function.</p>
 </div>
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.rf24_network.RF24NetworkHeader">
@@ -1563,8 +1570,8 @@ easily pass an instantiated <a class="reference internal" href="#pyrf24.rf24_net
 <span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#pyrf24.rf24_network.RF24NetworkHeader.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>The type of frame sent. Users are encouraged to use an integer in range [0, 127]
 because integers in range [128, 255] are reserved for system usage.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
 <p><a class="reference internal" href="#reserved-sys-msgs"><span class="std std-ref">Reserved System Message Types</span></a></p>
 </div>
 </dd></dl>
@@ -1700,12 +1707,12 @@ nRF24L01 transceivers. This applies to all multicasted messages (directly relate
 otherwise).</p>
 </li>
 </ul>
-<div class="admonition hint">
+<div class="hint admonition">
 <p class="admonition-title">Hint</p>
 <p>Remember, user messages types with a decimal value of <code class="docutils literal notranslate"><span class="pre">64</span></code> or less will not be acknowledged across
 the network via <code class="docutils literal notranslate"><span class="pre">NETWORK_ACK</span></code> messages.</p>
 </div>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">NETWORK_ACK</span></code> messages are only sent by the last node in the route to a target node.
 ie: When node <code class="docutils literal notranslate"><span class="pre">0o0</span></code> sends an instigating message to node <code class="docutils literal notranslate"><span class="pre">0o11</span></code>, node <code class="docutils literal notranslate"><span class="pre">0o1</span></code> will send the
@@ -1749,12 +1756,17 @@ accordingly.</p>
 
 
 
-              
-            </article>
-          </div>
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
           </a>
@@ -1763,7 +1775,8 @@ accordingly.</p>
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
         <a href="ble_api.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: BLE API" rel="prev">
@@ -1812,7 +1825,7 @@ accordingly.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.3.0.
+    6.1.3.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1827,10 +1840,11 @@ accordingly.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
+    
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.dc1bded0.min.js"></script>
+      <script src="_static/javascripts/bundle.444abb77.min.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     
   </body>

@@ -17,12 +17,12 @@
       
     
     
-      <link rel="stylesheet" href="_static/stylesheets/main.30c392bc.min.css">
       
         
-        <link rel="stylesheet" href="_static/stylesheets/palette.92c9fe4a.min.css">
         
       
+      
+
     
     
     
@@ -34,11 +34,13 @@
     
         <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
         <link rel="stylesheet" type="text/css" href="_static/google_fonts.css" />
+        <link rel="stylesheet" type="text/css" href="_static/stylesheets/sphinx_immaterial_theme.a53d1d38a4817af62.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -78,7 +80,9 @@
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="#" title="pyRF24 library" class="md-header__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
-      <img src="_static/Logo_large.jpg" alt="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
@@ -138,11 +142,11 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -166,7 +170,7 @@
         <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -262,7 +266,9 @@
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="#" title="pyRF24 library" class="md-nav__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
-      <img src="_static/Logo_large.jpg" alt="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
     </a>
     pyRF24 library
   </label>
@@ -271,7 +277,7 @@
       <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -557,23 +563,24 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset" role="main">
-                
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
 
 
-  <a class="reference external image-reference" href="https://www.piwheels.org/project/pyrf24/"><img alt="piwheels" src="https://img.shields.io/piwheels/v/pyrf24?color=informational" /></a>
+<a class="reference external image-reference" href="https://www.piwheels.org/project/pyrf24/"><img alt="piwheels" src="https://img.shields.io/piwheels/v/pyrf24?color=informational" /></a>
 <a class="reference external image-reference" href="https://pyrf24.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&amp;logo=readthedocs&amp;logoColor=white" /></a>
 <a class="reference external image-reference" href="https://pepy.tech/project/pyrf24"><img alt="PyPI Downloads" src="https://static.pepy.tech/personalized-badge/pyrf24?period=total&amp;units=none&amp;left_color=grey&amp;right_color=blue&amp;left_text=PyPI%20Downloads" /></a>
 <a class="reference external image-reference" href="https://github.com/nRF24/pyRF24/actions/workflows/build.yml"><img alt="Build CI" src="https://github.com/nRF24/pyRF24/actions/workflows/build.yml/badge.svg" /></a>
 <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
 <p>This is the official home of the python wrappers for the RF24 stack. It is meant for Linux-based
-SoC boards like the Raspberry Pi.</p>
+SoC boards like the Raspberry Pi. Documentation is hosted at <a class="reference external" href="http://pyrf24.rtfd.io/">http://pyrf24.rtfd.io/</a>.</p>
 <h2 id="pinout">Pinout<a class="headerlink" href="#pinout" title="Permalink to this heading">¶</a></h2>
 <a class="reference external image-reference" href="https://lastminuteengineers.com/nrf24l01-arduino-wireless-communication/#nrf24l01-transceiver-module-pinout"><img alt="https://lastminuteengineers.com/wp-content/uploads/2018/07/Pinout-nRF24L01-Wireless-Transceiver-Module.png" src="https://lastminuteengineers.com/wp-content/uploads/2018/07/Pinout-nRF24L01-Wireless-Transceiver-Module.png" /></a>
 <p>The nRF24L01’s CE and IRQ pins can be connected to other GPIO pins on the SoC. The MISO, MOSI, SCK
 are limited to the corresponding counterparts on the SoC’s SPI bus. The CSN pin is limited to the
-chosen SPI bus’s “Chip Select” options (Also labeled as “CE” pins on many Raspberry Pi pinout
+chosen SPI bus’s “Chip Select” options (also labeled as “CE” pins on many Raspberry Pi pinout
 diagrams). The following table shows the default pins used in all the
 <a class="reference external" href="https://pyrf24.readthedocs.io/en/latest/examples.html">examples</a> for this package.</p>
 <table class="docutils data align-default">
@@ -610,26 +617,26 @@ diagrams). The following table shows the default pins used in all the
 </tbody>
 </table>
 <p>The IRQ pin is not typically connected, and it is only used in the interrupt_configure example.</p>
-<div class="admonition warning">
+<div class="warning admonition">
 <p class="admonition-title">Warning</p>
 <p>If connecting a nRF24L01+PA+LNA module to the Raspberry Pi, you MUST use a external 3V
 power supply because the Raspberry Pi (all models) do not provide enough power for the
 nRF24L01+PA+LNA modules.</p>
 </div>
-<div class="admonition important">
+<div class="important admonition">
 <p class="admonition-title">Important</p>
 <p>It is highly recommended that the nRF24L01’s VCC and GND pins have a parallel
 capacitor to stabilize the power supply. Usually 100 microfarad is enough, but the capacitance
 ultimately depends on the nature of your power supply’s stability.</p>
 </div>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>Notice that RPi.GPIO (for python) is used to manage the GPIO pins on the Raspberry Pi
 (exclusively during the
 <a class="reference external" href="https://pyrf24.readthedocs.io/en/latest/examples.html#interrupt-configure">interrupt_configure.py</a>
 example).</p>
 <p>RPi.GPIO is not required for normal usage (when not using the radio’s IRQ pin).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo apt install python3-rpi.gpio
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-rpi.gpio
 </code></pre></div>
 </div>
 </div>
@@ -642,35 +649,35 @@ example).</p>
 These wheels specifically target any Linux platform on <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> architecture.
 If you’re using Raspberry Pi OS (32 bit), then the above command will fetch <code class="docutils literal notranslate"><span class="pre">armv7l</span></code> binary
 wheels from the piwheels index (which is already configured for use in the Raspberry Pi OS).</p>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>If you’re installing from a Linux machine that is not using an architecture <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>
 or <code class="docutils literal notranslate"><span class="pre">armv7l</span></code>, then pip may try to build the package from source code.
 In this case, you’ll likely need to install some extra build dependencies:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo apt install python3-dev cmake
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-dev<span class="w"> </span>cmake
 </code></pre></div>
 </div>
 </div>
 <h2 id="installing-from-github">Installing from Github<a class="headerlink" href="#installing-from-github" title="Permalink to this heading">¶</a></h2>
 <p>Installing from source will require CMake and CPython headers:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo apt install python3-dev cmake
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-dev<span class="w"> </span>cmake
 </code></pre></div>
 </div>
 <p>To build this python package locally, you need to have cloned this library’s repository with its submodules.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git clone --recurse-submodules https://github.com/nRF24/pyRF24.git
-<span class="nb">cd</span> pyRF24
-python -m pip install . -v
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/nRF24/pyRF24.git
+<span class="nb">cd</span><span class="w"> </span>pyRF24
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>-v
 </code></pre></div>
 </div>
-<div class="admonition hint">
+<div class="hint admonition">
 <p class="admonition-title">Hint</p>
 <p>For consecutive build attempts, it is recommended to delete any previous build artifacts
 before attempting to build again.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>rm -r build/ dist/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>build/<span class="w"> </span>dist/
 </code></pre></div>
 </div>
 </div>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-v</span></code> is optional. Here, we use it to show that pip isn’t frozen during the
 build process.</p>
@@ -686,28 +693,28 @@ same version of CPython, CPU architecture, and C standard lib.</p>
 <li><p>Because building wheels is not done in an isolated build environment, it is advised that
 some build-time dependencies be installed manually to ensure up-to-date stable releases are used.
 Execute the following from the root directory of this repo:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python -m pip install -r requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div>
 </div>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>This step only needs to be done once.</p>
 </div>
 </li>
 <li><p>Using the same directory that you cloned the pyrf24 library into:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python -m pip wheel -w dist .
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>wheel<span class="w"> </span>-w<span class="w"> </span>dist<span class="w"> </span>.
 </code></pre></div>
 </div>
-<div class="admonition important">
+<div class="important admonition">
 <p class="admonition-title">Important</p>
 <p>It is recommended to purge any previous build artifacts before re-building the package.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>rm -r build/ dist/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>build/<span class="w"> </span>dist/
 </code></pre></div>
 </div>
 </div>
 </li>
 <li><p>To install a built wheel, simply pass the wheel’s path and file name to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python -m pip install dist/pyrf24-MAJOR.MINOR.PATCH-cp3X-cp3X-linux_ARCH.whl
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>dist/pyrf24-MAJOR.MINOR.PATCH-cp3X-cp3X-linux_ARCH.whl
 </code></pre></div>
 </div>
 <p>Where the following would be replaced accordingly:</p>
@@ -731,22 +738,22 @@ On Raspberry Pi OS (32 bit), this will be <code class="docutils literal notransl
 <p>By default, this package is built using the RF24 driver SPIDEV. If you want to build the
 package using a different RF24 driver (like <code class="docutils literal notranslate"><span class="pre">RPi</span></code>, <code class="docutils literal notranslate"><span class="pre">MRAA</span></code>, <code class="docutils literal notranslate"><span class="pre">wiringPi</span></code>, etc), then
 it is necessary to use an environment variable containing additional arguments for CMake:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF4_DRIVER=RPi&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF4_DRIVER=RPi&quot;</span>
 </code></pre></div>
 </div>
-<div class="admonition hint">
+<div class="hint admonition">
 <p class="admonition-title">Hint</p>
 <p>You can also use this environment variable to enable debug output from different
 layers of the RF24 stack. For a list of supported options, look at the script in
 <a class="reference external" href="https://github.com/nRF24/pyRF24/blob/main/cmake/using_flags.cmake">this repository’s cmake/using_flags.cmake</a>.</p>
 <p>The following value will turn on debug output for the RF24Mesh and RF24Network
 classes (respectively).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DMESH_DEBUG=ON -DSERIAL_DEBUG=ON&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DMESH_DEBUG=ON -DSERIAL_DEBUG=ON&quot;</span>
 </code></pre></div>
 </div>
 </div>
 <p>Then just build and install the package from source as usual.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python -m pip install . -v
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>-v
 </code></pre></div>
 </div>
 <h2 id="differences-in-api">Differences in API<a class="headerlink" href="#differences-in-api" title="Permalink to this heading">¶</a></h2>
@@ -822,35 +829,36 @@ is exposed through the <code class="docutils literal notranslate"><span class="p
 package on non-Linux devices to get the stub files which help auto-completion and type checking
 in various development environments.</p>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
-<p>Before submitting contributions, you should make sure that any documentation changes builds
+<p>Each release has corresponding documentation hosted at <a class="reference external" href="http://pyrf24.rtfd.io/">http://pyrf24.rtfd.io/</a>.</p>
+<p>Before submitting contributions, you should make sure that any documentation changes build
 successfully. This can be done locally but <strong>on Linux only</strong>. The documentation of API requires
 this package (&amp; all its latest changes) be installed.</p>
 <p>This package’s documentation is built with the python package Sphinx and the sphinx-immaterial theme.
 It also uses the dot tool provided by the graphviz software to generate graphs.</p>
 <ol class="arabic">
 <li><p>Install Graphviz</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>sudo apt-get install graphviz
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>graphviz
 </code></pre></div>
 </div>
 </li>
 <li><p>Installing Sphinx necessities</p>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>If you installed sphinx using <code class="docutils literal notranslate"><span class="pre">apt</span></code>, then it is likely out-of-date and will override any virtual
 python environments installation of Sphinx. Simply uninstall sphinx (using <code class="docutils literal notranslate"><span class="pre">apt</span></code>) will remedy
 this problem.</p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python -m pip install -r docs/requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
 </code></pre></div>
 </div>
-<div class="admonition important">
+<div class="important admonition">
 <p class="admonition-title">Important</p>
 <p>If pip outputs a warning about your <code class="docutils literal notranslate"><span class="pre">path/to/Python/Python3x/Scripts</span></code> folder not
 added to your OS environment variable <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, then you will likely get an error message like
 <code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> when building the documentation. For more information on
 installing sphinx, see the
 <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/installation.html">official Sphinx install instructions</a>.</p>
-<div class="admonition warning">
+<div class="warning admonition">
 <p class="admonition-title">Warning</p>
 <p>This documentation’s theme requires Sphinx v4.0+. So, it is not recommended to install
 sphinx from <code class="docutils literal notranslate"><span class="pre">apt</span></code> on Linux because the version distributed with the OS’s PPA repository
@@ -860,14 +868,14 @@ may not be the most recent version of Sphinx.</p>
 </li>
 <li><p>Building the Documentation</p>
 <p>To build the documentation locally, the pyrf24 package needs to be installed first. Then run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> docs
-sphinx-build -E -W . _build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>docs
+sphinx-build<span class="w"> </span>-E<span class="w"> </span>-W<span class="w"> </span>.<span class="w"> </span>_build
 </code></pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">docs/_build</span></code> folder should now contain the html files that would be hosted on deployment.
 Direct your internet browser to the html files in this folder to make sure your changes have been
 rendered correctly.</p>
-<div class="admonition note">
+<div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>The flags <code class="docutils literal notranslate"><span class="pre">-E</span></code> and <code class="docutils literal notranslate"><span class="pre">-W</span></code> will ensure the docs fail to build on any error or warning
 (just like it does when deploying the docs online).</p>
@@ -890,12 +898,17 @@ rendered correctly.</p>
 
 
 
-              
-            </article>
-          </div>
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
           </a>
@@ -904,7 +917,8 @@ rendered correctly.</p>
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
       
         
@@ -938,7 +952,7 @@ rendered correctly.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    5.3.0.
+    6.1.3.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -953,10 +967,11 @@ rendered correctly.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
+    
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="_static/javascripts/bundle.dc1bded0.min.js"></script>
+      <script src="_static/javascripts/bundle.444abb77.min.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     
   </body>
