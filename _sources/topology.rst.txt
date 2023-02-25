@@ -294,7 +294,7 @@ To better explain the difference between a node's `mesh_address` vs a node's
 RF24Mesh node. These are the steps performed when calling `renew_address()`:
 
 1. Any RF24Mesh node not connected to a network will use the `Logical Address <logical_address>`
-   ``0o444`` (that's ``2340`` in decimal). It is up to the network administrator to ensure that
+   ``0o4444`` (that's ``2340`` in decimal). It is up to the network administrator to ensure that
    each RF24Mesh node has a unique :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id` (which is limited
    to the range [0, 255]).
 
