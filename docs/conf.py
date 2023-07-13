@@ -6,6 +6,8 @@ list see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 # pylint: disable=invalid-name
+import os
+
 try:
     from importlib.metadata import version as get_version
 except ImportError:  # for python v3.7 or older
@@ -55,7 +57,9 @@ default_role = "any"
 
 # -- Options for sphinx_social_cards -------------------------------------------------
 social_cards = {
-    "site_url": "https://pyrf24.rtfd.io",
+    "site_url": os.environ.get(
+        "READTHEDOCS_CANONICAL_URL", "https://nrf24.github.io/pyRF24/"
+    ),
     "description": (
         "A python package that wraps the RF24, RF24Network, and RF24Mesh C++ libraries."
     ),
