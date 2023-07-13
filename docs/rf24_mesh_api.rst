@@ -1,3 +1,5 @@
+:description: How to use the radio as a dynamic mesh network node.
+
 RF24Mesh API
 ============
 

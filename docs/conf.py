@@ -13,10 +13,10 @@ except ImportError:  # for python v3.7 or older
 
 # -- Project information -----------------------------------------------------
 
-project = "pyrf24"
-copyright = "2020, TMRh20 Avamander 2bndy5"  # pylint: disable=redefined-builtin
+project = "pyRF24"
+copyright = "2023, TMRh20 Avamander 2bndy5"  # pylint: disable=redefined-builtin
 author = "TMRh20 Avamander 2bndy5"
-language="en"
+language = "en"
 
 # The full version, including alpha/beta/rc tags
 release = get_version("pyrf24")
@@ -31,7 +31,8 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx_immaterial",
-    "sphinx.ext.graphviz",
+    "sphinx_immaterial.graphviz",
+    "sphinx_social_cards",
 ]
 
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
@@ -51,6 +52,30 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", ".env"]
 # documents.
 default_role = "any"
 
+
+# -- Options for sphinx_social_cards -------------------------------------------------
+social_cards = {
+    "site_url": "https://pyrf24.rtfd.io",
+    "description": (
+        "A python package that wraps the RF24, RF24Network, and RF24Mesh C++ libraries."
+    ),
+    "image_paths": ["social_cards/images"],
+    "cards_layout_dir": ["social_cards/layouts"],
+    "cards_layout": "custom",
+    "cards_layout_options": {
+        "logo": {
+            "image": "material/access-point",
+            "color": "lime",
+        },
+        "background_color": "#2c2c2c",
+        "background_image": "logo_large_no-bg.png",
+        "color": "lime",
+    },
+    # "debug": {
+    #     "enable": True,
+    #     "color": "lime",
+    # },
+}
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -96,7 +121,6 @@ html_theme_options = {
     # Set the repo location to get a badge with stats
     "repo_url": "https://github.com/nRF24/pyRF24/",
     "repo_name": "pyRF24",
-    "repo_type": "github",
     # If False, expand all TOC entries
     "globaltoc_collapse": False,
 }
@@ -138,7 +162,7 @@ sphinx_immaterial_custom_admonitions = [
     },
     {
         "name": "important",
-        "icon": "material/school",
+        "icon": "material/alert-decagram",
         "override": True,
     },
 ]

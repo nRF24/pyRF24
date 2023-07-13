@@ -1,3 +1,5 @@
+:description: How to use the radio as a fake Bluetooth Low Energy Beacon.
+
 BLE API
 =================
 
