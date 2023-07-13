@@ -32,14 +32,39 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.18813b814fbc99f79.min.css" />
-        <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.5e7c785e980d06ef5.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
+    
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:url"  content="https://pyrf24.rtfd.io/topology.html" >
+      
+        <meta  property="og:width"  content="1200" >
+      
+        <meta  property="og:height"  content="630" >
+      
+        <meta  property="og:title"  content="Network Topology" >
+      
+        <meta  name="twitter:title"  content="Network Topology" >
+      
+        <meta  property="og:description"  content="How a network is constructed, address composition, and common points of failure during Mesh connecting." >
+      
+        <meta  name="twitter:description"  content="How a network is constructed, address composition, and common points of failure during Mesh connecting." >
+      
+        <meta  property="og:image"  content="https://pyrf24.rtfd.io/_static/social_cards/topology-360d3f5e754afba9.png" >
+      
+        <meta  name="twitter:image"  content="https://pyrf24.rtfd.io/_static/social_cards/topology-360d3f5e754afba9.png" >
+      
+        <meta  title="Network Topology" >
+      
     
     
   </head>
@@ -601,95 +626,288 @@ is always the only node in the lowest level (denoted as level 0).</p></li>
 the inherited address of it’s parent node. Nodes on level 1 only have 1 digit because they are
 children of the master node.</p></li>
 </ul>
-<div class="graphviz"><img src="_images/graphviz-7a78adec53efe887e5335381ef477ace44aa7f9b.png" alt="graph network_hierarchy {
-    bgcolor=&quot;#323232A1&quot;
-    newrank=true
-    // ratio=&quot;0.65&quot;
-    node [
-        fontcolor=&quot;#FEFEFE&quot;
-        fontsize=14
-        fontname=Arial
-    ]
-    pad=&quot;0&quot;
-    margin=&quot;0&quot;
-    subgraph cluster_hierarchy {
-        bgcolor=&quot;#24242400&quot;
-        color=&quot;#24242400&quot;
-        node [
-            style=filled
-            color=&quot;#FEFEFE7f&quot;
-        ]
-        edge [color=&quot;#FEFEFE&quot; style=&quot;setlinewidth(2)&quot;]
-        subgraph lvl_0 {
-            &quot;0o0&quot; [
-                shape=&quot;circle&quot;
-                style=&quot;radial&quot;
-                fillcolor=&quot;0.85:#018268;0:#000&quot;
-            ]
-        }
-        subgraph lvl_1 {
-            node [fillcolor=&quot;#3E0180&quot;]
-            &quot;0o1&quot; &quot;0o2&quot; &quot;0o3&quot; &quot;0o4&quot; &quot;0o5&quot;
-        }
-        subgraph lvl_2 {
-            node [fillcolor=&quot;#014B80&quot;]
-            &quot;0o14&quot; &quot;0o24&quot; &quot;0o34&quot; &quot;0o44&quot; &quot;0o54&quot;
-        }
-        subgraph lvl_3 {
-            node [fillcolor=&quot;#0E6902&quot;]
-            &quot;0o124&quot; &quot;0o224&quot; &quot;0o324&quot; &quot;0o424&quot; &quot;0o524&quot;
-        }
-        subgraph lvl_4 {
-            node [fillcolor=&quot;#80010B&quot;]
-            &quot;0o1324&quot; &quot;0o2324&quot; &quot;0o3324&quot; &quot;0o4324&quot; &quot;0o5324&quot;
-        }
-        &quot;0o0&quot; -- &quot;0o4&quot; -- &quot;0o24&quot; -- &quot;0o324&quot; -- &quot;0o1324&quot;
-        &quot;0o0&quot; -- &quot;0o1&quot;; &quot;0o0&quot; -- &quot;0o2&quot;; &quot;0o0&quot; -- &quot;0o3&quot;; &quot;0o0&quot; -- &quot;0o5&quot;
-        &quot;0o4&quot; -- &quot;0o14&quot;; &quot;0o4&quot; -- &quot;0o34&quot;; &quot;0o4&quot; -- &quot;0o44&quot;; &quot;0o4&quot; -- &quot;0o54&quot;
-        &quot;0o24&quot; -- &quot;0o124&quot;; &quot;0o24&quot; -- &quot;0o224&quot;; &quot;0o24&quot; -- &quot;0o424&quot;; &quot;0o24&quot; -- &quot;0o524&quot;
-        &quot;0o324&quot; -- &quot;0o2324&quot;; &quot;0o324&quot; -- &quot;0o3324&quot;; &quot;0o324&quot; -- &quot;0o4324&quot;; &quot;0o324&quot; -- &quot;0o5324&quot;
-    }
-    subgraph cluster_legend {
-        bgcolor=&quot;#242424&quot;
-        color=&quot;#24242400&quot;
-        &quot;Legend&quot; [
-            color=&quot;#FEF9A9&quot;
-            shape=plain
-            margin=0
-            label=&lt;
-                    &lt;TABLE CELLBORDER=&quot;0&quot; CELLSPACING=&quot;8&quot;&gt;
-                        &lt;TR&gt;
-                            &lt;TD BORDER=&quot;1&quot; SIDES=&quot;B&quot; COLSPAN=&quot;3&quot;&gt;Legend&lt;/TD&gt;
-                        &lt;/TR&gt;
-                        &lt;TR&gt;
-                            &lt;TD&gt;Network Level 0&lt;/TD&gt;
-                            &lt;TD BORDER=&quot;1&quot; STYLE=&quot;rounded,radial&quot; BGCOLOR=&quot;#000:#018268&quot;&gt;        &lt;/TD&gt;
-                        &lt;/TR&gt;
-                        &lt;TR&gt;
-                            &lt;TD&gt;Network Level 1&lt;/TD&gt;
-                            &lt;TD BORDER=&quot;1&quot; STYLE=&quot;rounded&quot; BGCOLOR=&quot;#3E0180&quot;&gt;        &lt;/TD&gt;
-                        &lt;/TR&gt;
-                        &lt;TR&gt;
-                            &lt;TD&gt;Network Level 2&lt;/TD&gt;
-                            &lt;TD BORDER=&quot;1&quot; STYLE=&quot;rounded&quot; BGCOLOR=&quot;#014B80&quot;&gt;        &lt;/TD&gt;
-                        &lt;/TR&gt;
-                        &lt;TR&gt;
-                            &lt;TD&gt;Network Level 3&lt;/TD&gt;
-                            &lt;TD BORDER=&quot;1&quot; STYLE=&quot;rounded&quot; BGCOLOR=&quot;#0E6902&quot;&gt;        &lt;/TD&gt;
-                        &lt;/TR&gt;
-                        &lt;TR&gt;
-                            &lt;TD&gt;Network Level 4&lt;/TD&gt;
-                            &lt;TD BORDER=&quot;1&quot; STYLE=&quot;rounded&quot; BGCOLOR=&quot;#80010B&quot;&gt;        &lt;/TD&gt;
-                        &lt;/TR&gt;
-                        &lt;TR&gt;
-                            &lt;TD BORDER=&quot;1&quot; SIDES=&quot;T&quot; COLSPAN=&quot;3&quot;&gt;Nodes are labeled&lt;BR/&gt;in octal numbers&lt;/TD&gt;
-                        &lt;/TR&gt;
-                    &lt;/TABLE&gt;
-            &gt;
-        ]
-    }
-}" class="graphviz" /></div>
-<p>Hopefully, you should see the pattern. There can be up to a maximum of 5 network levels (that’s
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 594.00 524.00" class="graphviz" style="width: 37.125rem;height: 32.75rem;">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(0 524)">
+<title>network_hierarchy</title>
+<g id="clust1" class="cluster">
+<title>cluster_hierarchy</title>
+<polygon fill="transparent" stroke="transparent" points="8,-8 8,-428.74 434,-428.74 434,-8 8,-8" />
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_legend</title>
+<polygon fill="transparent" points="434,-296 434,-516 586,-516 586,-296 434,-296" style="stroke: var(--md-graphviz-node-fg-color);" />
+</g>
+
+<g id="node1" class="node">
+<title>0o0</title>
+<defs>
+<radialGradient id="r_0" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
+<stop offset="0" style="stop-color:#000000;stop-opacity:1.;" />
+<stop offset="1" style="stop-color:#018268;stop-opacity:1.;" />
+</radialGradient>
+</defs>
+<ellipse fill="url(#r_0)" cx="191" cy="-406" rx="22.98" ry="22.98" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="191" y="-402.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o0</text>
+</g>
+
+<g id="node2" class="node">
+<title>0o1</title>
+<ellipse fill="#3e0180" cx="47" cy="-242" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="47" y="-238.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o1</text>
+</g>
+
+<g id="edge5" class="edge">
+<title>0o0--0o1</title>
+<path fill="none" stroke-width="2" d="M176.13,-388.27C147.96,-356.58 87.23,-288.26 60.31,-257.98" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node3" class="node">
+<title>0o2</title>
+<ellipse fill="#3e0180" cx="119" cy="-242" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="119" y="-238.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o2</text>
+</g>
+
+<g id="edge6" class="edge">
+<title>0o0--0o2</title>
+<path fill="none" stroke-width="2" d="M182.03,-384.81C167.63,-352.41 139.63,-289.42 126.34,-259.52" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node4" class="node">
+<title>0o3</title>
+<ellipse fill="#3e0180" cx="191" cy="-242" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="191" y="-238.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o3</text>
+</g>
+
+<g id="edge7" class="edge">
+<title>0o0--0o3</title>
+<path fill="none" stroke-width="2" d="M191,-383.15C191,-350.51 191,-289.67 191,-260.07" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node5" class="node">
+<title>0o4</title>
+<ellipse fill="#3e0180" cx="263" cy="-242" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="263" y="-238.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o4</text>
+</g>
+
+<g id="edge1" class="edge">
+<title>0o0--0o4</title>
+<path fill="none" stroke-width="2" d="M199.97,-384.81C214.37,-352.41 242.37,-289.42 255.66,-259.52" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node6" class="node">
+<title>0o5</title>
+<ellipse fill="#3e0180" cx="335" cy="-242" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="335" y="-238.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o5</text>
+</g>
+
+<g id="edge8" class="edge">
+<title>0o0--0o5</title>
+<path fill="none" stroke-width="2" d="M205.87,-388.27C234.04,-356.58 294.77,-288.26 321.69,-257.98" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node7" class="node">
+<title>0o14</title>
+<ellipse fill="#014b80" cx="119" cy="-170" rx="27.33" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="119" y="-166.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o14</text>
+</g>
+
+<g id="edge9" class="edge">
+<title>0o4--0o14</title>
+<path fill="none" stroke-width="2" d="M241.75,-230.67C214.53,-217.44 167.6,-194.63 140.33,-181.37" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node8" class="node">
+<title>0o24</title>
+<ellipse fill="#014b80" cx="191" cy="-170" rx="27.33" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="191" y="-166.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o24</text>
+</g>
+
+<g id="edge2" class="edge">
+<title>0o4--0o24</title>
+<path fill="none" stroke-width="2" d="M248.43,-226.83C236.02,-214.77 218.27,-197.51 205.8,-185.38" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node9" class="node">
+<title>0o34</title>
+<ellipse fill="#014b80" cx="263" cy="-170" rx="27.33" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="263" y="-166.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o34</text>
+</g>
+
+<g id="edge10" class="edge">
+<title>0o4--0o34</title>
+<path fill="none" stroke-width="2" d="M263,-223.7C263,-212.85 263,-198.92 263,-188.1" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node10" class="node">
+<title>0o44</title>
+<ellipse fill="#014b80" cx="335" cy="-170" rx="27.33" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="335" y="-166.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o44</text>
+</g>
+
+<g id="edge11" class="edge">
+<title>0o4--0o44</title>
+<path fill="none" stroke-width="2" d="M277.57,-226.83C289.98,-214.77 307.73,-197.51 320.2,-185.38" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node11" class="node">
+<title>0o54</title>
+<ellipse fill="#014b80" cx="407" cy="-170" rx="27.33" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="407" y="-166.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o54</text>
+</g>
+
+<g id="edge12" class="edge">
+<title>0o4--0o54</title>
+<path fill="none" stroke-width="2" d="M284.25,-230.67C311.47,-217.44 358.4,-194.63 385.67,-181.37" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node12" class="node">
+<title>0o124</title>
+<ellipse fill="#0e6902" cx="50" cy="-98" rx="30.9" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="50" y="-94.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o124</text>
+</g>
+
+<g id="edge13" class="edge">
+<title>0o24--0o124</title>
+<path fill="none" stroke-width="2" d="M169.89,-158.52C143.92,-145.63 99.99,-123.82 73.13,-110.48" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node13" class="node">
+<title>0o224</title>
+<ellipse fill="#0e6902" cx="130" cy="-98" rx="30.9" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="130" y="-94.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o224</text>
+</g>
+
+<g id="edge14" class="edge">
+<title>0o24--0o224</title>
+<path fill="none" stroke-width="2" d="M178.06,-154.15C167.85,-142.44 153.65,-126.14 143.34,-114.31" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node14" class="node">
+<title>0o324</title>
+<ellipse fill="#0e6902" cx="210" cy="-98" rx="30.9" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="210" y="-94.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o324</text>
+</g>
+
+<g id="edge3" class="edge">
+<title>0o24--0o324</title>
+<path fill="none" stroke-width="2" d="M195.6,-152.05C198.54,-141.21 202.35,-127.18 205.31,-116.28" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node15" class="node">
+<title>0o424</title>
+<ellipse fill="#0e6902" cx="290" cy="-98" rx="30.9" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="290" y="-94.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o424</text>
+</g>
+
+<g id="edge15" class="edge">
+<title>0o24--0o424</title>
+<path fill="none" stroke-width="2" d="M209.16,-156.16C226.69,-143.77 253.12,-125.08 270.94,-112.47" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node16" class="node">
+<title>0o524</title>
+<ellipse fill="#0e6902" cx="370" cy="-98" rx="30.9" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="370" y="-94.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o524</text>
+</g>
+
+<g id="edge16" class="edge">
+<title>0o24--0o524</title>
+<path fill="none" stroke-width="2" d="M212.16,-158.56C216.99,-156.3 222.14,-153.99 227,-152 271.88,-133.62 284.77,-133.49 330,-116 335.21,-113.99 340.75,-111.72 345.99,-109.51" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node17" class="node">
+<title>0o1324</title>
+<ellipse fill="#80010b" cx="43" cy="-26" rx="35.25" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="43" y="-22.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o1324</text>
+</g>
+
+<g id="edge4" class="edge">
+<title>0o324--0o1324</title>
+<path fill="none" stroke-width="2" d="M185.47,-86.55C180.36,-84.38 175.01,-82.11 170,-80 135.43,-65.44 95.5,-48.81 69.78,-38.12" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node18" class="node">
+<title>0o2324</title>
+<ellipse fill="#80010b" cx="132" cy="-26" rx="35.25" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="132" y="-22.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o2324</text>
+</g>
+
+<g id="edge17" class="edge">
+<title>0o324--0o2324</title>
+<path fill="none" stroke-width="2" d="M193.84,-82.5C180.63,-70.64 162.03,-53.95 148.68,-41.97" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node19" class="node">
+<title>0o3324</title>
+<ellipse fill="#80010b" cx="221" cy="-26" rx="35.25" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="221" y="-22.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o3324</text>
+</g>
+
+<g id="edge18" class="edge">
+<title>0o324--0o3324</title>
+<path fill="none" stroke-width="2" d="M212.66,-80.05C214.37,-69.21 216.57,-55.18 218.29,-44.28" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node20" class="node">
+<title>0o4324</title>
+<ellipse fill="#80010b" cx="310" cy="-26" rx="35.25" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="310" y="-22.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o4324</text>
+</g>
+
+<g id="edge19" class="edge">
+<title>0o324--0o4324</title>
+<path fill="none" stroke-width="2" d="M229.28,-83.5C246.76,-71.27 272.42,-53.31 290.09,-40.93" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node21" class="node">
+<title>0o5324</title>
+<ellipse fill="#80010b" cx="399" cy="-26" rx="35.25" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="399" y="-22.2" font-family="Roboto" font-size="12.00" fill="#fefefe">0o5324</text>
+</g>
+
+<g id="edge20" class="edge">
+<title>0o324--0o5324</title>
+<path fill="none" stroke-width="2" d="M234,-86.48C239.25,-84.27 244.79,-82.01 250,-80 295.65,-62.42 308.01,-60.64 354,-44 359.65,-41.95 365.69,-39.71 371.44,-37.55" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node22" class="node">
+<title>Legend</title>
+<polygon stroke="transparent" points="585.5,-516 434.5,-516 434.5,-296 585.5,-296 585.5,-516" style="fill: var(--md-graphviz-node-bg-color);" />
+<polyline fill="none" points="444,-487 577,-487 " style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="491" y="-493.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Legend</text>
+<text text-anchor="start" x="446" y="-465.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Network Level 0</text>
+<defs>
+<radialGradient id="r_1" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
+<stop offset="0" style="stop-color:#000000;stop-opacity:1.;" />
+<stop offset="1" style="stop-color:#018268;stop-opacity:1.;" />
+</radialGradient>
+</defs>
+<path fill="url(#r_1)" stroke="transparent" d="M546.67,-459C546.67,-459 562.33,-459 562.33,-459 565.67,-459 569,-462.33 569,-465.67 569,-465.67 569,-472.33 569,-472.33 569,-475.67 565.67,-479 562.33,-479 562.33,-479 546.67,-479 546.67,-479 543.33,-479 540,-475.67 540,-472.33 540,-472.33 540,-465.67 540,-465.67 540,-462.33 543.33,-459 546.67,-459" />
+<path fill="none" d="M546.67,-459C546.67,-459 562.33,-459 562.33,-459 565.67,-459 569,-462.33 569,-465.67 569,-465.67 569,-472.33 569,-472.33 569,-475.67 565.67,-479 562.33,-479 562.33,-479 546.67,-479 546.67,-479 543.33,-479 540,-475.67 540,-472.33 540,-472.33 540,-465.67 540,-465.67 540,-462.33 543.33,-459 546.67,-459" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="543" y="-465.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">        </text>
+<text text-anchor="start" x="446" y="-437.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Network Level 1</text>
+<path fill="#3e0180" stroke="transparent" d="M546.67,-431C546.67,-431 562.33,-431 562.33,-431 565.67,-431 569,-434.33 569,-437.67 569,-437.67 569,-444.33 569,-444.33 569,-447.67 565.67,-451 562.33,-451 562.33,-451 546.67,-451 546.67,-451 543.33,-451 540,-447.67 540,-444.33 540,-444.33 540,-437.67 540,-437.67 540,-434.33 543.33,-431 546.67,-431" />
+<path fill="none" d="M546.67,-431C546.67,-431 562.33,-431 562.33,-431 565.67,-431 569,-434.33 569,-437.67 569,-437.67 569,-444.33 569,-444.33 569,-447.67 565.67,-451 562.33,-451 562.33,-451 546.67,-451 546.67,-451 543.33,-451 540,-447.67 540,-444.33 540,-444.33 540,-437.67 540,-437.67 540,-434.33 543.33,-431 546.67,-431" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="543" y="-437.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">        </text>
+<text text-anchor="start" x="446" y="-409.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Network Level 2</text>
+<path fill="#014b80" stroke="transparent" d="M546.67,-403C546.67,-403 562.33,-403 562.33,-403 565.67,-403 569,-406.33 569,-409.67 569,-409.67 569,-416.33 569,-416.33 569,-419.67 565.67,-423 562.33,-423 562.33,-423 546.67,-423 546.67,-423 543.33,-423 540,-419.67 540,-416.33 540,-416.33 540,-409.67 540,-409.67 540,-406.33 543.33,-403 546.67,-403" />
+<path fill="none" d="M546.67,-403C546.67,-403 562.33,-403 562.33,-403 565.67,-403 569,-406.33 569,-409.67 569,-409.67 569,-416.33 569,-416.33 569,-419.67 565.67,-423 562.33,-423 562.33,-423 546.67,-423 546.67,-423 543.33,-423 540,-419.67 540,-416.33 540,-416.33 540,-409.67 540,-409.67 540,-406.33 543.33,-403 546.67,-403" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="543" y="-409.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">        </text>
+<text text-anchor="start" x="446" y="-381.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Network Level 3</text>
+<path fill="#0e6902" stroke="transparent" d="M546.67,-375C546.67,-375 562.33,-375 562.33,-375 565.67,-375 569,-378.33 569,-381.67 569,-381.67 569,-388.33 569,-388.33 569,-391.67 565.67,-395 562.33,-395 562.33,-395 546.67,-395 546.67,-395 543.33,-395 540,-391.67 540,-388.33 540,-388.33 540,-381.67 540,-381.67 540,-378.33 543.33,-375 546.67,-375" />
+<path fill="none" d="M546.67,-375C546.67,-375 562.33,-375 562.33,-375 565.67,-375 569,-378.33 569,-381.67 569,-381.67 569,-388.33 569,-388.33 569,-391.67 565.67,-395 562.33,-395 562.33,-395 546.67,-395 546.67,-395 543.33,-395 540,-391.67 540,-388.33 540,-388.33 540,-381.67 540,-381.67 540,-378.33 543.33,-375 546.67,-375" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="543" y="-381.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">        </text>
+<text text-anchor="start" x="446" y="-353.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Network Level 4</text>
+<path fill="#80010b" stroke="transparent" d="M546.67,-347C546.67,-347 562.33,-347 562.33,-347 565.67,-347 569,-350.33 569,-353.67 569,-353.67 569,-360.33 569,-360.33 569,-363.67 565.67,-367 562.33,-367 562.33,-367 546.67,-367 546.67,-367 543.33,-367 540,-363.67 540,-360.33 540,-360.33 540,-353.67 540,-353.67 540,-350.33 543.33,-347 546.67,-347" />
+<path fill="none" d="M546.67,-347C546.67,-347 562.33,-347 562.33,-347 565.67,-347 569,-350.33 569,-353.67 569,-353.67 569,-360.33 569,-360.33 569,-363.67 565.67,-367 562.33,-367 562.33,-367 546.67,-367 546.67,-367 543.33,-367 540,-363.67 540,-360.33 540,-360.33 540,-353.67 540,-353.67 540,-350.33 543.33,-347 546.67,-347" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="543" y="-353.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">        </text>
+<polyline fill="none" points="577,-339 444,-339 " style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="463" y="-325.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">Nodes are labeled</text>
+<text text-anchor="start" x="466" y="-311.2" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);">in octal numbers</text>
+<polygon fill="none" points="434.5,-296 434.5,-516 585.5,-516 585.5,-296 434.5,-296" style="stroke: var(--md-graphviz-node-fg-color);" />
+</g>
+</g>
+</svg><p>Hopefully, you should see the pattern. There can be up to a maximum of 5 network levels (that’s
 0-4 ordered from lowest to highest).</p>
 <p>For a message to travel from node <code class="docutils literal notranslate"><span class="pre">0o124</span></code> to node <code class="docutils literal notranslate"><span class="pre">0o3</span></code>, it must be passed through any applicable
 network levels. So, the message flows <code class="docutils literal notranslate"><span class="pre">0o124</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o24</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o4</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o0</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o3</span></code>.</p>
@@ -702,68 +920,628 @@ graph only demonstrates</p>
 <li><p>level 3 only shows the 3<sup>rd</sup> and 4<sup>th</sup> children of parents on level 2</p></li>
 <li><p>level 4 only shows the 5<sup>th</sup> children of parents on level 3</p></li>
 </ul>
-<div class="graphviz"><img src="_images/graphviz-7de62c7308adc25424bf242cea3ab2f7512a026d.png" alt="graph network_levels {
-    layout=twopi
-    bgcolor=&quot;#323232A1&quot;
-    ratio=&quot;0.825&quot;
-    node [
-        style=filled
-        fontcolor=&quot;#FEFEFE&quot;
-        color=&quot;#FEFEFE7f&quot;
-        fontsize=14
-        fontname=Arial
-    ]
-    edge [color=&quot;#FEFEFE&quot; style=&quot;setlinewidth(2)&quot;]
-    ranksep=&quot;0.85:0.9:0.95:1.1&quot;
-    subgraph lvl_0 {
-        &quot;0o0&quot; [
-            root=true
-            shape=&quot;circle&quot;
-            style=&quot;radial&quot;
-            fillcolor=&quot;0.9:#018268;0:#000&quot;
-        ]
-    }
-    subgraph lvl_1 {
-        node [fillcolor=&quot;#3E0180&quot;]
-        &quot;0o1&quot; &quot;0o2&quot; &quot;0o3&quot; &quot;0o4&quot; &quot;0o5&quot;
-    }
-    subgraph lvl_2 {
-        node [fillcolor=&quot;#014B80&quot;]
-        &quot;0o11&quot; &quot;0o21&quot; &quot;0o12&quot; &quot;0o22&quot; &quot;0o13&quot; &quot;0o23&quot; &quot;0o14&quot; &quot;0o24&quot; &quot;0o15&quot; &quot;0o25&quot;
-    }
-    subgraph lvl_3 {
-        node [fillcolor=&quot;#0E6902&quot;]
-        &quot;0o311&quot; &quot;0o411&quot; &quot;0o321&quot; &quot;0o421&quot; &quot;0o312&quot; &quot;0o412&quot; &quot;0o322&quot; &quot;0o422&quot; &quot;0o313&quot; &quot;0o413&quot;
-        &quot;0o323&quot; &quot;0o423&quot; &quot;0o314&quot; &quot;0o414&quot; &quot;0o324&quot; &quot;0o424&quot; &quot;0o315&quot; &quot;0o415&quot; &quot;0o325&quot; &quot;0o425&quot;
-    }
-    subgraph lvl_4 {
-        node [fillcolor=&quot;#80010B&quot;]
-        &quot;0o5311&quot; &quot;0o5411&quot; &quot;0o5321&quot; &quot;0o5312&quot; &quot;0o5421&quot; &quot;0o5313&quot; &quot;0o5314&quot; &quot;0o5315&quot; &quot;0o5322&quot;
-        &quot;0o5323&quot; &quot;0o5324&quot; &quot;0o5325&quot; &quot;0o5412&quot; &quot;0o5423&quot; &quot;0o5422&quot; &quot;0o5413&quot; &quot;0o5414&quot; &quot;0o5424&quot;
-        &quot;0o5415&quot; &quot;0o5425&quot;
-    }
-    &quot;0o0&quot; -- &quot;0o1&quot; -- &quot;0o11&quot; -- &quot;0o311&quot; -- &quot;0o5311&quot;
-    &quot;0o0&quot; -- &quot;0o2&quot; -- &quot;0o12&quot; -- &quot;0o312&quot; -- &quot;0o5312&quot;
-    &quot;0o0&quot; -- &quot;0o3&quot; -- &quot;0o13&quot; -- &quot;0o313&quot; -- &quot;0o5313&quot;
-    &quot;0o0&quot; -- &quot;0o4&quot; -- &quot;0o14&quot; -- &quot;0o314&quot; -- &quot;0o5314&quot;
-    &quot;0o0&quot; -- &quot;0o5&quot; -- &quot;0o15&quot; -- &quot;0o315&quot; -- &quot;0o5315&quot;
-    &quot;0o1&quot; -- &quot;0o21&quot; -- &quot;0o321&quot; -- &quot;0o5321&quot;
-    &quot;0o2&quot; -- &quot;0o22&quot; -- &quot;0o322&quot; -- &quot;0o5322&quot;
-    &quot;0o3&quot; -- &quot;0o23&quot; -- &quot;0o323&quot; -- &quot;0o5323&quot;
-    &quot;0o4&quot; -- &quot;0o24&quot; -- &quot;0o324&quot; -- &quot;0o5324&quot;
-    &quot;0o5&quot; -- &quot;0o25&quot; -- &quot;0o325&quot; -- &quot;0o5325&quot;
-    &quot;0o11&quot; -- &quot;0o411&quot; -- &quot;0o5411&quot;
-    &quot;0o21&quot; -- &quot;0o421&quot; -- &quot;0o5421&quot;
-    &quot;0o12&quot; -- &quot;0o412&quot; -- &quot;0o5412&quot;
-    &quot;0o22&quot; -- &quot;0o422&quot; -- &quot;0o5422&quot;
-    &quot;0o13&quot; -- &quot;0o413&quot; -- &quot;0o5413&quot;
-    &quot;0o23&quot; -- &quot;0o423&quot; -- &quot;0o5423&quot;
-    &quot;0o14&quot; -- &quot;0o414&quot; -- &quot;0o5414&quot;
-    &quot;0o24&quot; -- &quot;0o424&quot; -- &quot;0o5424&quot;
-    &quot;0o15&quot; -- &quot;0o415&quot; -- &quot;0o5415&quot;
-    &quot;0o25&quot; -- &quot;0o425&quot; -- &quot;0o5425&quot;
-}" class="graphviz" /></div>
-<h2 id="physical-addresses-vs-logical-addresses"><span id="logical-address"></span><span id="physical-address"></span>Physical addresses vs Logical addresses<a class="headerlink" href="#physical-addresses-vs-logical-addresses" title="Permalink to this heading">¶</a></h2>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 706.74 584.46" class="graphviz" style="width: 44.1875rem;height: 36.5rem;">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 580.46)">
+<title>network_levels</title>
+
+<g id="node1" class="node">
+<title>0o0</title>
+<defs>
+<radialGradient id="r_0" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
+<stop offset="0" style="stop-color:#000000;stop-opacity:1.;" />
+<stop offset="1" style="stop-color:#018268;stop-opacity:1.;" />
+</radialGradient>
+</defs>
+<ellipse fill="url(#r_0)" cx="349.37" cy="-288.23" rx="26.32" ry="26.32" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="349.37" y="-283.63" font-family="Roboto" font-size="14.00" fill="#fefefe">0o0</text>
+</g>
+
+<g id="node2" class="node">
+<title>0o1</title>
+<ellipse fill="#3e0180" cx="404.73" cy="-324.2" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="404.73" y="-319.6" font-family="Roboto" font-size="14.00" fill="#fefefe">0o1</text>
+</g>
+
+<g id="edge1" class="edge">
+<title>0o0--0o1</title>
+<path fill="none" stroke-width="2" d="M371.57,-302.66C376.14,-305.63 380.92,-308.73 385.38,-311.63" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node3" class="node">
+<title>0o2</title>
+<ellipse fill="#3e0180" cx="328.23" cy="-346.44" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="328.23" y="-341.84" font-family="Roboto" font-size="14.00" fill="#fefefe">0o2</text>
+</g>
+
+<g id="edge5" class="edge">
+<title>0o0--0o2</title>
+<path fill="none" stroke-width="2" d="M340.4,-312.92C338.47,-318.24 336.46,-323.78 334.64,-328.77" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node4" class="node">
+<title>0o3</title>
+<ellipse fill="#3e0180" cx="280.95" cy="-288.23" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="280.95" y="-283.63" font-family="Roboto" font-size="14.00" fill="#fefefe">0o3</text>
+</g>
+
+<g id="edge9" class="edge">
+<title>0o0--0o3</title>
+<path fill="none" stroke-width="2" d="M323.11,-288.23C318.29,-288.23 313.24,-288.23 308.38,-288.23" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node5" class="node">
+<title>0o4</title>
+<ellipse fill="#3e0180" cx="328.23" cy="-230.03" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="328.23" y="-225.43" font-family="Roboto" font-size="14.00" fill="#fefefe">0o4</text>
+</g>
+
+<g id="edge13" class="edge">
+<title>0o0--0o4</title>
+<path fill="none" stroke-width="2" d="M340.4,-263.55C338.47,-258.22 336.46,-252.69 334.64,-247.69" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node6" class="node">
+<title>0o5</title>
+<ellipse fill="#3e0180" cx="404.73" cy="-252.26" rx="27" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="404.73" y="-247.66" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5</text>
+</g>
+
+<g id="edge17" class="edge">
+<title>0o0--0o5</title>
+<path fill="none" stroke-width="2" d="M371.57,-273.81C376.14,-270.84 380.92,-267.73 385.38,-264.83" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node7" class="node">
+<title>0o11</title>
+<ellipse fill="#014b80" cx="483.35" cy="-327.17" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="483.35" y="-322.57" font-family="Roboto" font-size="14.00" fill="#fefefe">0o11</text>
+</g>
+
+<g id="edge2" class="edge">
+<title>0o1--0o11</title>
+<path fill="none" stroke-width="2" d="M431.78,-325.22C438.18,-325.47 445.06,-325.72 451.64,-325.97" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node8" class="node">
+<title>0o21</title>
+<ellipse fill="#014b80" cx="432.17" cy="-390.17" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="432.17" y="-385.57" font-family="Roboto" font-size="14.00" fill="#fefefe">0o21</text>
+</g>
+
+<g id="edge21" class="edge">
+<title>0o1--0o21</title>
+<path fill="none" stroke-width="2" d="M412.08,-341.88C416.02,-351.35 420.86,-362.97 424.8,-372.44" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node9" class="node">
+<title>0o12</title>
+<ellipse fill="#014b80" cx="349.37" cy="-414.23" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="349.37" y="-409.63" font-family="Roboto" font-size="14.00" fill="#fefefe">0o12</text>
+</g>
+
+<g id="edge6" class="edge">
+<title>0o2--0o12</title>
+<path fill="none" stroke-width="2" d="M333.78,-364.25C336.87,-374.13 340.69,-386.4 343.78,-396.3" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node10" class="node">
+<title>0o22</title>
+<ellipse fill="#014b80" cx="266.57" cy="-390.17" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="266.57" y="-385.57" font-family="Roboto" font-size="14.00" fill="#fefefe">0o22</text>
+</g>
+
+<g id="edge24" class="edge">
+<title>0o2--0o22</title>
+<path fill="none" stroke-width="2" d="M309.73,-359.56C302.35,-364.79 293.84,-370.82 286.34,-376.14" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node11" class="node">
+<title>0o13</title>
+<ellipse fill="#014b80" cx="215.4" cy="-327.17" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="215.4" y="-322.57" font-family="Roboto" font-size="14.00" fill="#fefefe">0o13</text>
+</g>
+
+<g id="edge10" class="edge">
+<title>0o3--0o13</title>
+<path fill="none" stroke-width="2" d="M260.57,-300.34C253.2,-304.71 244.85,-309.67 237.36,-314.12" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node12" class="node">
+<title>0o23</title>
+<ellipse fill="#014b80" cx="215.4" cy="-249.3" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="215.4" y="-244.7" font-family="Roboto" font-size="14.00" fill="#fefefe">0o23</text>
+</g>
+
+<g id="edge27" class="edge">
+<title>0o3--0o23</title>
+<path fill="none" stroke-width="2" d="M260.57,-276.13C253.2,-271.75 244.85,-266.79 237.36,-262.34" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node13" class="node">
+<title>0o14</title>
+<ellipse fill="#014b80" cx="266.57" cy="-186.3" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="266.57" y="-181.7" font-family="Roboto" font-size="14.00" fill="#fefefe">0o14</text>
+</g>
+
+<g id="edge14" class="edge">
+<title>0o4--0o14</title>
+<path fill="none" stroke-width="2" d="M309.73,-216.91C302.35,-211.67 293.84,-205.64 286.34,-200.32" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node14" class="node">
+<title>0o24</title>
+<ellipse fill="#014b80" cx="349.37" cy="-162.23" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="349.37" y="-157.63" font-family="Roboto" font-size="14.00" fill="#fefefe">0o24</text>
+</g>
+
+<g id="edge30" class="edge">
+<title>0o4--0o24</title>
+<path fill="none" stroke-width="2" d="M333.78,-212.21C336.87,-202.33 340.69,-190.07 343.78,-180.16" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node15" class="node">
+<title>0o15</title>
+<ellipse fill="#014b80" cx="432.17" cy="-186.3" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="432.17" y="-181.7" font-family="Roboto" font-size="14.00" fill="#fefefe">0o15</text>
+</g>
+
+<g id="edge18" class="edge">
+<title>0o5--0o15</title>
+<path fill="none" stroke-width="2" d="M412.08,-234.58C416.02,-225.12 420.86,-213.49 424.8,-204.02" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node16" class="node">
+<title>0o25</title>
+<ellipse fill="#014b80" cx="483.35" cy="-249.3" rx="31.56" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="483.35" y="-244.7" font-family="Roboto" font-size="14.00" fill="#fefefe">0o25</text>
+</g>
+
+<g id="edge33" class="edge">
+<title>0o5--0o25</title>
+<path fill="none" stroke-width="2" d="M431.78,-251.24C438.18,-251 445.06,-250.74 451.64,-250.49" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node17" class="node">
+<title>0o311</title>
+<ellipse fill="#0e6902" cx="564.04" cy="-318.64" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="564.04" y="-314.04" font-family="Roboto" font-size="14.00" fill="#fefefe">0o311</text>
+</g>
+
+<g id="edge3" class="edge">
+<title>0o11--0o311</title>
+<path fill="none" stroke-width="2" d="M514.77,-323.85C519.02,-323.4 523.41,-322.93 527.73,-322.48" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node18" class="node">
+<title>0o411</title>
+<ellipse fill="#0e6902" cx="543.02" cy="-376.49" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="543.02" y="-371.89" font-family="Roboto" font-size="14.00" fill="#fefefe">0o411</text>
+</g>
+
+<g id="edge36" class="edge">
+<title>0o11--0o411</title>
+<path fill="none" stroke-width="2" d="M501.58,-342.23C508.71,-348.13 516.88,-354.88 524.08,-360.83" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node19" class="node">
+<title>0o321</title>
+<ellipse fill="#0e6902" cx="503.06" cy="-425.69" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="503.06" y="-421.09" font-family="Roboto" font-size="14.00" fill="#fefefe">0o321</text>
+</g>
+
+<g id="edge22" class="edge">
+<title>0o21--0o321</title>
+<path fill="none" stroke-width="2" d="M456.17,-402.19C462.92,-405.58 470.29,-409.27 477.14,-412.7" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node20" class="node">
+<title>0o421</title>
+<ellipse fill="#0e6902" cx="448.04" cy="-461.44" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="448.04" y="-456.84" font-family="Roboto" font-size="14.00" fill="#fefefe">0o421</text>
+</g>
+
+<g id="edge38" class="edge">
+<title>0o21--0o421</title>
+<path fill="none" stroke-width="2" d="M436.18,-408.15C438.56,-418.88 441.59,-432.45 443.98,-443.22" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node21" class="node">
+<title>0o312</title>
+<ellipse fill="#0e6902" cx="383.37" cy="-480.24" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="383.37" y="-475.64" font-family="Roboto" font-size="14.00" fill="#fefefe">0o312</text>
+</g>
+
+<g id="edge7" class="edge">
+<title>0o12--0o312</title>
+<path fill="none" stroke-width="2" d="M358.3,-431.57C363.18,-441.05 369.22,-452.76 374.14,-462.32" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node22" class="node">
+<title>0o412</title>
+<ellipse fill="#0e6902" cx="315.37" cy="-480.24" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="315.37" y="-475.64" font-family="Roboto" font-size="14.00" fill="#fefefe">0o412</text>
+</g>
+
+<g id="edge40" class="edge">
+<title>0o12--0o412</title>
+<path fill="none" stroke-width="2" d="M340.44,-431.57C335.56,-441.05 329.53,-452.76 324.6,-462.32" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node23" class="node">
+<title>0o322</title>
+<ellipse fill="#0e6902" cx="250.7" cy="-461.44" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="250.7" y="-456.84" font-family="Roboto" font-size="14.00" fill="#fefefe">0o322</text>
+</g>
+
+<g id="edge25" class="edge">
+<title>0o22--0o322</title>
+<path fill="none" stroke-width="2" d="M262.57,-408.15C260.18,-418.88 257.16,-432.45 254.76,-443.22" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node24" class="node">
+<title>0o422</title>
+<ellipse fill="#0e6902" cx="195.69" cy="-425.69" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="195.69" y="-421.09" font-family="Roboto" font-size="14.00" fill="#fefefe">0o422</text>
+</g>
+
+<g id="edge42" class="edge">
+<title>0o22--0o422</title>
+<path fill="none" stroke-width="2" d="M242.57,-402.19C235.83,-405.58 228.46,-409.27 221.6,-412.7" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node25" class="node">
+<title>0o313</title>
+<ellipse fill="#0e6902" cx="155.72" cy="-376.49" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="155.72" y="-371.89" font-family="Roboto" font-size="14.00" fill="#fefefe">0o313</text>
+</g>
+
+<g id="edge11" class="edge">
+<title>0o13--0o313</title>
+<path fill="none" stroke-width="2" d="M197.17,-342.23C190.04,-348.13 181.86,-354.88 174.66,-360.83" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node26" class="node">
+<title>0o413</title>
+<ellipse fill="#0e6902" cx="134.71" cy="-318.64" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="134.71" y="-314.04" font-family="Roboto" font-size="14.00" fill="#fefefe">0o413</text>
+</g>
+
+<g id="edge44" class="edge">
+<title>0o13--0o413</title>
+<path fill="none" stroke-width="2" d="M183.97,-323.85C179.72,-323.4 175.33,-322.93 171.01,-322.48" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node27" class="node">
+<title>0o323</title>
+<ellipse fill="#0e6902" cx="134.71" cy="-257.82" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="134.71" y="-253.22" font-family="Roboto" font-size="14.00" fill="#fefefe">0o323</text>
+</g>
+
+<g id="edge28" class="edge">
+<title>0o23--0o323</title>
+<path fill="none" stroke-width="2" d="M183.97,-252.62C179.72,-253.06 175.33,-253.53 171.01,-253.99" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node28" class="node">
+<title>0o423</title>
+<ellipse fill="#0e6902" cx="155.72" cy="-199.98" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="155.72" y="-195.38" font-family="Roboto" font-size="14.00" fill="#fefefe">0o423</text>
+</g>
+
+<g id="edge46" class="edge">
+<title>0o23--0o423</title>
+<path fill="none" stroke-width="2" d="M197.17,-234.23C190.04,-228.34 181.86,-221.58 174.66,-215.63" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node29" class="node">
+<title>0o314</title>
+<ellipse fill="#0e6902" cx="195.69" cy="-150.77" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="195.69" y="-146.17" font-family="Roboto" font-size="14.00" fill="#fefefe">0o314</text>
+</g>
+
+<g id="edge15" class="edge">
+<title>0o14--0o314</title>
+<path fill="none" stroke-width="2" d="M242.57,-174.27C235.83,-170.89 228.46,-167.19 221.6,-163.76" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node30" class="node">
+<title>0o414</title>
+<ellipse fill="#0e6902" cx="250.7" cy="-115.02" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="250.7" y="-110.42" font-family="Roboto" font-size="14.00" fill="#fefefe">0o414</text>
+</g>
+
+<g id="edge48" class="edge">
+<title>0o14--0o414</title>
+<path fill="none" stroke-width="2" d="M262.57,-168.31C260.18,-157.59 257.16,-144.01 254.76,-133.25" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node31" class="node">
+<title>0o324</title>
+<ellipse fill="#0e6902" cx="315.37" cy="-96.22" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="315.37" y="-91.62" font-family="Roboto" font-size="14.00" fill="#fefefe">0o324</text>
+</g>
+
+<g id="edge31" class="edge">
+<title>0o24--0o324</title>
+<path fill="none" stroke-width="2" d="M340.44,-144.89C335.56,-135.42 329.53,-123.7 324.6,-114.14" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node32" class="node">
+<title>0o424</title>
+<ellipse fill="#0e6902" cx="383.37" cy="-96.22" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="383.37" y="-91.62" font-family="Roboto" font-size="14.00" fill="#fefefe">0o424</text>
+</g>
+
+<g id="edge50" class="edge">
+<title>0o24--0o424</title>
+<path fill="none" stroke-width="2" d="M358.3,-144.89C363.18,-135.42 369.22,-123.7 374.14,-114.14" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node33" class="node">
+<title>0o315</title>
+<ellipse fill="#0e6902" cx="448.04" cy="-115.02" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="448.04" y="-110.42" font-family="Roboto" font-size="14.00" fill="#fefefe">0o315</text>
+</g>
+
+<g id="edge19" class="edge">
+<title>0o15--0o315</title>
+<path fill="none" stroke-width="2" d="M436.18,-168.31C438.56,-157.59 441.59,-144.01 443.98,-133.25" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node34" class="node">
+<title>0o415</title>
+<ellipse fill="#0e6902" cx="503.06" cy="-150.77" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="503.06" y="-146.17" font-family="Roboto" font-size="14.00" fill="#fefefe">0o415</text>
+</g>
+
+<g id="edge52" class="edge">
+<title>0o15--0o415</title>
+<path fill="none" stroke-width="2" d="M456.17,-174.27C462.92,-170.89 470.29,-167.19 477.14,-163.76" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node35" class="node">
+<title>0o325</title>
+<ellipse fill="#0e6902" cx="543.02" cy="-199.98" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="543.02" y="-195.38" font-family="Roboto" font-size="14.00" fill="#fefefe">0o325</text>
+</g>
+
+<g id="edge34" class="edge">
+<title>0o25--0o325</title>
+<path fill="none" stroke-width="2" d="M501.58,-234.23C508.71,-228.34 516.88,-221.58 524.08,-215.63" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node36" class="node">
+<title>0o425</title>
+<ellipse fill="#0e6902" cx="564.04" cy="-257.82" rx="36.79" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="564.04" y="-253.22" font-family="Roboto" font-size="14.00" fill="#fefefe">0o425</text>
+</g>
+
+<g id="edge54" class="edge">
+<title>0o25--0o425</title>
+<path fill="none" stroke-width="2" d="M514.77,-252.62C519.02,-253.06 523.41,-253.53 527.73,-253.99" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node37" class="node">
+<title>0o5311</title>
+<ellipse fill="#80010b" cx="651.49" cy="-331.03" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="651.49" y="-326.43" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5311</text>
+</g>
+
+<g id="edge4" class="edge">
+<title>0o311--0o5311</title>
+<path fill="none" stroke-width="2" d="M599.61,-323.68C603.49,-324.23 607.45,-324.79 611.38,-325.35" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node38" class="node">
+<title>0o5411</title>
+<ellipse fill="#80010b" cx="621.92" cy="-412.44" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="621.92" y="-407.84" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5411</text>
+</g>
+
+<g id="edge37" class="edge">
+<title>0o411--0o5411</title>
+<path fill="none" stroke-width="2" d="M570.18,-388.86C577.49,-392.19 585.42,-395.81 592.83,-399.19" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node39" class="node">
+<title>0o5321</title>
+<ellipse fill="#80010b" cx="565.67" cy="-481.7" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="565.67" y="-477.1" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5321</text>
+</g>
+
+<g id="edge23" class="edge">
+<title>0o321--0o5321</title>
+<path fill="none" stroke-width="2" d="M520.83,-441.59C529.07,-448.96 538.87,-457.72 547.19,-465.17" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node41" class="node">
+<title>0o5421</title>
+<ellipse fill="#80010b" cx="488.24" cy="-532.01" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="488.24" y="-527.41" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5421</text>
+</g>
+
+<g id="edge39" class="edge">
+<title>0o421--0o5421</title>
+<path fill="none" stroke-width="2" d="M457.98,-478.89C464.12,-489.66 471.97,-503.45 478.14,-514.28" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node40" class="node">
+<title>0o5312</title>
+<ellipse fill="#80010b" cx="397.22" cy="-558.46" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="397.22" y="-553.86" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5312</text>
+</g>
+
+<g id="edge8" class="edge">
+<title>0o312--0o5312</title>
+<path fill="none" stroke-width="2" d="M386.58,-498.38C388.82,-511.02 391.79,-527.8 394.03,-540.42" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node49" class="node">
+<title>0o5412</title>
+<ellipse fill="#80010b" cx="301.52" cy="-558.46" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="301.52" y="-553.86" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5412</text>
+</g>
+
+<g id="edge41" class="edge">
+<title>0o412--0o5412</title>
+<path fill="none" stroke-width="2" d="M312.16,-498.38C309.92,-511.02 306.95,-527.8 304.72,-540.42" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node45" class="node">
+<title>0o5322</title>
+<ellipse fill="#80010b" cx="210.5" cy="-532.01" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="210.5" y="-527.41" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5322</text>
+</g>
+
+<g id="edge26" class="edge">
+<title>0o322--0o5322</title>
+<path fill="none" stroke-width="2" d="M240.76,-478.89C234.63,-489.66 226.77,-503.45 220.6,-514.28" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node51" class="node">
+<title>0o5422</title>
+<ellipse fill="#80010b" cx="133.08" cy="-481.7" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="133.08" y="-477.1" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5422</text>
+</g>
+
+<g id="edge43" class="edge">
+<title>0o422--0o5422</title>
+<path fill="none" stroke-width="2" d="M177.91,-441.59C169.67,-448.96 159.88,-457.72 151.55,-465.17" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node42" class="node">
+<title>0o5313</title>
+<ellipse fill="#80010b" cx="76.82" cy="-412.44" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="76.82" y="-407.84" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5313</text>
+</g>
+
+<g id="edge12" class="edge">
+<title>0o313--0o5313</title>
+<path fill="none" stroke-width="2" d="M128.57,-388.86C121.26,-392.19 113.32,-395.81 105.91,-399.19" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node52" class="node">
+<title>0o5413</title>
+<ellipse fill="#80010b" cx="47.25" cy="-331.03" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="47.25" y="-326.43" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5413</text>
+</g>
+
+<g id="edge45" class="edge">
+<title>0o413--0o5413</title>
+<path fill="none" stroke-width="2" d="M99.13,-323.68C95.26,-324.23 91.29,-324.79 87.36,-325.35" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node46" class="node">
+<title>0o5323</title>
+<ellipse fill="#80010b" cx="47.25" cy="-245.43" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="47.25" y="-240.83" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5323</text>
+</g>
+
+<g id="edge29" class="edge">
+<title>0o323--0o5323</title>
+<path fill="none" stroke-width="2" d="M99.13,-252.78C95.26,-252.23 91.29,-251.67 87.36,-251.11" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node50" class="node">
+<title>0o5423</title>
+<ellipse fill="#80010b" cx="76.82" cy="-164.02" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="76.82" y="-159.42" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5423</text>
+</g>
+
+<g id="edge47" class="edge">
+<title>0o423--0o5423</title>
+<path fill="none" stroke-width="2" d="M128.57,-187.6C121.26,-184.27 113.32,-180.65 105.91,-177.28" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node43" class="node">
+<title>0o5314</title>
+<ellipse fill="#80010b" cx="133.08" cy="-94.77" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="133.08" y="-90.17" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5314</text>
+</g>
+
+<g id="edge16" class="edge">
+<title>0o314--0o5314</title>
+<path fill="none" stroke-width="2" d="M177.91,-134.87C169.67,-127.5 159.88,-118.74 151.55,-111.29" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node53" class="node">
+<title>0o5414</title>
+<ellipse fill="#80010b" cx="210.5" cy="-44.45" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="210.5" y="-39.85" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5414</text>
+</g>
+
+<g id="edge49" class="edge">
+<title>0o414--0o5414</title>
+<path fill="none" stroke-width="2" d="M240.76,-97.58C234.63,-86.8 226.77,-73.01 220.6,-62.19" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node47" class="node">
+<title>0o5324</title>
+<ellipse fill="#80010b" cx="301.52" cy="-18" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="301.52" y="-13.4" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5324</text>
+</g>
+
+<g id="edge32" class="edge">
+<title>0o324--0o5324</title>
+<path fill="none" stroke-width="2" d="M312.16,-78.08C309.92,-65.44 306.95,-48.66 304.72,-36.04" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node54" class="node">
+<title>0o5424</title>
+<ellipse fill="#80010b" cx="397.22" cy="-18" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="397.22" y="-13.4" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5424</text>
+</g>
+
+<g id="edge51" class="edge">
+<title>0o424--0o5424</title>
+<path fill="none" stroke-width="2" d="M386.58,-78.08C388.82,-65.44 391.79,-48.66 394.03,-36.04" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node44" class="node">
+<title>0o5315</title>
+<ellipse fill="#80010b" cx="488.24" cy="-44.45" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="488.24" y="-39.85" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5315</text>
+</g>
+
+<g id="edge20" class="edge">
+<title>0o315--0o5315</title>
+<path fill="none" stroke-width="2" d="M457.98,-97.58C464.12,-86.8 471.97,-73.01 478.14,-62.19" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node55" class="node">
+<title>0o5415</title>
+<ellipse fill="#80010b" cx="565.67" cy="-94.77" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="565.67" y="-90.17" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5415</text>
+</g>
+
+<g id="edge53" class="edge">
+<title>0o415--0o5415</title>
+<path fill="none" stroke-width="2" d="M520.83,-134.87C529.07,-127.5 538.87,-118.74 547.19,-111.29" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node48" class="node">
+<title>0o5325</title>
+<ellipse fill="#80010b" cx="621.92" cy="-164.02" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="621.92" y="-159.42" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5325</text>
+</g>
+
+<g id="edge35" class="edge">
+<title>0o325--0o5325</title>
+<path fill="none" stroke-width="2" d="M570.18,-187.6C577.49,-184.27 585.42,-180.65 592.83,-177.28" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node56" class="node">
+<title>0o5425</title>
+<ellipse fill="#80010b" cx="651.49" cy="-245.43" rx="42.02" ry="18" style="stroke: var(--md-graphviz-edge-color);" />
+<text text-anchor="middle" x="651.49" y="-240.83" font-family="Roboto" font-size="14.00" fill="#fefefe">0o5425</text>
+</g>
+
+<g id="edge55" class="edge">
+<title>0o425--0o5425</title>
+<path fill="none" stroke-width="2" d="M599.61,-252.78C603.49,-252.23 607.45,-251.67 611.38,-251.11" style="stroke: var(--md-graphviz-edge-color);" />
+</g>
+</g>
+</svg><h2 id="physical-addresses-vs-logical-addresses"><span id="logical-address"></span><span id="physical-address"></span>Physical addresses vs Logical addresses<a class="headerlink" href="#physical-addresses-vs-logical-addresses" title="Permalink to this heading">¶</a></h2>
 <ul>
 <li><p>The Physical address is the 5-byte address assigned to the radio’s data pipes.</p></li>
 <li><p>The Logical address is the 12-bit integer representing a network node.
@@ -1012,7 +1790,7 @@ and describe the situation with as much detail as possible.</p>
       <div class="md-copyright">
   
     <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2020, TMRh20 Avamander 2bndy5.
+        &#169; Copyright 2023, TMRh20 Avamander 2bndy5.
         
     </div>
   
@@ -1037,7 +1815,7 @@ and describe the situation with as much detail as possible.</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
       
-        <script src="_static/sphinx_immaterial_theme.cea6a0c1d5b0618cf.min.js"></script>
+        <script src="_static/sphinx_immaterial_theme.1b5b7a2d5891aec19.min.js"></script>
     
   </body>
 </html>
