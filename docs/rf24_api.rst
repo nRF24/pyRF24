@@ -1,3 +1,5 @@
+:description: How to use the radio's basic functionality.
+
 RF24 API
 ========
 

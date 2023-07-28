@@ -1,3 +1,5 @@
+:description: How to use the radio as a static network node.
+
 RF24Network API
 ===============
 
