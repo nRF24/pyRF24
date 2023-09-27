@@ -11,6 +11,12 @@ build:
     - python3-dev
     - graphviz
     - cmake
+    - libgl1-mesa-dev
+    - libxkbcommon-x11-0
+  # setting a public env var from RTD config is not yet implemented.
+  # See https://github.com/readthedocs/readthedocs.org/issues/6311
+  # Instead, use the RTD project's  settings page (admin/environment variables) to
+  # set QT_QPA_PLATFORM=offscreen
 
 python:
   install:
