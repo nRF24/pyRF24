@@ -30,6 +30,7 @@ jobs:
       - name: Run cpp-linter as a py pkg
         id: linter
         run: |
+          sudo apt-get install clang-format-12
           cpp-linter \
           --version=12 \
           --style=file \
