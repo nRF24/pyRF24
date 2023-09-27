@@ -28,7 +28,7 @@ jobs:
           python3 -m pip install twine
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: aarch64
 
