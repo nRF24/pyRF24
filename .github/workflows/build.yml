@@ -1,6 +1,6 @@
 name: Build CI
 
-on: 
+on:
   pull_request:
     types: [opened, reopened]
   push:
@@ -24,12 +24,13 @@ jobs:
       - name: Install dependencies
         # cmake ships with the ubuntu-latest runner
         run: |
-          sudo apt-get install python3-dev graphviz
+          sudo apt-get install python3-dev
           python3 -m pip install -r docs/requirements.txt -r requirements.txt -r requirements-dev.txt
 
       - name: Run cpp-linter as a py pkg
         id: linter
         run: |
+          sudo apt-get install clang-format-12
           cpp-linter \
           --version=12 \
           --style=file \
@@ -56,8 +57,13 @@ jobs:
       - name: Match pylint problems to diff via github annotations
         run: python ./.github/workflows/pylint_matcher.py pylint.json
 
+      - name: Get doc dependencies
+        run: sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 graphviz
       - name: Build docs
         working-directory: docs
+        # required for pySide6 on headless linux (as used by sphinx-social-cards extension)
+        env:
+          QT_QPA_PLATFORM: offscreen
         run: sphinx-build -E -W -b html . _build/html
 
       - name: Save built docs as artifact
@@ -67,7 +73,7 @@ jobs:
           path: ${{ github.workspace }}/docs/_build/html
 
       - name: upload to github pages
-        if: github.event_name !='pull_request'
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
