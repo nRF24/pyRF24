@@ -73,7 +73,7 @@ jobs:
           path: ${{ github.workspace }}/docs/_build/html
 
       - name: upload to github pages
-        if: github.event_name !='pull_request'
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
