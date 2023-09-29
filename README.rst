@@ -179,7 +179,7 @@ it is necessary to use an environment variable containing additional arguments f
 
 .. code-block:: bash
 
-    export CMAKE_ARGS="-DRF4_DRIVER=RPi"
+    export CMAKE_ARGS="-DRF24_DRIVER=RPi"
 
 .. hint::
     You can also use this environment variable to enable debug output from different
