@@ -740,7 +740,7 @@ On Raspberry Pi OS (32 bit), this will be <code class="docutils literal notransl
 <p>By default, this package is built using the RF24 driver SPIDEV. If you want to build the
 package using a different RF24 driver (like <code class="docutils literal notranslate"><span class="pre">RPi</span></code>, <code class="docutils literal notranslate"><span class="pre">MRAA</span></code>, <code class="docutils literal notranslate"><span class="pre">wiringPi</span></code>, etc), then
 it is necessary to use an environment variable containing additional arguments for CMake:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF4_DRIVER=RPi&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF24_DRIVER=RPi&quot;</span>
 </code></pre></div>
 </div>
 <div class="hint admonition">
