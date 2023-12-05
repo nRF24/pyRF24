@@ -42,7 +42,7 @@ class RF24Wrapper : public RF24
 {
 
 public:
-    RF24Wrapper(uint16_t _ce_pin, uint16_t _csn_pin, uint32_t _spi_speed = 10000000) : RF24(_ce_pin, _csn_pin, _spi_speed)
+    RF24Wrapper(rf24_gpio_pin_t _ce_pin, rf24_gpio_pin_t _csn_pin, uint32_t _spi_speed = 10000000) : RF24(_ce_pin, _csn_pin, _spi_speed)
     {
     }
 
@@ -851,7 +851,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
         // ************************** functions that have overloads
 
-        .def(py::init<uint8_t, uint8_t, uint32_t>(), R"docstr(
+        .def(py::init<rf24_gpio_pin_t, rf24_gpio_pin_t, uint32_t>(), R"docstr(
             __init__(ce_pin: int, csn_pin: int, spi_speed: int = 10000000)
             __init__(spi_speed: int = 10000000)
 
@@ -861,7 +861,7 @@ PYBIND11_MODULE(rf24, m)
             :param int csn_pin: The pin number connected to the radio's CSN pin.
             :param int spi_speed: The SPI bus speed (in Hz). Defaults to 10 MHz when not specified.
         )docstr",
-             py::arg("ce_pin") = 0xFFFF, py::arg("csn_pin") = 0xFFFF, py::arg("spi_speed") = 10000000)
+             py::arg("ce_pin") = RF24_PIN_INVALID, py::arg("csn_pin") = RF24_PIN_INVALID, py::arg("spi_speed") = 10000000)
 
         // *****************************************************************************
 
@@ -885,7 +885,7 @@ PYBIND11_MODULE(rf24, m)
 
         // *****************************************************************************
 
-        .def("begin", static_cast<bool (RF24Wrapper::*)(uint16_t, uint16_t)>(&RF24Wrapper::begin), R"docstr(
+        .def("begin", static_cast<bool (RF24Wrapper::*)(rf24_gpio_pin_t, rf24_gpio_pin_t)>(&RF24Wrapper::begin), R"docstr(
             If configuring the radio's CE & CSN pins dynamically, then the respective pin numbers must be passed to this function.
 
             :param int ce_pin: The pin number connected to the radio's CE pin.
