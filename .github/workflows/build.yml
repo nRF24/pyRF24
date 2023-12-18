@@ -67,7 +67,7 @@ jobs:
         run: sphinx-build -E -W -b html . _build/html
 
       - name: Save built docs as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "pyRF24_docs"
           path: ${{ github.workspace }}/docs/_build/html
@@ -80,7 +80,7 @@ jobs:
           publish_dir: ./docs/_build/html
 
       - name: Save distributable wheels as artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "pyRF24_pkg_dist"
           path: ${{ github.workspace }}/dist
