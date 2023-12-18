@@ -48,7 +48,7 @@ jobs:
         run: python setup.py sdist
 
       - name: Save distributable wheels as artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "pyRF24_pkg_dist"
           path: ${{ github.workspace }}/dist
