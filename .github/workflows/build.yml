@@ -30,13 +30,15 @@ jobs:
       - name: Run cpp-linter as a py pkg
         id: linter
         run: |
-          sudo apt-get install clang-format-12
+          sudo apt-get install clang-format-14
           cpp-linter \
-          --version=12 \
+          --version=14 \
           --style=file \
           --tidy-checks='-*' \
-          --files-changed-only='false' \
-          --ignore='!src|'
+          --lines-changed-only=true \
+          --ignore='!src|' \
+          --format-review=true \
+          --file-annotations=false
 
       - name: C++ Linter checks failed?
         if: steps.linter.outputs.checks-failed > 0
@@ -61,8 +63,8 @@ jobs:
         run: sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 graphviz
       - name: Build docs
         working-directory: docs
-        # required for pySide6 on headless linux (as used by sphinx-social-cards extension)
         env:
+          # required for pySide6 on headless linux (as used by sphinx-social-cards extension)
           QT_QPA_PLATFORM: offscreen
         run: sphinx-build -E -W -b html . _build/html
 

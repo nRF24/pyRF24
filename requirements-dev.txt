@@ -1,4 +1,4 @@
 pylint
 mypy
-cpp-linter
+cpp-linter>=1.7.1
 black
