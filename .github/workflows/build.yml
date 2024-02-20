@@ -28,15 +28,19 @@ jobs:
           python3 -m pip install -r docs/requirements.txt -r requirements.txt -r requirements-dev.txt
 
       - name: Run cpp-linter as a py pkg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: linter
         run: |
-          sudo apt-get install clang-format-12
+          sudo apt-get install clang-format-14
           cpp-linter \
-          --version=12 \
+          --version=14 \
           --style=file \
           --tidy-checks='-*' \
-          --files-changed-only='false' \
-          --ignore='!src|'
+          --lines-changed-only=true \
+          --ignore='!src|' \
+          --format-review=true \
+          --file-annotations=false
 
       - name: C++ Linter checks failed?
         if: steps.linter.outputs.checks-failed > 0
@@ -58,11 +62,13 @@ jobs:
         run: python ./.github/workflows/pylint_matcher.py pylint.json
 
       - name: Get doc dependencies
-        run: sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 graphviz
+        run: |-
+          sudo apt-get update
+          sudo apt-get install -y libgl-dev libglvnd-dev libxkbcommon-x11-0 graphviz
       - name: Build docs
         working-directory: docs
-        # required for pySide6 on headless linux (as used by sphinx-social-cards extension)
         env:
+          # required for pySide6 on headless linux (as used by sphinx-social-cards extension)
           QT_QPA_PLATFORM: offscreen
         run: sphinx-build -E -W -b html . _build/html
 
