@@ -28,6 +28,8 @@ jobs:
           python3 -m pip install -r docs/requirements.txt -r requirements.txt -r requirements-dev.txt
 
       - name: Run cpp-linter as a py pkg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: linter
         run: |
           sudo apt-get install clang-format-14
