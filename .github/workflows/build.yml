@@ -60,7 +60,9 @@ jobs:
         run: python ./.github/workflows/pylint_matcher.py pylint.json
 
       - name: Get doc dependencies
-        run: sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 graphviz
+        run: |-
+          sudo apt-get update
+          sudo apt-get install -y libgl-dev libglvnd-dev libxkbcommon-x11-0 graphviz
       - name: Build docs
         working-directory: docs
         env:
