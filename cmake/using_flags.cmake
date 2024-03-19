@@ -71,6 +71,13 @@ function(apply_flags target)
 
     #  pass driver used to expose as a constant in rf24 module.
     target_compile_definitions(${target} PUBLIC RF24_DRIVER="${RF24_DRIVER}")
+    if(NOT "${RF24_LINKED_DRIVER}" STREQUAL "")
+        if("${RF24_DRIVER}" STREQUAL "wiringPi")
+            target_link_libraries(${target} PRIVATE rt crypt ${RF24_LINKED_DRIVER})
+        else()
+            target_link_libraries(${target} PRIVATE ${RF24_LINKED_DRIVER})
+        endif()
+    endif()
 
     # apply RF24Network flags to rf24_mesh and rf24_network targets
     if("${target}" STREQUAL "rf24_network" OR "${target}" STREQUAL "rf24_mesh")

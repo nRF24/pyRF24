@@ -7,10 +7,16 @@ if(SKBUILD)
   message(STATUS "This project is being built using scikit-build & pybind11")
 endif()
 
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+
 include(cmake/using_flags.cmake)
 
 add_subdirectory(pybind11)
+include(RF24/cmake/AutoConfig_RF24_DRIVER.cmake)
 add_subdirectory(RF24/utility) # configure the RF24_DRIVER
+if(NOT "${RF24_LINKED_DRIVER}" STREQUAL "")
+    message(STATUS "Linking to utility driver '${RF24_LINKED_DRIVER}'")
+endif()
 
 ################################# RF24 #############################
 
