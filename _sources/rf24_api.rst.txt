@@ -5,6 +5,19 @@ RF24 API
 
 .. automodule:: pyrf24.rf24
 
+    .. autoattribute:: pyrf24.rf24.RF24_DRIVER
+
+        This `str` describes the backend driver used to build the pyrf24 package.
+        If installed from pypi, then this value should be ``"SPIDEV"``.
+        
+        All other drivers imply that the pyrf24 package was built from source
+        :ref:`using-specific-driver`.
+
+        .. hint::
+
+            Use this attribute to determine programmatically which pin numbers to use.
+            Drivers like ``wiringPi`` and ``MRAA`` use their own pin numbering scheme.
+
 Enum classes
 ------------
 

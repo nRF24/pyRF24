@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.7c9a37b00d8b88dbe.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.903b73fa37b983ad2.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -736,10 +736,10 @@ On Raspberry Pi OS (32 bit), this will be <code class="docutils literal notransl
 </ul>
 </li>
 </ol>
-<h3 id="using-a-specific-rf24-driver">Using a specific RF24 driver<a class="headerlink" href="#using-a-specific-rf24-driver" title="Permalink to this heading">¶</a></h3>
-<p>By default, this package is built using the RF24 driver SPIDEV. If you want to build the
-package using a different RF24 driver (like <code class="docutils literal notranslate"><span class="pre">RPi</span></code>, <code class="docutils literal notranslate"><span class="pre">MRAA</span></code>, <code class="docutils literal notranslate"><span class="pre">wiringPi</span></code>, etc), then
-it is necessary to use an environment variable containing additional arguments for CMake:</p>
+<h3 id="using-a-specific-rf24-driver"><span id="using-specific-driver"></span>Using a specific RF24 driver<a class="headerlink" href="#using-a-specific-rf24-driver" title="Permalink to this heading">¶</a></h3>
+<p>By default, this package is built using the RF24 driver <code class="docutils literal notranslate"><span class="pre">SPIDEV</span></code>. If you want to build the
+package using a different RF24 driver (like <code class="docutils literal notranslate"><span class="pre">RPi</span></code>, <code class="docutils literal notranslate"><span class="pre">MRAA</span></code>, <code class="docutils literal notranslate"><span class="pre">wiringPi</span></code>, or <code class="docutils literal notranslate"><span class="pre">pigpio</span></code>),
+then it is necessary to use an environment variable containing additional arguments for CMake:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF24_DRIVER=RPi&quot;</span>
 </code></pre></div>
 </div>
@@ -943,7 +943,7 @@ rendered correctly.</p>
       <div class="md-copyright">
   
     <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2023, TMRh20 Avamander 2bndy5.
+        &#169; Copyright 2024, TMRh20 Avamander 2bndy5.
         
     </div>
   
