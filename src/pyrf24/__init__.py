@@ -11,6 +11,7 @@ from .rf24 import (
     RF24_PA_LOW,
     RF24_PA_HIGH,
     RF24_PA_MAX,
+    RF24_DRIVER,
 )
 from .rf24_network import (
     RF24Network,

@@ -4,7 +4,7 @@ Example of library usage for streaming multiple payloads.
 import sys
 import argparse
 import time
-from pyrf24 import RF24, RF24_PA_LOW
+from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
 
 ########### USER CONFIGURATION ###########
@@ -14,7 +14,14 @@ from pyrf24 import RF24, RF24_PA_LOW
 # their own pin numbering
 # CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
-radio = RF24(22, 0)
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15 # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
+radio = RF24(CE_PIN, CSN_PIN)
 
 # For this example, we will use different addresses
 # An address need to be a buffer protocol object (bytearray)

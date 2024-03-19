@@ -2,10 +2,17 @@
 Example of using the rf24_mesh module to operate the nRF24L01 transceiver as
 a Mesh network master node.
 """
-from pyrf24 import RF24, RF24Network, RF24Mesh
+from pyrf24 import RF24, RF24Network, RF24Mesh, RF24_DRIVER
 
 
-radio = RF24(22, 0)
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15 # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
+radio = RF24(CE_PIN, CSN_PIN)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
 mesh.node_id = 0
