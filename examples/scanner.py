@@ -36,12 +36,18 @@ radio.set_retries(0, 0)
 
 # use reverse engineering tactics for a better "snapshot"
 radio.address_width = 2
-radio.open_rx_pipe(0, b"\x55\x55")
-radio.open_rx_pipe(1, b"\xaa\xaa")
-radio.open_rx_pipe(2, b"\xa0\xaa")
-radio.open_rx_pipe(3, b"\x0a\xaa")
-radio.open_rx_pipe(4, b"\xa5\xaa")
-radio.open_rx_pipe(5, b"\x5a\xaa")
+# The worst possible addresses. These are designed to confuse the radio into thinking
+# the RF signal's preamble is part of the packet/payload.
+noise_addresses = [
+    b"\x55\x55",
+    b"\xaa\xaa",
+    b"\xa0\xaa",
+    b"\x0a\xaa",
+    b"\xa5\xaa",
+    b"\x5a\xaa",
+]
+for pipe, address in enumerate(noise_addresses):
+    radio.open_rx_pipe(pipe, address)
 
 
 def scan(timeout: int = 30):
@@ -60,6 +66,7 @@ def scan(timeout: int = 30):
     print("\n" + "~" * 126)
 
     signals = [0] * 126  # store the signal count for each channel
+    sweeps = 0  # keep track of the number of sweeps made through all channels
     curr_channel = 0
     start_timer = time.monotonic()  # start the timer
     while time.monotonic() - start_timer < timeout:
@@ -75,6 +82,11 @@ def scan(timeout: int = 30):
         # clear the RX FIFO if a signal was detected/captured
         if found_signal:
             radio.flush_rx()  # flush the RX FIFO because it asserts the RPD flag
+        endl = False
+        if curr_channel >= 125:
+            sweeps += 1
+            if sweeps % 100 == 0:
+                endl = True
         curr_channel = curr_channel + 1 if curr_channel < 125 else 0
 
         # output the signal counts per channel
@@ -82,8 +94,9 @@ def scan(timeout: int = 30):
         print(
             ("%X" % min(15, sig_cnt)) if sig_cnt else "-",
             sep="",
-            end="" if curr_channel < 125 else "\r",
+            end="" if curr_channel < 125 else ("\n" if endl else "\r"),
         )
+
     # finish printing results and end with a new line
     while curr_channel < len(signals) - 1:
         curr_channel += 1
