@@ -244,6 +244,7 @@ public:
 PYBIND11_MODULE(rf24, m)
 {
     m.doc() = "A Python module that wraps all RF24 C++ library's API";
+    m.attr("RF24_DRIVER") = RF24_DRIVER;
 
     // ********************** Enum structs
     py::enum_<rf24_crclength_e>(m, "rf24_crclength_e")

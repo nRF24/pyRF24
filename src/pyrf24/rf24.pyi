@@ -1,5 +1,6 @@
-# pylint: skip-file
-from typing import Tuple, Union, overload, Optional
+from typing import Tuple, Union, overload, Optional, Literal
+
+RF24_DRIVER: Literal["SPIDEV", "wiringPi", "pigpio", "MRAA", "RPi"]
 
 class rf24_crclength_e:
     RF24_CRC_DISABLED: "rf24_crclength_e"

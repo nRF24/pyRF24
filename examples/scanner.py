@@ -3,9 +3,9 @@ This is an example of how to use the nRF24L01's builtin
 Received Power Detection (RPD) to scan for possible interference.
 This example does not require a counterpart node.
 """
-# pylint: disable=consider-using-f-string
+
 import time
-from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr
+from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr, RF24_DRIVER
 
 
 ########### USER CONFIGURATION ###########
@@ -15,7 +15,14 @@ from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr
 # their own pin numbering
 # CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
-radio = RF24(22, 0)
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15  # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
+radio = RF24(CE_PIN, CSN_PIN)
 
 # initialize the nRF24L01 on the spi bus
 if not radio.begin():
@@ -30,11 +37,12 @@ radio.set_retries(0, 0)
 # use reverse engineering tactics for a better "snapshot"
 radio.address_width = 2
 radio.open_rx_pipe(0, b"\x55\x55")
-radio.open_rx_pipe(1, b"\xAA\xAA")
-radio.open_rx_pipe(2, b"\xA0\xAA")
-radio.open_rx_pipe(3, b"\x0A\xAA")
-radio.open_rx_pipe(4, b"\xA5\xAA")
-radio.open_rx_pipe(5, b"\x5A\xAA")
+radio.open_rx_pipe(1, b"\xaa\xaa")
+radio.open_rx_pipe(2, b"\xa0\xaa")
+radio.open_rx_pipe(3, b"\x0a\xaa")
+radio.open_rx_pipe(4, b"\xa5\xaa")
+radio.open_rx_pipe(5, b"\x5a\xaa")
+
 
 def scan(timeout: int = 30):
     """Traverse the spectrum of accessible frequencies and print any detection
@@ -114,7 +122,8 @@ def set_role():
             "*** Enter 'S' to perform scan.\n"
             "*** Enter 'N' to display noise.\n"
             "*** Enter 'Q' to quit example.\n"
-        ) or "?"
+        )
+        or "?"
     )
     user_input = user_input.split()
     if user_input[0].upper().startswith("S"):

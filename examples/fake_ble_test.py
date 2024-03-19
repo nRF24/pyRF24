@@ -1,10 +1,12 @@
 """
 This example uses the nRF24L01 as a 'fake' BLE Beacon
 """
+
 import time
 from pyrf24 import (
     RF24,
     RF24_PA_LOW,
+    RF24_DRIVER,
     FakeBLE,
     chunk,
     address_repr,
@@ -14,9 +16,15 @@ from pyrf24 import (
 )
 
 
-
 # initialize the nRF24L01 on the spi bus object as a BLE compliant radio
-radio = RF24(22, 0)
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15  # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
+radio = RF24(CE_PIN, CSN_PIN)
 ble = FakeBLE(radio)
 # On Linux, csn value is a bit coded
 #                 0 = bus 0, CE0  # SPI bus 0 is enabled by default
@@ -140,7 +148,7 @@ def slave(timeout=6):
             result = ble.read()
             print(
                 "received payload from MAC address",
-                address_repr(result.mac, delimit=":")
+                address_repr(result.mac, delimit=":"),
             )
             if result.name is not None:
                 print("\tdevice name:", result.name)

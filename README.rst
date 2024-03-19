@@ -170,12 +170,14 @@ same version of CPython, CPU architecture, and C standard lib.
    - ``ARCH`` is the architecture type of the CPU. This corresponds to the compiler used.
      On Raspberry Pi OS (32 bit), this will be ``armv7l``.
 
+.. _using-specific-driver:
+
 Using a specific RF24 driver
 ----------------------------
 
-By default, this package is built using the RF24 driver SPIDEV. If you want to build the
-package using a different RF24 driver (like ``RPi``, ``MRAA``, ``wiringPi``, etc), then
-it is necessary to use an environment variable containing additional arguments for CMake:
+By default, this package is built using the RF24 driver ``SPIDEV``. If you want to build the
+package using a different RF24 driver (like ``RPi``, ``MRAA``, ``wiringPi``, or ``pigpio``),
+then it is necessary to use an environment variable containing additional arguments for CMake:
 
 .. code-block:: bash
 

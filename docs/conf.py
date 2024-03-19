@@ -5,18 +5,21 @@ This file only contains a selection of the most common options. For a full
 list see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
-# pylint: disable=invalid-name
+
 import os
+import time
 
 try:
     from importlib.metadata import version as get_version
 except ImportError:  # for python v3.7 or older
     from importlib_metadata import version as get_version  # type: ignore
 
+current_time = time.localtime()
+
 # -- Project information -----------------------------------------------------
 
 project = "pyRF24"
-copyright = "2023, TMRh20 Avamander 2bndy5"  # pylint: disable=redefined-builtin
+copyright = f"{current_time.tm_year}, TMRh20 Avamander 2bndy5"
 author = "TMRh20 Avamander 2bndy5"
 language = "en"
 

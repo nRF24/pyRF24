@@ -54,12 +54,11 @@ jobs:
       - name: check python typing
         run: mypy src
 
-      - name: check python examples PEP8 compliance
-        # duplicate-code error gets flagged because some examples use similar code snippets
-        run: pylint examples/*.py src/pyrf24/*.py --disable=duplicate-code --output-format=json:pylint.json
+      - name: lint python sources
+        run: ruff check examples/*.py src/pyrf24/*.py* setup.py docs/conf.py
 
-      - name: Match pylint problems to diff via github annotations
-        run: python ./.github/workflows/pylint_matcher.py pylint.json
+      - name: format python sources
+        run: ruff format examples/*.py src/pyrf24/*.py* setup.py docs/conf.py
 
       - name: Get doc dependencies
         run: |-

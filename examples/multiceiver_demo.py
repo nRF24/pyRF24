@@ -2,11 +2,12 @@
 Simple example of using 1 nRF24L01 to receive data from up to 6 other
 transceivers. This technique is called "multiceiver" in the datasheet.
 """
+
 import sys
 import argparse
 import time
 import struct
-from pyrf24 import RF24, RF24_PA_LOW
+from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -15,16 +16,23 @@ from pyrf24 import RF24, RF24_PA_LOW
 # their own pin numbering
 # CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
-radio = RF24(22, 0)
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15  # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
+radio = RF24(CE_PIN, CSN_PIN)
 
 # setup the addresses for all transmitting nRF24L01 nodes
 addresses = [
     b"\x78" * 5,
-    b"\xF1\xB6\xB5\xB4\xB3",
-    b"\xCD\xB6\xB5\xB4\xB3",
-    b"\xA3\xB6\xB5\xB4\xB3",
-    b"\x0F\xB6\xB5\xB4\xB3",
-    b"\x05\xB6\xB5\xB4\xB3",
+    b"\xf1\xb6\xb5\xb4\xb3",
+    b"\xcd\xb6\xb5\xb4\xb3",
+    b"\xa3\xb6\xb5\xb4\xb3",
+    b"\x0f\xb6\xb5\xb4\xb3",
+    b"\x05\xb6\xb5\xb4\xb3",
 ]
 # It is very helpful to think of an address as a path instead of as
 # an identifying device destination
@@ -141,7 +149,6 @@ print(sys.argv[0])  # print example name
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

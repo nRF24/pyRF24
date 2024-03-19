@@ -1,5 +1,6 @@
 """Build & Install script for the pyrf24 package or python wrappers about
 the RF24 C++ libraries."""
+
 import os
 import platform
 import subprocess
@@ -17,6 +18,7 @@ class CMakeExtension(Extension):
     A CMakeExtension needs a sourcedir instead of a file list.
     The name must be the single output extension from the CMake build.
     """
+
     def __init__(self, name, sourcedir="", **kwargs):
         kwargs.pop("sources", None)
         Extension.__init__(self, name, sources=[], **kwargs)
@@ -26,6 +28,7 @@ class CMakeExtension(Extension):
 class CMakeBuild(build_ext):
     """A class that wraps the builtin mechanism for building a
     distributable wheel from a compiled c-extension"""
+
     def build_extension(self, ext: Extension):
         extdir = str(
             (Path(self.get_ext_fullpath(ext.name)).parent / ext.name).resolve()

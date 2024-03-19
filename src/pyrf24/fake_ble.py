@@ -73,11 +73,11 @@ here has been adapted to work with Python.
        triggered because auto-ack feature is disabled. Keep this in mind when using
        `mask_irq()`.
 """
-# pylint: disable=too-few-public-methods,missing-docstring,too-many-instance-attributes
+
 from os import urandom
 import struct
 from typing import Union, List, Optional
-from .rf24 import (  # pylint: disable=import-error
+from .rf24 import (
     RF24,
     RF24_CRC_DISABLED,
     RF24_PA_HIGH,
@@ -111,9 +111,7 @@ def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
         specified ``buf`` parameter.
     """
     order = range(len(buf) - 1, -1, -1) if reverse else range(len(buf))
-    # pylint: disable=consider-using-f-string
     return delimit.join(["%02X" % buf[byte] for byte in order])
-    # pylint: enable=consider-using-f-string
 
 
 def swap_bits(original: int) -> int:
@@ -409,8 +407,8 @@ class FakeBLE:
         self._radio.dynamic_payloads = False
         self._radio.set_retries(0, 0)
         self._radio.address_width = 4  # use only 4 byte address length
-        self._radio.open_tx_pipe(b"\x71\x91\x7D\x6B\0")
-        self._radio.open_rx_pipe(0, b"\x71\x91\x7D\x6B\0")
+        self._radio.open_tx_pipe(b"\x71\x91\x7d\x6b\0")
+        self._radio.open_rx_pipe(0, b"\x71\x91\x7d\x6b\0")
         self.hop_channel()
         self._radio.power = True
         self._radio.listen = True

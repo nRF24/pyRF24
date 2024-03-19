@@ -1,4 +1,3 @@
-# pylint: skip-file
 from typing import Union, overload, List
 from .rf24 import RF24, rf24_datarate_e
 from .rf24_network import RF24Network

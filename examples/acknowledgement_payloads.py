@@ -2,6 +2,7 @@
 Simple example of using the library to transmit
 and retrieve custom automatic acknowledgment payloads.
 """
+
 import sys
 import time
 import argparse
@@ -157,7 +158,6 @@ print(sys.argv[0])  # print example name
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

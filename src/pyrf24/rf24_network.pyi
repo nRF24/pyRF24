@@ -1,5 +1,4 @@
-# pylint: skip-file
-from typing import Tuple, Union, List, overload, Optional
+from typing import Tuple, Union, overload
 from .rf24 import RF24
 
 MAX_USER_DEFINED_HEADER_TYPE: int = 127
