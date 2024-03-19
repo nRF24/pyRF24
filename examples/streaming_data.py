@@ -1,6 +1,7 @@
 """
 Example of library usage for streaming multiple payloads.
 """
+
 import sys
 import argparse
 import time
@@ -16,7 +17,7 @@ from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":
-    CE_PIN = 15 # for GPIO22
+    CE_PIN = 15  # for GPIO22
 elif RF24_DRIVER == "wiringPi":
     CE_PIN = 3  # for GPIO22
 else:
@@ -93,9 +94,7 @@ def master(count: int = 1, size: int = 32):
                 radio.reuse_tx()
                 if failures > 99 and buf_iter < 7 and cnt < 2:
                     # we need to prevent an infinite loop
-                    print(
-                        "Make sure slave() node is listening. Quitting master_fifo()"
-                    )
+                    print("Make sure slave() node is listening. Quitting master_fifo()")
                     buf_iter = size + 1  # be sure to exit the while loop
                     radio.flush_tx()  # discard all payloads in TX FIFO
                     break
@@ -165,7 +164,6 @@ print(sys.argv[0])  # print example name
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

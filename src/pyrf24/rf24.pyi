@@ -1,4 +1,3 @@
-# pylint: skip-file
 from typing import Tuple, Union, overload, Optional, Literal
 
 RF24_DRIVER: Literal["SPIDEV", "wiringPi", "pigpio", "MRAA", "RPi"]

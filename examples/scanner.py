@@ -3,7 +3,7 @@ This is an example of how to use the nRF24L01's builtin
 Received Power Detection (RPD) to scan for possible interference.
 This example does not require a counterpart node.
 """
-# pylint: disable=consider-using-f-string
+
 import time
 from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr, RF24_DRIVER
 
@@ -37,11 +37,12 @@ radio.set_retries(0, 0)
 # use reverse engineering tactics for a better "snapshot"
 radio.address_width = 2
 radio.open_rx_pipe(0, b"\x55\x55")
-radio.open_rx_pipe(1, b"\xAA\xAA")
-radio.open_rx_pipe(2, b"\xA0\xAA")
-radio.open_rx_pipe(3, b"\x0A\xAA")
-radio.open_rx_pipe(4, b"\xA5\xAA")
-radio.open_rx_pipe(5, b"\x5A\xAA")
+radio.open_rx_pipe(1, b"\xaa\xaa")
+radio.open_rx_pipe(2, b"\xa0\xaa")
+radio.open_rx_pipe(3, b"\x0a\xaa")
+radio.open_rx_pipe(4, b"\xa5\xaa")
+radio.open_rx_pipe(5, b"\x5a\xaa")
+
 
 def scan(timeout: int = 30):
     """Traverse the spectrum of accessible frequencies and print any detection
@@ -121,7 +122,8 @@ def set_role():
             "*** Enter 'S' to perform scan.\n"
             "*** Enter 'N' to display noise.\n"
             "*** Enter 'Q' to quit example.\n"
-        ) or "?"
+        )
+        or "?"
     )
     user_input = user_input.split()
     if user_input[0].upper().startswith("S"):

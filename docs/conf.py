@@ -5,7 +5,7 @@ This file only contains a selection of the most common options. For a full
 list see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
-# pylint: disable=invalid-name
+
 import os
 
 try:
@@ -16,7 +16,7 @@ except ImportError:  # for python v3.7 or older
 # -- Project information -----------------------------------------------------
 
 project = "pyRF24"
-copyright = "2023, TMRh20 Avamander 2bndy5"  # pylint: disable=redefined-builtin
+copyright = "2023, TMRh20 Avamander 2bndy5"
 author = "TMRh20 Avamander 2bndy5"
 language = "en"
 

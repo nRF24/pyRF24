@@ -5,13 +5,14 @@ Simplest possible example of using RF24Network
 RECEIVER NODE
 Listens for messages from the transmitter and prints them out.
 """
+
 import struct
 from pyrf24 import RF24, RF24Network, RF24_DRIVER
 
 
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":
-    CE_PIN = 15 # for GPIO22
+    CE_PIN = 15  # for GPIO22
 elif RF24_DRIVER == "wiringPi":
     CE_PIN = 3  # for GPIO22
 else:

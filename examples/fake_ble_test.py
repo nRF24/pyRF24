@@ -1,6 +1,7 @@
 """
 This example uses the nRF24L01 as a 'fake' BLE Beacon
 """
+
 import time
 from pyrf24 import (
     RF24,
@@ -13,7 +14,6 @@ from pyrf24 import (
     BatteryServiceData,
     TemperatureServiceData,
 )
-
 
 
 # initialize the nRF24L01 on the spi bus object as a BLE compliant radio
@@ -148,7 +148,7 @@ def slave(timeout=6):
             result = ble.read()
             print(
                 "received payload from MAC address",
-                address_repr(result.mac, delimit=":")
+                address_repr(result.mac, delimit=":"),
             )
             if result.name is not None:
                 print("\tdevice name:", result.name)

@@ -5,6 +5,7 @@ Simplest possible example of using RF24Network.
 TRANSMITTER NODE
 Sends messages from to receiver.
 """
+
 import struct
 import time
 from pyrf24 import RF24, RF24Network, RF24NetworkHeader, RF24_DRIVER
@@ -12,7 +13,7 @@ from pyrf24 import RF24, RF24Network, RF24NetworkHeader, RF24_DRIVER
 
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":
-    CE_PIN = 15 # for GPIO22
+    CE_PIN = 15  # for GPIO22
 elif RF24_DRIVER == "wiringPi":
     CE_PIN = 3  # for GPIO22
 else:
