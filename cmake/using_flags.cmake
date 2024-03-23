@@ -4,11 +4,6 @@
 # RF24 core specific options
 option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
 
-# Disabling IRQ support should be always done because
-# IRQ support can be handled in python with different libs.
-option(RF24_NO_INTERRUPT "disable IRQ support (dependent on pigpio)" ON)
-# does not affect pigpio driver though
-
 # RF24Network specific options
 option(SERIAL_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
 option(SERIAL_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Network lib" OFF)
@@ -61,9 +56,6 @@ option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh 
 # function to apply flags to applicable targets
 function(apply_flags target)
     # apply RF24 flags to all targets
-    if(RF24_NO_INTERRUPT)
-        target_compile_definitions(${target} PUBLIC RF24_NO_INTERRUPT)
-    endif()
     if(RF24_DEBUG)
         message(STATUS "RF24_DEBUG asserted for ${target}")
         target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
