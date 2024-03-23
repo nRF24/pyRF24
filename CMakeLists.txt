@@ -18,14 +18,26 @@ if(NOT "${RF24_LINKED_DRIVER}" STREQUAL "")
     message(STATUS "Linking to utility driver '${RF24_LINKED_DRIVER}'")
 endif()
 
-################################# RF24 #############################
+# suplement our copy of linux/gpio.h into SPIDEV & RPi driver sources
+set(SUPPLEMEN_LINUX_GPIO_H FALSE)
+if("${RF24_DRIVER}" STREQUAL "RPi" OR "${RF24_DRIVER}" STREQUAL "SPIDEV")
+    set(SUPPLEMEN_LINUX_GPIO_H TRUE)
+    message(STATUS "Supplementing ${RF24_DRIVER} driver with linux/gpio.h")
+    # file(COPY src/linux/gpio.h DESTINATION RF24/utility/${RF24_DRIVER}/linux)
+    list(APPEND RF24_DRIVER_SOURCES src/linux/gpio.h)
+endif()
 
+################################# RF24 #############################
+set(CMAKE_VERBOSE_MAKEFILE ON)
 pybind11_add_module(rf24 src/pyRF24.cpp)
 target_include_directories(rf24 PUBLIC
     RF24
     RF24/utility
     RF24/utility/${RF24_DRIVER}
 )
+if(SUPPLEMEN_LINUX_GPIO_H)
+    target_include_directories(rf24 PUBLIC src)
+endif()
 target_sources(rf24 PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/RF24/RF24.h
     ${CMAKE_CURRENT_LIST_DIR}/RF24/RF24.cpp
@@ -44,6 +56,9 @@ target_include_directories(rf24_network PUBLIC
     RF24/utility
     RF24/utility/${RF24_DRIVER}
 )
+if(SUPPLEMEN_LINUX_GPIO_H)
+    target_include_directories(rf24_network PUBLIC src)
+endif()
 # don't let source look for an installed RF24 lib
 target_compile_definitions(rf24_network PUBLIC USE_RF24_LIB_SRC)
 target_sources(rf24_network PUBLIC
@@ -69,6 +84,9 @@ target_include_directories(rf24_mesh PUBLIC
     RF24/utility
     RF24/utility/${RF24_DRIVER}
 )
+if(SUPPLEMEN_LINUX_GPIO_H)
+    target_include_directories(rf24_mesh PUBLIC src)
+endif()
 # don't let source look for an installed RF24 lib
 target_compile_definitions(rf24_mesh PUBLIC USE_RF24_LIB_SRC)
 target_sources(rf24_mesh PUBLIC

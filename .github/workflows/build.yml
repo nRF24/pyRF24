@@ -38,9 +38,10 @@ jobs:
           --style=file \
           --tidy-checks='-*' \
           --lines-changed-only=true \
-          --ignore='!src|' \
+          --ignore='src/linux/gpio.h' \
           --format-review=true \
-          --file-annotations=false
+          --file-annotations=false \
+          --step-summary=true
 
       - name: C++ Linter checks failed?
         if: steps.linter.outputs.checks-failed > 0
