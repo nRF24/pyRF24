@@ -63,16 +63,9 @@ function(apply_flags target)
 
     #  pass driver used to expose as a constant in rf24 module.
     target_compile_definitions(${target} PUBLIC RF24_DRIVER="${RF24_DRIVER}")
-    if(NOT "${RF24_LINKED_DRIVER}" STREQUAL "")
-        if("${RF24_DRIVER}" STREQUAL "wiringPi")
-            target_link_libraries(${target} PRIVATE rt crypt ${RF24_LINKED_DRIVER})
-        else()
-            target_link_libraries(${target} PRIVATE ${RF24_LINKED_DRIVER})
-        endif()
-    endif()
 
-    # apply RF24Network flags to rf24_mesh and rf24_network targets
-    if("${target}" STREQUAL "rf24_network" OR "${target}" STREQUAL "rf24_mesh")
+    # apply RF24Network flags to cpp_rf24_network target
+    if("${target}" STREQUAL "cpp_rf24_network")
         if(SERIAL_DEBUG)
             message(STATUS "SERIAL_DEBUG asserted for ${target}")
             target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
@@ -108,8 +101,8 @@ function(apply_flags target)
         endif()
     endif()
 
-    # apply RF24Mesh flags to only rf24_mesh target
-    if("${target}" STREQUAL "rf24_mesh")
+    # apply RF24Mesh flags to cpp_rf24_mesh target
+    if("${target}" STREQUAL "cpp_rf24_mesh")
         if(MESH_NOMASTER)
             message(STATUS "MESH_NOMASTER asserted for ${target}")
             target_compile_definitions(${target} PUBLIC MESH_NOMASTER)
