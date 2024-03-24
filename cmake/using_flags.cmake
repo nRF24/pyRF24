@@ -55,10 +55,12 @@ option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh 
 ###############################################
 # function to apply flags to applicable targets
 function(apply_flags target)
-    # apply RF24 flags to all targets
-    if(RF24_DEBUG)
-        message(STATUS "RF24_DEBUG asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
+    # apply RF24 flags to cpp_rf24 target
+    if("${target}" STREQUAL "cpp_rf24")
+        if(RF24_DEBUG)
+            message(STATUS "RF24_DEBUG asserted for ${target}")
+            target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
+        endif()
     endif()
 
     #  pass driver used to expose as a constant in rf24 module.

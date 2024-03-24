@@ -27,7 +27,7 @@ if("${RF24_DRIVER}" STREQUAL "RPi" OR "${RF24_DRIVER}" STREQUAL "SPIDEV")
     list(APPEND RF24_DRIVER_SOURCES src/linux/gpio.h)
 endif()
 
-### Build C++ RF24 stack as static libraries (for linking to pyRF24*)
+### Build C++ RF24 stack as shared libraries (resulting in isolated binary drivers)
 
 ################################# RF24 C++ #########################
 add_library(cpp_rf24 SHARED
@@ -78,6 +78,8 @@ target_include_directories(cpp_rf24_mesh PUBLIC
 target_link_libraries(cpp_rf24_mesh PUBLIC cpp_rf24_network)
 apply_flags(cpp_rf24_mesh)
 
+### Build python bindings for RF24 stack and link to shared C++ lib binaries
+
 ################################# RF24 #############################
 pybind11_add_module(rf24 src/pyRF24.cpp)
 target_link_libraries(rf24 PUBLIC cpp_rf24)
@@ -86,11 +88,10 @@ target_include_directories(rf24 PUBLIC
     RF24/utility
     RF24/utility/${RF24_DRIVER}
 )
-apply_flags(rf24)
 
 ################################# RF24NETWORK #############################
-
 pybind11_add_module(rf24_network src/pyRF24Network.cpp)
+target_link_libraries(rf24_network PUBLIC cpp_rf24_network)
 target_include_directories(rf24_network PUBLIC
     RF24
     RF24/utility
@@ -99,13 +100,10 @@ target_include_directories(rf24_network PUBLIC
 )
 # don't let source look for an installed RF24 lib
 target_compile_definitions(rf24_network PUBLIC USE_RF24_LIB_SRC)
-target_link_libraries(rf24_network PUBLIC cpp_rf24_network)
-apply_flags(rf24_network)
-
 
 ################################# RF24MESH #############################
-
 pybind11_add_module(rf24_mesh src/pyRF24Mesh.cpp)
+target_link_libraries(rf24_mesh PUBLIC cpp_rf24_mesh)
 target_include_directories(rf24_mesh PUBLIC
     RF24
     RF24/utility
@@ -113,18 +111,15 @@ target_include_directories(rf24_mesh PUBLIC
     RF24Network
     RF24Mesh
 )
-target_link_libraries(rf24_mesh PUBLIC cpp_rf24_mesh)
 # don't let source look for an installed RF24 lib
 target_compile_definitions(rf24_mesh PUBLIC USE_RF24_LIB_SRC)
-apply_flags(rf24_mesh)
 
 
 ################################ INSTALL RULES ####################################
 # these are needed for scikit builds since the resulting .so files are copied into
 # the binary distribution wheels (.whl files) for python.
-install(TARGETS rf24 DESTINATION .)
-install(TARGETS rf24_network DESTINATION .)
-install(TARGETS rf24_mesh DESTINATION .)
+install(TARGETS rf24 rf24_network rf24_mesh DESTINATION .)
+install(TARGETS cpp_rf24 cpp_rf24_network cpp_rf24_mesh DESTINATION .)
 
 # uncomment to show compiler args used in build logs
 # set(CMAKE_VERBOSE_MAKEFILE ON)
