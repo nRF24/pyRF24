@@ -9,6 +9,7 @@ Listens for messages from the transmitter and prints them out.
 import struct
 from pyrf24 import RF24, RF24Network, RF24_DRIVER
 
+print(__file__)  # print example name
 
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":

@@ -3,7 +3,6 @@ Simple example of using the library to transmit
 and retrieve custom automatic acknowledgment payloads.
 """
 
-import sys
 import time
 import argparse
 from pyrf24 import RF24, RF24_PA_LOW
@@ -55,7 +54,7 @@ radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # for debugging
-radio.print_pretty_details()
+# radio.print_pretty_details()
 
 
 def master(count: int = 5):  # count = 5 will only transmit 5 packets
@@ -154,7 +153,7 @@ def set_role():
     return set_role()
 
 
-print(sys.argv[0])  # print example name
+print(__file__)  # print example name
 
 
 if __name__ == "__main__":
@@ -181,6 +180,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(" Keyboard Interrupt detected. Exiting...")
         radio.power = False
-        sys.exit()
 else:
     print("    Run slave() on receiver\n    Run master() on transmitter")

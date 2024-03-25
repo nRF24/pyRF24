@@ -10,6 +10,7 @@ import struct
 import time
 from pyrf24 import RF24, RF24Network, RF24NetworkHeader, RF24_DRIVER
 
+print(__file__)  # print example name
 
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":

@@ -7,6 +7,8 @@ import time
 import struct
 from pyrf24 import RF24, RF24Network, RF24Mesh, MESH_DEFAULT_ADDRESS, RF24_DRIVER
 
+print(__file__)  # print example name
+
 start = time.monotonic()
 
 

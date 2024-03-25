@@ -6,15 +6,26 @@ good channel for your application.
 See documentation at https://nRF24.github.io/pyRF24
 """
 
-# pylint: disable=no-member
 import curses
 import time
 from typing import List, Tuple, Any
+from pyrf24 import RF24, RF24_1MBPS, RF24_2MBPS, RF24_250KBPS, RF24_DRIVER
 
-from pyrf24 import RF24, RF24_1MBPS, RF24_2MBPS, RF24_250KBPS
 
-CSN_PIN = 0  # connected to GPIO8
-CE_PIN = 22  # connected to GPIO22
+########### USER CONFIGURATION ###########
+# See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
+# Radio CE Pin, CSN Pin, SPI Speed
+# CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use
+# their own pin numbering
+# CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
+# ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15  # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
 radio = RF24(CE_PIN, CSN_PIN)
 
 

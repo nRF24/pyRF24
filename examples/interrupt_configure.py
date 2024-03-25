@@ -3,9 +3,7 @@ Simple example of detecting (and verifying) the IRQ (interrupt) pin on the
 nRF24L01
 """
 
-import argparse
 import select
-import sys
 import time
 
 try:
@@ -18,16 +16,17 @@ except ImportError as exc:
     ) from exc
 from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
-try:  # try RPi5 gpio cjip first
+try:  # try RPi5 gpio chip first
     chip_path = "/dev/gpiochip4"
     chip = gpiod.Chip(chip_path)
 except FileNotFoundError:  # fall back to gpio chip for RPi4 or older
     chip_path = "/dev/gpiochip0"
     chip = gpiod.Chip(chip_path)
 finally:
+    print(__file__)  # print example name
     # print gpio chip info
     info = chip.get_info()
-    print("Using {} [{}] ({} lines)".format(info.name, info.label, info.num_lines))
+    print(f"Using {info.name} [{info.label}] ({info.num_lines} lines)")
 
 
 ########### USER CONFIGURATION ###########
@@ -96,7 +95,7 @@ def interrupt_handler():
     print("\tIRQ pin went active LOW.")
     tx_ds, tx_df, rx_dr = radio.what_happened()  # update IRQ status flags
     print(f"\ttx_ds: {tx_ds}, tx_df: {tx_df}, rx_dr: {rx_dr}")
-    if pl_iterator[0] == 0 and rx_dr:
+    if pl_iterator[0] == 0:
         print("'data ready' event test", ("passed" if rx_dr else "failed"))
     elif pl_iterator[0] == 1:
         print("'data sent' event test", ("passed" if tx_ds else "failed"))
@@ -129,9 +128,15 @@ def _wait_for_irq(timeout: int = 15):
 
 
 def master():
-    """Transmits 3 times: successfully receive ACK payload first, successfully
-    transmit on second, and intentionally fail transmit on the third"""
-    radio.listen = False  # ensures the nRF24L01 is in TX mode
+    """Transmits 4 times and reports results
+
+    1. successfully receive ACK payload first
+    2. successfully transmit on second
+    3. send a third payload to fill RX node's RX FIFO
+       (supposedly making RX node unresponsive)
+    4. intentionally fail transmit on the fourth
+    """
+    radio.listen = False  # put radio in TX mode
 
     # on data ready test
     print("\nConfiguring IRQ pin to only ignore 'on data sent' event")
@@ -220,7 +225,7 @@ def set_role():
         slave(*[int(x) for x in user_input[1:2]])
         return True
     if user_input[0].upper().startswith("T"):
-        master(*[int(x) for x in user_input[1:2]])
+        master()
         return True
     if user_input[0].upper().startswith("Q"):
         radio.power = False
@@ -229,34 +234,13 @@ def set_role():
     return set_role()
 
 
-print(sys.argv[0])  # print example name
-
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    parser.add_argument(
-        "-r",
-        "--role",
-        type=int,
-        choices=range(2),
-        help="'1' specifies the TX role. '0' specifies the RX role.",
-    )
-    args = parser.parse_args()  # parse any CLI args
-
     try:
-        if args.role is None:  # if not specified with CLI arg '-r'
-            while set_role():
-                pass  # continue example until 'Q' is entered
-        elif bool(args.role):  # if role was set using CLI args, run role once and exit
-            master()
-        else:
-            slave()
+        while set_role():
+            pass  # continue example until 'Q' is entered
     except KeyboardInterrupt:
         print(" Keyboard Interrupt detected. Exiting...")
         radio.power = False
-        sys.exit()
 else:
     print(
         f"Make sure the IRQ pin is connected to the GPIO{IRQ_PIN}",

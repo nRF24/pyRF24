@@ -7,6 +7,7 @@ This example does not require a counterpart node.
 import time
 from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr, RF24_DRIVER
 
+print(__file__)  # print example name
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md

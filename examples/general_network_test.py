@@ -2,7 +2,6 @@
 An all-purpose example of using the nRF24L01 transceiver in a network of nodes.
 """
 
-import sys
 import time
 import struct
 from pyrf24 import (
@@ -28,7 +27,7 @@ radio = RF24(CE_PIN, CSN_PIN)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
 
-print(sys.argv[0])
+print(__file__)
 IS_MESH = (
     (
         input("Would you like to run as a mesh network node (y/n)? Defaults to 'Y' ")
