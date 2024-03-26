@@ -69,6 +69,7 @@ if not radio.begin():
 # this example uses the ACK payload to trigger the IRQ pin active for
 # the "on data received" event
 radio.ack_payloads = True  # enable ACK payloads
+radio.dynamic_payloads = True  # ACK payloads are dynamically sized
 
 # set the Power Amplifier level to -12 dBm since this test example is
 # usually run with nRF24L01 transceivers in close proximity of each other
@@ -107,7 +108,7 @@ def interrupt_handler():
 # setup IRQ GPIO pin
 irq_line = gpiod.request_lines(
     path=chip_path,
-    consumer="pyrf24/examples/interrupt_configure.py",  # optional
+    consumer="pyrf24/examples/interrupt",  # optional
     config={IRQ_PIN: gpiod.LineSettings(edge_detection=Edge.FALLING)},
 )
 
@@ -118,7 +119,7 @@ def _wait_for_irq(timeout: float = 5):
     """
     # wait up to ``timeout`` seconds for event to be detected.
     if not irq_line.wait_edge_events(timeout):
-        print(f"\tinterrupt not detected for {timeout} seconds!", flush=True)
+        print(f"\tInterrupt event not detected for {timeout} seconds!")
         return False
     # read event from kernel buffer
     for event in irq_line.read_edge_events():
