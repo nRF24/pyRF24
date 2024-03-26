@@ -1,5 +1,7 @@
 """
 This example uses the nRF24L01 as a 'fake' BLE Beacon
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
@@ -15,6 +17,7 @@ from pyrf24 import (
     TemperatureServiceData,
 )
 
+print(__file__)  # print example name
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -198,8 +201,6 @@ def set_role():
     print(user_input[0], "is an unrecognized input. Please try again.")
     return set_role()
 
-
-print("    nRF24L01 fake BLE beacon test")
 
 if __name__ == "__main__":
     try:

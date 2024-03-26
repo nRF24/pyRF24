@@ -4,6 +4,8 @@ Simplest possible example of using RF24Network.
 
 TRANSMITTER NODE
 Sends messages from to receiver.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import struct

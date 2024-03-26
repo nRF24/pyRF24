@@ -1,5 +1,7 @@
 """
 Simple example of using the RF24 class.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time

@@ -1,5 +1,7 @@
 """
 An all-purpose example of using the nRF24L01 transceiver in a network of nodes.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
@@ -15,6 +17,7 @@ from pyrf24 import (
     RF24_DRIVER,
 )
 
+print(__file__)  # print example name
 
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":
@@ -27,7 +30,6 @@ radio = RF24(CE_PIN, CSN_PIN)
 network = RF24Network(radio)
 mesh = RF24Mesh(radio, network)
 
-print(__file__)
 IS_MESH = (
     (
         input("Would you like to run as a mesh network node (y/n)? Defaults to 'Y' ")

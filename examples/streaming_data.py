@@ -1,5 +1,7 @@
 """
 Example of library usage for streaming multiple payloads.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time

@@ -1,6 +1,8 @@
 """
 Simple example of using 1 nRF24L01 to receive data from up to 6 other
 transceivers. This technique is called "multiceiver" in the datasheet.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time

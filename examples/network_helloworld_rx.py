@@ -4,6 +4,8 @@ Simplest possible example of using RF24Network
 
 RECEIVER NODE
 Listens for messages from the transmitter and prints them out.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import struct

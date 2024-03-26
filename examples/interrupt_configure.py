@@ -1,10 +1,12 @@
 """
 Simple example of detecting (and verifying) the IRQ (interrupt) pin on the
 nRF24L01
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
-import select
 import time
+from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
 try:
     import gpiod
@@ -14,7 +16,6 @@ except ImportError as exc:
         "This script requires gpiod installed for observing the IRQ pin. Please run\n"
         "\n    pip install gpiod\n\nMore details at https://pypi.org/project/gpiod/"
     ) from exc
-from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
 try:  # try RPi5 gpio chip first
     chip_path = "/dev/gpiochip4"
@@ -80,7 +81,7 @@ radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # for debugging
-radio.print_pretty_details()
+# radio.print_pretty_details()
 
 # For this example, we'll be using a payload containing
 # a string that changes on every transmission. (successful or not)
@@ -109,18 +110,17 @@ irq_line = gpiod.request_lines(
     consumer="pyrf24/examples/interrupt_configure.py",  # optional
     config={IRQ_PIN: gpiod.LineSettings(edge_detection=Edge.FALLING)},
 )
-poll = select.poll()
-poll.register(irq_line.fd, select.POLLIN)
 
 
-def _wait_for_irq(timeout: int = 15):
+def _wait_for_irq(timeout: float = 5):
     """Wait till IRQ_PIN goes active (LOW).
     IRQ pin is LOW when activated. Otherwise it is always HIGH
     """
     # wait up to ``timeout`` seconds for event to be detected.
-    result = poll.poll(timeout * 1000)  # pass `None` to block
-    if not result:  # channel should be equal to GPIO.HIGH
-        raise RuntimeError("Interrupt event not detected. Check your wiring.")
+    if not irq_line.wait_edge_events(timeout):
+        print(f"\tinterrupt not detected for {timeout} seconds!", flush=True)
+        return False
+    # read event from kernel buffer
     for event in irq_line.read_edge_events():
         if event.line_offset == IRQ_PIN and event.event_type is event.Type.FALLING_EDGE:
             return True

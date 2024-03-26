@@ -2,6 +2,8 @@
 This is an example of how to use the nRF24L01's builtin
 Received Power Detection (RPD) to scan for possible interference.
 This example does not require a counterpart node.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time

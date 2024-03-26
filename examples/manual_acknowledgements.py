@@ -4,6 +4,8 @@ acknowledgment (ACK) transmissions. Notice that the auto-ack feature is
 enabled, but this example doesn't use automatic ACK payloads because automatic
 ACK payloads' data will always be outdated by 1 transmission. Instead, this
 example uses a call and response paradigm.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
@@ -11,7 +13,6 @@ import struct
 from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
 print(__file__)  # print example name
-
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md

@@ -1,5 +1,7 @@
 """
 Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import sys
