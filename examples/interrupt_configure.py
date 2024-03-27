@@ -144,7 +144,7 @@ def master():
     radio.mask_irq(True, False, False)  # args = tx_ds, tx_df, rx_dr
     print("    Pinging slave node for an ACK payload...")
     pl_iterator[0] = 0
-    radio.start_write(tx_payloads[0], False)  # False means expecting an ACK
+    radio.start_fast_write(tx_payloads[0])
     if _wait_for_irq():
         interrupt_handler()
 
@@ -153,7 +153,7 @@ def master():
     radio.mask_irq(False, False, True)  # args = tx_ds, tx_df, rx_dr
     print("    Pinging slave node again...")
     pl_iterator[0] = 1
-    radio.start_write(tx_payloads[1], False)  # False means expecting an ACK
+    radio.start_fast_write(tx_payloads[1])
     if _wait_for_irq():
         interrupt_handler()
 
@@ -172,7 +172,7 @@ def master():
     print("    Sending a ping to inactive slave node...")
     radio.flush_tx()  # just in case any previous tests failed
     pl_iterator[0] = 2
-    radio.start_write(tx_payloads[3], False)  # False means expecting an ACK
+    radio.start_fast_write(tx_payloads[3])
     if _wait_for_irq():
         interrupt_handler()
     radio.flush_tx()  # flush artifact payload in TX FIFO from last test

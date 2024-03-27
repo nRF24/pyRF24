@@ -86,11 +86,11 @@ def scan(timeout: int = 30):
         if found_signal:
             radio.flush_rx()  # flush the RX FIFO because it asserts the RPD flag
         endl = False
-        if curr_channel >= 125:
+        if curr_channel >= 124:
             sweeps += 1
-            if sweeps % 100 == 0:
+            if int(sweeps / 100) > 0:
                 endl = True
-        curr_channel = curr_channel + 1 if curr_channel < 125 else 0
+                sweeps = 0
 
         # output the signal counts per channel
         sig_cnt = signals[curr_channel]
@@ -99,6 +99,10 @@ def scan(timeout: int = 30):
             sep="",
             end="" if curr_channel < 125 else ("\n" if endl else "\r"),
         )
+        curr_channel = curr_channel + 1 if curr_channel < 125 else 0
+        if endl:
+            signals = [0] * 126  # reset the signal counts for new line
+
 
     # finish printing results and end with a new line
     while curr_channel < len(signals) - 1:

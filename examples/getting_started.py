@@ -63,7 +63,9 @@ radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 radio.payload_size = struct.calcsize("<f")
 
 # for debugging
-radio.print_details()
+# radio.print_details()
+# or for human readable data
+# radio.print_pretty_details()
 
 
 def master(count: int = 5):  # count = 5 will only transmit 5 packets
