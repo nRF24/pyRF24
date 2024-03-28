@@ -831,16 +831,20 @@
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
-<span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using the RF24 class.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
 <span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
@@ -895,7 +899,9 @@
 <span class="n">radio</span><span class="o">.</span><span class="n">payload_size</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">calcsize</span><span class="p">(</span><span class="s2">&quot;&lt;f&quot;</span><span class="p">)</span>
 
 <span class="c1"># for debugging</span>
-<span class="n">radio</span><span class="o">.</span><span class="n">print_details</span><span class="p">()</span>
+<span class="c1"># radio.print_details()</span>
+<span class="c1"># or for human readable data</span>
+<span class="c1"># radio.print_pretty_details()</span>
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
@@ -1078,15 +1084,26 @@
 <span class="normal">123</span>
 <span class="normal">124</span>
 <span class="normal">125</span>
-<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using the library to transmit</span>
 <span class="sd">and retrieve custom automatic acknowledgment payloads.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span>
+<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
 <span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
@@ -1095,7 +1112,14 @@
 <span class="c1"># their own pin numbering</span>
 <span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
 <span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
-<span class="n">radio</span> <span class="o">=</span> <span class="n">RF24</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
+<span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
+    <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
+<span class="k">elif</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;wiringPi&quot;</span><span class="p">:</span>
+    <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># for GPIO22</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">22</span>
+<span class="n">radio</span> <span class="o">=</span> <span class="n">RF24</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">)</span>
 
 <span class="c1"># using the python keyword global is bad practice. Instead we&#39;ll use a 1 item</span>
 <span class="c1"># list to store our integer number for the payloads&#39; counter</span>
@@ -1135,7 +1159,7 @@
 <span class="n">radio</span><span class="o">.</span><span class="n">open_rx_pipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="ow">not</span> <span class="n">radio_number</span><span class="p">])</span>  <span class="c1"># using pipe 1</span>
 
 <span class="c1"># for debugging</span>
-<span class="n">radio</span><span class="o">.</span><span class="n">print_pretty_details</span><span class="p">()</span>
+<span class="c1"># radio.print_pretty_details()</span>
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
@@ -1368,19 +1392,23 @@
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
-<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using the RF24 class to transmit and respond with</span>
 <span class="sd">acknowledgment (ACK) transmissions. Notice that the auto-ack feature is</span>
 <span class="sd">enabled, but this example doesn&#39;t use automatic ACK payloads because automatic</span>
 <span class="sd">ACK payloads&#39; data will always be outdated by 1 transmission. Instead, this</span>
 <span class="sd">example uses a call and response paradigm.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
 <span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
@@ -1648,16 +1676,20 @@
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using 1 nRF24L01 to receive data from up to 6 other</span>
 <span class="sd">transceivers. This technique is called &quot;multiceiver&quot; in the datasheet.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
 <span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
@@ -1903,15 +1935,17 @@
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">132</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example of library usage for streaming multiple payloads.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
 <span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
@@ -2222,19 +2256,108 @@
 <span class="normal">177</span>
 <span class="normal">178</span>
 <span class="normal">179</span>
-<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of detecting (and verifying) the IRQ (interrupt) pin on the</span>
 <span class="sd">nRF24L01</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
-<span class="c1"># RPi.GPIO will show a warning if any pin is setup() that is already been</span>
-<span class="c1"># setup() for use without calling cleanup() first</span>
-<span class="n">GPIO</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>  <span class="c1"># call this now in case it wasn&#39;t called on last program exit</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">gpiod</span>
+    <span class="kn">from</span> <span class="nn">gpiod.line</span> <span class="kn">import</span> <span class="n">Edge</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+        <span class="s2">&quot;This script requires gpiod installed for observing the IRQ pin. Please run</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    pip install gpiod</span><span class="se">\n\n</span><span class="s2">More details at https://pypi.org/project/gpiod/&quot;</span>
+    <span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
+
+<span class="k">try</span><span class="p">:</span>  <span class="c1"># try RPi5 gpio chip first</span>
+    <span class="n">chip_path</span> <span class="o">=</span> <span class="s2">&quot;/dev/gpiochip4&quot;</span>
+    <span class="n">chip</span> <span class="o">=</span> <span class="n">gpiod</span><span class="o">.</span><span class="n">Chip</span><span class="p">(</span><span class="n">chip_path</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>  <span class="c1"># fall back to gpio chip for RPi4 or older</span>
+    <span class="n">chip_path</span> <span class="o">=</span> <span class="s2">&quot;/dev/gpiochip0&quot;</span>
+    <span class="n">chip</span> <span class="o">=</span> <span class="n">gpiod</span><span class="o">.</span><span class="n">Chip</span><span class="p">(</span><span class="n">chip_path</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
+    <span class="c1"># print gpio chip info</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">chip</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">] (</span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">num_lines</span><span class="si">}</span><span class="s2"> lines)&quot;</span><span class="p">)</span>
+
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
 <span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
@@ -2253,7 +2376,7 @@
 <span class="n">radio</span> <span class="o">=</span> <span class="n">RF24</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">)</span>
 
 <span class="c1"># select your digital input pin that&#39;s connected to the IRQ pin on the nRF24L01</span>
-<span class="n">IRQ_PIN</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">IRQ_PIN</span> <span class="o">=</span> <span class="mi">24</span>
 
 <span class="c1"># For this example, we will use different addresses</span>
 <span class="c1"># An address need to be a buffer protocol object (bytearray)</span>
@@ -2275,6 +2398,7 @@
 <span class="c1"># this example uses the ACK payload to trigger the IRQ pin active for</span>
 <span class="c1"># the &quot;on data received&quot; event</span>
 <span class="n">radio</span><span class="o">.</span><span class="n">ack_payloads</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># enable ACK payloads</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">dynamic_payloads</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># ACK payloads are dynamically sized</span>
 
 <span class="c1"># set the Power Amplifier level to -12 dBm since this test example is</span>
 <span class="c1"># usually run with nRF24L01 transceivers in close proximity of each other</span>
@@ -2287,7 +2411,7 @@
 <span class="n">radio</span><span class="o">.</span><span class="n">open_rx_pipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="ow">not</span> <span class="n">radio_number</span><span class="p">])</span>  <span class="c1"># using pipe 1</span>
 
 <span class="c1"># for debugging</span>
-<span class="n">radio</span><span class="o">.</span><span class="n">print_pretty_details</span><span class="p">()</span>
+<span class="c1"># radio.print_pretty_details()</span>
 
 <span class="c1"># For this example, we&#39;ll be using a payload containing</span>
 <span class="c1"># a string that changes on every transmission. (successful or not)</span>
@@ -2299,10 +2423,10 @@
 
 <span class="k">def</span> <span class="nf">interrupt_handler</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function is called when IRQ pin is detected active LOW&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IRQ pin went active LOW.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">IRQ pin went active LOW.&quot;</span><span class="p">)</span>
     <span class="n">tx_ds</span><span class="p">,</span> <span class="n">tx_df</span><span class="p">,</span> <span class="n">rx_dr</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">what_happened</span><span class="p">()</span>  <span class="c1"># update IRQ status flags</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">tx_ds: </span><span class="si">{</span><span class="n">tx_ds</span><span class="si">}</span><span class="s2">, tx_df: </span><span class="si">{</span><span class="n">tx_df</span><span class="si">}</span><span class="s2">, rx_dr: </span><span class="si">{</span><span class="n">rx_dr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">rx_dr</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;data ready&#39; event test&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;passed&quot;</span> <span class="k">if</span> <span class="n">rx_dr</span> <span class="k">else</span> <span class="s2">&quot;failed&quot;</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;data sent&#39; event test&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;passed&quot;</span> <span class="k">if</span> <span class="n">tx_ds</span> <span class="k">else</span> <span class="s2">&quot;failed&quot;</span><span class="p">))</span>
@@ -2311,53 +2435,62 @@
 
 
 <span class="c1"># setup IRQ GPIO pin</span>
-<span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BCM</span><span class="p">)</span>
-<span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">pull_up_down</span><span class="o">=</span><span class="n">GPIO</span><span class="o">.</span><span class="n">PUD_UP</span><span class="p">)</span>
-<span class="n">GPIO</span><span class="o">.</span><span class="n">add_event_detect</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">FALLING</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">interrupt_handler</span><span class="p">)</span>
+<span class="n">irq_line</span> <span class="o">=</span> <span class="n">gpiod</span><span class="o">.</span><span class="n">request_lines</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">chip_path</span><span class="p">,</span>
+    <span class="n">consumer</span><span class="o">=</span><span class="s2">&quot;pyrf24/examples/interrupt&quot;</span><span class="p">,</span>  <span class="c1"># optional</span>
+    <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="n">IRQ_PIN</span><span class="p">:</span> <span class="n">gpiod</span><span class="o">.</span><span class="n">LineSettings</span><span class="p">(</span><span class="n">edge_detection</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">FALLING</span><span class="p">)},</span>
+<span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_wait_for_irq</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wait till IRQ_PIN goes active then inactive.</span>
+<span class="k">def</span> <span class="nf">_wait_for_irq</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wait till IRQ_PIN goes active (LOW).</span>
 <span class="sd">    IRQ pin is LOW when activated. Otherwise it is always HIGH</span>
-
-<span class="sd">    In this example, the &quot;data fail&quot; event is always configured to</span>
-<span class="sd">    trigger the IRQ pin active. Because the auto-ACK feature is on by</span>
-<span class="sd">    default, the timeout in GPIO.wait_for_edge() is inconsequential.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># wait up to 1 second for event to be cleared.</span>
-    <span class="c1"># GPIO.RISING means whatHappened() was called.</span>
-    <span class="n">channel</span> <span class="o">=</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">wait_for_edge</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">channel</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># channel should be equal to GPIO.HIGH</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Interrupt event not detected. Check your wiring.&quot;</span><span class="p">)</span>
-    <span class="c1"># wait for half a second for interrupt_handler() to complete</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="c1"># wait up to ``timeout`` seconds for event to be detected.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">irq_line</span><span class="o">.</span><span class="n">wait_edge_events</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Interrupt event not detected for </span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s2"> seconds!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># read event from kernel buffer</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">irq_line</span><span class="o">.</span><span class="n">read_edge_events</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">line_offset</span> <span class="o">==</span> <span class="n">IRQ_PIN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">event_type</span> <span class="ow">is</span> <span class="n">event</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">FALLING_EDGE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
 
 
 <span class="k">def</span> <span class="nf">master</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits 3 times: successfully receive ACK payload first, successfully</span>
-<span class="sd">    transmit on second, and intentionally fail transmit on the third&quot;&quot;&quot;</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ensures the nRF24L01 is in TX mode</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits 4 times and reports results</span>
+
+<span class="sd">    1. successfully receive ACK payload first</span>
+<span class="sd">    2. successfully transmit on second</span>
+<span class="sd">    3. send a third payload to fill RX node&#39;s RX FIFO</span>
+<span class="sd">       (supposedly making RX node unresponsive)</span>
+<span class="sd">    4. intentionally fail transmit on the fourth</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># put radio in TX mode</span>
 
     <span class="c1"># on data ready test</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuring IRQ pin to only ignore &#39;on data sent&#39; event&quot;</span><span class="p">)</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">mask_irq</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># args = tx_ds, tx_df, rx_dr</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Pinging slave node for an ACK payload...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Pinging slave node for an ACK payload...&quot;</span><span class="p">)</span>
     <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">start_write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># False means expecting an ACK</span>
-    <span class="n">_wait_for_irq</span><span class="p">()</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">start_fast_write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">_wait_for_irq</span><span class="p">():</span>
+        <span class="n">interrupt_handler</span><span class="p">()</span>
 
     <span class="c1"># on &quot;data sent&quot; test</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuring IRQ pin to only ignore &#39;on data ready&#39; event&quot;</span><span class="p">)</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">mask_irq</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = tx_ds, tx_df, rx_dr</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Pinging slave node again...             &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Pinging slave node again...&quot;</span><span class="p">)</span>
     <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">start_write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># False means expecting an ACK</span>
-    <span class="n">_wait_for_irq</span><span class="p">()</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">start_fast_write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">_wait_for_irq</span><span class="p">():</span>
+        <span class="n">interrupt_handler</span><span class="p">()</span>
 
     <span class="c1"># trigger slave node to exit by filling the slave node&#39;s RX FIFO</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sending one extra payload to fill RX FIFO on slave node.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Disabling IRQ pin for all events.&quot;</span><span class="p">)</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">mask_irq</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = tx_ds, tx_df, rx_dr</span>
     <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
-        <span class="c1"># when send_only parameter is True, send() ignores RX FIFO usage</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Slave node should not be listening anymore.&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Slave node was unresponsive.&quot;</span><span class="p">)</span>
@@ -2365,11 +2498,12 @@
     <span class="c1"># on &quot;data fail&quot; test</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuring IRQ pin to go active for all events.&quot;</span><span class="p">)</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">mask_irq</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># args = tx_ds, tx_df, rx_dr</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Sending a ping to inactive slave node...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Sending a ping to inactive slave node...&quot;</span><span class="p">)</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">flush_tx</span><span class="p">()</span>  <span class="c1"># just in case any previous tests failed</span>
     <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">start_write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># False means expecting an ACK</span>
-    <span class="n">_wait_for_irq</span><span class="p">()</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">start_fast_write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">_wait_for_irq</span><span class="p">():</span>
+        <span class="n">interrupt_handler</span><span class="p">()</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">flush_tx</span><span class="p">()</span>  <span class="c1"># flush artifact payload in TX FIFO from last test</span>
     <span class="c1"># all 3 ACK payloads received were 4 bytes each, and RX FIFO is full</span>
     <span class="c1"># so, fetching 12 bytes from the RX FIFO also flushes RX FIFO</span>
@@ -2378,6 +2512,11 @@
 
 <span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># will listen for 6 seconds before timing out</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Only listen for 3 payload from the master node&quot;&quot;&quot;</span>
+    <span class="c1"># the &quot;data ready&quot; event will trigger in RX mode</span>
+    <span class="c1"># the &quot;data sent&quot; or &quot;data fail&quot; events will trigger when we</span>
+    <span class="c1"># receive with ACK payloads enabled (&amp; loaded in TX FIFO)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Disabling IRQ pin for all events.&quot;</span><span class="p">)</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">mask_irq</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = tx_ds, tx_df, rx_dr</span>
     <span class="c1"># setup radio to receive pings, fill TX FIFO with ACK payloads</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">write_ack_payload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">write_ack_payload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -2395,13 +2534,50 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complete RX FIFO:&quot;</span><span class="p">,</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
 
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
-<span class="s2">    </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n\</span>
-<span class="s2">    Make sure the IRQ pin is connected to the RPi GPIO12</span><span class="se">\n\</span>
-<span class="s2">    Run slave() on receiver</span><span class="se">\n\</span>
-<span class="s2">    Run master() on transmitter&quot;&quot;&quot;</span>
-<span class="p">)</span>
+<span class="k">def</span> <span class="nf">set_role</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the role using stdin stream. Timeout arg for slave() can be</span>
+<span class="sd">    specified using a space delimiter (e.g. &#39;R 10&#39; calls `slave(10)`)</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        - True when role is complete &amp; app should continue running.</span>
+<span class="sd">        - False when app should exit</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">input</span><span class="p">(</span>
+            <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;T&#39; for transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="p">)</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="n">user_input</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">):</span>
+        <span class="n">slave</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">):</span>
+        <span class="n">master</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">):</span>
+        <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;is an unrecognized input. Please try again.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">set_role</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">set_role</span><span class="p">():</span>
+            <span class="k">pass</span>  <span class="c1"># continue example until &#39;Q&#39; is entered</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Keyboard Interrupt detected. Exiting...&quot;</span><span class="p">)</span>
+        <span class="n">radio</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Make sure the IRQ pin is connected to the GPIO</span><span class="si">{</span><span class="n">IRQ_PIN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Run slave() on receiver&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Run master() on transmitter&quot;</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2573,8 +2749,15 @@
 <span class="normal">161</span>
 <span class="normal">162</span>
 <span class="normal">163</span>
-<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This example uses the nRF24L01 as a &#39;fake&#39; BLE Beacon</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
@@ -2590,8 +2773,15 @@
     <span class="n">TemperatureServiceData</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
-<span class="c1"># initialize the nRF24L01 on the spi bus object as a BLE compliant radio</span>
+<span class="c1">########### USER CONFIGURATION ###########</span>
+<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
+<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
+<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># their own pin numbering</span>
+<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -2601,10 +2791,6 @@
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">22</span>
 <span class="n">radio</span> <span class="o">=</span> <span class="n">RF24</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">)</span>
 <span class="n">ble</span> <span class="o">=</span> <span class="n">FakeBLE</span><span class="p">(</span><span class="n">radio</span><span class="p">)</span>
-<span class="c1"># On Linux, csn value is a bit coded</span>
-<span class="c1">#                 0 = bus 0, CE0  # SPI bus 0 is enabled by default</span>
-<span class="c1">#                10 = bus 1, CE0  # enable SPI bus 2 prior to running this</span>
-<span class="c1">#                21 = bus 2, CE1  # enable SPI bus 1 prior to running this</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">ble</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;radio hardware not responding&quot;</span><span class="p">)</span>
@@ -2804,18 +2990,24 @@
 <span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
-<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest possible example of using RF24Network.</span>
 
 <span class="sd">TRANSMITTER NODE</span>
 <span class="sd">Sends messages from to receiver.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24NetworkHeader</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
@@ -2918,17 +3110,23 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest possible example of using RF24Network</span>
 
 <span class="sd">RECEIVER NODE</span>
 <span class="sd">Listens for messages from the transmitter and prints them out.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
@@ -3044,14 +3242,22 @@
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">MESH_DEFAULT_ADDRESS</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -3156,13 +3362,19 @@
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example of using the rf24_mesh module to operate the nRF24L01 transceiver as</span>
 <span class="sd">a Mesh network master node.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
@@ -3358,11 +3570,13 @@
 <span class="normal">156</span>
 <span class="normal">157</span>
 <span class="normal">158</span>
-<span class="normal">159</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">159</span>
+<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">An all-purpose example of using the nRF24L01 transceiver in a network of nodes.</span>
+
+<span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="p">(</span>
@@ -3376,6 +3590,7 @@
     <span class="n">RF24_DRIVER</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
@@ -3388,7 +3603,6 @@
 <span class="n">network</span> <span class="o">=</span> <span class="n">RF24Network</span><span class="p">(</span><span class="n">radio</span><span class="p">)</span>
 <span class="n">mesh</span> <span class="o">=</span> <span class="n">RF24Mesh</span><span class="p">(</span><span class="n">radio</span><span class="p">,</span> <span class="n">network</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">IS_MESH</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span>
         <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to run as a mesh network node (y/n)? Defaults to &#39;Y&#39; &quot;</span><span class="p">)</span>

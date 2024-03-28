@@ -633,12 +633,13 @@ ultimately depends on the nature of your power supply’s stability.</p>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
-<p>Notice that RPi.GPIO (for python) is used to manage the GPIO pins on the Raspberry Pi
+<p>Notice that <a class="reference external" href="https://pypi.org/project/gpiod">gpiod</a> is used to watch the radio’s IRQ pin
 (exclusively during the
 <a class="reference external" href="https://pyrf24.readthedocs.io/en/latest/examples.html#interrupt-configure">interrupt_configure.py</a>
 example).</p>
-<p>RPi.GPIO is not required for normal usage (when not using the radio’s IRQ pin).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-rpi.gpio
+<p><a class="reference external" href="https://pypi.org/project/gpiod">gpiod</a> is not required for normal usage (when not using the radio’s IRQ pin).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-dev
+pip<span class="w"> </span>install<span class="w"> </span>gpiod
 </code></pre></div>
 </div>
 </div>
