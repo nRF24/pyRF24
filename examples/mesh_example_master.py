@@ -1,10 +1,13 @@
 """
 Example of using the rf24_mesh module to operate the nRF24L01 transceiver as
 a Mesh network master node.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 from pyrf24 import RF24, RF24Network, RF24Mesh, RF24_DRIVER
 
+print(__file__)  # print example name
 
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":

@@ -1,11 +1,15 @@
 """
 Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import sys
 import time
 import struct
 from pyrf24 import RF24, RF24Network, RF24Mesh, MESH_DEFAULT_ADDRESS, RF24_DRIVER
+
+print(__file__)  # print example name
 
 start = time.monotonic()
 

@@ -1,5 +1,7 @@
 """
 This example uses the nRF24L01 as a 'fake' BLE Beacon
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
@@ -15,8 +17,15 @@ from pyrf24 import (
     TemperatureServiceData,
 )
 
+print(__file__)  # print example name
 
-# initialize the nRF24L01 on the spi bus object as a BLE compliant radio
+########### USER CONFIGURATION ###########
+# See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
+# Radio CE Pin, CSN Pin, SPI Speed
+# CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use
+# their own pin numbering
+# CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
+# ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
 CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
 if RF24_DRIVER == "MRAA":
     CE_PIN = 15  # for GPIO22
@@ -26,10 +35,6 @@ else:
     CE_PIN = 22
 radio = RF24(CE_PIN, CSN_PIN)
 ble = FakeBLE(radio)
-# On Linux, csn value is a bit coded
-#                 0 = bus 0, CE0  # SPI bus 0 is enabled by default
-#                10 = bus 1, CE0  # enable SPI bus 2 prior to running this
-#                21 = bus 2, CE1  # enable SPI bus 1 prior to running this
 
 if not ble.begin():
     raise OSError("radio hardware not responding")
@@ -196,8 +201,6 @@ def set_role():
     print(user_input[0], "is an unrecognized input. Please try again.")
     return set_role()
 
-
-print("    nRF24L01 fake BLE beacon test")
 
 if __name__ == "__main__":
     try:

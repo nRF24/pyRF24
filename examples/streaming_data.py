@@ -1,12 +1,13 @@
 """
 Example of library usage for streaming multiple payloads.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
-import sys
-import argparse
 import time
 from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
 
+print(__file__)  # print example name
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -160,33 +161,12 @@ def set_role():
     return set_role()
 
 
-print(sys.argv[0])  # print example name
-
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    parser.add_argument(
-        "-r",
-        "--role",
-        type=int,
-        choices=range(2),
-        help="'1' specifies the TX role. '0' specifies the RX role.",
-    )
-    args = parser.parse_args()  # parse any CLI args
-
     try:
-        if args.role is None:  # if not specified with CLI arg '-r'
-            while set_role():
-                pass  # continue example until 'Q' is entered
-        elif bool(args.role):  # if role was set using CLI args, run role once and exit
-            master()
-        else:
-            slave()
+        while set_role():
+            pass  # continue example until 'Q' is entered
     except KeyboardInterrupt:
         print(" Keyboard Interrupt detected. Exiting...")
         radio.power = False
-        sys.exit()
 else:
     print("    Run slave() on receiver\n    Run master() on transmitter")

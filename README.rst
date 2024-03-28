@@ -52,16 +52,17 @@ The IRQ pin is not typically connected, and it is only used in the interrupt_con
     ultimately depends on the nature of your power supply's stability.
 
 .. note::
-    Notice that RPi.GPIO (for python) is used to manage the GPIO pins on the Raspberry Pi
+    Notice that `gpiod <https://pypi.org/project/gpiod>`_ is used to watch the radio's IRQ pin
     (exclusively during the
     `interrupt_configure.py <https://pyrf24.readthedocs.io/en/latest/examples.html#interrupt-configure>`_
     example).
 
-    RPi.GPIO is not required for normal usage (when not using the radio's IRQ pin).
+    `gpiod <https://pypi.org/project/gpiod>`_ is not required for normal usage (when not using the radio's IRQ pin).
 
     .. code-block:: bash
 
-        sudo apt install python3-rpi.gpio
+        sudo apt install python3-dev
+        pip install gpiod
 
 Installing from PyPI
 ~~~~~~~~~~~~~~~~~~~~

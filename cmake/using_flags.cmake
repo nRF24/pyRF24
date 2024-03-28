@@ -4,11 +4,6 @@
 # RF24 core specific options
 option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
 
-# Disabling IRQ support should be always done because
-# IRQ support can be handled in python with different libs.
-option(RF24_NO_INTERRUPT "disable IRQ support (dependent on pigpio)" ON)
-# does not affect pigpio driver though
-
 # RF24Network specific options
 option(SERIAL_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
 option(SERIAL_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Network lib" OFF)
@@ -60,27 +55,19 @@ option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh 
 ###############################################
 # function to apply flags to applicable targets
 function(apply_flags target)
-    # apply RF24 flags to all targets
-    if(RF24_NO_INTERRUPT)
-        target_compile_definitions(${target} PUBLIC RF24_NO_INTERRUPT)
-    endif()
-    if(RF24_DEBUG)
-        message(STATUS "RF24_DEBUG asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
+    # apply RF24 flags to cpp_rf24 target
+    if("${target}" STREQUAL "cpp_rf24")
+        if(RF24_DEBUG)
+            message(STATUS "RF24_DEBUG asserted for ${target}")
+            target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
+        endif()
     endif()
 
     #  pass driver used to expose as a constant in rf24 module.
     target_compile_definitions(${target} PUBLIC RF24_DRIVER="${RF24_DRIVER}")
-    if(NOT "${RF24_LINKED_DRIVER}" STREQUAL "")
-        if("${RF24_DRIVER}" STREQUAL "wiringPi")
-            target_link_libraries(${target} PRIVATE rt crypt ${RF24_LINKED_DRIVER})
-        else()
-            target_link_libraries(${target} PRIVATE ${RF24_LINKED_DRIVER})
-        endif()
-    endif()
 
-    # apply RF24Network flags to rf24_mesh and rf24_network targets
-    if("${target}" STREQUAL "rf24_network" OR "${target}" STREQUAL "rf24_mesh")
+    # apply RF24Network flags to cpp_rf24_network target
+    if("${target}" STREQUAL "cpp_rf24_network")
         if(SERIAL_DEBUG)
             message(STATUS "SERIAL_DEBUG asserted for ${target}")
             target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
@@ -116,8 +103,8 @@ function(apply_flags target)
         endif()
     endif()
 
-    # apply RF24Mesh flags to only rf24_mesh target
-    if("${target}" STREQUAL "rf24_mesh")
+    # apply RF24Mesh flags to cpp_rf24_mesh target
+    if("${target}" STREQUAL "cpp_rf24_mesh")
         if(MESH_NOMASTER)
             message(STATUS "MESH_NOMASTER asserted for ${target}")
             target_compile_definitions(${target} PUBLIC MESH_NOMASTER)

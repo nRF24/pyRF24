@@ -1,12 +1,14 @@
 """
 Simple example of using the library to transmit
 and retrieve custom automatic acknowledgment payloads.
+
+See documentation at https://nRF24.github.io/pyRF24
 """
 
-import sys
 import time
-import argparse
-from pyrf24 import RF24, RF24_PA_LOW
+from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
+
+print(__file__)  # print example name
 
 ########### USER CONFIGURATION ###########
 # See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md
@@ -15,7 +17,14 @@ from pyrf24 import RF24, RF24_PA_LOW
 # their own pin numbering
 # CS Pin addresses the SPI bus number at /dev/spidev<a>.<b>
 # ie: RF24 radio(<ce_pin>, <a>*10+<b>); spidev1.0 is 10, spidev1.1 is 11 etc..
-radio = RF24(22, 0)
+CSN_PIN = 0  # aka CE0 on SPI bus 0: /dev/spidev0.0
+if RF24_DRIVER == "MRAA":
+    CE_PIN = 15  # for GPIO22
+elif RF24_DRIVER == "wiringPi":
+    CE_PIN = 3  # for GPIO22
+else:
+    CE_PIN = 22
+radio = RF24(CE_PIN, CSN_PIN)
 
 # using the python keyword global is bad practice. Instead we'll use a 1 item
 # list to store our integer number for the payloads' counter
@@ -55,7 +64,7 @@ radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
 
 # for debugging
-radio.print_pretty_details()
+# radio.print_pretty_details()
 
 
 def master(count: int = 5):  # count = 5 will only transmit 5 packets
@@ -154,33 +163,12 @@ def set_role():
     return set_role()
 
 
-print(sys.argv[0])  # print example name
-
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    parser.add_argument(
-        "-r",
-        "--role",
-        type=int,
-        choices=range(2),
-        help="'1' specifies the TX role. '0' specifies the RX role.",
-    )
-    args = parser.parse_args()  # parse any CLI args
-
     try:
-        if args.role is None:  # if not specified with CLI arg '-r'
-            while set_role():
-                pass  # continue example until 'Q' is entered
-        elif bool(args.role):  # if role was set using CLI args, run role once and exit
-            master()
-        else:
-            slave()
+        while set_role():
+            pass  # continue example until 'Q' is entered
     except KeyboardInterrupt:
         print(" Keyboard Interrupt detected. Exiting...")
         radio.power = False
-        sys.exit()
 else:
     print("    Run slave() on receiver\n    Run master() on transmitter")
