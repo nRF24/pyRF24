@@ -20,7 +20,7 @@ endif()
 
 # suplement our copy of linux/gpio.h into SPIDEV & RPi driver sources
 set(SUPPLEMENT_LINUX_GPIO_H FALSE)
-if("${RF24_DRIVER}" STREQUAL "RPi" OR "${RF24_DRIVER}" STREQUAL "SPIDEV")
+if("${RF24_DRIVER}" STREQUAL "SPIDEV")
     set(SUPPLEMENT_LINUX_GPIO_H TRUE)
     message(STATUS "Supplementing ${RF24_DRIVER} driver with linux/gpio.h")
     # file(COPY src/linux/gpio.h DESTINATION RF24/utility/${RF24_DRIVER}/linux)
