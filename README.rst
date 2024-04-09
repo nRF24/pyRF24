@@ -4,12 +4,13 @@
 .. |rtd-badge| image:: https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&logo=readthedocs&logoColor=white
     :target: https://pyrf24.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
-.. |pypi-downloads| image:: https://static.pepy.tech/personalized-badge/pyrf24?period=total&units=none&left_color=grey&right_color=blue&left_text=PyPI%20Downloads
+.. |pypi-downloads| image:: https://img.shields.io/pepy/dt/pyrf24?label=PyPI%20Downloads&color=blue
     :target: https://pepy.tech/project/pyrf24
     :alt: PyPI Downloads
 .. |ci-badge| image:: https://github.com/nRF24/pyRF24/actions/workflows/build.yml/badge.svg
     :target: https://github.com/nRF24/pyRF24/actions/workflows/build.yml
     :alt: Build CI
+
 |piwheels-badge| |rtd-badge| |pypi-downloads| |ci-badge|
 
 Introduction
