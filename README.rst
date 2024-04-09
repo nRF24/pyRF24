@@ -1,15 +1,16 @@
-.. image:: https://img.shields.io/piwheels/v/pyrf24?color=informational
+.. |piwheels-badge| image:: https://img.shields.io/piwheels/v/pyrf24?color=informational
     :target: https://www.piwheels.org/project/pyrf24/
     :alt: piwheels
-.. image:: https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&logo=readthedocs&logoColor=white
+.. |rtd-badge| image:: https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&logo=readthedocs&logoColor=white
     :target: https://pyrf24.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
-.. image:: https://static.pepy.tech/personalized-badge/pyrf24?period=total&units=none&left_color=grey&right_color=blue&left_text=PyPI%20Downloads
+.. |pypi-downloads| image:: https://static.pepy.tech/personalized-badge/pyrf24?period=total&units=none&left_color=grey&right_color=blue&left_text=PyPI%20Downloads
     :target: https://pepy.tech/project/pyrf24
     :alt: PyPI Downloads
-.. image:: https://github.com/nRF24/pyRF24/actions/workflows/build.yml/badge.svg
+.. |ci-badge| image:: https://github.com/nRF24/pyRF24/actions/workflows/build.yml/badge.svg
     :target: https://github.com/nRF24/pyRF24/actions/workflows/build.yml
     :alt: Build CI
+|piwheels-badge| |rtd-badge| |pypi-downloads| |ci-badge|
 
 Introduction
 ============
