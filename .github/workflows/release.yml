@@ -33,7 +33,7 @@ jobs:
           platforms: aarch64
 
       - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.17.0
+        uses: pypa/cibuildwheel@v2.18.1
         env:
           CIBW_ARCHS_LINUX: aarch64 native
           CIBW_SKIP: cp36* pp* *musllinux*
