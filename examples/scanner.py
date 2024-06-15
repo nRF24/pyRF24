@@ -103,7 +103,6 @@ def scan(timeout: int = 30):
         if endl:
             signals = [0] * 126  # reset the signal counts for new line
 
-
     # finish printing results and end with a new line
     while curr_channel < len(signals) - 1:
         curr_channel += 1

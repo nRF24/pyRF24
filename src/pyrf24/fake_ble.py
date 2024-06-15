@@ -77,7 +77,7 @@ here has been adapted to work with Python.
 from os import urandom
 import struct
 from typing import Union, List, Optional
-from .rf24 import (
+from .pyrf24 import (
     RF24,
     RF24_CRC_DISABLED,
     RF24_PA_HIGH,

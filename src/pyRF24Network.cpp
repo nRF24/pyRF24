@@ -1,11 +1,7 @@
 #include "pyRF24Network.h"
 
-PYBIND11_MODULE(rf24_network, m)
+void init_rf24network(py::module& m)
 {
-    m.doc() = "A Python module that wraps the RF24Network C++ library's API";
-    py::options options;
-    options.disable_function_signatures();
-
     // **************** Module level constants *********************
     //
     m.attr("MAX_USER_DEFINED_HEADER_TYPE") = MAX_USER_DEFINED_HEADER_TYPE;
