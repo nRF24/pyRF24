@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.903b73fa37b983ad2.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.5b57f5fd224598659.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -912,7 +912,7 @@ children of the master node.</p></li>
 <p>For a message to travel from node <code class="docutils literal notranslate"><span class="pre">0o124</span></code> to node <code class="docutils literal notranslate"><span class="pre">0o3</span></code>, it must be passed through any applicable
 network levels. So, the message flows <code class="docutils literal notranslate"><span class="pre">0o124</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o24</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o4</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o0</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0o3</span></code>.</p>
 <p>A single network can potentially have a maximum of 781 nodes (all operating on the same
-<a class="reference internal" href="rf24_api.html#pyrf24.rf24.RF24.channel" title="pyrf24.rf24.RF24.channel (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">channel</span></code></a>), but for readability reasons, the following
+<a class="reference internal" href="rf24_api.html#pyrf24.RF24.channel" title="pyrf24.RF24.channel (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">channel</span></code></a>), but for readability reasons, the following
 graph only demonstrates</p>
 <ul class="simple">
 <li><p>the master node (level 0) and it’s 5 children (level 1)</p></li>
@@ -1550,7 +1550,7 @@ contain octal digits in range [1, 5]. The master node is the exception for it us
 number <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
 <div class="tip admonition">
 <p class="admonition-title">Tip</p>
-<p>Use the <a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network.is_address_valid" title="pyrf24.rf24_network.RF24Network.is_address_valid (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_address_valid()</span></code></a>
+<p>Use the <a class="reference internal" href="rf24_network_api.html#pyrf24.RF24Network.is_address_valid" title="pyrf24.RF24Network.is_address_valid (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_address_valid()</span></code></a>
 function to programmatically check a Logical Address for validity.</p>
 </div>
 </li>
@@ -1565,9 +1565,9 @@ multicasted messages about the node’s network level).</p>
 <h3 id="translating-logical-to-physical">Translating Logical to Physical<a class="headerlink" href="#translating-logical-to-physical" title="Permalink to this heading">¶</a></h3>
 <p>Before translating the Logical address, a single byte is used repetitively as the
 base case for all bytes of any Physical Address. This byte is the address prefix
-(stored internally and unexposed) in the <a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network" title="pyrf24.rf24_network.RF24Network (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24Network</span></code></a> class. By default the
+(stored internally and unexposed) in the <a class="reference internal" href="rf24_network_api.html#pyrf24.RF24Network" title="pyrf24.RF24Network (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24Network</span></code></a> class. By default the
 address prefix has a single byte value of <code class="docutils literal notranslate"><span class="pre">0xCC</span></code>.</p>
-<p>The <a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.RF24Network" title="pyrf24.rf24_network.RF24Network (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24Network</span></code></a> class also has a predefined internal (unexposed) array of bytes used for translating
+<p>The <a class="reference internal" href="rf24_network_api.html#pyrf24.RF24Network" title="pyrf24.RF24Network (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24Network</span></code></a> class also has a predefined internal (unexposed) array of bytes used for translating
 unique Logical addresses into unique Physical addresses. This list is called
 address suffix. By default the address suffix has 6-byte value of
 <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">0xC3,</span> <span class="pre">0x3C,</span> <span class="pre">0x33,</span> <span class="pre">0xCE,</span> <span class="pre">0x3E,</span> <span class="pre">0xE3</span> <span class="pre">}</span></code> where the order of bytes pertains to the
@@ -1682,7 +1682,7 @@ to a child node’s Physical address, the address suffix is used.</p>
 <p>As noted above, a single network <em>can</em> have up to 781 nodes. This number also includes
 up to 255 RF24Mesh nodes. The key difference from the user’s perspective is that RF24Mesh
 API does not publicly use a <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>. Instead the RF24Mesh API
-relies on a <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> number to identify a RF24Mesh node
+relies on a <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.node_id" title="pyrf24.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> number to identify a RF24Mesh node
 that may use a different  <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a> (which can change based on
 the node’s physical location).</p>
 <div class="important admonition">
@@ -1691,37 +1691,37 @@ the node’s physical location).</p>
 master node. This will not interfere with RF24Network nodes since the RF24Mesh API
 is layered on top of the RF24Network API.</p>
 </div>
-<p>To better explain the difference between a node’s <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.mesh_address" title="pyrf24.rf24_mesh.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a> vs a node’s
-<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>, we will examine the connecting process for a
-RF24Mesh node. These are the steps performed when calling <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.renew_address" title="pyrf24.rf24_mesh.RF24Mesh.renew_address (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">renew_address()</span></code></a>:</p>
+<p>To better explain the difference between a node’s <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.mesh_address" title="pyrf24.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a> vs a node’s
+<a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.node_id" title="pyrf24.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>, we will examine the connecting process for a
+RF24Mesh node. These are the steps performed when calling <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.renew_address" title="pyrf24.RF24Mesh.renew_address (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">renew_address()</span></code></a>:</p>
 <ol class="arabic">
 <li><p>Any RF24Mesh node not connected to a network will use the <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>
 <code class="docutils literal notranslate"><span class="pre">0o4444</span></code> (that’s <code class="docutils literal notranslate"><span class="pre">2340</span></code> in decimal). It is up to the network administrator to ensure that
-each RF24Mesh node has a unique <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> (which is limited
+each RF24Mesh node has a unique <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.node_id" title="pyrf24.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a> (which is limited
 to the range [0, 255]).</p>
 <div class="hint admonition">
 <p class="admonition-title">Hint</p>
 <p>Remember that <code class="docutils literal notranslate"><span class="pre">0</span></code> is reserved the master node’s
-<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
+<a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.node_id" title="pyrf24.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
 </div>
 </li>
 <li><p>To get assigned a <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>, an unconnected node must poll the
-network for a response (using a <a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_POLL" title="pyrf24.rf24_network.NETWORK_POLL (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NETWORK_POLL</span></code></a> message). Initially this happens on the
+network for a response (using a <a class="reference internal" href="rf24_network_api.html#pyrf24.pyrf24.NETWORK_POLL" title="pyrf24.pyrf24.NETWORK_POLL (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NETWORK_POLL</span></code></a> message). Initially this happens on the
 network level 0, but consecutive attempts will poll higher network levels (in order of low to
 high) if this process fails.</p></li>
 <li><p>When a polling transmission is responded, the connecting mesh node sends an address
 request which gets forwarded to the master node when necessary (using a
-<a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_REQ_ADDRESS" title="pyrf24.rf24_network.NETWORK_REQ_ADDRESS (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NETWORK_REQ_ADDRESS</span></code></a> message).</p></li>
-<li><p>The master node will process the address request and respond with a <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.mesh_address" title="pyrf24.rf24_mesh.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a>
-(using a <a class="reference internal" href="rf24_network_api.html#pyrf24.rf24_network.NETWORK_ADDR_RESPONSE" title="pyrf24.rf24_network.NETWORK_ADDR_RESPONSE (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NETWORK_ADDR_RESPONSE</span></code></a> message). If there is no available occupancy on the
+<a class="reference internal" href="rf24_network_api.html#pyrf24.pyrf24.NETWORK_REQ_ADDRESS" title="pyrf24.pyrf24.NETWORK_REQ_ADDRESS (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NETWORK_REQ_ADDRESS</span></code></a> message).</p></li>
+<li><p>The master node will process the address request and respond with a <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.mesh_address" title="pyrf24.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a>
+(using a <a class="reference internal" href="rf24_network_api.html#pyrf24.pyrf24.NETWORK_ADDR_RESPONSE" title="pyrf24.pyrf24.NETWORK_ADDR_RESPONSE (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NETWORK_ADDR_RESPONSE</span></code></a> message). If there is no available occupancy on the
 network level from which the address request originated, then the master node will
 respond with an invalid <a class="reference internal" href="#logical-address"><span class="std std-ref">Logical Address</span></a>.</p></li>
 <li><p>Once the requesting node receives the address response (and the assigned address is
-valid), it assumes that as the <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.mesh_address" title="pyrf24.rf24_mesh.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a> while maintaining its
-<a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.node_id" title="pyrf24.rf24_mesh.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
+valid), it assumes that as the <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.mesh_address" title="pyrf24.RF24Mesh.mesh_address (Python attribute)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">mesh_address</span></code></a> while maintaining its
+<a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.node_id" title="pyrf24.RF24Mesh.node_id (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node_id</span></code></a>.</p>
 <ul class="simple">
-<li><p>The connecting node will verify its new address by calling <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.check_connection" title="pyrf24.rf24_mesh.RF24Mesh.check_connection (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">check_connection()</span></code></a>.</p></li>
-<li><p>If the assigned address is invalid or <a class="reference internal" href="rf24_mesh_api.html#pyrf24.rf24_mesh.RF24Mesh.check_connection" title="pyrf24.rf24_mesh.RF24Mesh.check_connection (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">check_connection()</span></code></a> returns <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>, then
+<li><p>The connecting node will verify its new address by calling <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.check_connection" title="pyrf24.RF24Mesh.check_connection (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">check_connection()</span></code></a>.</p></li>
+<li><p>If the assigned address is invalid or <a class="reference internal" href="rf24_mesh_api.html#pyrf24.RF24Mesh.check_connection" title="pyrf24.RF24Mesh.check_connection (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">check_connection()</span></code></a> returns <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>, then
 the connecting node will re-start the process (step 1) on a different network level.</p></li>
 </ul>
 </li>

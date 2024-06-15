@@ -3,12 +3,12 @@
 RF24Mesh API
 ============
 
-.. automodule:: pyrf24.rf24_mesh
+.. currentmodule:: pyrf24
 
 RF24Mesh class
 **************
 
-.. autoclass:: pyrf24.rf24_mesh.RF24Mesh
+.. autoclass:: pyrf24.RF24Mesh
 
     Basic RF24Mesh API
     ------------------
@@ -43,7 +43,7 @@ successful connection to a child node.
     The `AddrListStruct` class supports the python "magic method" :py:func:`repr()`. So, you can
     easily pass an instantiated `AddrListStruct` object to the :py:func:`print()` function.
 
-.. autoclass:: pyrf24.rf24_mesh.AddrListStruct
+.. autoclass:: pyrf24.AddrListStruct
     
     .. autoattribute:: node_id
     .. autoattribute:: address
@@ -53,14 +53,14 @@ Mesh Constants
 
 These are the pre-defined constants provided for convenience and code readability.
 
-.. autoattribute:: pyrf24.rf24_mesh.MESH_DEFAULT_ADDRESS
+.. autoattribute:: pyrf24.MESH_DEFAULT_ADDRESS
 
     A reserved valid address for use with RF24Mesh (when a mesh node requests an assigned address)
 
 Reserved System Message Types
 -----------------------------
 
-.. autoattribute:: pyrf24.rf24_mesh.MESH_ADDR_LOOKUP
+.. autoattribute:: pyrf24.MESH_ADDR_LOOKUP
 
     This message type is used to fetch (from the master node) an allocated Logical
     Address (`mesh_address`) corresponding to specified a mesh node's
@@ -68,7 +68,7 @@ Reserved System Message Types
 
     This is exclusively used by `get_address()`.
 
-.. autoattribute:: pyrf24.rf24_mesh.MESH_ID_LOOKUP
+.. autoattribute:: pyrf24.MESH_ID_LOOKUP
 
     This message type is used to fetch (from the master node) a mesh node's
     :py:attr:`~RF24Mesh.node_id` corresponding to an specified Logical Address
@@ -76,7 +76,7 @@ Reserved System Message Types
 
     This is exclusively used by `get_node_id()`.
 
-.. autoattribute:: pyrf24.rf24_mesh.MESH_ADDR_RELEASE
+.. autoattribute:: pyrf24.MESH_ADDR_RELEASE
 
     This message type is used when mesh nodes are consciously disconnecting from the
     network. It is used to unassign the Logical Address allocated the mesh node's

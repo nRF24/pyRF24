@@ -3,37 +3,37 @@
 RF24 API
 ========
 
-.. automodule:: pyrf24.rf24
+.. currentmodule:: pyrf24
 
-    .. autoattribute:: pyrf24.rf24.RF24_DRIVER
+.. autoattribute:: pyrf24.RF24_DRIVER
 
-        This `str` describes the backend driver used to build the pyrf24 package.
-        If installed from pypi, then this value should be ``"SPIDEV"``.
-        
-        All other drivers imply that the pyrf24 package was built from source
-        :ref:`using-specific-driver`.
+    This `str` describes the backend driver used to build the pyrf24 package.
+    If installed from pypi, then this value should be ``"SPIDEV"``.
+    
+    All other drivers imply that the pyrf24 package was built from source
+    :ref:`using-specific-driver`.
 
-        .. hint::
+    .. hint::
 
-            Use this attribute to determine programmatically which pin numbers to use.
-            Drivers like ``wiringPi`` and ``MRAA`` use their own pin numbering scheme.
+        Use this attribute to determine programmatically which pin numbers to use.
+        Drivers like ``wiringPi`` and ``MRAA`` use their own pin numbering scheme.
 
 Enum classes
 ------------
 
-.. autoclass:: pyrf24.rf24.rf24_crclength_e
+.. autoclass:: pyrf24.rf24_crclength_e
     :members: RF24_CRC_DISABLED, RF24_CRC_8, RF24_CRC_16
 
-.. autoclass:: pyrf24.rf24.rf24_datarate_e
+.. autoclass:: pyrf24.rf24_datarate_e
     :members: RF24_1MBPS, RF24_2MBPS, RF24_250KBPS
 
-.. autoclass:: pyrf24.rf24.rf24_pa_dbm_e
+.. autoclass:: pyrf24.rf24_pa_dbm_e
     :members: RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
 
 RF24 class
 ----------
 
-.. autoclass:: pyrf24.rf24.RF24
+.. autoclass:: pyrf24.RF24
 
     Basic RF24 API
     **************
