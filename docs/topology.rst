@@ -113,7 +113,7 @@ For a message to travel from node ``0o124`` to node ``0o3``, it must be passed t
 network levels. So, the message flows ``0o124`` -> ``0o24`` -> ``0o4`` -> ``0o0`` -> ``0o3``.
 
 A single network can potentially have a maximum of 781 nodes (all operating on the same
-:attr:`~pyrf24.rf24.RF24.channel`), but for readability reasons, the following
+:attr:`~pyrf24.RF24.channel`), but for readability reasons, the following
 graph only demonstrates
 
 - the master node (level 0) and it's 5 children (level 1)
@@ -216,7 +216,7 @@ Physical addresses vs Logical addresses
   number ``0``
 
   .. tip::
-      Use the :py:meth:`~pyrf24.rf24_network.RF24Network.is_address_valid()`
+      Use the :py:meth:`~pyrf24.RF24Network.is_address_valid()`
       function to programmatically check a Logical Address for validity.
 
 .. note::
@@ -295,7 +295,7 @@ RF24Mesh connecting process
 As noted above, a single network *can* have up to 781 nodes. This number also includes
 up to 255 RF24Mesh nodes. The key difference from the user's perspective is that RF24Mesh
 API does not publicly use a `Logical Address <logical_address>`. Instead the RF24Mesh API
-relies on a :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id` number to identify a RF24Mesh node
+relies on a :attr:`~pyrf24.RF24Mesh.node_id` number to identify a RF24Mesh node
 that may use a different  `Logical Address <logical_address>` (which can change based on
 the node's physical location).
 
@@ -305,17 +305,17 @@ the node's physical location).
     is layered on top of the RF24Network API.
 
 To better explain the difference between a node's `mesh_address` vs a node's
-:attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id`, we will examine the connecting process for a
+:attr:`~pyrf24.RF24Mesh.node_id`, we will examine the connecting process for a
 RF24Mesh node. These are the steps performed when calling `renew_address()`:
 
 1. Any RF24Mesh node not connected to a network will use the `Logical Address <logical_address>`
    ``0o4444`` (that's ``2340`` in decimal). It is up to the network administrator to ensure that
-   each RF24Mesh node has a unique :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id` (which is limited
+   each RF24Mesh node has a unique :attr:`~pyrf24.RF24Mesh.node_id` (which is limited
    to the range [0, 255]).
 
    .. hint::
        Remember that ``0`` is reserved the master node's
-       :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id`.
+       :attr:`~pyrf24.RF24Mesh.node_id`.
 2. To get assigned a `Logical Address <logical_address>`, an unconnected node must poll the
    network for a response (using a `NETWORK_POLL` message). Initially this happens on the
    network level 0, but consecutive attempts will poll higher network levels (in order of low to
@@ -329,7 +329,7 @@ RF24Mesh node. These are the steps performed when calling `renew_address()`:
    respond with an invalid `Logical Address <logical_address>`.
 5. Once the requesting node receives the address response (and the assigned address is
    valid), it assumes that as the `mesh_address` while maintaining its
-   :attr:`~pyrf24.rf24_mesh.RF24Mesh.node_id`.
+   :attr:`~pyrf24.RF24Mesh.node_id`.
 
    - The connecting node will verify its new address by calling `check_connection()`.
    - If the assigned address is invalid or `check_connection()` returns `False`, then

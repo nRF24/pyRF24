@@ -123,7 +123,7 @@ void init_rf24network(py::module& m)
         // *****************************************************************************
 
         .def_readwrite("header", &RF24NetworkFrameWrapper::header, R"docstr(
-            The :py:class:`~pyrf24.rf24_network.RF24NetworkHeader` object about the frame's message.
+            The :py:class:`~pyrf24.RF24NetworkHeader` object about the frame's message.
         )docstr")
 
         // *****************************************************************************
@@ -136,7 +136,7 @@ void init_rf24network(py::module& m)
 
         .def_readonly("message_size", &RF24NetworkFrameWrapper::message_size, R"docstr(
             A read-only attribute that returns the length of the message. This is set accordingly
-            when the :py:attr:`~pyrf24.rf24_network.RF24NetworkFrame.message_buffer` is changed.
+            when the :py:attr:`~pyrf24.RF24NetworkFrame.message_buffer` is changed.
         )docstr");
     */
 
@@ -178,7 +178,7 @@ void init_rf24network(py::module& m)
             :param int channel: The desired channel used by the network.
                 Using this parameter is the deprecated form of this function.
 
-                .. seealso:: Use :py:attr:`~pyrf24.rf24.RF24.channel` attribute to change the radio
+                .. seealso:: Use :py:attr:`~pyrf24.RF24.channel` attribute to change the radio
                     channel.
         )docstr",
              py::arg("channel"), py::arg("node_address"))
@@ -211,7 +211,7 @@ void init_rf24network(py::module& m)
 
             :param int maxlen: The maximum length of the frame's message to be returned. If this parameter is unspecified or greater than
                 the actual frame's message size, then only the frame's full message size is used. Defaults to
-                :py:attr:`~pyrf24.rf24_network.MAX_PAYLOAD_SIZE`.
+                :py:attr:`~pyrf24.MAX_PAYLOAD_SIZE`.
 
             :Returns: A `tuple` in which
 
@@ -239,7 +239,7 @@ void init_rf24network(py::module& m)
 
             :param int maxlen: The maximum length of the message to fetch. If this parameter is unspecified or greater than
                 the actual frame's message size, then only the frame's full message size is used. Defaults to
-                :py:attr:`~pyrf24.rf24_network.MAX_PAYLOAD_SIZE`.
+                :py:attr:`~pyrf24.MAX_PAYLOAD_SIZE`.
 
             :Returns: A 2-tuple containing the frame's header (of type `RF24NetworkHeader`) and the frame's message (of type `bytearray`).
         )docstr",
@@ -253,7 +253,7 @@ void init_rf24network(py::module& m)
             Keep the network layer current. This function should be called regularly in the application.
             For applications that have a long-running operations in 1 "loop"/iteration, then it is advised to call this function more than once.
 
-            :Returns: The `int` of the last received header's :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type`
+            :Returns: The `int` of the last received header's :py:attr:`~pyrf24.RF24NetworkHeader.type`
         )docstr")
 
         // *****************************************************************************
@@ -358,7 +358,7 @@ void init_rf24network(py::module& m)
         // *****************************************************************************
 
         .def_readwrite("return_sys_msgs", &RF24Network::returnSysMsgs, R"docstr(
-            This `bool` attribute is used by RF24Mesh to force :py:meth:`~pyrf24.rf24_network.RF24Network.update()`
+            This `bool` attribute is used by RF24Mesh to force :py:meth:`~pyrf24.RF24Network.update()`
             to return when handling a frame containing a system message.
 
             When this attribute is enabled, the following system messages are not returned because they are handled
@@ -367,11 +367,11 @@ void init_rf24network(py::module& m)
             .. csv-table::
                 :header: Message Name, Numeric Value, Additional Context
 
-                :py:attr:`~pyrf24.rf24_network.NETWORK_ADDR_RESPONSE`, 128,
-                :py:attr:`~pyrf24.rf24_network.NETWORK_ACK`, 193,
-                :py:attr:`~pyrf24.rf24_network.NETWORK_PING`, 130,
-                :py:attr:`~pyrf24.rf24_network.NETWORK_POLL`, 194,  With multicast enabled (which is enabled by default)
-                :py:attr:`~pyrf24.rf24_network.NETWORK_REQ_ADDRESS`, 195,
+                :py:attr:`~pyrf24.NETWORK_ADDR_RESPONSE`, 128,
+                :py:attr:`~pyrf24.NETWORK_ACK`, 193,
+                :py:attr:`~pyrf24.NETWORK_PING`, 130,
+                :py:attr:`~pyrf24.NETWORK_POLL`, 194,  With multicast enabled (which is enabled by default)
+                :py:attr:`~pyrf24.NETWORK_REQ_ADDRESS`, 195,
 
             .. seealso::
                 There's a more complete list (with behavioral descriptions) of the :ref:`reserved_sys_msgs`.
@@ -383,7 +383,7 @@ void init_rf24network(py::module& m)
 
         /// TODO: need to write a custom type caster for std::queue to expose the external_queue member
         // .def_readwrite("external_queue", &RF24NetworkWrapper::external_queue, R"docstr(
-        //     Data with a header type of :py:attr:`~pyrf24.rf24_network.EXTERNAL_DATA_TYPE` will be loaded into a separate queue.
+        //     Data with a header type of :py:attr:`~pyrf24.EXTERNAL_DATA_TYPE` will be loaded into a separate queue.
         // )docstr")
 
         // *****************************************************************************
@@ -398,8 +398,8 @@ void init_rf24network(py::module& m)
             .. csv-table::
                 :header: Flags, Value, Description
 
-                :py:attr:`~pyrf24.rf24_network.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Allows for faster transfers between directly connected nodes.
-                :py:attr:`~pyrf24.rf24_network.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables :py:attr:`~pyrf24.rf24_network.NETWORK_POLL` responses on a node-by-node basis.
+                :py:attr:`~pyrf24.FLAG_FAST_FRAG`, 4 (bit 2 asserted), INTERNAL: Allows for faster transfers between directly connected nodes.
+                :py:attr:`~pyrf24.FLAG_NO_POLL`, 8 (bit 3 asserted), EXTERNAL/USER: Disables :py:attr:`~pyrf24.NETWORK_POLL` responses on a node-by-node basis.
         )docstr")
 
         .def_readwrite("networkFlags", &RF24Network::networkFlags);

@@ -36,10 +36,10 @@ void init_rf24mesh(py::module& m)
         // *****************************************************************************
 
         .def("begin", &RF24MeshWrapper::begin, R"docstr(
-            begin(channel: int = 97, data_rate: pyrf24.rf24.rf24_datarate_e = RF24_1MBPS, timeout: int = 7500) -> bool
+            begin(channel: int = 97, data_rate: pyrf24.rf24_datarate_e = RF24_1MBPS, timeout: int = 7500) -> bool
 
-            :param int channel: The :py:attr:`~pyrf24.rf24.RF24.channel` to use for the network.
-            :param ~pyrf24.rf24.rf24_datarate_e data_rate: The :py:attr:`~pyrf24.rf24.RF24.data_rate`
+            :param int channel: The :py:attr:`~pyrf24.RF24.channel` to use for the network.
+            :param ~pyrf24.rf24_datarate_e data_rate: The :py:attr:`~pyrf24.RF24.data_rate`
                 to use for the network.
             :param int timeout: The timeout to use when connecting to the mesh network. This value is equivalent
                 to the ``timeout`` parameter in `renew_address()`
@@ -60,7 +60,7 @@ void init_rf24mesh(py::module& m)
             Keep the mesh network layer current. This function should be called regularly in the application.
             For applications that have a long-running operations in 1 "loop"/iteration, then it is advised to call this function more than once.
 
-            :Returns: the `int` of the last received header's :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type`
+            :Returns: the `int` of the last received header's :py:attr:`~pyrf24.RF24NetworkHeader.type`
         )docstr")
 
         // *****************************************************************************
@@ -70,7 +70,7 @@ void init_rf24mesh(py::module& m)
             write(to_node_address: int, buf: Union[bytes, bytearray], message_type: int) -> bool
 
             :param bytes,bytearray buf: The message to transmit.
-            :param int message_type: The :py:attr:`~pyrf24.rf24_network.RF24NetworkHeader.type` to
+            :param int message_type: The :py:attr:`~pyrf24.RF24NetworkHeader.type` to
                 be used in the frame's header.
             :Returns: `True` if the message was successfully sent, otherwise `False`
 
@@ -99,7 +99,7 @@ void init_rf24mesh(py::module& m)
 
             Only call this function on a mesh network's master node to manually assign a logical
             address to a unique `node_id`. This function is meant to include RF24Network nodes in
-            mesh networks' :attr:`~pyrf24.rf24_mesh.RF24Mesh.addr_list` list.
+            mesh networks' :attr:`~pyrf24.RF24Mesh.addr_list` list.
 
             .. code-block:: py
 
@@ -171,7 +171,7 @@ void init_rf24mesh(py::module& m)
             Keep the master node's list of assigned addresses up-to-date.
 
             .. tip:: This function should be called on a mesh network's master node immediately
-                after calling :py:meth:`~pyrf24.rf24_mesh.RF24Mesh.update()`.
+                after calling :py:meth:`~pyrf24.RF24Mesh.update()`.
         )docstr")
 
         .def("DHCP", &RF24MeshWrapper::DHCP, R"docstr(
@@ -305,7 +305,7 @@ void init_rf24mesh(py::module& m)
             Translates a `node_id` into the corresponding `mesh_address`
 
             :param int node_id: The identifying number of the mesh node for which to fetch the
-                corresponding :py:attr:`~pyrf24.rf24_network.RF24Network.node_address`.
+                corresponding :py:attr:`~pyrf24.RF24Network.node_address`.
 
             :Returns:
 
@@ -328,7 +328,7 @@ void init_rf24mesh(py::module& m)
             set_channel(channel: int)
             This function controls the radio's configured `channel` (AKA frequency).
 
-            :param int channel: The desired :py:attr:`~pyrf24.rf24.RF24.channel` to be used for the network.
+            :param int channel: The desired :py:attr:`~pyrf24.RF24.channel` to be used for the network.
         )docstr",
              py::arg("channel"))
 

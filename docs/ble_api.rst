@@ -38,14 +38,14 @@ Restricted RF24 functionality
 The following `RF24` functionality should not be used when `FakeBLE`
 objects are instantiated with an `RF24` object:
 
-- :py:attr:`~pyrf24.rf24.RF24.dynamic_payloads`
-- :py:attr:`~pyrf24.rf24.RF24.data_rate`
-- :py:attr:`~pyrf24.rf24.RF24.address_width`
-- :py:meth:`~pyrf24.rf24.RF24.set_auto_ack()`
-- :py:attr:`~pyrf24.rf24.RF24.ack_payloads`
-- :py:attr:`~pyrf24.rf24.RF24.crc_length`
-- :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()`
-- :py:meth:`~pyrf24.rf24.RF24.open_tx_pipe()`
+- :py:attr:`~pyrf24.RF24.dynamic_payloads`
+- :py:attr:`~pyrf24.RF24.data_rate`
+- :py:attr:`~pyrf24.RF24.address_width`
+- :py:meth:`~pyrf24.RF24.set_auto_ack()`
+- :py:attr:`~pyrf24.RF24.ack_payloads`
+- :py:attr:`~pyrf24.RF24.crc_length`
+- :py:meth:`~pyrf24.RF24.open_rx_pipe()`
+- :py:meth:`~pyrf24.RF24.open_tx_pipe()`
 
 
 Service related classes
