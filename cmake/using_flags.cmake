@@ -1,7 +1,7 @@
 # ###################### DEBUG (& EXTRA) FLAGS ######################
 
 # ## RF24 core specific options
-option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
+# option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
 
 # ## RF24Network specific options
 option(SERIAL_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
@@ -64,16 +64,18 @@ option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh 
 # function to apply flags to applicable targets
 function(apply_flags target)
     # apply RF24 flags to cpp_rf24 target
-    if(RF24_DEBUG)
-        message(STATUS "RF24_DEBUG asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
-    endif()
+    # if(RF24_DEBUG)
+    #     message(STATUS "RF24_DEBUG asserted for ${target}")
+    #     target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
+    # endif()
 
     # pass driver used to expose as a constant in rf24 module.
     target_compile_definitions(${target} PUBLIC RF24_DRIVER="${RF24_DRIVER}")
 
     # apply RF24Network flags to cpp_rf24_network target
     if(SERIAL_DEBUG)
+        # this flag also applies to RF24 lib because
+        # the samme macro name is used to enable debug output in RF24
         message(STATUS "SERIAL_DEBUG asserted for ${target}")
         target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
     endif()
