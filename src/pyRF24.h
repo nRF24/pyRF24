@@ -1,42 +1,15 @@
+#ifndef PYRF24_H
+#define PYRF24_H
 #include <pybind11/pybind11.h>
 #include <RF24.h>
 #include <nRF24L01.h>
 
 namespace py = pybind11;
 
-void throw_ba_exception(void)
-{
-    PyErr_SetString(PyExc_TypeError, "buf parameter must be bytes or bytearray");
-    py::error_already_set();
-}
-
-char* get_bytes_or_bytearray_str(py::object buf)
-{
-    PyObject* py_ba;
-    py_ba = buf.ptr();
-    if (PyByteArray_Check(py_ba))
-        return PyByteArray_AsString(py_ba);
-    else if (PyBytes_Check(py_ba))
-        return PyBytes_AsString(py_ba);
-    else
-        throw_ba_exception();
-
-    return NULL;
-}
-
-int get_bytes_or_bytearray_ln(py::object buf)
-{
-    PyObject* py_ba;
-    py_ba = buf.ptr();
-    if (PyByteArray_Check(py_ba))
-        return PyByteArray_Size(py_ba);
-    else if (PyBytes_Check(py_ba))
-        return PyBytes_Size(py_ba);
-    else
-        throw_ba_exception();
-
-    return 0;
-}
+void throw_ba_exception(void);
+char* get_bytes_or_bytearray_str(py::object buf);
+int get_bytes_or_bytearray_ln(py::object buf);
+void init_rf24(py::module& m);
 
 class RF24Wrapper : public RF24
 {
@@ -240,3 +213,5 @@ public:
             stopListening();
     }
 };
+
+#endif // PYRF24_H

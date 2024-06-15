@@ -1,10 +1,12 @@
+#ifndef PYRF24NETWORK_H
+#define PYRF24NETWORK_H
 #include <pybind11/pybind11.h>
 #include "pyRF24.h"
 #include <RF24Network.h>
 // #include <queue>
 // #include <pybind11/stl.h>
 
-namespace py = pybind11;
+void init_rf24network(py::module& m);
 
 /*
 namespace pybind11 {
@@ -116,3 +118,5 @@ public:
         return RF24Network::node_address;
     }
 };
+
+#endif // PYRF24NETWORK_H

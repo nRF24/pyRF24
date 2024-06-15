@@ -1,8 +1,10 @@
+#ifndef PYRF24MESH_H
+#define PYRF24MESH_H
 #include <pybind11/pybind11.h>
-#include "pyRF24Network.cpp"
+#include "pyRF24Network.h"
 #include <RF24Mesh.h>
 
-namespace py = pybind11;
+void init_rf24mesh(py::module& m);
 
 class RF24MeshWrapper : public RF24Mesh
 {
@@ -47,3 +49,5 @@ public:
         return list;
     }
 };
+
+#endif // PYRF24MESH_H

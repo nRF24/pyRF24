@@ -50,23 +50,23 @@ here has been adapted to work with Python.
        GHz, 2.426 GHz, and 2.480 GHz. We have provided a tuple of these
        specific channels for convenience (See `BLE_FREQ` and
        :py:func:`~pyrf24.fake_ble.FakeBLE.hop_channel()`).
-    3. :py:attr:`~pyrf24.rf24.RF24.crc_length` is disabled in the
+    3. :py:attr:`~pyrf24.RF24.crc_length` is disabled in the
        nRF24L01 firmware because BLE  specifications require 3 bytes
        (:py:func:`~pyrf24.fake_ble.crc24_ble()`), and the
        nRF24L01 firmware can only handle a maximum of 2.
        Thus, we have appended the required 3 bytes of CRC24 into the payload.
-    4. :py:attr:`~pyrf24.rf24.RF24.address_width` of BLE
+    4. :py:attr:`~pyrf24.RF24.address_width` of BLE
        packet only uses 4 bytes, so we have set that accordingly.
     5. The auto-ack (automatic acknowledgment) feature of the nRF24L01 is useless
        when transmitting to BLE devices, thus it is disabled as well as automatic
-       re-transmit (:py:meth:`~pyrf24.rf24.RF24.get_arc()`) and custom ACK
-       payloads (:py:attr:`~pyrf24.rf24.RF24.ack_payloads`) features
+       re-transmit (:py:meth:`~pyrf24.RF24.get_arc()`) and custom ACK
+       payloads (:py:attr:`~pyrf24.RF24.ack_payloads`) features
        which both depend on the automatic acknowledgments feature.
-    6. The :py:attr:`~pyrf24.rf24.RF24.dynamic_payloads`
+    6. The :py:attr:`~pyrf24.RF24.dynamic_payloads`
        feature of the nRF24L01 isn't compatible with BLE specifications. Thus,
        we have disabled it.
     7. BLE specifications only allow using 1 Mbps RF
-       :py:attr:`~pyrf24.rf24.RF24.data_rate`, so that too has
+       :py:attr:`~pyrf24.RF24.data_rate`, so that too has
        been hard coded.
     8. Only the "on data sent" & "on data ready" events will have
        an effect on the interrupt (IRQ) pin. The "on data fail"  is never
@@ -77,7 +77,7 @@ here has been adapted to work with Python.
 from os import urandom
 import struct
 from typing import Union, List, Optional
-from .rf24 import (
+from .pyrf24 import ( # type: ignore
     RF24,
     RF24_CRC_DISABLED,
     RF24_PA_HIGH,
@@ -341,7 +341,7 @@ class FakeBLE:
     """A class to implement BLE advertisements using the nRF24L01.
 
     Per the limitations of this technique, only some of underlying
-    :py:class:`~pyrf24.rf24.RF24` functionality is
+    :py:class:`~pyrf24.RF24` functionality is
     available for configuration when implementing BLE transmissions.
     See the `Restricted RF24 functionality`_ for more details.
 
@@ -349,7 +349,7 @@ class FakeBLE:
         hardware.
 
         .. seealso::
-            See the :py:class:`~pyrf24.rf24.RF24` class' constructor documentation.
+            See the :py:class:`~pyrf24.RF24` class' constructor documentation.
     """
 
     def __init__(self, radio: RF24):
@@ -386,7 +386,7 @@ class FakeBLE:
     ) -> bool:
         """Initialize the radio using BLE specifications.
 
-        Internally, this function also calls :meth:`~pyrf24.rf24.RF24.begin()`, so
+        Internally, this function also calls :meth:`~pyrf24.RF24.begin()`, so
         there's no need to initialized the radio's hardware before calling this
         function.
 
@@ -466,7 +466,7 @@ class FakeBLE:
     @property
     def show_pa_level(self) -> bool:
         """If this attribute is `True`, the payload will automatically include
-        the nRF24L01's :py:attr:`~pyrf24.rf24.RF24.pa_level` in the
+        the nRF24L01's :py:attr:`~pyrf24.RF24.pa_level` in the
         advertisement.
 
         The default value of `False` will exclude this optional information.

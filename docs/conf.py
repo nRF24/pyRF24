@@ -175,7 +175,7 @@ sphinx_immaterial_custom_admonitions = [
 ]
 
 python_type_aliases = {
-    "pyrf24.rf24.rf24_datarate_e": "rf24_datarate_e",
+    "pyrf24.rf24_datarate_e": "rf24_datarate_e",
 }
 
 # Set link name generated in the top bar.

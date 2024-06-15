@@ -1,18 +1,19 @@
-from .rf24 import (
+from .pyrf24 import (  # type: ignore
     RF24,
+    rf24_crclength_e,
     RF24_CRC_DISABLED,
     RF24_CRC_8,
     RF24_CRC_16,
+    rf24_datarate_e,
     RF24_1MBPS,
     RF24_2MBPS,
     RF24_250KBPS,
+    rf24_pa_dbm_e,
     RF24_PA_MIN,
     RF24_PA_LOW,
     RF24_PA_HIGH,
     RF24_PA_MAX,
     RF24_DRIVER,
-)
-from .rf24_network import (
     RF24Network,
     RF24NetworkHeader,
     # RF24NetworkFrame,
@@ -29,8 +30,6 @@ from .rf24_network import (
     NETWORK_REQ_ADDRESS,
     FLAG_FAST_FRAG,
     FLAG_NO_POLL,
-)
-from .rf24_mesh import (
     RF24Mesh,
     MESH_DEFAULT_ADDRESS,
     MESH_ADDR_LOOKUP,
@@ -59,12 +58,15 @@ from .fake_ble import (
 
 __all__ = [
     "RF24",
+    "rf24_crclength_e",
     "RF24_CRC_DISABLED",
     "RF24_CRC_8",
     "RF24_CRC_16",
+    "rf24_datarate_e",
     "RF24_1MBPS",
     "RF24_2MBPS",
     "RF24_250KBPS",
+    "rf24_pa_dbm_e",
     "RF24_PA_MIN",
     "RF24_PA_LOW",
     "RF24_PA_HIGH",

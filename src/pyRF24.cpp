@@ -1,7 +1,41 @@
 #include <pybind11/pybind11.h>
 #include "pyRF24.h"
 
-PYBIND11_MODULE(rf24, m)
+void throw_ba_exception(void)
+{
+    PyErr_SetString(PyExc_TypeError, "buf parameter must be bytes or bytearray");
+    py::error_already_set();
+}
+
+char* get_bytes_or_bytearray_str(py::object buf)
+{
+    PyObject* py_ba;
+    py_ba = buf.ptr();
+    if (PyByteArray_Check(py_ba))
+        return PyByteArray_AsString(py_ba);
+    else if (PyBytes_Check(py_ba))
+        return PyBytes_AsString(py_ba);
+    else
+        throw_ba_exception();
+
+    return NULL;
+}
+
+int get_bytes_or_bytearray_ln(py::object buf)
+{
+    PyObject* py_ba;
+    py_ba = buf.ptr();
+    if (PyByteArray_Check(py_ba))
+        return PyByteArray_Size(py_ba);
+    else if (PyBytes_Check(py_ba))
+        return PyBytes_Size(py_ba);
+    else
+        throw_ba_exception();
+
+    return 0;
+}
+
+void init_rf24(py::module& m)
 {
     m.doc() = "A Python module that wraps all RF24 C++ library's API";
     m.attr("RF24_DRIVER") = RF24_DRIVER;
@@ -68,8 +102,6 @@ PYBIND11_MODULE(rf24, m)
         .export_values();
 
     // ******************** RF24 class  **************************
-    py::options options;
-    options.disable_function_signatures();
     py::class_<RF24Wrapper>(m, "RF24")
 
         // *****************************************************************************
@@ -103,7 +135,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("getCRCLength", &RF24Wrapper::getCRCLength, R"docstr(
-            getCRCLength() -> pyrf24.rf24.rf24_crclength_e
+            getCRCLength() -> pyrf24.rf24_crclength_e
 
             Get the current setting of the radio's CRC Length.
         )docstr")
@@ -119,7 +151,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("getDataRate", &RF24Wrapper::getDataRate, R"docstr(
-            getDataRate() -> pyrf24.rf24.rf24_datarate_e
+            getDataRate() -> pyrf24.rf24_datarate_e
 
             Get the current setting of the radio's Data Rate.
         )docstr")
@@ -139,7 +171,7 @@ PYBIND11_MODULE(rf24, m)
         // *****************************************************************************
 
         .def("getPALevel", &RF24Wrapper::getPALevel, R"docstr(
-            getPALevel() -> pyrf24.rf24.rf24_pa_dbm_e
+            getPALevel() -> pyrf24.rf24_pa_dbm_e
 
             Get the current setting of the radio's Power Amplitude Level.
         )docstr")
@@ -302,7 +334,7 @@ PYBIND11_MODULE(rf24, m)
             Verify the configured pin numbers are indeed valid.
 
             :Returns: `True` if the radio's CE & CSN pins have been configured (using the
-                RF24 class' constructor or :py:meth:`~pyrf24.rf24.RF24.begin()` function)
+                RF24 class' constructor or :py:meth:`~pyrf24.RF24.begin()` function)
         )docstr")
 
         // *****************************************************************************
@@ -348,7 +380,7 @@ PYBIND11_MODULE(rf24, m)
                 Calling this function also clears all status flags and resets the IRQ pin
                 to inactive high.
             .. seealso::
-                :py:meth:`~pyrf24.rf24.RF24.mask_irq()`
+                :py:meth:`~pyrf24.RF24.mask_irq()`
         )docstr")
 
         .def("whatHappened", &RF24Wrapper::what_happened, R"docstr(
@@ -360,7 +392,7 @@ PYBIND11_MODULE(rf24, m)
         .def("available_pipe", &RF24Wrapper::available_pipe, R"docstr(
             available_pipe() -> Tuple[bool, int]
 
-            Similar to :py:meth:`~pyrf24.rf24.RF24.available()`, but additionally returns the pipe
+            Similar to :py:meth:`~pyrf24.RF24.available()`, but additionally returns the pipe
             number that received the next available payload.
 
             :Returns: A 2-tuple in which
@@ -405,9 +437,9 @@ PYBIND11_MODULE(rf24, m)
 
             .. seealso::
 
-                - :py:meth:`~pyrf24.rf24.RF24.set_pa_level()`
-                - :py:attr:`~pyrf24.rf24.RF24.pa_level`
-                - :py:attr:`~pyrf24.rf24.RF24.data_rate`
+                - :py:meth:`~pyrf24.RF24.set_pa_level()`
+                - :py:attr:`~pyrf24.RF24.pa_level`
+                - :py:attr:`~pyrf24.RF24.data_rate`
         )docstr",
              py::arg("level"), py::arg("speed"), py::arg("lna_enable") = true)
 
@@ -603,9 +635,9 @@ PYBIND11_MODULE(rf24, m)
 
             .. seealso::
 
-                - :py:attr:`~pyrf24.rf24.RF24.payload_size`
-                - :py:meth:`~pyrf24.rf24.RF24.get_dynamic_payload_size()`
-                - :py:meth:`~pyrf24.rf24.RF24.available()`
+                - :py:attr:`~pyrf24.RF24.payload_size`
+                - :py:meth:`~pyrf24.RF24.get_dynamic_payload_size()`
+                - :py:meth:`~pyrf24.RF24.available()`
         )docstr",
              py::arg("length") = 0)
 
@@ -631,7 +663,7 @@ PYBIND11_MODULE(rf24, m)
             configured, the ``ce_pin`` and ``csn_pin`` parameters can be omitted.
 
             .. important:: If dynamically configuring the pin numbers, then they must be set using
-                the overloaded :py:meth:`~pyrf24.rf24.RF24.begin()` function.
+                the overloaded :py:meth:`~pyrf24.RF24.begin()` function.
         )docstr",
              py::arg("spi_speed") = 10000000)
 
@@ -666,7 +698,7 @@ PYBIND11_MODULE(rf24, m)
             :Returns: `True` if there is a payload in the radio's RX FIFO, otherwise `False`.
 
             .. seealso::
-                Use :py:meth:`~pyrf24.rf24.RF24.available_pipe()` to get the pipe number that received the
+                Use :py:meth:`~pyrf24.RF24.available_pipe()` to get the pipe number that received the
                 next available payload.
         )docstr")
 
@@ -900,18 +932,18 @@ PYBIND11_MODULE(rf24, m)
 
             .. hint::
 
-                1. Be sure to call :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()` before
-                   setting :py:attr:`~pyrf24.rf24.RF24.listen` to `True`.
-                2. Do not call :py:meth:`~pyrf24.rf24.RF24.write()` while in RX mode, without
-                   first setting :py:attr:`~pyrf24.rf24.RF24.listen` to `False`.
-                3. Call :py:meth:`~pyrf24.rf24.RF24.available()` to check for incoming traffic,
-                   and use :py:meth:`~pyrf24.rf24.RF24.read()` to get it.
+                1. Be sure to call :py:meth:`~pyrf24.RF24.open_rx_pipe()` before
+                   setting :py:attr:`~pyrf24.RF24.listen` to `True`.
+                2. Do not call :py:meth:`~pyrf24.RF24.write()` while in RX mode, without
+                   first setting :py:attr:`~pyrf24.RF24.listen` to `False`.
+                3. Call :py:meth:`~pyrf24.RF24.available()` to check for incoming traffic,
+                   and use :py:meth:`~pyrf24.RF24.read()` to get it.
 
             .. important::
-                If there was a call to :py:meth:`~pyrf24.rf24.RF24.open_rx_pipe()`
+                If there was a call to :py:meth:`~pyrf24.RF24.open_rx_pipe()`
                 about pipe 0 prior to setting this attribute to `False`, then this attribute
                 will re-write the address that was last set to RX pipe 0.
-                This is because :py:meth:`~pyrf24.rf24.RF24.open_tx_pipe()`
+                This is because :py:meth:`~pyrf24.RF24.open_tx_pipe()`
                 will overwrite the address to RX pipe 0 for proper auto-ack
                 functionality.
             .. note::
@@ -1011,7 +1043,7 @@ PYBIND11_MODULE(rf24, m)
 
         .def_property_readonly("is_chip_connected", &RF24Wrapper::isChipConnected, R"docstr(
             Check if the SPI bus is working with the radio. This read-only `bool` attribute assumes that
-            :py:meth:`~pyrf24.rf24.RF24.begin()` returned `True`.
+            :py:meth:`~pyrf24.RF24.begin()` returned `True`.
         )docstr")
 
         .def("isChipConnected", &RF24Wrapper::isChipConnected, R"docstr(
