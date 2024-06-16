@@ -611,7 +611,7 @@ diagrams). The following table shows the default pins used in all the
 <td><p>GPIO9 (MISO)</p></td>
 </tr>
 <tr class="row-odd"><td><p>IRQ</p></td>
-<td><p>GPIO12</p></td>
+<td><p>GPIO24</p></td>
 </tr>
 </tbody>
 </table>
@@ -748,7 +748,7 @@ layers of the RF24 stack. For a list of supported options, look at the script in
 <a class="reference external" href="https://github.com/nRF24/pyRF24/blob/main/cmake/using_flags.cmake">this repository’s cmake/using_flags.cmake</a>.</p>
 <p>The following value will turn on debug output for the RF24Mesh and RF24Network
 classes (respectively).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DMESH_DEBUG=ON -DSERIAL_DEBUG=ON&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF24MESH_DEBUG=ON -DRF24NETWORK_DEBUG=ON&quot;</span>
 </code></pre></div>
 </div>
 </div>
