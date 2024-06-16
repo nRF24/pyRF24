@@ -41,7 +41,7 @@ diagrams). The following table shows the default pins used in all the
     SCK, "GPIO11 (SCK)"
     MOSI, "GPIO10 (MOSI)"
     MISO, "GPIO9 (MISO)"
-    IRQ, GPIO12
+    IRQ, GPIO24
 
 The IRQ pin is not typically connected, and it is only used in the interrupt_configure example.
 
@@ -196,7 +196,7 @@ then it is necessary to use an environment variable containing additional argume
 
     .. code-block:: bash
 
-        export CMAKE_ARGS="-DMESH_DEBUG=ON -DSERIAL_DEBUG=ON"
+        export CMAKE_ARGS="-DRF24MESH_DEBUG=ON -DRF24NETWORK_DEBUG=ON"
 
 Then just build and install the package from source as usual.
 
