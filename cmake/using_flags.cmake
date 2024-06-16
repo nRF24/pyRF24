@@ -33,8 +33,8 @@ option(DISABLE_DYNAMIC_PAYLOADS "force usage of static payload size for RF24Netw
 
 # ## RF24Mesh specific options
 option(MESH_NOMASTER "exclude compiling code that is strictly for master nodes for RF24Mesh lib" OFF)
-option(MESH_DEBUG "enable/disable debugging output for RF24Mesh lib" OFF)
-option(MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh lib" OFF)
+option(RF24MESH_DEBUG "enable/disable debugging output for RF24Mesh lib" OFF)
+option(RF24MESH_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Mesh lib" OFF)
 
 # ### options with default values:
 
@@ -120,14 +120,14 @@ function(apply_flags target)
         target_compile_definitions(${target} PUBLIC MESH_NOMASTER)
     endif()
 
-    if(MESH_DEBUG)
-        message(STATUS "MESH_DEBUG asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC MESH_DEBUG)
+    if(RF24MESH_DEBUG)
+        message(STATUS "RF24MESH_DEBUG asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24MESH_DEBUG)
     endif()
 
-    if(MESH_DEBUG_MINIMAL)
-        message(STATUS "MESH_DEBUG_MINIMAL asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC MESH_DEBUG_MINIMAL)
+    if(RF24MESH_DEBUG_MINIMAL)
+        message(STATUS "RF24MESH_DEBUG_MINIMAL asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24MESH_DEBUG_MINIMAL)
     endif()
 
     # for the following, we let the default be configured in source code
