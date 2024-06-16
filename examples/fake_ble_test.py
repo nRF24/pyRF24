@@ -196,7 +196,7 @@ def set_role():
         slave(*[int(x) for x in user_input[1:2]])
         return True
     if user_input[0].upper().startswith("Q"):
-        ble.power = False
+        radio.power = False
         return False
     print(user_input[0], "is an unrecognized input. Please try again.")
     return set_role()
@@ -208,7 +208,7 @@ if __name__ == "__main__":
             pass  # continue example until 'Q' is entered
     except KeyboardInterrupt:
         print(" Keyboard Interrupt detected. Powering down radio...")
-        ble.power = False
+        radio.power = False
 else:
     print("    Run master() to broadcast the device name, pa_level, & battery charge")
     print("    Run send_temp() to broadcast the device name & a temperature")
