@@ -4,17 +4,17 @@
 # option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
 
 # ## RF24Network specific options
-option(SERIAL_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
-option(SERIAL_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Network lib" OFF)
-option(SERIAL_DEBUG_ROUTING
+option(RF24NETWORK_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
+option(RF24NETWORK_DEBUG_MINIMAL "enable/disable minimal debugging output for RF24Network lib" OFF)
+option(RF24NETWORK_DEBUG_ROUTING
     "enable/disable debugging output related to transmission routing for RF24Network lib"
     OFF
 )
-option(SERIAL_DEBUG_FRAGMENTATION
+option(RF24NETWORK_DEBUG_FRAGMENTATION
     "enable/disable debugging output related to message fragmentation for RF24Network lib"
     OFF
 )
-option(SERIAL_DEBUG_FRAGMENTATION_L2
+option(RF24NETWORK_DEBUG_FRAGMENTATION_L2
     "enable/disable debugging output related to fragmented messages' transmission success for RF24Network lib"
     OFF
 )
@@ -73,31 +73,29 @@ function(apply_flags target)
     target_compile_definitions(${target} PUBLIC RF24_DRIVER="${RF24_DRIVER}")
 
     # apply RF24Network flags to cpp_rf24_network target
-    if(SERIAL_DEBUG)
-        # this flag also applies to RF24 lib because
-        # the samme macro name is used to enable debug output in RF24
-        message(STATUS "SERIAL_DEBUG asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG)
+    if(RF24NETWORK_DEBUG)
+        message(STATUS "RF24NETWORK_DEBUG asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24NETWORK_DEBUG)
     endif()
 
-    if(SERIAL_DEBUG_MINIMAL)
-        message(STATUS "SERIAL_DEBUG_MINIMAL asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG_MINIMAL)
+    if(RF24NETWORK_DEBUG_MINIMAL)
+        message(STATUS "RF24NETWORK_DEBUG_MINIMAL asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24NETWORK_DEBUG_MINIMAL)
     endif()
 
-    if(SERIAL_DEBUG_ROUTING)
-        message(STATUS "SERIAL_DEBUG_ROUTING asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG_ROUTING)
+    if(RF24NETWORK_DEBUG_ROUTING)
+        message(STATUS "RF24NETWORK_DEBUG_ROUTING asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24NETWORK_DEBUG_ROUTING)
     endif()
 
-    if(SERIAL_DEBUG_FRAGMENTATION)
-        message(STATUS "SERIAL_DEBUG_FRAGMENTATION asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG_FRAGMENTATION)
+    if(RF24NETWORK_DEBUG_FRAGMENTATION)
+        message(STATUS "RF24NETWORK_DEBUG_FRAGMENTATION asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24NETWORK_DEBUG_FRAGMENTATION)
     endif()
 
-    if(SERIAL_DEBUG_FRAGMENTATION_L2)
-        message(STATUS "SERIAL_DEBUG_FRAGMENTATION_L2 asserted for ${target}")
-        target_compile_definitions(${target} PUBLIC SERIAL_DEBUG_FRAGMENTATION_L2)
+    if(RF24NETWORK_DEBUG_FRAGMENTATION_L2)
+        message(STATUS "RF24NETWORK_DEBUG_FRAGMENTATION_L2 asserted for ${target}")
+        target_compile_definitions(${target} PUBLIC RF24NETWORK_DEBUG_FRAGMENTATION_L2)
     endif()
 
     if(DISABLE_FRAGMENTATION)
