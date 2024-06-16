@@ -833,8 +833,7 @@
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using the RF24 class.</span>
 
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
@@ -847,12 +846,11 @@
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
 <span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -1092,8 +1090,7 @@
 <span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">134</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using the library to transmit</span>
 <span class="sd">and retrieve custom automatic acknowledgment payloads.</span>
 
@@ -1106,12 +1103,11 @@
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
 <span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -1393,8 +1389,7 @@
 <span class="normal">155</span>
 <span class="normal">156</span>
 <span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using the RF24 class to transmit and respond with</span>
 <span class="sd">acknowledgment (ACK) transmissions. Notice that the auto-ack feature is</span>
 <span class="sd">enabled, but this example doesn&#39;t use automatic ACK payloads because automatic</span>
@@ -1411,12 +1406,11 @@
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
 <span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -1677,8 +1671,7 @@
 <span class="normal">114</span>
 <span class="normal">115</span>
 <span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of using 1 nRF24L01 to receive data from up to 6 other</span>
 <span class="sd">transceivers. This technique is called &quot;multiceiver&quot; in the datasheet.</span>
 
@@ -1692,12 +1685,11 @@
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
 <span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -1935,8 +1927,7 @@
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example of library usage for streaming multiple payloads.</span>
 
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
@@ -1948,12 +1939,11 @@
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
-<span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
+<span class="c1"># their own pin numbering.</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -2326,8 +2316,7 @@
 <span class="normal">247</span>
 <span class="normal">248</span>
 <span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">250</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simple example of detecting (and verifying) the IRQ (interrupt) pin on the</span>
 <span class="sd">nRF24L01</span>
 
@@ -2360,12 +2349,11 @@
 
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
 <span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -2753,8 +2741,7 @@
 <span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This example uses the nRF24L01 as a &#39;fake&#39; BLE Beacon</span>
 
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
@@ -2776,12 +2763,11 @@
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
-<span class="c1"># See https://github.com/TMRh20/RF24/blob/master/pyRF24/readme.md</span>
-<span class="c1"># Radio CE Pin, CSN Pin, SPI Speed</span>
-<span class="c1"># CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
 <span class="c1"># their own pin numbering</span>
-<span class="c1"># CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="c1"># ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -2993,7 +2979,13 @@
 <span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span>
-<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest possible example of using RF24Network.</span>
 
@@ -3009,6 +3001,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
+<span class="c1">########### USER CONFIGURATION ###########</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
+<span class="c1"># their own pin numbering</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -3113,7 +3111,13 @@
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest possible example of using RF24Network</span>
 
@@ -3128,6 +3132,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
+<span class="c1">########### USER CONFIGURATION ###########</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
+<span class="c1"># their own pin numbering</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -3246,7 +3256,13 @@
 <span class="normal">71</span>
 <span class="normal">72</span>
 <span class="normal">73</span>
-<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplest RF24Mesh example that transmits a time stamp (in milliseconds) 1 per second.</span>
 
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
@@ -3268,6 +3284,12 @@
     <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">)</span>
 
 
+<span class="c1">########### USER CONFIGURATION ###########</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
+<span class="c1"># their own pin numbering</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -3365,7 +3387,13 @@
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
-<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example of using the rf24_mesh module to operate the nRF24L01 transceiver as</span>
 <span class="sd">a Mesh network master node.</span>
 
@@ -3376,6 +3404,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
+<span class="c1">########### USER CONFIGURATION ###########</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
+<span class="c1"># their own pin numbering</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
@@ -3571,7 +3605,13 @@
 <span class="normal">157</span>
 <span class="normal">158</span>
 <span class="normal">159</span>
-<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">An all-purpose example of using the nRF24L01 transceiver in a network of nodes.</span>
 
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
@@ -3592,6 +3632,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
+<span class="c1">########### USER CONFIGURATION ###########</span>
+<span class="c1"># CE Pin uses GPIO number with RPi and SPIDEV drivers, other drivers use</span>
+<span class="c1"># their own pin numbering</span>
+<span class="c1"># CS Pin corresponds the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="c1"># ie: radio = RF24(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;)</span>
+<span class="c1"># where CS pin for /dev/spidev1.0 is 10, /dev/spidev1.1 is 11 etc...</span>
 <span class="n">CSN_PIN</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># aka CE0 on SPI bus 0: /dev/spidev0.0</span>
 <span class="k">if</span> <span class="n">RF24_DRIVER</span> <span class="o">==</span> <span class="s2">&quot;MRAA&quot;</span><span class="p">:</span>
     <span class="n">CE_PIN</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># for GPIO22</span>
