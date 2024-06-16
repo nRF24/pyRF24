@@ -10,9 +10,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyrf24"
-description = "A python package for the wrapping nRF24 related C++ libraries."
+description = "A python package wrapping the nRF24 C++ libraries."
 readme = "README.rst"
-keywords = ["nrf24l01", "nRF24L01+", "raspberry", "pi", "driver", "radio", "transceiver"]
+keywords = [
+    "nrf24l01",
+    "nRF24L01+",
+    "raspberry",
+    "pi",
+    "driver",
+    "radio",
+    "transceiver",
+    "RF24",
+    "RF24Network",
+    "RF24Mesh",
+]
 license = {text = "GPLv2"}
 authors = [
     { name = "Brendan Doherty", email = "2bndy5@gmail.com" },
