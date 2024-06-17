@@ -12,9 +12,8 @@ updates:
     ignore:
       - dependency-name: "pybind11"
     groups:
-      submodules:
-        patterns:
-          - "RF24*"
+      RF24-submodules:
+        patterns: ["RF24*"]
   - package-ecosystem: "github-actions"
     # Workflow files stored in the
     # default location of `.github/workflows`
@@ -22,6 +21,5 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      actions:
-        patterns:
-          - "*"
+      github-actions:
+        patterns: ["*"]
