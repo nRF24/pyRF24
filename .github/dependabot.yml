@@ -12,7 +12,7 @@ updates:
     ignore:
       - dependency-name: "pybind11"
     groups:
-      actions:
+      RF24-submodules:
         patterns:
           - "RF24*"
   - package-ecosystem: "github-actions"
@@ -22,6 +22,6 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      actions:
+      github-actions:
         patterns:
           - "*"
