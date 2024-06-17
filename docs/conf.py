@@ -93,12 +93,9 @@ social_cards = {
 html_theme = "sphinx_immaterial"
 html_theme_options = {
     "features": [
-        # "navigation.expand",
-        "navigation.tabs",
-        # "toc.integrate",
-        # "navigation.sections",
         "navigation.instant",
-        # "header.autohide",
+        "toc.follow",
+        "toc.sticky",
         "navigation.top",
         # "search.highlight",
         "search.share",
@@ -130,6 +127,7 @@ html_theme_options = {
     "repo_name": "pyRF24",
     # If False, expand all TOC entries
     "globaltoc_collapse": False,
+    "toc_title_is_page_title": True,
 }
 
 # turn off some features specific to sphinx-immaterial theme
