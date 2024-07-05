@@ -281,22 +281,51 @@ void init_rf24mesh(py::module& m)
 
         // *****************************************************************************
 
-        .def("release_address", &RF24MeshWrapper::releaseAddress, R"docstr(
-            release_address() -> bool
+        .def("release_address", static_cast<bool (RF24MeshWrapper::*)()>(&RF24MeshWrapper::releaseAddress), R"docstr(
+            release_address() -> bool \
+            release_address(address: int) -> bool
 
-            Use this function to manually expire a leased `Logical Address <logical_address>` from the mesh network's master node.
+            Use this function from a child node (without a parameter) to manually expire a leased `Logical Address <logical_address>`
+            from the mesh network's master node.
 
             .. tip:: This function allows re-use of the assigned address for other mesh network nodes.
                 Call this function from mesh network nodes that are going offline (or to sleep).
 
-            :Returns: `True` if the mesh network's master node received the request to de-allocate
-                the assigned address. `False` means the wireless transaction did not complete.
+            :Returns:
+                - `True` if the mesh network's master node received the request to de-allocate
+                  the assigned address.
+                - `False` means the wireless transaction did not complete.
         )docstr")
 
-        .def("releaseAddress", &RF24MeshWrapper::releaseAddress, R"docstr(
+        .def("releaseAddress", static_cast<bool (RF24MeshWrapper::*)()>(&RF24MeshWrapper::releaseAddress), R"docstr(
             releaseAddress() -> bool
         )docstr")
 
+    // *****************************************************************************
+#ifndef MESH_NOMASTER
+
+        .def("release_address", static_cast<bool (RF24MeshWrapper::*)(uint16_t)>(&RF24MeshWrapper::releaseAddress), R"docstr(
+            When called from the master node, this function takes a parameter and returns
+            without using wireless transactions.
+
+            .. hint::
+                This overloaded function signature is specific to master nodes,
+                so network administrators can manage assigned `Logical Addresses <logical_address>`
+                without notifying the nodes that might be appropriating them.
+
+            :param address: The `Logical Address <logical_address>` to release from any mesh node.
+            :Returns:
+                - `True` if successfully released the specified ``address``.
+                - `False` if the specified ``address`` was not assigned to any child node.
+        )docstr",
+             py::arg("address"))
+
+        .def("releaseAddress", static_cast<bool (RF24MeshWrapper::*)(uint16_t)>(&RF24MeshWrapper::releaseAddress), R"docstr(
+            releaseAddress(address: int) -> bool
+        )docstr",
+             py::arg("address"))
+
+#endif
         // *****************************************************************************
 
         .def("get_address", &RF24MeshWrapper::getAddress, R"docstr(
