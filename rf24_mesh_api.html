@@ -1121,7 +1121,10 @@ node not connected to the mesh network. This default address is <code class="doc
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight py" id="pyrf24.RF24Mesh.release_address">
 <span class="sig-name descname"><span class="pre">release_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span></span><a class="headerlink" href="#pyrf24.RF24Mesh.release_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use this function to manually expire a leased <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a> from the mesh network’s master node.</p>
+<dt class="sig sig-object highlight py">
+<span class="sig-name descname"><span class="pre">release_address</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pyrf24.RF24Mesh.release_address.address" title="pyrf24.RF24Mesh.release_address.address (Python parameter)"><span class="n"><span class="pre">address</span></span></a><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span></em></span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span></span></dt>
+<dd><p>Use this function from a child node (without a parameter) to manually expire a leased <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a>
+from the mesh network’s master node.</p>
 <div class="tip admonition">
 <p class="admonition-title">Tip</p>
 <p>This function allows re-use of the assigned address for other mesh network nodes.
@@ -1129,8 +1132,33 @@ Call this function from mesh network nodes that are going offline (or to sleep).
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the mesh network’s master node received the request to de-allocate
-the assigned address. <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a> means the wireless transaction did not complete.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if the mesh network’s master node received the request to de-allocate
+the assigned address.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a> means the wireless transaction did not complete.</p></li>
+</ul>
+</dd>
+</dl>
+<p>When called from the master node, this function takes a parameter and returns
+without using wireless transactions.</p>
+<div class="hint admonition">
+<p class="admonition-title">Hint</p>
+<p>This overloaded function signature is specific to master nodes,
+so network administrators can manage assigned <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Addresses</span></a>
+without notifying the nodes that might be appropriating them.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt><span class="n sig-name">address</span><span class="p">:</span><span class="w">   </span><span class="n"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></span></span></dt><dd><p>The <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a> to release from any mesh node.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if successfully released the specified <code class="docutils literal notranslate"><span class="pre">address</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a> if the specified <code class="docutils literal notranslate"><span class="pre">address</span></code> was not assigned to any child node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
