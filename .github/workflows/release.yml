@@ -7,6 +7,8 @@ on:
 
 jobs:
   upload-pypi:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
@@ -35,7 +37,7 @@ jobs:
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.21.2
         env:
-          CIBW_ARCHS_LINUX: aarch64 native
+          CIBW_ARCHS_LINUX: aarch64 native armv7l
           CIBW_SKIP: cp36* pp* *musllinux*
 
       - name: Move cross-compiled wheels to dist folder
@@ -57,15 +59,11 @@ jobs:
 
       - name: Publish package (to TestPyPI)
         if: github.event_name == 'workflow_dispatch'
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: twine upload --repository testpypi dist/*
+        uses: pypa/gh-action-pypi-publish@v1.10.3
+        with:
+          repository-url: https://test.pypi.org/legacy/
 
       - name: Publish to PyPi
         # only upload distributions to PyPi when triggered by a published release
         if: github.event_name == 'release'
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.pypi_token }}
-        run: twine upload dist/*
+        uses: pypa/gh-action-pypi-publish@v1.10.3
