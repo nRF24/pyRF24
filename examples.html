@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.642b156d87fadaadd.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.6b5b4a2f8a99502f9.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -59,9 +59,9 @@
       
         <meta  name="twitter:description"  content="A python package that wraps the RF24, RF24Network, and RF24Mesh C++ libraries." >
       
-        <meta  property="og:image"  content="https://nrf24.github.io/pyRF24/_static/social_cards/examples-83c430139d139564.png" >
+        <meta  property="og:image"  content="https://nrf24.github.io/pyRF24/_static/social_cards/examples-d9a6e6ab778f1b91.png" >
       
-        <meta  name="twitter:image"  content="https://nrf24.github.io/pyRF24/_static/social_cards/examples-83c430139d139564.png" >
+        <meta  name="twitter:image"  content="https://nrf24.github.io/pyRF24/_static/social_cards/examples-d9a6e6ab778f1b91.png" >
       
         <meta  title="Examples" >
       
@@ -782,9 +782,9 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -845,7 +845,7 @@
 <span class="c1"># radio.print_pretty_details()</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits an incrementing float every second&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ensures the nRF24L01 is in TX mode</span>
 
@@ -869,7 +869,7 @@
         <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span>
 <span class="sd">    after 6 seconds of no received transmission.&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># put radio into RX mode and power up</span>
@@ -1040,8 +1040,8 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -1101,7 +1101,7 @@
 <span class="c1"># radio.print_pretty_details()</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>  <span class="c1"># count = 5 will only transmit 5 packets</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits a payload every second and prints the ACK payload&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># put radio in TX mode</span>
 
@@ -1134,7 +1134,7 @@
         <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints the received value and sends an ACK payload&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># put radio into RX mode, power it up</span>
 
@@ -1342,9 +1342,9 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -1404,7 +1404,7 @@
 <span class="n">payload</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits a message and an incrementing integer every second&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># ensures the nRF24L01 is in TX mode</span>
 
@@ -1450,7 +1450,7 @@
         <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span>
 <span class="sd">    after 6 seconds of no received transmission&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># put radio into RX mode and power up</span>
@@ -1621,9 +1621,9 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -1672,7 +1672,7 @@
 <span class="n">radio</span><span class="o">.</span><span class="n">print_pretty_details</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">node_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">(</span><span class="n">node_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;start transmitting to the base station.</span>
 
 <span class="sd">    :param int node_number: the node&#39;s identifying index (from the</span>
@@ -1709,7 +1709,7 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># slow down the test for readability</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Use the nRF24L01 as a base station for listening to all nodes&quot;&quot;&quot;</span>
     <span class="c1"># write the addresses to all pipes.</span>
     <span class="k">for</span> <span class="n">pipe_n</span><span class="p">,</span> <span class="n">addr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">addresses</span><span class="p">):</span>
@@ -1876,8 +1876,8 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -1927,7 +1927,7 @@
 <span class="n">radio</span><span class="o">.</span><span class="n">print_pretty_details</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">make_buffer</span><span class="p">(</span><span class="n">buf_iter</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_buffer</span><span class="p">(</span><span class="n">buf_iter</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;return a list of payloads&quot;&quot;&quot;</span>
     <span class="c1"># we&#39;ll use `size` for the number of payloads in the list and the</span>
     <span class="c1"># payloads&#39; length</span>
@@ -1941,7 +1941,7 @@
     <span class="k">return</span> <span class="n">buff</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Uses all 3 levels of the TX FIFO `RF24.writeFast()`&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting size to 6;&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="s2">&quot;is not allowed for this test.&quot;</span><span class="p">)</span>
@@ -1978,7 +1978,7 @@
         <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Stops listening after a `timeout` with no response&quot;&quot;&quot;</span>
     <span class="c1"># set address of TX node into an RX pipe. NOTE you MUST specify</span>
 
@@ -2266,17 +2266,17 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">gpiod</span>
-    <span class="kn">from</span> <span class="nn">gpiod.line</span> <span class="kn">import</span> <span class="n">Edge</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">gpiod</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gpiod.line</span><span class="w"> </span><span class="kn">import</span> <span class="n">Edge</span>
 <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
         <span class="s2">&quot;This script requires gpiod installed for observing the IRQ pin. Please run</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    pip install gpiod</span><span class="se">\n\n</span><span class="s2">More details at https://pypi.org/project/gpiod/&quot;</span>
-    <span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
+    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
 <span class="k">try</span><span class="p">:</span>  <span class="c1"># try RPi5 gpio chip first</span>
     <span class="n">chip_path</span> <span class="o">=</span> <span class="s2">&quot;/dev/gpiochip4&quot;</span>
@@ -2352,7 +2352,7 @@
 <span class="n">ack_payloads</span> <span class="o">=</span> <span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Yak &quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;Back&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot; ACK&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">interrupt_handler</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">interrupt_handler</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function is called when IRQ pin is detected active LOW&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">IRQ pin went active LOW.&quot;</span><span class="p">)</span>
     <span class="n">tx_ds</span><span class="p">,</span> <span class="n">tx_df</span><span class="p">,</span> <span class="n">rx_dr</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">what_happened</span><span class="p">()</span>  <span class="c1"># update IRQ status flags</span>
@@ -2373,7 +2373,7 @@
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_wait_for_irq</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_wait_for_irq</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wait till IRQ_PIN goes active (LOW).</span>
 <span class="sd">    IRQ pin is LOW when activated. Otherwise it is always HIGH</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2388,7 +2388,7 @@
     <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits 4 times and reports results</span>
 
 <span class="sd">    1. successfully receive ACK payload first</span>
@@ -2441,7 +2441,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Complete RX FIFO:&quot;</span><span class="p">,</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># will listen for 6 seconds before timing out</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># will listen for 6 seconds before timing out</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Only listen for 3 payload from the master node&quot;&quot;&quot;</span>
     <span class="c1"># the &quot;data ready&quot; event will trigger in RX mode</span>
     <span class="c1"># the &quot;data sent&quot; or &quot;data fail&quot; events will trigger when we</span>
@@ -2465,7 +2465,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complete RX FIFO:&quot;</span><span class="p">,</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">set_role</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_role</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the role using stdin stream. Timeout arg for slave() can be</span>
 <span class="sd">    specified using a space delimiter (e.g. &#39;R 10&#39; calls `slave(10)`)</span>
 
@@ -2690,8 +2690,8 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">RF24</span><span class="p">,</span>
     <span class="n">RF24_PA_LOW</span><span class="p">,</span>
     <span class="n">RF24_DRIVER</span><span class="p">,</span>
@@ -2739,7 +2739,7 @@
 <span class="n">radio</span><span class="o">.</span><span class="n">pa_level</span> <span class="o">=</span> <span class="n">RF24_PA_LOW</span>
 
 
-<span class="k">def</span> <span class="nf">_prompt</span><span class="p">(</span><span class="n">remaining</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_prompt</span><span class="p">(</span><span class="n">remaining</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">remaining</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">remaining</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">remaining</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span> <span class="s2">&quot;advertisements left to go!&quot;</span><span class="p">)</span>
@@ -2753,7 +2753,7 @@
 <span class="n">battery_service</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="mi">85</span>
 
 
-<span class="k">def</span> <span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">master</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends out the device information.&quot;&quot;&quot;</span>
     <span class="c1"># using the &quot;with&quot; statement is highly recommended if the nRF24L01 is</span>
     <span class="c1"># to be used for more than a BLE configuration</span>
@@ -2783,7 +2783,7 @@
 <span class="n">temperature_service</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="mf">42.0</span>
 
 
-<span class="k">def</span> <span class="nf">send_temp</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">send_temp</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends out a fake temperature.&quot;&quot;&quot;</span>
     <span class="n">ble</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;nRF24L01&quot;</span>
     <span class="nb">print</span><span class="p">(</span>
@@ -2812,7 +2812,7 @@
 <span class="n">url_service</span><span class="o">.</span><span class="n">pa_level_at_1_meter</span> <span class="o">=</span> <span class="o">-</span><span class="mi">45</span>  <span class="c1"># defaults to -25 dBm</span>
 
 
-<span class="k">def</span> <span class="nf">send_url</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">send_url</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends out a URL.&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="s2">&quot;available bytes in next payload:&quot;</span><span class="p">,</span>
@@ -2829,7 +2829,7 @@
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slave</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;read and decipher BLE payloads for `timeout` seconds.&quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># ensure radio is in RX mode</span>
     <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
@@ -2938,9 +2938,9 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24NetworkHeader</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24NetworkHeader</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -3070,8 +3070,8 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -3211,17 +3211,17 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">MESH_DEFAULT_ADDRESS</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">MESH_DEFAULT_ADDRESS</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">millis</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">millis</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;:Returns: Delta time since started example in milliseconds. Wraps value around</span>
 <span class="sd">    the width of a ``long`` integer.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">)</span>
@@ -3343,7 +3343,7 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24Network</span><span class="p">,</span> <span class="n">RF24Mesh</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># print example name</span>
 
@@ -3560,9 +3560,9 @@
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">from</span> <span class="nn">pyrf24</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">RF24</span><span class="p">,</span>
     <span class="n">RF24Network</span><span class="p">,</span>
     <span class="n">RF24NetworkHeader</span><span class="p">,</span>  <span class="c1"># only need to construct frame headers for RF24Network.write()</span>
@@ -3652,7 +3652,7 @@
 <span class="n">packets_sent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">idle</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">strict_timeout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">idle</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">strict_timeout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Listen for any payloads and print the transaction</span>
 
 <span class="sd">    :param int timeout: The number of seconds to wait (with no transmission)</span>
@@ -3682,7 +3682,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span> <span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">payload_len</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">emit</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">emit</span><span class="p">(</span>
     <span class="n">node</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">THIS_NODE</span><span class="p">,</span> <span class="n">frag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transmits 1 (or 2) integers or a large buffer</span>
@@ -3789,7 +3789,7 @@
       <div class="md-copyright">
   
     <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2024, TMRh20 Avamander 2bndy5.
+        &#169; Copyright 2025, TMRh20 Avamander 2bndy5.
         
     </div>
   
