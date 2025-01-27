@@ -28,7 +28,6 @@ endif()
 
 # ## Build python bindings for RF24 stack into 1 binary
 pybind11_add_module(pyrf24
-    THIN_LTO
     RF24/RF24.cpp
     ${RF24_DRIVER_SOURCES}
     RF24Network/RF24Network.cpp
