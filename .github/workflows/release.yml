@@ -13,6 +13,7 @@ jobs:
       matrix:
         platform: [native, aarch64, armv7l]
         python: [cp37, cp38, cp39, cp310, cp311, cp312, cp313]
+        tag: [manylinux, musllinux]
     steps:
       - name: Checkout Current Repo
         uses: actions/checkout@v4
@@ -44,7 +45,7 @@ jobs:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
           CIBW_SKIP: pp* *ppc64le *s390x
           CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: '${{ matrix.python }}*'
+          CIBW_BUILD: '${{ matrix.python }}*${{ matrix.tag }}*'
 
       - name: Move cross-compiled wheels to dist folder
         run: |
@@ -53,7 +54,7 @@ jobs:
 
       - name: build source distributable wheel
         # only need to do this once, preferably on a native build.
-        if: matrix.platform == 'native' && matrix.python == 'cp313'
+        if: matrix.platform == 'native' && matrix.python == 'cp313' && matrix.tag == 'manylinux'
         # sdist for non-supported platforms will serve as a stub lib install
         run: |
           python -m pip install build
@@ -62,7 +63,7 @@ jobs:
       - name: Save distributable wheels as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}
+          name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
           path: ${{ github.workspace }}/dist
 
   upload-pypi:
