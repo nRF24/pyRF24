@@ -39,6 +39,7 @@ jobs:
         env:
           CIBW_ARCHS_LINUX: aarch64 native armv7l
           CIBW_SKIP: cp36* pp* *ppc64le *s390x
+          CIBW_BUILD_VERBOSITY: 1
 
       - name: Move cross-compiled wheels to dist folder
         run: |
