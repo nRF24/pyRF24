@@ -37,7 +37,12 @@ jobs:
         if: matrix.platform != 'native'
         uses: docker/setup-qemu-action@v3
         with:
-          cache-image: false
+          # cached image is enabled by default.
+          # This option to disable caching doesn't exist before docker/setup-qemu-action@v3.3
+          # cache-image: false
+
+          # NOTE: the default tag `tonistiigi/binfmt:latest` is old and uses qemu v6.2.0
+          # See also https://github.com/tonistiigi/binfmt/issues/215
           image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Build wheels with cibuildwheels
