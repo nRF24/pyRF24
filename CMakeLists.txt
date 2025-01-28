@@ -7,8 +7,6 @@ if(SKBUILD)
     message(STATUS "This project is being built using scikit-build & pybind11")
 endif()
 
-set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
-
 include(cmake/using_flags.cmake)
 
 add_subdirectory(pybind11)

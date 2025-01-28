@@ -6,37 +6,52 @@ on:
     types: [published]
 
 jobs:
-  upload-pypi:
-    permissions:
-      id-token: write
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [native, aarch64, armv7l]
+        python: [cp37, cp38, cp39, cp310, cp311, cp312, cp313]
+        tag: [manylinux, musllinux]
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-
       - name: Checkout Current Repo
         uses: actions/checkout@v4
         with:
           submodules: true
           fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
       - name: Install dependencies
+        if: matrix.platform == 'native'
         run: |
           sudo apt install python3-dev
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
-          python3 -m pip install twine
 
       - name: Set up QEMU
+        if: matrix.platform != 'native'
         uses: docker/setup-qemu-action@v3
+        with:
+          # cached image is enabled by default.
+          # This option to disable caching doesn't exist before docker/setup-qemu-action@v3.3
+          # cache-image: false
+
+          # NOTE: the default tag `tonistiigi/binfmt:latest` is old and uses qemu v6.2.0
+          # See also https://github.com/tonistiigi/binfmt/issues/215
+          image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.22.0
         env:
-          CIBW_ARCHS_LINUX: aarch64 native armv7l
-          CIBW_SKIP: cp36* pp* *ppc64le *s390x
+          CIBW_ARCHS_LINUX: ${{ matrix.platform }}
+          CIBW_SKIP: pp* *ppc64le *s390x
+          CIBW_BUILD_VERBOSITY: 1
+          CIBW_BUILD: '${{ matrix.python }}*${{ matrix.tag }}*'
 
       - name: Move cross-compiled wheels to dist folder
         run: |
@@ -44,7 +59,9 @@ jobs:
           mv ./wheelhouse/*.whl ${{ github.workspace }}/dist/
 
       - name: build source distributable wheel
-        # sdist for non-supprted platforms will serve as a stub lib install
+        # only need to do this once, preferably on a native build.
+        if: matrix.platform == 'native' && matrix.python == 'cp313' && matrix.tag == 'manylinux'
+        # sdist for non-supported platforms will serve as a stub lib install
         run: |
           python -m pip install build
           python -m build -s
@@ -52,11 +69,36 @@ jobs:
       - name: Save distributable wheels as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: "pyRF24_pkg_dist"
+          name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
           path: ${{ github.workspace }}/dist
 
+  upload-pypi:
+    needs: [build]
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Current Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: pyRF24_pkg_dist_*
+          path: dist
+          merge-multiple: true
+
+      - name: Display uploaded distributions
+        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
+        run: ls -r dist/
+
       - name: Publish package (to TestPyPI)
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         uses: pypa/gh-action-pypi-publish@v1.12.3
         with:
           repository-url: https://test.pypi.org/legacy/
