@@ -1870,7 +1870,10 @@
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example of library usage for streaming multiple payloads.</span>
 
 <span class="sd">See documentation at https://nRF24.github.io/pyRF24</span>
@@ -1971,6 +1974,9 @@
                     <span class="n">radio</span><span class="o">.</span><span class="n">flush_tx</span><span class="p">()</span>  <span class="c1"># discard all payloads in TX FIFO</span>
                     <span class="k">break</span>
             <span class="n">buf_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">radio</span><span class="o">.</span><span class="n">failure_detected</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">radio</span><span class="o">.</span><span class="n">tx_standby</span><span class="p">()</span>
+        <span class="n">failures</span> <span class="o">+=</span> <span class="n">radio</span><span class="o">.</span><span class="n">failure_detected</span>
         <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># end timer</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Transmission took </span><span class="si">{</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="si">}</span><span class="s2"> ms with&quot;</span><span class="p">,</span>
