@@ -63,3 +63,7 @@ version_scheme = "no-guess-dev"
 [tool.mypy]
 show_error_codes = true
 pretty = true
+
+[tool.ruff]
+# In addition to the standard set of exclusions, omit all tests, plus a specific file.
+extend-exclude = ["pybind11", "RF24", "RF24Network", "RF24Mesh"]

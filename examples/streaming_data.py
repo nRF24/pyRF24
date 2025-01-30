@@ -99,6 +99,9 @@ def master(count: int = 1, size: int = 32):
                     radio.flush_tx()  # discard all payloads in TX FIFO
                     break
             buf_iter += 1
+        radio.failure_detected = 0
+        radio.tx_standby()
+        failures += radio.failure_detected
         end_timer = time.monotonic() * 1000  # end timer
         print(
             f"Transmission took {end_timer - start_timer} ms with",
