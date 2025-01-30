@@ -1,3 +1,4 @@
 sphinx<6.0
 sphinx-immaterial
 sphinx-social-cards
+standard-imghdr ;  python_version >= "3.13"
