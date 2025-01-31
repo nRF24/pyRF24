@@ -30,6 +30,9 @@ Enum classes
 .. autoclass:: pyrf24.rf24_pa_dbm_e
     :members: RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
 
+.. autoclass:: pyrf24.rf24_fifo_state_e
+    :members: RF24_FIFO_OCCUPIED, RF24_FIFO_EMPTY, RF24_FIFO_FULL, RF24_FIFO_INVALID
+
 RF24 class
 ----------
 

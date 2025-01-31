@@ -631,10 +631,10 @@ on the step labeled “Building wheel for pyrf24 (pyproject.toml)”. Just wait 
 .whl file known as a wheel. This wheel can be used to install the pyrf24 package on systems using the
 same version of CPython, CPU architecture, and C standard lib.</p>
 <ol class="arabic">
-<li><p>Because building wheels is not done in an isolated build environment, it is advised that
+<li><p>If building wheels is not done in an isolated build environment, it is advised that
 some build-time dependencies be installed manually to ensure up-to-date stable releases are used.
 Execute the following from the root directory of this repo:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-build.txt
 </code></pre></div>
 </div>
 <div class="note admonition">

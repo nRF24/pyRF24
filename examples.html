@@ -1123,8 +1123,8 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">available</span><span class="p">():</span>
                 <span class="c1"># print the received ACK that was automatically sent</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">radio</span><span class="o">.</span><span class="n">get_dynamic_payload_size</span><span class="p">())</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Received: </span><span class="si">{</span><span class="n">result</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}{</span><span class="n">result</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">payload</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">radio</span><span class="o">.</span><span class="n">get_dynamic_payload_size</span><span class="p">())</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Received: </span><span class="si">{</span><span class="n">payload</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}{</span><span class="n">payload</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment payload counter</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Received an empty ACK packet&quot;</span><span class="p">)</span>
@@ -1701,7 +1701,7 @@
         <span class="k">if</span> <span class="n">report</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Transmission of payloadID </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2"> as node </span><span class="si">{</span><span class="n">node_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;successfull! Transmission time: </span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;successful! Transmission time: </span><span class="si">{</span><span class="p">(</span><span class="n">end_timer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_timer</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;us&quot;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2273,11 +2273,11 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrf24</span><span class="w"> </span><span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span><span class="p">,</span> <span class="n">RF24_DRIVER</span><span class="p">,</span> <span class="n">RF24_FIFO_FULL</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">gpiod</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">gpiod.line</span><span class="w"> </span><span class="kn">import</span> <span class="n">Edge</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">gpiod</span>  <span class="c1"># type: ignore[import-untyped]</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gpiod.line</span><span class="w"> </span><span class="kn">import</span> <span class="n">Edge</span>  <span class="c1"># type: ignore[import-untyped]</span>
 <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
         <span class="s2">&quot;This script requires gpiod installed for observing the IRQ pin. Please run</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -2459,8 +2459,8 @@
     <span class="n">radio</span><span class="o">.</span><span class="n">write_ack_payload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">write_ack_payload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># start listening &amp; clear irq_dr flag</span>
-    <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>  <span class="c1"># start timer now</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">radio</span><span class="o">.</span><span class="n">is_fifo</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timer</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">:</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>  <span class="c1"># start timer now</span>
+    <span class="k">while</span> <span class="n">radio</span><span class="o">.</span><span class="n">is_fifo</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span> <span class="o">!=</span> <span class="n">RF24_FIFO_FULL</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">end_time</span><span class="p">:</span>
         <span class="c1"># if RX FIFO is not full and timeout is not reached, then keep waiting</span>
         <span class="k">pass</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># wait for last ACK payload to transmit</span>
@@ -2785,7 +2785,7 @@
 
 <span class="c1"># create an object for manipulating temperature measurements</span>
 <span class="n">temperature_service</span> <span class="o">=</span> <span class="n">TemperatureServiceData</span><span class="p">()</span>
-<span class="c1"># temperature&#39;s float data has up to 2 decimal places of percision</span>
+<span class="c1"># temperature&#39;s float data has up to 2 decimal places of precision</span>
 <span class="n">temperature_service</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="mf">42.0</span>
 
 
