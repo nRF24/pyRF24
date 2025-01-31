@@ -129,13 +129,13 @@ Building a somewhat portable binary distribution for python packages involves bu
 .whl file known as a wheel. This wheel can be used to install the pyrf24 package on systems using the
 same version of CPython, CPU architecture, and C standard lib.
 
-1. Because building wheels is not done in an isolated build environment, it is advised that
+1. If building wheels is not done in an isolated build environment, it is advised that
    some build-time dependencies be installed manually to ensure up-to-date stable releases are used.
    Execute the following from the root directory of this repo:
 
    .. code-block:: bash
 
-       python -m pip install -r requirements.txt
+       python -m pip install -r requirements-build.txt
 
    .. note::
        This step only needs to be done once.

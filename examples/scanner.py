@@ -7,7 +7,8 @@ See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
-from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr, RF24_DRIVER
+from typing import Optional
+from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr, RF24_DRIVER, RF24_FIFO_EMPTY
 
 print(__file__)  # print example name
 
@@ -70,13 +71,13 @@ def scan(timeout: int = 30):
     signals = [0] * 126  # store the signal count for each channel
     sweeps = 0  # keep track of the number of sweeps made through all channels
     curr_channel = 0
-    start_timer = time.monotonic()  # start the timer
-    while time.monotonic() - start_timer < timeout:
+    end_time = time.monotonic() + timeout  # start the timer
+    while time.monotonic() < end_time:
         radio.channel = curr_channel
-        radio.listen = 1  # start a RX session
+        radio.listen = True  # start a RX session
         time.sleep(0.00013)  # wait 130 microseconds
         found_signal = radio.rpd
-        radio.listen = 0  # end the RX session
+        radio.listen = False  # end the RX session
         found_signal = found_signal or radio.rpd or radio.available()
 
         # count signal as interference
@@ -110,7 +111,7 @@ def scan(timeout: int = 30):
     print("")
 
 
-def noise(timeout: int = 1, channel: int = None):
+def noise(timeout: int = 1, channel: Optional[int] = None):
     """print a stream of detected noise for duration of time.
 
     :param int timeout: The number of seconds to scan for ambient noise.
@@ -120,15 +121,15 @@ def noise(timeout: int = 1, channel: int = None):
     if channel is not None:
         radio.channel = channel
     radio.listen = True
-    timeout += time.monotonic()
-    while time.monotonic() < timeout:
+    end_time = timeout + time.monotonic()
+    while time.monotonic() < end_time:
         signal = radio.read(radio.payload_size)
         if signal:
             print(address_repr(signal, False, " "))
     radio.listen = False
-    while not radio.is_fifo(False, True):
+    while radio.is_fifo(False) != RF24_FIFO_EMPTY:
         # dump the left overs in the RX FIFO
-        print(address_repr(radio.read(), False, " "))
+        print(address_repr(radio.read(32), False, " "))
 
 
 def set_role():

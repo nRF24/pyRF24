@@ -88,8 +88,8 @@ def master(count: int = 5):  # count = 5 will only transmit 5 packets
             )
             if radio.available():
                 # print the received ACK that was automatically sent
-                result = radio.read(radio.get_dynamic_payload_size())
-                print(f" Received: {result[:6].decode('utf-8')}{result[7:8][0]}")
+                payload = radio.read(radio.get_dynamic_payload_size())
+                print(f" Received: {payload[:6].decode('utf-8')}{payload[7:8][0]}")
                 counter[0] += 1  # increment payload counter
             else:
                 print(" Received an empty ACK packet")

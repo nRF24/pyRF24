@@ -85,7 +85,7 @@ def master(node_number: int = 0, count: int = 6):
         if report:
             print(
                 f"Transmission of payloadID {counter} as node {node_number}",
-                f"successfull! Transmission time: {(end_timer - start_timer) / 1000}",
+                f"successful! Transmission time: {(end_timer - start_timer) / 1000}",
                 "us",
             )
         else:
