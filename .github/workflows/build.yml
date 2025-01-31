@@ -51,7 +51,7 @@ jobs:
       - name: Build package for docs extraction and linting examples
         run: |
           python -m pip install build
-          python -m build 
+          python -m build
           python -m pip install dist/pyrf24-*.whl
 
       - name: check python typing
@@ -61,7 +61,7 @@ jobs:
         run: ruff check examples/*.py src/pyrf24/*.py* setup.py docs/conf.py
 
       - name: format python sources
-        run: ruff format examples/*.py src/pyrf24/*.py* setup.py docs/conf.py
+        run: ruff format --check examples/*.py src/pyrf24/*.py* setup.py docs/conf.py
 
       - name: Get doc dependencies
         run: |-
