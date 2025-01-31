@@ -6,11 +6,11 @@ See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
-from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
+from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER, RF24_FIFO_FULL
 
 try:
-    import gpiod
-    from gpiod.line import Edge
+    import gpiod  # type: ignore[import-untyped]
+    from gpiod.line import Edge  # type: ignore[import-untyped]
 except ImportError as exc:
     raise ImportError(
         "This script requires gpiod installed for observing the IRQ pin. Please run\n"
@@ -192,8 +192,8 @@ def slave(timeout=6):  # will listen for 6 seconds before timing out
     radio.write_ack_payload(1, ack_payloads[1])
     radio.write_ack_payload(1, ack_payloads[2])
     radio.listen = True  # start listening & clear irq_dr flag
-    start_timer = time.monotonic()  # start timer now
-    while not radio.is_fifo(False, False) and time.monotonic() - start_timer < timeout:
+    end_time = time.monotonic() + timeout  # start timer now
+    while radio.is_fifo(False) != RF24_FIFO_FULL and time.monotonic() < end_time:
         # if RX FIFO is not full and timeout is not reached, then keep waiting
         pass
     time.sleep(0.5)  # wait for last ACK payload to transmit

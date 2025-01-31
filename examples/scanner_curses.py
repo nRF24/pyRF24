@@ -8,7 +8,7 @@ See documentation at https://nRF24.github.io/pyRF24
 
 import curses
 import time
-from typing import List, Tuple, Any
+from typing import List, Tuple, Any, cast, Optional
 from pyrf24 import RF24, RF24_1MBPS, RF24_2MBPS, RF24_250KBPS, RF24_DRIVER
 
 print(__file__)  # print example name
@@ -75,7 +75,7 @@ class ProgressBar:  # pylint: disable=too-few-public-methods
         x: int,
         y: int,
         cols: int,
-        std_scr: Any,  # type: curses.window,
+        std_scr: Any,  # type is actually curses.window,
         label: str,
         color: int,
     ):
@@ -109,7 +109,7 @@ class ProgressBar:  # pylint: disable=too-few-public-methods
 
 def init_display(window) -> List[ProgressBar]:
     """Creates a table of progress bars (1 for each channel)."""
-    progress_bars: List[ProgressBar] = [None] * TOTAL_CHANNELS
+    progress_bars: List[Optional[ProgressBar]] = [None] * TOTAL_CHANNELS
     bar_w = int(curses.COLS / 6)
     for i in range(21):  # 21 rows
         for j in range(i, i + (21 * 6), 21):  # 6 columns
@@ -122,7 +122,7 @@ def init_display(window) -> List[ProgressBar]:
                 label=f"{2400 + (j)} ",
                 color=color,
             )
-    return progress_bars
+    return cast(List[ProgressBar], progress_bars)
 
 
 def init_radio():

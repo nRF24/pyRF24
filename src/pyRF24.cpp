@@ -65,6 +65,21 @@ void init_rf24(py::module& m)
         )docstr")
         .export_values();
 
+    py::enum_<rf24_fifo_state_e>(m, "rf24_fifo_state_e")
+        .value("RF24_FIFO_OCCUPIED", RF24_FIFO_OCCUPIED, R"docstr(
+            The FIFO is not full nor empty, but it is occupied with 1 or 2 payloads.
+        )docstr")
+        .value("RF24_FIFO_EMPTY", RF24_FIFO_EMPTY, R"docstr(
+            The FIFO is empty.
+        )docstr")
+        .value("RF24_FIFO_FULL", RF24_FIFO_FULL, R"docstr(
+            The FIFO is full.
+        )docstr")
+        .value("RF24_FIFO_INVALID", RF24_FIFO_INVALID, R"docstr(
+            Represents corruption of data over SPI (when observed).
+        )docstr")
+        .export_values();
+
     py::enum_<rf24_pa_dbm_e>(m, "rf24_pa_dbm_e")
         .value("RF24_PA_MIN", RF24_PA_MIN, R"docstr(
             +----------------------+--------------------+--------------------+
@@ -711,6 +726,12 @@ void init_rf24(py::module& m)
 
             :param int pipe_number: The pipe number to use for receiving transmissions. This value should be in range [0, 5].
             :param bytes,bytearray,int address: The address assigned to the specified data pipe for receiving transmissions.
+
+                .. deprecated:: 0.2.1
+                    Use `bytes` or `bytearray` to specify address.
+
+                    Using an `int` to specify the address has been deprecated because of
+                    inconsistent endianess and needless memory consumption.
         )docstr",
              py::arg("pipe_number"), py::arg("address"))
 
@@ -739,6 +760,12 @@ void init_rf24(py::module& m)
             Open data pipe 0 for transmitting to a specified address.
 
             :param bytes,bytearray,int address: The address assigned to data pipe 0 for outgoing transmissions.
+
+                .. deprecated:: 0.2.1
+                    Use `bytes` or `bytearray` to specify address.
+
+                    Using an `int` to specify the address has been deprecated because of
+                    inconsistent endianess and needless memory consumption.
         )docstr",
              py::arg("address"))
 
@@ -834,7 +861,7 @@ void init_rf24(py::module& m)
 
         .def("is_fifo", static_cast<bool (RF24Wrapper::*)(bool, bool)>(&RF24Wrapper::isFifo), R"docstr(
             is_fifo(about_tx: bool, check_empty: bool) -> bool \
-            is_fifo(about_tx: bool) -> int
+            is_fifo(about_tx: bool) -> rf24_fifo_state_e
 
 
             Get information about a specified FIFO buffers.
@@ -843,6 +870,13 @@ void init_rf24(py::module& m)
                 to make returned data describe the RX FIFO.
             :param bool check_empty: Check if the specified FIFO is empty. Set this to `False` to
                 check if the specified FIFO is full.
+
+                .. deprecated:: 0.4.4
+                    Use ``is_fifo(about_tx: bool)`` for better precision.
+
+                    The ``is_fifo(about_tx: bool, check_empty: bool)`` signature may yield
+                    inaccurate information when data suffers corruption over the SPI bus'
+                    MISO line.
         )docstr",
              py::arg("about_tx"), py::arg("check_empty"))
 
@@ -853,19 +887,17 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("is_fifo", static_cast<uint8_t (RF24Wrapper::*)(bool)>(&RF24Wrapper::isFifo), R"docstr(
+        .def("is_fifo", static_cast<rf24_fifo_state_e (RF24Wrapper::*)(bool)>(&RF24Wrapper::isFifo), R"docstr(
             :Returns:
-                - A `bool` describing if the specified FIFO is empty or full.
-                - An `int` if the ``check_empty`` parameter was unspecified. In which case, the return integer is
-
-                  - ``0`` if the specified FIFO is neither full nor empty.
-                  - ``1`` if the specified FIFO is empty.
-                  - ``2`` if the specified FIFO is full.
+                - A `bool` describing if the specified FIFO is empty or full
+                  if the ``check_empty`` parameter was specified.
+                - An enumeration of `rf24_fifo_state_e` describing the specifed FIFO's state
+                  if the ``check_empty`` parameter was unspecified.
         )docstr",
              py::arg("about_tx"))
 
-        .def("isFifo", static_cast<uint8_t (RF24Wrapper::*)(bool)>(&RF24Wrapper::isFifo), R"docstr(
-            isFifo(about_tx: bool) -> int
+        .def("isFifo", static_cast<rf24_fifo_state_e (RF24Wrapper::*)(bool)>(&RF24Wrapper::isFifo), R"docstr(
+            isFifo(about_tx: bool) -> rf24_fifo_state_e
         )docstr",
              py::arg("about_tx"))
 
