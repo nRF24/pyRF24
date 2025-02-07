@@ -6,12 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD024 -->
 
+## [0.4.5] - 2025-02-07
+
+### <!-- 6 --> 📦 Dependency updates
+
+- Bump RF24 from `6f3da43` to `929a5aa` in the rf24-submodules group by \@dependabot[bot] in [#101](https://github.com/nRF24/pyRF24/pull/101)
+
+[0.4.5]: https://github.com/nRF24/pyRF24/compare/v0.4.4...v0.4.5
+
+Full commit diff: [`v0.4.4...v0.4.5`][0.4.5]
+
 ## [0.4.4] - 2025-01-31
 
 ### <!-- 6 --> 📦 Dependency updates
 
 - Bump pypa/gh-action-pypi-publish in the github-actions group by \@dependabot[bot] in [#99](https://github.com/nRF24/pyRF24/pull/99)
 - Bump the rf24-submodules group with 2 updates by \@dependabot[bot] in [#100](https://github.com/nRF24/pyRF24/pull/100)
+
+### <!-- 9 --> 🗨️ Changed
+
+- Bump version to v0.4.4 by \@2bndy5 in [`54ea3fb`](https://github.com/nRF24/pyRF24/commit/54ea3fb1bfe09610371d2f08d0d8b92ea4109a8f)
 
 [0.4.4]: https://github.com/nRF24/pyRF24/compare/v0.4.3...v0.4.4
 
