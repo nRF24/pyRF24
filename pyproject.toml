@@ -2,7 +2,7 @@
 # building cmake from pypi releases requires openssl-dev installed, so
 # just require users install cmake from apt when getting python-dev (CPython headers)
 requires = [
-    "setuptools>=61",
+    "setuptools>=77",
     "wheel",
     "setuptools_scm[toml]>=6.2"
 ]
@@ -24,7 +24,7 @@ keywords = [
     "RF24Network",
     "RF24Mesh",
 ]
-license = {text = "GPLv2"}
+license = "GPL-2.0-only"
 authors = [
     { name = "Brendan Doherty", email = "2bndy5@gmail.com" },
 ]
@@ -32,7 +32,6 @@ classifiers = [
     # https://pypi.org/pypi?%3Aaction=list_classifiers
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: C++",
     "Programming Language :: Python :: 3",
@@ -46,7 +45,7 @@ classifiers = [
     "Topic :: System :: Networking",
     "Typing :: Typed",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 dynamic = ["version"]
 
 [project.urls]
