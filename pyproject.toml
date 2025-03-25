@@ -24,7 +24,7 @@ keywords = [
     "RF24Network",
     "RF24Mesh",
 ]
-license = {text = "GPLv2"}
+license = "GPL-2.0-only"
 authors = [
     { name = "Brendan Doherty", email = "2bndy5@gmail.com" },
 ]
@@ -32,7 +32,6 @@ classifiers = [
     # https://pypi.org/pypi?%3Aaction=list_classifiers
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: C++",
     "Programming Language :: Python :: 3",
