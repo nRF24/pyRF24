@@ -9,6 +9,13 @@
       
       
       
+      
+        <link rel="prev" href="rf24_api.html">
+      
+      
+        <link rel="next" href="rf24_network_api.html">
+      
+      
       <link rel="icon" href="_static/new_favicon.ico">
     
     
@@ -19,11 +26,13 @@
     
       
         
-        
       
       
 
+
     
+    
+      
     
     
       
@@ -32,9 +41,9 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.56abcaefa05b849d4.min.css" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.06022b9971f9d62c2.min.css" />
         <link rel="stylesheet" type="text/css" href="_static/custom_material.css" />
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,9 +89,6 @@
     <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="light-blue">
   
     
-    
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
-    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -101,13 +107,16 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="pyRF24 library" class="md-header__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
       <img src="_static/Logo_large.jpg" alt="logo">
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -126,32 +135,40 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
-          
-            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
-            </label>
-          
-        
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
-          
-            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
-            </label>
-          
-        
-      </form>
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -159,28 +176,32 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
           <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -192,7 +213,7 @@
         <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -224,6 +245,7 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="pyRF24 library" class="md-nav__button md-logo" aria-label="pyRF24 library" data-md-component="logo">
@@ -236,7 +258,7 @@
       <a href="https://github.com/nRF24/pyRF24/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     pyRF24
@@ -248,15 +270,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="index.html" class="md-nav__link">
-        <span class="md-ellipsis">Introduction</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -264,15 +293,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="examples.html" class="md-nav__link">
-        <span class="md-ellipsis">Examples</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -280,69 +316,104 @@
     
       
       
-      
-
   
   
     
   
   
+  
+    
+    
     
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_3">
-          <span class="md-ellipsis">API Reference</span>
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          <span class="md-ellipsis">API Reference</span>
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
           
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
+                
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="rf24_api.html" class="md-nav__link">
-        <span class="md-ellipsis">RF24 API</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    RF24 API
+    
+  </span>
+  
+
       </a>
     </li>
   
 
-            
-          
+              
             
               
+                
   
   
     
   
     
+  
   
   
     <li class="md-nav__item md-nav__item--active">
       
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          <span class="md-ellipsis">BLE API</span>
+          
+  
+  
+  <span class="md-ellipsis">
+    BLE API
+    
+  </span>
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="#" class="md-nav__link md-nav__link--active">
-        <span class="md-ellipsis">BLE API</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    BLE API
+    
+  </span>
+  
+
       </a>
       
         
@@ -357,20 +428,26 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      <span class="md-ellipsis">BLE API</span>
+      BLE API
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#module-pyrf24.fake_ble" class="md-nav__link">
-    <span title="pyrf24.fake_ble (Python module)" class="md-ellipsis">BLE Limitations</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble (Python module)">BLE Limitations</span>
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#fake-ble-module-helpers" class="md-nav__link">
-    <span class="md-ellipsis">fake_<wbr>ble module helpers</span>
+    
+    <span class="md-ellipsis">
+      fake_<wbr>ble module helpers
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="fake_ble module helpers">
@@ -378,49 +455,84 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.address_repr" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.address_repr (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>address_<wbr>repr</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.address_repr (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>address_<wbr>repr</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.swap_bits" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.swap_bits (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>swap_<wbr>bits</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.swap_bits (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>swap_<wbr>bits</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.reverse_bits" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.reverse_bits (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>reverse_<wbr>bits</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.reverse_bits (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>reverse_<wbr>bits</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.crc24_ble" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.crc24_ble (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>crc24_<wbr>ble</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.crc24_ble (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>crc24_<wbr>ble</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.chunk" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.chunk (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>chunk</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.chunk (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>chunk</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.whitener" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.whitener (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>whitener</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.whitener (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>whitener</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BLE_FREQ" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.BLE_FREQ (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>BLE_<wbr>FREQ</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BLE_FREQ (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>BLE_<wbr>FREQ</span>
+    </span>
   </a>
   
 </li>
@@ -432,7 +544,10 @@
       
         <li class="md-nav__item">
   <a href="#queueelement-class" class="md-nav__link">
-    <span class="md-ellipsis">Queue<wbr>Element class</span>
+    
+    <span class="md-ellipsis">
+      Queue<wbr>Element class
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="QueueElement class">
@@ -440,7 +555,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.QueueElement (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Queue<wbr>Element</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Queue<wbr>Element</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.QueueElement">
@@ -448,28 +568,48 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.data" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.data (Python attribute)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.data (Python attribute)">data</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.mac" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.mac (Python attribute)" class="md-ellipsis">mac</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.mac (Python attribute)">mac</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.name" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.name (Python attribute)" class="md-ellipsis">name</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.name (Python attribute)">name</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.pa_level" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.pa_level (Python attribute)" class="md-ellipsis">pa_<wbr>level</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.pa_level (Python attribute)">pa_<wbr>level</span>
+    </span>
   </a>
   
 </li>
@@ -486,7 +626,10 @@
       
         <li class="md-nav__item">
   <a href="#fakeble-class" class="md-nav__link">
-    <span class="md-ellipsis">Fake<wbr>BLE class</span>
+    
+    <span class="md-ellipsis">
+      Fake<wbr>BLE class
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="FakeBLE class">
@@ -494,7 +637,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.FakeBLE (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Fake<wbr>BLE</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Fake<wbr>BLE</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.FakeBLE">
@@ -502,84 +650,144 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.advertise" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.advertise (Python method)" class="md-ellipsis">advertise</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.advertise (Python method)">advertise</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.available" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.available (Python method)" class="md-ellipsis">available</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.available (Python method)">available</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.begin" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.begin (Python method)" class="md-ellipsis">begin</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.begin (Python method)">begin</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.hop_channel" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.hop_channel (Python method)" class="md-ellipsis">hop_<wbr>channel</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.hop_channel (Python method)">hop_<wbr>channel</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.len_available" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.len_available (Python method)" class="md-ellipsis">len_<wbr>available</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.len_available (Python method)">len_<wbr>available</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.mac" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.FakeBLE.mac (Python property)" class="md-ellipsis">mac</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.mac (Python property)">mac</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.name" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.FakeBLE.name (Python property)" class="md-ellipsis">name</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.name (Python property)">name</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.read" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.read (Python method)" class="md-ellipsis">read</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.read (Python method)">read</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.rx_cache" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.FakeBLE.rx_cache (Python attribute)" class="md-ellipsis">rx_<wbr>cache</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.rx_cache (Python attribute)">rx_<wbr>cache</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.rx_queue" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.FakeBLE.rx_queue (Python attribute)" class="md-ellipsis">rx_<wbr>queue</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.rx_queue (Python attribute)">rx_<wbr>queue</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.show_pa_level" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.FakeBLE.show_pa_level (Python property)" class="md-ellipsis">show_<wbr>pa_<wbr>level</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.show_pa_level (Python property)">show_<wbr>pa_<wbr>level</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.whiten" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.whiten (Python method)" class="md-ellipsis">whiten</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.whiten (Python method)">whiten</span>
+    </span>
   </a>
   
 </li>
@@ -591,7 +799,10 @@
         
           <li class="md-nav__item">
   <a href="#restricted-rf24-functionality" class="md-nav__link">
-    <span class="md-ellipsis">Restricted RF24 functionality</span>
+    
+    <span class="md-ellipsis">
+      Restricted RF24 functionality
+    </span>
   </a>
   
 </li>
@@ -603,7 +814,10 @@
       
         <li class="md-nav__item">
   <a href="#service-related-classes" class="md-nav__link">
-    <span class="md-ellipsis">Service related classes</span>
+    
+    <span class="md-ellipsis">
+      Service related classes
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Service related classes">
@@ -611,7 +825,10 @@
         
           <li class="md-nav__item">
   <a href="#abstract-parent" class="md-nav__link">
-    <span class="md-ellipsis">Abstract Parent</span>
+    
+    <span class="md-ellipsis">
+      Abstract Parent
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Abstract Parent">
@@ -619,7 +836,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.ServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.ServiceData">
@@ -627,35 +849,60 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.__len__" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.ServiceData.__len__ (Python method)" class="md-ellipsis">__<wbr>len__<wbr></span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.__len__ (Python method)">__<wbr>len__<wbr></span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.__repr__" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.ServiceData.__repr__ (Python method)" class="md-ellipsis">__<wbr>repr__<wbr></span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.__repr__ (Python method)">__<wbr>repr__<wbr></span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.buffer" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.ServiceData.buffer (Python property)" class="md-ellipsis">buffer</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.buffer (Python property)">buffer</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.ServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.uuid" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.ServiceData.uuid (Python property)" class="md-ellipsis">uuid</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.uuid (Python property)">uuid</span>
+    </span>
   </a>
   
 </li>
@@ -672,7 +919,10 @@
         
           <li class="md-nav__item">
   <a href="#service-data-uuid-numbers" class="md-nav__link">
-    <span class="md-ellipsis">Service data UUID numbers</span>
+    
+    <span class="md-ellipsis">
+      Service data UUID numbers
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Service data UUID numbers">
@@ -680,21 +930,36 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.TEMPERATURE_UUID" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.TEMPERATURE_UUID (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>TEMPERATURE_<wbr>UUID</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.TEMPERATURE_UUID (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>TEMPERATURE_<wbr>UUID</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BATTERY_UUID" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.BATTERY_UUID (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>BATTERY_<wbr>UUID</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BATTERY_UUID (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>BATTERY_<wbr>UUID</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.EDDYSTONE_UUID" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.EDDYSTONE_UUID (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>EDDYSTONE_<wbr>UUID</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.EDDYSTONE_UUID (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>EDDYSTONE_<wbr>UUID</span>
+    </span>
   </a>
   
 </li>
@@ -706,7 +971,10 @@
         
           <li class="md-nav__item">
   <a href="#derivative-children" class="md-nav__link">
-    <span class="md-ellipsis">Derivative Children</span>
+    
+    <span class="md-ellipsis">
+      Derivative Children
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Derivative Children">
@@ -714,7 +982,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.TemperatureServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.TemperatureServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Temperature<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.TemperatureServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Temperature<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.TemperatureServiceData">
@@ -722,7 +995,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.TemperatureServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.TemperatureServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.TemperatureServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
@@ -734,7 +1012,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BatteryServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.BatteryServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Battery<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BatteryServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Battery<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.BatteryServiceData">
@@ -742,7 +1025,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BatteryServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.BatteryServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BatteryServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
@@ -754,7 +1042,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.UrlServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.UrlServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Url<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.UrlServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Url<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.UrlServiceData">
@@ -762,14 +1055,24 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.UrlServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.UrlServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.UrlServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter (Python property)" class="md-ellipsis">pa_<wbr>level_<wbr>at_<wbr>1_<wbr>meter</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter (Python property)">pa_<wbr>level_<wbr>at_<wbr>1_<wbr>meter</span>
+    </span>
   </a>
   
 </li>
@@ -796,40 +1099,59 @@
     </li>
   
 
-            
-          
+              
             
               
+                
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="rf24_network_api.html" class="md-nav__link">
-        <span class="md-ellipsis">RF24Network API</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    RF24Network API
+    
+  </span>
+  
+
       </a>
     </li>
   
 
-            
-          
+              
             
               
+                
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="rf24_mesh_api.html" class="md-nav__link">
-        <span class="md-ellipsis">RF24Mesh API</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    RF24Mesh API
+    
+  </span>
+  
+
       </a>
     </li>
   
 
+              
             
-          
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      
     </li>
   
   
@@ -837,15 +1159,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="topology.html" class="md-nav__link">
-        <span class="md-ellipsis">Network Topology</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    Network Topology
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -872,20 +1201,26 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      <span class="md-ellipsis">BLE API</span>
+      BLE API
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#module-pyrf24.fake_ble" class="md-nav__link">
-    <span title="pyrf24.fake_ble (Python module)" class="md-ellipsis">BLE Limitations</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble (Python module)">BLE Limitations</span>
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#fake-ble-module-helpers" class="md-nav__link">
-    <span class="md-ellipsis">fake_<wbr>ble module helpers</span>
+    
+    <span class="md-ellipsis">
+      fake_<wbr>ble module helpers
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="fake_ble module helpers">
@@ -893,49 +1228,84 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.address_repr" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.address_repr (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>address_<wbr>repr</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.address_repr (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>address_<wbr>repr</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.swap_bits" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.swap_bits (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>swap_<wbr>bits</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.swap_bits (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>swap_<wbr>bits</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.reverse_bits" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.reverse_bits (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>reverse_<wbr>bits</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.reverse_bits (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>reverse_<wbr>bits</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.crc24_ble" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.crc24_ble (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>crc24_<wbr>ble</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.crc24_ble (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>crc24_<wbr>ble</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.chunk" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.chunk (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>chunk</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.chunk (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>chunk</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.whitener" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="pyrf24.fake_ble.whitener (Python function)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>whitener</span>
+    
+      <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.whitener (Python function)">pyrf24.<wbr>fake_<wbr>ble.<wbr>whitener</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BLE_FREQ" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.BLE_FREQ (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>BLE_<wbr>FREQ</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BLE_FREQ (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>BLE_<wbr>FREQ</span>
+    </span>
   </a>
   
 </li>
@@ -947,7 +1317,10 @@
       
         <li class="md-nav__item">
   <a href="#queueelement-class" class="md-nav__link">
-    <span class="md-ellipsis">Queue<wbr>Element class</span>
+    
+    <span class="md-ellipsis">
+      Queue<wbr>Element class
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="QueueElement class">
@@ -955,7 +1328,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.QueueElement (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Queue<wbr>Element</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Queue<wbr>Element</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.QueueElement">
@@ -963,28 +1341,48 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.data" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.data (Python attribute)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.data (Python attribute)">data</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.mac" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.mac (Python attribute)" class="md-ellipsis">mac</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.mac (Python attribute)">mac</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.name" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.name (Python attribute)" class="md-ellipsis">name</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.name (Python attribute)">name</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.QueueElement.pa_level" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.QueueElement.pa_level (Python attribute)" class="md-ellipsis">pa_<wbr>level</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.QueueElement.pa_level (Python attribute)">pa_<wbr>level</span>
+    </span>
   </a>
   
 </li>
@@ -1001,7 +1399,10 @@
       
         <li class="md-nav__item">
   <a href="#fakeble-class" class="md-nav__link">
-    <span class="md-ellipsis">Fake<wbr>BLE class</span>
+    
+    <span class="md-ellipsis">
+      Fake<wbr>BLE class
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="FakeBLE class">
@@ -1009,7 +1410,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.FakeBLE (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Fake<wbr>BLE</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Fake<wbr>BLE</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.FakeBLE">
@@ -1017,84 +1423,144 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.advertise" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.advertise (Python method)" class="md-ellipsis">advertise</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.advertise (Python method)">advertise</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.available" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.available (Python method)" class="md-ellipsis">available</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.available (Python method)">available</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.begin" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.begin (Python method)" class="md-ellipsis">begin</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.begin (Python method)">begin</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.hop_channel" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.hop_channel (Python method)" class="md-ellipsis">hop_<wbr>channel</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.hop_channel (Python method)">hop_<wbr>channel</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.len_available" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.len_available (Python method)" class="md-ellipsis">len_<wbr>available</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.len_available (Python method)">len_<wbr>available</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.mac" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.FakeBLE.mac (Python property)" class="md-ellipsis">mac</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.mac (Python property)">mac</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.name" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.FakeBLE.name (Python property)" class="md-ellipsis">name</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.name (Python property)">name</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.read" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.read (Python method)" class="md-ellipsis">read</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.read (Python method)">read</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.rx_cache" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.FakeBLE.rx_cache (Python attribute)" class="md-ellipsis">rx_<wbr>cache</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.rx_cache (Python attribute)">rx_<wbr>cache</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.rx_queue" class="md-nav__link">
-    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="pyrf24.fake_ble.FakeBLE.rx_queue (Python attribute)" class="md-ellipsis">rx_<wbr>queue</span>
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.rx_queue (Python attribute)">rx_<wbr>queue</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.show_pa_level" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.FakeBLE.show_pa_level (Python property)" class="md-ellipsis">show_<wbr>pa_<wbr>level</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.show_pa_level (Python property)">show_<wbr>pa_<wbr>level</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.FakeBLE.whiten" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.FakeBLE.whiten (Python method)" class="md-ellipsis">whiten</span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.FakeBLE.whiten (Python method)">whiten</span>
+    </span>
   </a>
   
 </li>
@@ -1106,7 +1572,10 @@
         
           <li class="md-nav__item">
   <a href="#restricted-rf24-functionality" class="md-nav__link">
-    <span class="md-ellipsis">Restricted RF24 functionality</span>
+    
+    <span class="md-ellipsis">
+      Restricted RF24 functionality
+    </span>
   </a>
   
 </li>
@@ -1118,7 +1587,10 @@
       
         <li class="md-nav__item">
   <a href="#service-related-classes" class="md-nav__link">
-    <span class="md-ellipsis">Service related classes</span>
+    
+    <span class="md-ellipsis">
+      Service related classes
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Service related classes">
@@ -1126,7 +1598,10 @@
         
           <li class="md-nav__item">
   <a href="#abstract-parent" class="md-nav__link">
-    <span class="md-ellipsis">Abstract Parent</span>
+    
+    <span class="md-ellipsis">
+      Abstract Parent
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Abstract Parent">
@@ -1134,7 +1609,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.ServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.ServiceData">
@@ -1142,35 +1622,60 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.__len__" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.ServiceData.__len__ (Python method)" class="md-ellipsis">__<wbr>len__<wbr></span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.__len__ (Python method)">__<wbr>len__<wbr></span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.__repr__" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="pyrf24.fake_ble.ServiceData.__repr__ (Python method)" class="md-ellipsis">__<wbr>repr__<wbr></span>
+    
+      <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.__repr__ (Python method)">__<wbr>repr__<wbr></span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.buffer" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.ServiceData.buffer (Python property)" class="md-ellipsis">buffer</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.buffer (Python property)">buffer</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.ServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.ServiceData.uuid" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.ServiceData.uuid (Python property)" class="md-ellipsis">uuid</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.ServiceData.uuid (Python property)">uuid</span>
+    </span>
   </a>
   
 </li>
@@ -1187,7 +1692,10 @@
         
           <li class="md-nav__item">
   <a href="#service-data-uuid-numbers" class="md-nav__link">
-    <span class="md-ellipsis">Service data UUID numbers</span>
+    
+    <span class="md-ellipsis">
+      Service data UUID numbers
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Service data UUID numbers">
@@ -1195,21 +1703,36 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.TEMPERATURE_UUID" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.TEMPERATURE_UUID (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>TEMPERATURE_<wbr>UUID</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.TEMPERATURE_UUID (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>TEMPERATURE_<wbr>UUID</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BATTERY_UUID" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.BATTERY_UUID (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>BATTERY_<wbr>UUID</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BATTERY_UUID (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>BATTERY_<wbr>UUID</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.EDDYSTONE_UUID" class="md-nav__link">
-    <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span><span title="pyrf24.fake_ble.EDDYSTONE_UUID (Python data)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>EDDYSTONE_<wbr>UUID</span>
+    
+      <span aria-label="Python data" class="objinfo-icon objinfo-icon__alias" title="Python data">V</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.EDDYSTONE_UUID (Python data)">pyrf24.<wbr>fake_<wbr>ble.<wbr>EDDYSTONE_<wbr>UUID</span>
+    </span>
   </a>
   
 </li>
@@ -1221,7 +1744,10 @@
         
           <li class="md-nav__item">
   <a href="#derivative-children" class="md-nav__link">
-    <span class="md-ellipsis">Derivative Children</span>
+    
+    <span class="md-ellipsis">
+      Derivative Children
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Derivative Children">
@@ -1229,7 +1755,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.TemperatureServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.TemperatureServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Temperature<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.TemperatureServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Temperature<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.TemperatureServiceData">
@@ -1237,7 +1768,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.TemperatureServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.TemperatureServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.TemperatureServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
@@ -1249,7 +1785,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BatteryServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.BatteryServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Battery<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BatteryServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Battery<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.BatteryServiceData">
@@ -1257,7 +1798,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.BatteryServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.BatteryServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.BatteryServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
@@ -1269,7 +1815,12 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.UrlServiceData" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="pyrf24.fake_ble.UrlServiceData (Python class)" class="md-ellipsis">pyrf24.<wbr>fake_<wbr>ble.<wbr>Url<wbr>Service<wbr>Data</span>
+    
+      <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.UrlServiceData (Python class)">pyrf24.<wbr>fake_<wbr>ble.<wbr>Url<wbr>Service<wbr>Data</span>
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="pyrf24.fake_ble.UrlServiceData">
@@ -1277,14 +1828,24 @@
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.UrlServiceData.data" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.UrlServiceData.data (Python property)" class="md-ellipsis">data</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.UrlServiceData.data (Python property)">data</span>
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter" class="md-nav__link">
-    <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span><span title="pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter (Python property)" class="md-ellipsis">pa_<wbr>level_<wbr>at_<wbr>1_<wbr>meter</span>
+    
+      <span aria-label="Python property" class="objinfo-icon objinfo-icon__alias" title="Python property">P</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.fake_ble.UrlServiceData.pa_level_at_1_meter (Python property)">pa_<wbr>level_<wbr>at_<wbr>1_<wbr>meter</span>
+    </span>
   </a>
   
 </li>
@@ -1318,6 +1879,7 @@
                   
 
 
+
 <h1 id="ble-api">BLE API<a class="headerlink" href="#ble-api" title="Permalink to this heading">¶</a></h1>
 <h2 id="module-pyrf24.fake_ble"><span id="ble-limitations"></span>BLE Limitations<a class="headerlink" href="#module-pyrf24.fake_ble" title="Permalink to this heading">¶</a></h2>
 <p>This module uses the <a class="reference internal" href="rf24_api.html#pyrf24.RF24" title="pyrf24.RF24 (Python class)"><code class="xref any py py-class docutils literal notranslate"><span class="pre">RF24</span></code></a> class to make the nRF24L01 imitate a
@@ -1328,7 +1890,7 @@ advertisements) to any BLE compatible device (ie smart devices with Bluetooth
 source code) can be found here</a>
 As this technique can prove invaluable in certain project designs, the code
 here has been adapted to work with Python.</p>
-<div class="important admonition">
+<div class="important tip admonition">
 <p class="admonition-title">Important</p>
 <p>Because the nRF24L01 wasn’t designed for BLE advertising, it
 has some limitations that helps to be aware of.</p>
@@ -1492,7 +2054,7 @@ advertisements.</p>
 </dl>
 </dd>
 </dl>
-<div class="important admonition">
+<div class="important tip admonition">
 <p class="admonition-title">Important</p>
 <p>This function is called internally by
 <a class="reference internal" href="#pyrf24.fake_ble.FakeBLE.advertise" title="pyrf24.fake_ble.FakeBLE.advertise (Python method)"><code class="xref py py-func docutils literal notranslate"><span class="pre">advertise()</span></code></a>.
@@ -1676,7 +2238,7 @@ advertisements.</p>
 </dl>
 </dd>
 </dl>
-<div class="important admonition">
+<div class="important tip admonition">
 <p class="admonition-title">Important</p>
 <p>If the name and/or TX power level of the emulated BLE
 device is also to be broadcast, then the <a class="reference internal" href="#pyrf24.fake_ble.FakeBLE.name" title="pyrf24.fake_ble.FakeBLE.name (Python property)"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">name</span></code></a> and/or
@@ -1829,7 +2391,7 @@ the length of the name set by this attribute.</p>
 <p>This attribute is only used by <a class="reference internal" href="#pyrf24.fake_ble.FakeBLE.available" title="pyrf24.fake_ble.FakeBLE.available (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">available()</span></code></a>
 to cache the data from the top level of the radio’s RX FIFO then validate and
 decode it.</p>
-<div class="hint admonition">
+<div class="hint tip admonition">
 <p class="admonition-title">Hint</p>
 <p>This attribute is exposed for debugging purposes.</p>
 </div>
@@ -1843,7 +2405,7 @@ decode it.</p>
 according to the its internal decoding algorithm. The
 <a class="reference internal" href="#pyrf24.fake_ble.FakeBLE.read" title="pyrf24.fake_ble.FakeBLE.read (Python method)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> function will remove &amp; return the first
 element in this queue.</p>
-<div class="hint admonition">
+<div class="hint tip admonition">
 <p class="admonition-title">Hint</p>
 <p>This attribute is exposed for debugging purposes, but it can also be used
 by applications.</p>
@@ -2062,6 +2624,16 @@ be a 1-byte signed <a class="reference external" href="https://docs.python.org/3
 
 
 
+
+
+  
+  
+
+
+
+
+
+
                 
               </article>
             </div>
@@ -2069,50 +2641,15 @@ be a 1-byte signed <a class="reference external" href="https://docs.python.org/3
           
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </a>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
         
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="rf24_api.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: RF24 API" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              RF24 API
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="rf24_network_api.html" class="md-footer__link md-footer__link--next" aria-label="Next: RF24Network API" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              RF24Network API
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   
   
@@ -2144,10 +2681,11 @@ be a 1-byte signed <a class="reference external" href="https://docs.python.org/3
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "toc.follow", "toc.sticky", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "toc.follow", "toc.sticky", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
       
-        <script src="_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js"></script>
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js"></script>
     
   </body>
 </html>
