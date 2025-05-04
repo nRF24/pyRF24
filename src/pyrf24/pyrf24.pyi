@@ -60,6 +60,7 @@ class rf24_irq_flags_e:
     RF24_IRQ_NONE: rf24_irq_flags_e
     @property
     def value(self) -> int: ...
+    def __int__(self) -> int: ...
 
 RF24_RX_DR: rf24_irq_flags_e = rf24_irq_flags_e.RF24_RX_DR
 RF24_TX_DS: rf24_irq_flags_e = rf24_irq_flags_e.RF24_TX_DS
