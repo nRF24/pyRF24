@@ -17,6 +17,8 @@ void init_rf24network(py::module& m)
     m.attr("NETWORK_REQ_ADDRESS") = NETWORK_REQ_ADDRESS;
     m.attr("FLAG_FAST_FRAG") = FLAG_FAST_FRAG;
     m.attr("FLAG_NO_POLL") = FLAG_NO_POLL;
+    m.attr("NETWORK_OVERRUN") = NETWORK_OVERRUN;
+    m.attr("NETWORK_CORRUPTION") = NETWORK_CORRUPTION;
 
     // **************** RF24NetworkHeader exposed  *****************
     //

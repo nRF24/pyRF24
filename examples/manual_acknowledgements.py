@@ -50,8 +50,8 @@ if not radio.begin():
 # usually run with nRF24L01 transceivers in close proximity of each other
 radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
-# set TX address of RX node into the TX pipe
-radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
+# set TX address of RX node (uses pipe 0)
+radio.stop_listening(address[radio_number])  # enter inactive TX mode
 
 # set RX address of TX node into an RX pipe
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
@@ -85,9 +85,9 @@ def master(count: int = 10):
             print("Transmission failed or timed out")
         else:
             radio.listen = True
-            timout = time.monotonic() * 1000 + 200  # use 200 ms timeout
+            timeout = time.monotonic() * 1000 + 200  # use 200 ms timeout
             ack = b"\x00" * len(buffer)  # variable used for the response
-            while ack[0] == 0 and time.monotonic() * 1000 < timout:
+            while ack[0] == 0 and time.monotonic() * 1000 < timeout:
                 if radio.available():
                     # get the response & save it to ack variable
                     ack = radio.read(radio.payload_size)
@@ -104,7 +104,7 @@ def master(count: int = 10):
                 # decode response's text as an string
                 # NOTE ack[:6] ignores the NULL terminating 0
                 response = ack[:6].decode("utf-8")
-                # use struct.unpack() to get the repsonse's appended int
+                # use struct.unpack() to get the response's appended int
                 # NOTE ack[7:] discards NULL terminating 0, and
                 # "<b" means its a single little endian unsigned byte
                 payload[0] = struct.unpack("<b", ack[7:])[0]

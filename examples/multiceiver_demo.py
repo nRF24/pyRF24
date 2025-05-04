@@ -69,9 +69,9 @@ def master(node_number: int = 0, count: int = 6):
     # So, use varying delay between retry attempts and 15 (at most) retry attempts
     radio.set_retries(((node_number * 3) % 12) + 3, 15)  # max value is 15 for both args
 
-    radio.listen = False
-    # set the TX address to the address of the base station.
-    radio.open_tx_pipe(addresses[node_number])
+    # set TX address of RX node (uses pipe 0)
+    radio.stop_listening(addresses[node_number])  # enter inactive TX mode
+
     counter = 0
     # use the node_number to identify where the payload came from
     while counter < count:

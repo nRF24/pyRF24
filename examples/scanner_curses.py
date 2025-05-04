@@ -191,10 +191,10 @@ def get_user_input() -> Tuple[int, int]:
 def scan_channel(channel: int) -> bool:
     """Scan a specified channel and report if a signal was detected."""
     radio.channel = channel
-    radio.startListening()
+    radio.listen = True
     time.sleep(0.00013)
     found_signal = radio.testRPD()
-    radio.stopListening()
+    radio.listen = False
     if found_signal or radio.testRPD() or radio.available():
         radio.flush_rx()
         return True

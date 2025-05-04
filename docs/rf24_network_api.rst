@@ -10,7 +10,7 @@ RF24Network class
 
 
 .. autoclass:: pyrf24.RF24Network
-    
+
     Basic RF24Network API
     *********************
 
@@ -47,7 +47,7 @@ RF24NetworkHeader class
     easily pass an instantiated `RF24NetworkHeader` object to the :py:func:`print()` function.
 
 .. autoclass:: pyrf24.RF24NetworkHeader
-    
+
     .. autoattribute:: to_node
     .. autoattribute:: type
     .. autoattribute:: from_node
@@ -67,7 +67,7 @@ The following are predefined module-level constants that can be used for compari
 code readability.
 
 .. autoattribute:: pyrf24.MAX_USER_DEFINED_HEADER_TYPE
-    
+
     The maximum of user defined message types.
 
 .. autoattribute:: pyrf24.MAX_PAYLOAD_SIZE
@@ -147,11 +147,11 @@ System types can also contain message data.
       radio's auto-ack feature for transmissions between them, but nodes ``0o1`` and ``0o2`` do not use
       the radio's auto-ack feature for transmissions between them as messages will be routed through
       other nodes.
-  
+
       Multicasted messages do use the radio's auto-ack feature because of the hardware limitations of
       nRF24L01 transceivers. This applies to all multicasted messages (directly related nodes or
       otherwise).
- 
+
     .. hint::
         Remember, user messages types with a decimal value of ``64`` or less will not be acknowledged across
         the network via ``NETWORK_ACK`` messages.
@@ -175,6 +175,14 @@ System types can also contain message data.
 
     Messages of this type are used to request information from the master node, generally via a unicast (direct) write.
     Any (non-master) node receiving a message of this type will manually forward it to the master node using a normal network write.
+
+.. autoattribute:: pyrf24.NETWORK_OVERRUN
+
+    Messages of this type indicate the network is being overrun with data and `RF24Network.available()` has returned from a loop.
+
+.. autoattribute:: pyrf24.NETWORK_CORRUPTION
+
+    Messages of this type indicate the radio has encountered corrupted data & the RX FIFO has been flushed.
 
 Network flag mnemonics
 ***********************

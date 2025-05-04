@@ -80,6 +80,24 @@ void init_rf24(py::module& m)
         )docstr")
         .export_values();
 
+    py::enum_<rf24_irq_flags_e>(m, "rf24_irq_flags_e")
+        .value("RF24_RX_DR", RF24_RX_DR, R"docstr(
+                Represents an event where RX Data is Ready to `RF24.read()`.
+            )docstr")
+        .value("RF24_TX_DS", RF24_TX_DS, R"docstr(
+                Represents an event where TX Data Sent successfully.
+            )docstr")
+        .value("RF24_TX_DF", RF24_TX_DF, R"docstr(
+                Represents an event where TX Data Failed to send.
+            )docstr")
+        .value("RF24_IRQ_ALL", RF24_IRQ_ALL, R"docstr(
+                Equivalent to ``RF24_RX_DR | RF24_TX_DS | RF24_TX_DF``.
+            )docstr")
+        .value("RF24_IRQ_NONE", RF24_IRQ_NONE, R"docstr(
+                An alias of ``0`` to describe no IRQ events enabled.
+            )docstr")
+        .export_values();
+
     py::enum_<rf24_pa_dbm_e>(m, "rf24_pa_dbm_e")
         .value("RF24_PA_MIN", RF24_PA_MIN, R"docstr(
             +----------------------+--------------------+--------------------+
@@ -314,18 +332,41 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
+        .def("start_listening", &RF24Wrapper::startListening, R"docstr(
+            start_listening()
+
+            Start listening on the pipes opened for receiving.
+            This function is equivalent to calling ``radio.listen = True``.
+
+            .. hint::
+
+                1. Be sure to call :py:meth:`~pyrf24.RF24.open_rx_pipe()` before
+                   calling this function.
+                2. Do not call :py:meth:`~pyrf24.RF24.write()` while in RX mode, without
+                   first setting :py:attr:`~pyrf24.RF24.listen` to `False` (or calling
+                   `RF24.stop_listening()`).
+                3. Call :py:meth:`~pyrf24.RF24.available()` to check for incoming traffic,
+                   and use :py:meth:`~pyrf24.RF24.read()` to get it.
+
+            .. code-block:: python
+                :caption: Open reading pipe 1 using address ``b"\xCC\xCE\xCC\xCE\xCC"``
+
+                address = bytes([0xCC, 0xCE, 0xCC, 0xCE, 0xCC])
+                radio.open_rx_pipe(1, address)
+                radio.start_listening()  # or radio.listen = True
+
+            .. note::
+                If there was a call to `RF24.open_rx_pipe()` about pipe 0 prior to
+                calling this function, then this function will re-write the address
+                that was last set to reading pipe 0. This is because `RF24.stop_listening()`
+                (and `RF24.open_tx_pipe()`) will overwrite the address to reading pipe 0
+                for proper auto-ack functionality.
+        )docstr")
+
         .def("startListening", &RF24Wrapper::startListening, R"docstr(
             startListening()
 
             Put the radio into RX mode.
-        )docstr")
-
-        // *****************************************************************************
-
-        .def("stopListening", &RF24Wrapper::stopListening, R"docstr(
-            stopListening()
-
-            Put the radio into TX mode.
         )docstr")
 
         // *****************************************************************************
@@ -384,6 +425,9 @@ void init_rf24(py::module& m)
             what_happened() -> Tuple[bool, bool, bool]
 
             Call this function when the radio's IRQ pin is active LOW.
+
+            .. deprecated:: 0.5.0
+                Use `clear_status_flags()` instead.
 
             :Returns: a 3-tuple of boolean values in which
 
@@ -610,6 +654,9 @@ void init_rf24(py::module& m)
 
             Configure the radio's IRQ pin to go active on certain events.
 
+            .. deprecated:: 0.5.0
+                Use `set_status_flags()` instead.
+
             .. important:: The IRQ pin is only active when LOW.
 
             :param bool tx_ok: `True` ignores the "data sent" event, `False` reflects the
@@ -625,6 +672,134 @@ void init_rf24(py::module& m)
             maskIRQ(tx_ok: bool, tx_fail: bool, rx_ready: bool)
         )docstr",
              py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
+
+        // *****************************************************************************
+
+        .def("set_status_flags", &RF24::setStatusFlags, R"docstr(
+            set_status_flags(flags: int = RF24_IRQ_NONE) -> None
+
+            Set which flags shall be reflected on the radio's IRQ pin (when active LOW).
+
+            .. note:: This function is similar to `mask_irq()` but with less confusing parameters.
+
+            :param flags: A value of `rf24_irq_flags_e` to influence the radio's IRQ pin.
+                The default value (``RF24_IRQ_NONE``) will disable the radio's IRQ pin.
+                Multiple events can be enabled by OR-ing `rf24_irq_flags_e` values together.
+
+                .. code-block:: python
+
+                    radio.set_status_flags(RF24_IRQ_ALL)
+                    # is equivalent to
+                    radio.set_status_flags(RF24_RX_DR | RF24_TX_DS | RF24_TX_DF)
+        )docstr",
+             py::arg("flags") = RF24_IRQ_NONE)
+
+        .def("setStatusFlags", &RF24::setStatusFlags, R"docstr(
+            setStatusFlags(flags: int = RF24_IRQ_NONE) -> None
+        )docstr",
+             py::arg("flags") = RF24_IRQ_NONE)
+
+        // *****************************************************************************
+
+        .def("clear_status_flags", &RF24::clearStatusFlags, R"docstr(
+            clear_status_flags(flags: int = RF24_IRQ_ALL) -> int
+
+            Clear the Status flags that caused an interrupt event.
+
+            .. note::
+                This function is similar to `what_happened()` because it also returns the
+                Status flags that caused the interrupt event. However, this function returns
+                a STATUS byte instead of bit-banging into 3 1-byte booleans
+                passed by reference.
+
+            .. caution::
+                When used in an ISR (Interrupt Service routine), there is a chance that the
+                returned bits ``0b1110`` (RX pipe number) is inaccurate. See the
+                datasheet for more detail.
+
+            :param flags: The IRQ flags to clear. Default value is all of them (``RF24_IRQ_ALL``).
+                Multiple flags can be cleared by OR-ing `rf24_irq_flags_e` values together.
+
+            :Returns: The STATUS byte from the radio's register before it was modified. Use
+                enumerations of `rf24_irq_flags_e` as masks to interpret the STATUS byte's meaning(s).
+        )docstr",
+             py::arg("flags") = RF24_IRQ_ALL)
+
+        .def("clearStatusFlags", &RF24::clearStatusFlags, R"docstr(
+            clearStatusFlags(flags: int = RF24_IRQ_ALL) -> int
+        )docstr",
+             py::arg("flags") = RF24_IRQ_ALL)
+
+        // *****************************************************************************
+
+        .def("get_status_flags", &RF24::getStatusFlags, R"docstr(
+            get_status_flags() -> int
+
+            Get the latest STATUS byte returned from the last SPI transaction.
+
+            .. note:: This does not actually perform any SPI transaction with the radio.
+                Use `RF24.update()` instead to get a fresh copy of the Status flags at
+                the slight cost of performance.
+
+            :Returns: The STATUS byte from the radio's register as the latest SPI transaction. Use
+                enumerations of `rf24_irq_flags_e` as masks to interpret the STATUS byte's meaning(s).
+        )docstr")
+
+        .def("getStatusFlags", &RF24::getStatusFlags, R"docstr(
+            getStatusFlags() -> int
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("update", &RF24::update, R"docstr(
+            update() -> int
+
+            Get an updated STATUS byte from the radio.
+
+            :returns: The STATUS byte fetched from the radio's register. Use enumerations of
+                `rf24_irq_flags_e` as masks to interpret the STATUS byte's meaning(s).
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("print_status", &RF24Wrapper::printStatus, R"docstr(
+            print_status(flags: int) -> None
+
+            A convenient function to display the meaning of the STATUS byte
+            returned from `RF24.get_status_flags()`, `RF24.update()`,
+            or `RF24.clear_status_flags()`.
+        )docstr",
+             py::arg("flags"))
+
+        .def("printStatus", &RF24Wrapper::printStatus, R"docstr(
+            printStatus(flags: int) -> None
+        )docstr",
+             py::arg("flags"))
+
+        // *****************************************************************************
+
+        .def("ce_pin", &RF24::ce, R"docstr(
+            ce_pin(level: bool) -> None
+
+            Set radio's CE (Chip Enable) pin state.
+
+            .. warning:: Please see the datasheet for a much more detailed description of this pin.
+
+            .. note:: This is only publicly exposed for advanced use cases such as complex networking or
+                streaming consecutive payloads without robust error handling.
+                Typical uses are satisfied by simply using `RF24.start_listening()` for RX mode or
+                `RF24.stop_listening()` and `RF24.write()` for TX mode.
+
+            :param level: In RX mode, `True` (``HIGH``) causes the radio to begin actively listening.
+                In TX mode, `True` (``HIGH``) (+ 130 microsecond delay) causes the radio to begin transmitting.
+                Setting this to `False` (``LOW``) will cause the radio to stop transmitting or receiving in any mode.
+        )docstr",
+             py::arg("level"))
+
+        .def("ce", &RF24::ce, R"docstr(
+            ce(level: bool) -> None
+        )docstr",
+             py::arg("level"))
 
         // *****************************************************************************
 
@@ -743,7 +918,9 @@ void init_rf24(py::module& m)
         // *****************************************************************************
 
         .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
-            For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
+            .. deprecated:: 0.2.1 Use a `bytes` or `bytearray` address instead of an `int` address.
+
+                For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
         )docstr",
              py::arg("pipe_number"), py::arg("address"))
 
@@ -758,6 +935,8 @@ void init_rf24(py::module& m)
             open_tx_pipe(address: Union[bytearray, bytes, int])
 
             Open data pipe 0 for transmitting to a specified address.
+
+            .. deprecated:: 0.5.0 Use `RF24.open_tx_pipe()` instead.
 
             :param bytes,bytearray,int address: The address assigned to data pipe 0 for outgoing transmissions.
 
@@ -777,7 +956,10 @@ void init_rf24(py::module& m)
         // *****************************************************************************
 
         .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
-            For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
+
+            .. deprecated:: 0.2.1 Use a `bytes` or `bytearray` address instead of an `int` address.
+
+                For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
         )docstr",
              py::arg("address"))
 
@@ -785,6 +967,48 @@ void init_rf24(py::module& m)
             openWritingPipe(address: int)
         )docstr",
              py::arg("address"))
+
+        // *****************************************************************************
+
+        .def("stopListening", static_cast<void (RF24Wrapper::*)(void)>(&RF24Wrapper::stopListening), R"docstr(
+            stopListening() -> None
+
+            Put the radio into TX mode.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("stop_listening", static_cast<void (RF24Wrapper::*)(void)>(&RF24Wrapper::stopListening), R"docstr(
+            stop_listening() -> None
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("stopListening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
+            stopListening(tx_address: bytes | bytearray) -> None
+
+            Put the radio into TX mode.
+        )docstr",
+             py::arg("tx_address"))
+
+        // *****************************************************************************
+
+        .def("stop_listening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
+            stop_listening(tx_address: bytes | bytearray) -> None
+
+            Stop listening for incoming messages, set the TX address, and switch to transmit mode.
+
+            .. code-block:: python
+                :caption: Do this to set the TX address (and enter TX mode) before calling `RF24.write()`
+
+                radio.stop_listening(b"1Node")
+                radio.write(data)
+
+            .. warning:: When the ACK payloads feature is enabled, the TX FIFO buffers are
+                flushed when calling this function. This is meant to discard any ACK
+                payloads that were not appended to acknowledgment packets.
+        )docstr",
+             py::arg("tx_address"))
 
         // *****************************************************************************
 

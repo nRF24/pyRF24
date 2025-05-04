@@ -8,6 +8,8 @@ class rf24_crclength_e:
     RF24_CRC_DISABLED: "rf24_crclength_e"
     RF24_CRC_8: "rf24_crclength_e"
     RF24_CRC_16: "rf24_crclength_e"
+    @property
+    def value(self) -> int: ...
 
 RF24_CRC_DISABLED: rf24_crclength_e = rf24_crclength_e.RF24_CRC_DISABLED
 RF24_CRC_8: rf24_crclength_e = rf24_crclength_e.RF24_CRC_8
@@ -17,6 +19,8 @@ class rf24_datarate_e:
     RF24_1MBPS: rf24_datarate_e
     RF24_2MBPS: rf24_datarate_e
     RF24_250KBPS: rf24_datarate_e
+    @property
+    def value(self) -> int: ...
 
 RF24_1MBPS: rf24_datarate_e = rf24_datarate_e.RF24_1MBPS
 RF24_2MBPS: rf24_datarate_e = rf24_datarate_e.RF24_2MBPS
@@ -27,6 +31,8 @@ class rf24_pa_dbm_e:
     RF24_PA_LOW: rf24_pa_dbm_e
     RF24_PA_HIGH: rf24_pa_dbm_e
     RF24_PA_MAX: rf24_pa_dbm_e
+    @property
+    def value(self) -> int: ...
 
 RF24_PA_MIN: rf24_pa_dbm_e = rf24_pa_dbm_e.RF24_PA_MIN
 RF24_PA_LOW: rf24_pa_dbm_e = rf24_pa_dbm_e.RF24_PA_LOW
@@ -38,11 +44,28 @@ class rf24_fifo_state_e:
     RF24_FIFO_EMPTY: rf24_fifo_state_e
     RF24_FIFO_FULL: rf24_fifo_state_e
     RF24_FIFO_INVALID: rf24_fifo_state_e
+    @property
+    def value(self) -> int: ...
 
 RF24_FIFO_OCCUPIED: rf24_fifo_state_e = rf24_fifo_state_e.RF24_FIFO_OCCUPIED
 RF24_FIFO_EMPTY: rf24_fifo_state_e = rf24_fifo_state_e.RF24_FIFO_EMPTY
 RF24_FIFO_FULL: rf24_fifo_state_e = rf24_fifo_state_e.RF24_FIFO_FULL
 RF24_FIFO_INVALID: rf24_fifo_state_e = rf24_fifo_state_e.RF24_FIFO_INVALID
+
+class rf24_irq_flags_e:
+    RF24_RX_DR: rf24_irq_flags_e
+    RF24_TX_DS: rf24_irq_flags_e
+    RF24_TX_DF: rf24_irq_flags_e
+    RF24_IRQ_ALL: rf24_irq_flags_e
+    RF24_IRQ_NONE: rf24_irq_flags_e
+    @property
+    def value(self) -> int: ...
+
+RF24_RX_DR: rf24_irq_flags_e = rf24_irq_flags_e.RF24_RX_DR
+RF24_TX_DS: rf24_irq_flags_e = rf24_irq_flags_e.RF24_TX_DS
+RF24_TX_DF: rf24_irq_flags_e = rf24_irq_flags_e.RF24_TX_DF
+RF24_IRQ_ALL: rf24_irq_flags_e = rf24_irq_flags_e.RF24_IRQ_ALL
+RF24_IRQ_NONE: rf24_irq_flags_e = rf24_irq_flags_e.RF24_IRQ_NONE
 
 class RF24:
     @overload
@@ -133,8 +156,6 @@ class RF24:
     def setPayloadSize(self, size: int) -> None: ...
     def sprintf_pretty_details(self) -> str: ...
     def sprintfPrettyDetails(self) -> str: ...
-    def startListening(self) -> None: ...
-    def stopListening(self) -> None: ...
     def start_const_carrier(self, level: rf24_pa_dbm_e, channel: int) -> None: ...
     def startConstCarrier(self, level: rf24_pa_dbm_e, channel: int) -> None: ...
     def start_fast_write(
@@ -249,6 +270,20 @@ class RF24:
     def rpd(self) -> bool: ...
     @property
     def rx_fifo_full(self) -> bool: ...
+    def stop_listening(self, tx_address: bytes | bytearray | None = None) -> None: ...
+    def stopListening(self, tx_address: bytes | bytearray | None = None) -> None: ...
+    def start_listening(self) -> None: ...
+    def startListening(self) -> None: ...
+    def ce_pin(self, level: bool) -> None: ...
+    def update(self) -> int: ...
+    def get_status_flags(self) -> int: ...
+    def getStatusFlags(self) -> int: ...
+    def set_status_flags(self, flags: int = RF24_IRQ_NONE.value) -> None: ...
+    def setStatusFlags(self, flags: int = RF24_IRQ_NONE.value) -> None: ...
+    def clear_status_flags(self, flags: int = RF24_IRQ_ALL.value) -> int: ...
+    def clearStatusFlags(self, flags: int = RF24_IRQ_ALL.value) -> int: ...
+    def print_status(self, flags: int) -> None: ...
+    def printStatus(self, flags: int) -> None: ...
 
 ######### stubs for RF24Network bindings ###########################################
 
@@ -263,6 +298,8 @@ NETWORK_LAST_FRAGMENT: int = 150
 NETWORK_ACK: int = 193
 NETWORK_POLL: int = 194
 NETWORK_REQ_ADDRESS: int = 195
+NETWORK_OVERRUN: int = 160
+NETWORK_CORRUPTION: int = 161
 FLAG_FAST_FRAG: int = 4
 FLAG_NO_POLL: int = 8
 

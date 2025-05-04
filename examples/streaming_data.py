@@ -45,8 +45,8 @@ if not radio.begin():
 # usually run with nRF24L01 transceivers in close proximity of each other
 radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
-# set TX address of RX node into the TX pipe
-radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
+# set TX address of RX node (uses pipe 0)
+radio.stop_listening(address[radio_number])  # enter inactive TX mode
 
 # set RX address of TX node into an RX pipe
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1

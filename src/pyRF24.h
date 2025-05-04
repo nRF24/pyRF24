@@ -45,6 +45,11 @@ public:
         RF24::openWritingPipe(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
+    void stop_listening(py::buffer address)
+    {
+        RF24::stopListening(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
+    }
+
     void open_rx_pipe(uint8_t number, py::buffer address)
     {
         RF24::openReadingPipe(number, reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
