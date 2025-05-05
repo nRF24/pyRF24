@@ -925,7 +925,7 @@ void init_rf24(py::module& m)
             :param bytes,bytearray,int address: The address assigned to the specified data pipe for receiving transmissions.
 
                 .. deprecated:: 0.2.1
-                    Use `bytes` or `bytearray` to specify address.
+                    Use `bytes` or `bytearray` to specify the address.
 
                     Using an `int` to specify the address has been deprecated because of
                     inconsistent endianess and needless memory consumption.
@@ -970,7 +970,7 @@ void init_rf24(py::module& m)
             :param bytes,bytearray,int address: The address assigned to data pipe 0 for outgoing transmissions.
 
                 .. deprecated:: 0.2.1
-                    Use `bytes` or `bytearray` to specify address.
+                    Use `bytes` or `bytearray` to specify the address.
 
                     Using an `int` to specify the address has been deprecated because of
                     inconsistent endianess and needless memory consumption.
@@ -1014,19 +1014,8 @@ void init_rf24(py::module& m)
         // *****************************************************************************
 
         .def("stop_listening", static_cast<void (RF24Wrapper::*)(void)>(&RF24Wrapper::stopListening), R"docstr(
-            stop_listening(tx_address: Optional[Union[bytes | bytearray]] = None) -> None
-        )docstr")
+            stop_listening(tx_address: Optional[Union[bytes | bytearray | int]] = None) -> None
 
-        // *****************************************************************************
-
-        .def("stopListening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
-            stopListening(tx_address: Optional[Union[bytes | bytearray]] = None) -> None
-        )docstr",
-             py::arg("tx_address"))
-
-        // *****************************************************************************
-
-        .def("stop_listening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
             Stop listening for incoming messages, set the TX address, and switch to transmit mode.
 
             .. code-block:: python
@@ -1038,8 +1027,50 @@ void init_rf24(py::module& m)
             .. warning:: When the ACK payloads feature is enabled, the TX FIFO buffers are
                 flushed when calling this function. This is meant to discard any ACK
                 payloads that were not appended to acknowledgment packets.
+        )docstr")
+
+        // *****************************************************************************
+
+        .def("stopListening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
+            stopListening(tx_address: Optional[Union[bytes | bytearray | int]] = None) -> None
         )docstr",
              py::arg("tx_address"))
+
+        // *****************************************************************************
+
+        .def("stop_listening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
+            :param tx_address: Use this optional parameter to set the TX address.
+                This value is cached internally. The cached address will be restored to
+                pipe 0 when switching from RX mode to TX mode.
+
+                .. deprecated:: 0.5.0
+                    Use `bytes` or `bytearray` to specify the address.
+
+                    Using an `int` to specify the address has been deprecated because of
+                    inconsistent endianess and needless memory consumption.
+        )docstr",
+             py::arg("tx_address"))
+
+        // *****************************************************************************
+
+        .def(
+            "stopListening", [](RF24Wrapper& self, uint64_t tx_address) {
+            emit_deprecation_warning(
+                std::string(
+                    "Using an integer address is deprecated. "
+                    "Specify the address using a buffer protocol (bytes or bytearray) instead."));
+            return self.stopListening(tx_address); },
+            py::arg("tx_address"))
+
+        // *****************************************************************************
+
+        .def(
+            "stop_listening", [](RF24Wrapper& self, uint64_t tx_address) {
+            emit_deprecation_warning(
+                std::string(
+                    "Using an integer address is deprecated. "
+                    "Specify the address using a buffer protocol (bytes or bytearray) instead."));
+            return self.stopListening(tx_address); }, py::arg("tx_address"))
 
         // *****************************************************************************
 
