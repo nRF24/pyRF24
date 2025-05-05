@@ -176,9 +176,19 @@ void init_rf24network(py::module& m)
 
         // *****************************************************************************
 
-        .def("begin", static_cast<void (RF24NetworkWrapper::*)(uint8_t, uint16_t)>(&RF24NetworkWrapper::begin), R"docstr(
+        .def("begin", [](RF24NetworkWrapper& self, uint8_t channel, uint16_t node_address) {
+            emit_deprecation_warning(
+                std::string(
+                    "`begin(channel: int, node_address: int)` is deprecated. "
+                    "Instead use `begin(node_address: int)` "
+                    "and change the channel with `RF24.channel`."
+                )
+            );
+            return self.begin(channel, node_address); }, R"docstr(
             :param int channel: The desired channel used by the network.
-                Using this parameter is the deprecated form of this function.
+
+                .. deprecated:: 0.2.1
+                    Using this ``channel`` parameter is the deprecated.
 
                 .. seealso:: Use :py:attr:`~pyrf24.RF24.channel` attribute to change the radio
                     channel.

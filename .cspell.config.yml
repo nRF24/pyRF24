@@ -16,6 +16,7 @@ words:
   - datasheet
   - deinit
   - docstr
+  - Doherty
   - Doxyfile
   - EDDYSTONE
   - endl
@@ -37,6 +38,8 @@ words:
   - pyrf
   - repr
   - seealso
+  - setuptools
   - SPIDEV
   - sprintf
+  - STREQUAL
   - urandom

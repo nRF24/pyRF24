@@ -35,6 +35,11 @@ int get_bytes_or_bytearray_ln(py::object buf)
     return 0;
 }
 
+void emit_deprecation_warning(std::string message)
+{
+    PyErr_WarnEx(PyExc_DeprecationWarning, message.c_str(), 1);
+}
+
 void init_rf24(py::module& m)
 {
     m.doc() = "A Python module that wraps all RF24 C++ library's API";
@@ -649,7 +654,9 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("mask_irq", &RF24Wrapper::maskIRQ, R"docstr(
+        .def("mask_irq", [](RF24Wrapper& self, bool tx_ok, bool tx_fail, bool rx_ready) {
+            emit_deprecation_warning(std::string("`mask_irq()` is deprecated. Use `set_status_flags()` instead."));
+            return self.maskIRQ(tx_ok, tx_fail, rx_ready); }, R"docstr(
             mask_irq(tx_ok: bool, tx_fail: bool, rx_ready: bool)
 
             Configure the radio's IRQ pin to go active on certain events.
@@ -668,7 +675,9 @@ void init_rf24(py::module& m)
         )docstr",
              py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
 
-        .def("maskIRQ", &RF24Wrapper::maskIRQ, R"docstr(
+        .def("maskIRQ", [](RF24Wrapper& self, bool tx_ok, bool tx_fail, bool rx_ready) {
+            emit_deprecation_warning(std::string("`maskIRQ()` is deprecated. Use `setStatusFlags()` instead."));
+            return self.maskIRQ(tx_ok, tx_fail, rx_ready); }, R"docstr(
             maskIRQ(tx_ok: bool, tx_fail: bool, rx_ready: bool)
         )docstr",
              py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
@@ -928,14 +937,19 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("open_rx_pipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
-            .. deprecated:: 0.2.1 Use a `bytes` or `bytearray` address instead of an `int` address.
+        .def("open_rx_pipe", [](RF24Wrapper& self, uint8_t pipe_number, uint64_t address) {
+            emit_deprecation_warning(
+                std::string(
+                    "Using an integer address is deprecated. "
+                    "Specify the address using a buffer protocol (bytes or bytearray) instead."));
+            return self.openReadingPipe(pipe_number, address); }, py::arg("pipe_number"), py::arg("address"))
 
-                For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
-        )docstr",
-             py::arg("pipe_number"), py::arg("address"))
-
-        .def("openReadingPipe", static_cast<void (RF24Wrapper::*)(uint8_t, uint64_t)>(&RF24Wrapper::openReadingPipe), R"docstr(
+        .def("openReadingPipe", [](RF24Wrapper& self, uint8_t pipe_number, uint64_t address) {
+            emit_deprecation_warning(
+                std::string(
+                    "Using an integer address is deprecated. "
+                    "Specify the address using a buffer protocol (bytes or bytearray) instead."));
+            return self.openReadingPipe(pipe_number, address); }, R"docstr(
             openReadingPipe(pipe_number: int, address: int)
         )docstr",
              py::arg("pipe_number"), py::arg("address"))
@@ -966,15 +980,21 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("open_tx_pipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
+        .def("open_tx_pipe", [](RF24Wrapper& self, uint64_t address) {
+            emit_deprecation_warning(
+                std::string(
+                    "Using an integer address and `open_tx_pipe()` is deprecated. "
+                    "Instead use `stop_listening(address: bytes | bytearray)` "
+                    "or `stopListening(address: bytes | bytearray)`"));
+            return self.openWritingPipe(address); }, py::arg("address"))
 
-            .. deprecated:: 0.2.1 Use a `bytes` or `bytearray` address instead of an `int` address.
-
-                For backward compatibility, this function's ``address`` parameter can also take a 64-bit integer.
-        )docstr",
-             py::arg("address"))
-
-        .def("openWritingPipe", static_cast<void (RF24Wrapper::*)(uint64_t)>(&RF24Wrapper::openWritingPipe), R"docstr(
+        .def("openWritingPipe", [](RF24Wrapper& self, uint64_t address) {
+            emit_deprecation_warning(
+                std::string(
+                    "Using an integer address and `open_tx_pipe()` is deprecated. "
+                    "Instead use `stop_listening(address: bytes | bytearray)` "
+                    "or `stopListening(address: bytes | bytearray)`"));
+            return self.openWritingPipe(address); }, R"docstr(
             openWritingPipe(address: int)
         )docstr",
              py::arg("address"))
@@ -983,30 +1003,24 @@ void init_rf24(py::module& m)
 
         .def("stopListening", static_cast<void (RF24Wrapper::*)(void)>(&RF24Wrapper::stopListening), R"docstr(
             stopListening() -> None
-
-            Put the radio into TX mode.
         )docstr")
 
         // *****************************************************************************
 
         .def("stop_listening", static_cast<void (RF24Wrapper::*)(void)>(&RF24Wrapper::stopListening), R"docstr(
-            stop_listening() -> None
+            stop_listening(tx_address: Optional[Union[bytes | bytearray]] = None) -> None
         )docstr")
 
         // *****************************************************************************
 
         .def("stopListening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
-            stopListening(tx_address: bytes | bytearray) -> None
-
-            Put the radio into TX mode.
+            stopListening(tx_address: Optional[Union[bytes | bytearray]] = None) -> None
         )docstr",
              py::arg("tx_address"))
 
         // *****************************************************************************
 
         .def("stop_listening", static_cast<void (RF24Wrapper::*)(py::buffer)>(&RF24Wrapper::stop_listening), R"docstr(
-            stop_listening(tx_address: bytes | bytearray) -> None
-
             Stop listening for incoming messages, set the TX address, and switch to transmit mode.
 
             .. code-block:: python
@@ -1043,11 +1057,9 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck),
-             py::arg("pipe_number"), py::arg("enable"))
+        .def("set_auto_ack", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck), py::arg("pipe_number"), py::arg("enable"))
 
-        .def("setAutoAck", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck),
-             py::arg("pipe_number"), py::arg("enable"))
+        .def("setAutoAck", static_cast<void (RF24Wrapper::*)(uint8_t, bool)>(&RF24Wrapper::setAutoAck), py::arg("pipe_number"), py::arg("enable"))
 
         // *****************************************************************************
 
@@ -1094,7 +1106,14 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("is_fifo", static_cast<bool (RF24Wrapper::*)(bool, bool)>(&RF24Wrapper::isFifo), R"docstr(
+        .def("is_fifo", [](RF24Wrapper& self, bool about_tx, bool check_empty) {
+            emit_deprecation_warning(
+                std::string(
+                    "`is_fifo(about_tx: bool, check_empty: bool)` is deprecated. "
+                    "Instead use `is_fifo(about_tx: bool) -> rf24_fifo_state_e`."
+                )
+            );
+            return self.isFifo(about_tx, check_empty); }, R"docstr(
             is_fifo(about_tx: bool, check_empty: bool) -> bool \
             is_fifo(about_tx: bool) -> rf24_fifo_state_e
 
@@ -1115,7 +1134,14 @@ void init_rf24(py::module& m)
         )docstr",
              py::arg("about_tx"), py::arg("check_empty"))
 
-        .def("isFifo", static_cast<bool (RF24Wrapper::*)(bool, bool)>(&RF24Wrapper::isFifo), R"docstr(
+        .def("isFifo", [](RF24Wrapper& self, bool about_tx, bool check_empty) {
+            emit_deprecation_warning(
+                std::string(
+                    "`isFifo(about_tx: bool, check_empty: bool)` is deprecated. "
+                    "Instead use `isFifo(about_tx: bool) -> rf24_fifo_state_e`."
+                )
+            );
+            return self.isFifo(about_tx, check_empty); }, R"docstr(
             isFifo(about_tx: bool, check_empty: bool) -> bool
         )docstr",
              py::arg("about_tx"), py::arg("check_empty"))

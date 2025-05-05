@@ -17,7 +17,9 @@ if(NOT "${RF24_LINKED_DRIVER}" STREQUAL "")
     message(STATUS "Linking to utility driver '${RF24_LINKED_DRIVER}'")
 endif()
 
-# suplement our copy of linux/gpio.h into SPIDEV driver sources
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# supplement our copy of linux/gpio.h into SPIDEV driver sources
 set(SUPPLEMENT_LINUX_GPIO_H FALSE)
 
 if("${RF24_DRIVER}" STREQUAL "SPIDEV")
