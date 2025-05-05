@@ -654,7 +654,8 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("mask_irq", [](RF24Wrapper& self, bool tx_ok, bool tx_fail, bool rx_ready) {
+        .def(
+            "mask_irq", [](RF24Wrapper& self, bool tx_ok, bool tx_fail, bool rx_ready) {
             emit_deprecation_warning(std::string("`mask_irq()` is deprecated. Use `set_status_flags()` instead."));
             return self.maskIRQ(tx_ok, tx_fail, rx_ready); }, R"docstr(
             mask_irq(tx_ok: bool, tx_fail: bool, rx_ready: bool)
@@ -673,14 +674,15 @@ void init_rf24(py::module& m)
             :param bool rx_ready: `True` ignores the "data ready" event, `False` reflects the
                 "data ready" event on the IRQ pin.
         )docstr",
-             py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
+            py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
 
-        .def("maskIRQ", [](RF24Wrapper& self, bool tx_ok, bool tx_fail, bool rx_ready) {
+        .def(
+            "maskIRQ", [](RF24Wrapper& self, bool tx_ok, bool tx_fail, bool rx_ready) {
             emit_deprecation_warning(std::string("`maskIRQ()` is deprecated. Use `setStatusFlags()` instead."));
             return self.maskIRQ(tx_ok, tx_fail, rx_ready); }, R"docstr(
             maskIRQ(tx_ok: bool, tx_fail: bool, rx_ready: bool)
         )docstr",
-             py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
+            py::arg("tx_ok"), py::arg("tx_fail"), py::arg("rx_ready"))
 
         // *****************************************************************************
 
@@ -937,14 +939,16 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("open_rx_pipe", [](RF24Wrapper& self, uint8_t pipe_number, uint64_t address) {
+        .def(
+            "open_rx_pipe", [](RF24Wrapper& self, uint8_t pipe_number, uint64_t address) {
             emit_deprecation_warning(
                 std::string(
                     "Using an integer address is deprecated. "
                     "Specify the address using a buffer protocol (bytes or bytearray) instead."));
             return self.openReadingPipe(pipe_number, address); }, py::arg("pipe_number"), py::arg("address"))
 
-        .def("openReadingPipe", [](RF24Wrapper& self, uint8_t pipe_number, uint64_t address) {
+        .def(
+            "openReadingPipe", [](RF24Wrapper& self, uint8_t pipe_number, uint64_t address) {
             emit_deprecation_warning(
                 std::string(
                     "Using an integer address is deprecated. "
@@ -952,7 +956,7 @@ void init_rf24(py::module& m)
             return self.openReadingPipe(pipe_number, address); }, R"docstr(
             openReadingPipe(pipe_number: int, address: int)
         )docstr",
-             py::arg("pipe_number"), py::arg("address"))
+            py::arg("pipe_number"), py::arg("address"))
 
         // *****************************************************************************
 
@@ -980,7 +984,8 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("open_tx_pipe", [](RF24Wrapper& self, uint64_t address) {
+        .def(
+            "open_tx_pipe", [](RF24Wrapper& self, uint64_t address) {
             emit_deprecation_warning(
                 std::string(
                     "Using an integer address and `open_tx_pipe()` is deprecated. "
@@ -988,7 +993,8 @@ void init_rf24(py::module& m)
                     "or `stopListening(address: bytes | bytearray)`"));
             return self.openWritingPipe(address); }, py::arg("address"))
 
-        .def("openWritingPipe", [](RF24Wrapper& self, uint64_t address) {
+        .def(
+            "openWritingPipe", [](RF24Wrapper& self, uint64_t address) {
             emit_deprecation_warning(
                 std::string(
                     "Using an integer address and `open_tx_pipe()` is deprecated. "
@@ -997,7 +1003,7 @@ void init_rf24(py::module& m)
             return self.openWritingPipe(address); }, R"docstr(
             openWritingPipe(address: int)
         )docstr",
-             py::arg("address"))
+            py::arg("address"))
 
         // *****************************************************************************
 
@@ -1106,7 +1112,8 @@ void init_rf24(py::module& m)
 
         // *****************************************************************************
 
-        .def("is_fifo", [](RF24Wrapper& self, bool about_tx, bool check_empty) {
+        .def(
+            "is_fifo", [](RF24Wrapper& self, bool about_tx, bool check_empty) {
             emit_deprecation_warning(
                 std::string(
                     "`is_fifo(about_tx: bool, check_empty: bool)` is deprecated. "
@@ -1132,9 +1139,10 @@ void init_rf24(py::module& m)
                     inaccurate information when data suffers corruption over the SPI bus'
                     MISO line.
         )docstr",
-             py::arg("about_tx"), py::arg("check_empty"))
+            py::arg("about_tx"), py::arg("check_empty"))
 
-        .def("isFifo", [](RF24Wrapper& self, bool about_tx, bool check_empty) {
+        .def(
+            "isFifo", [](RF24Wrapper& self, bool about_tx, bool check_empty) {
             emit_deprecation_warning(
                 std::string(
                     "`isFifo(about_tx: bool, check_empty: bool)` is deprecated. "
@@ -1144,7 +1152,7 @@ void init_rf24(py::module& m)
             return self.isFifo(about_tx, check_empty); }, R"docstr(
             isFifo(about_tx: bool, check_empty: bool) -> bool
         )docstr",
-             py::arg("about_tx"), py::arg("check_empty"))
+            py::arg("about_tx"), py::arg("check_empty"))
 
         // *****************************************************************************
 
