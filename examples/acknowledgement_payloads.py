@@ -98,10 +98,15 @@ def master(count: int = 5):  # count = 5 will only transmit 5 packets
         time.sleep(1)  # let the RX node prepare a new ACK payload
         count -= 1
 
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
+    # `listen = False` (or `stop_listening()`) also will flush any
+    # unused ACK payloads in the TX FIFO, if ACK payloads are enabled
+
 
 def slave(timeout: int = 6):
     """Prints the received value and sends an ACK payload"""
-    radio.listen = True  # put radio into RX mode, power it up
+    radio.listen = True  # put radio into RX mode
 
     # setup the first transmission's ACK payload
     buffer = b"World \x00" + bytes([counter[0]])
@@ -128,8 +133,8 @@ def slave(timeout: int = 6):
             buffer = b"World \x00" + bytes([counter[0]])
             radio.write_ack_payload(1, buffer)  # load ACK for next response
 
-    # recommended behavior is to keep in TX mode while idle
-    radio.listen = False  # put radio in TX mode & flush unused ACK payloads
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def set_role():

@@ -124,7 +124,7 @@ def slave(timeout: int = 5, size: int = 32):
     #  number of bytes we need to transmit
     radio.payload_size = size  # the default is the maximum 32 bytes
 
-    radio.listen = True  # put radio into RX mode and power up
+    radio.listen = True  # put radio into RX mode
     count = 0  # keep track of the number of received payloads
     start_timer = time.monotonic()  # start timer
     while time.monotonic() < start_timer + timeout:

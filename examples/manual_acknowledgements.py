@@ -119,7 +119,7 @@ def master(count: int = 10):
 def slave(timeout: int = 6):
     """Polls the radio and prints the received value. This method expires
     after 6 seconds of no received transmission"""
-    radio.listen = True  # put radio into RX mode and power up
+    radio.listen = True  # put radio into RX mode
 
     start_timer = time.monotonic()  # start a timer to detect timeout
     while (time.monotonic() - start_timer) < timeout:

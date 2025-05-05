@@ -190,10 +190,15 @@ def master():
     radio.start_fast_write(tx_payloads[3])
     if _wait_for_irq():
         interrupt_handler()
-    radio.flush_tx()  # flush artifact payload in TX FIFO from last test
+
     # all 3 ACK payloads received were 4 bytes each, and RX FIFO is full
     # so, fetching 12 bytes from the RX FIFO also flushes RX FIFO
     print("\nComplete RX FIFO:", radio.read(12))
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
+    # `listen = False` (or `stop_listening()`) also will flush any
+    # unused ACK payloads in the TX FIFO, if ACK payloads are enabled
 
 
 def slave(timeout=6):  # will listen for 6 seconds before timing out
@@ -207,13 +212,16 @@ def slave(timeout=6):  # will listen for 6 seconds before timing out
     radio.write_ack_payload(1, ack_payloads[0])
     radio.write_ack_payload(1, ack_payloads[1])
     radio.write_ack_payload(1, ack_payloads[2])
-    radio.listen = True  # start listening & clear irq_dr flag
+    radio.listen = True  # start listening
     end_time = time.monotonic() + timeout  # start timer now
     while radio.is_fifo(False) != RF24_FIFO_FULL and time.monotonic() < end_time:
         # if RX FIFO is not full and timeout is not reached, then keep waiting
         pass
-    time.sleep(0.5)  # wait for last ACK payload to transmit
-    radio.listen = False  # put radio in TX mode & discard any ACK payloads
+    time.sleep(0.5)  # wait for last ACK payload to finish transmitting
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
+
     if radio.available():  # if RX FIFO is not empty (timeout did not occur)
         # all 3 payloads received were 5 bytes each, and RX FIFO is full
         # so, fetching 15 bytes from the RX FIFO also flushes RX FIFO

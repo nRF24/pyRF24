@@ -407,11 +407,9 @@ class FakeBLE:
         self._radio.dynamic_payloads = False
         self._radio.set_retries(0, 0)
         self._radio.address_width = 4  # use only 4 byte address length
-        self._radio.open_tx_pipe(b"\x71\x91\x7d\x6b\0")
-        self._radio.open_rx_pipe(0, b"\x71\x91\x7d\x6b\0")
+        self._radio.stop_listening(b"\x71\x91\x7d\x6b")
+        self._radio.open_rx_pipe(1, b"\x71\x91\x7d\x6b")
         self.hop_channel()
-        self._radio.power = True
-        self._radio.listen = True
         return success
 
     @property

@@ -88,7 +88,12 @@ def master(count=50):
             # channel hoping is recommended per BLE specs
             ble.hop_channel()
             time.sleep(0.5)  # wait till next broadcast
+
+    # disable these features now that we're done
     ble.show_pa_level, ble.name = (False, None)
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 # create an object for manipulating temperature measurements
@@ -112,7 +117,12 @@ def send_temp(count=50):
             ble.advertise(temperature_service.buffer, data_type=0x16)
             ble.hop_channel()
             time.sleep(0.2)
+
+    # disable these features now that we're done
     ble.name = None
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 # use the Eddystone protocol from Google to broadcast a URL as
@@ -142,6 +152,9 @@ def send_url(count=50):
             ble.hop_channel()
             time.sleep(0.2)
 
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
+
 
 def slave(timeout=6):
     """read and decipher BLE payloads for `timeout` seconds."""
@@ -163,7 +176,9 @@ def slave(timeout=6):
                     print("\traw buffer:", address_repr(service_data, False, " "))
                 else:
                     print("\t" + repr(service_data))
-    radio.listen = False  # ensure radio is in TX mode (preferred when idling)
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def set_role():

@@ -92,6 +92,9 @@ def master(node_number: int = 0, count: int = 6):
             print("Transmission failed or timed out")
         time.sleep(0.5)  # slow down the test for readability
 
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
+
 
 def slave(timeout=10):
     """Use the nRF24L01 as a base station for listening to all nodes"""
@@ -112,7 +115,9 @@ def slave(timeout=10):
                 f"PayloadID: {payload_id}",
             )
             start_timer = time.monotonic()  # reset timer with every payload
-    radio.listen = False
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def set_role():

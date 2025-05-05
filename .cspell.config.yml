@@ -18,12 +18,14 @@ words:
   - docstr
   - Doxyfile
   - EDDYSTONE
+  - endl
   - endwin
   - gpiochip
   - gpiod
   - HLINE
   - KBPS
   - MBPS
+  - millis
   - MRAA
   - multicasted
   - multiceiver
@@ -37,3 +39,4 @@ words:
   - seealso
   - SPIDEV
   - sprintf
+  - urandom
