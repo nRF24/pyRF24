@@ -105,7 +105,7 @@ def slave(timeout: int = 6):
         if has_payload:
             length = radio.payload_size  # grab the payload length
             # fetch 1 payload from RX FIFO
-            received = radio.read(length)  # also clears radio.TX_DF status flag
+            received = radio.read(length)
             # expecting a little endian float, thus the format string "<f"
             # received[:4] truncates padded 0s in case dynamic payloads are disabled
             payload[0] = struct.unpack("<f", received[:4])[0]

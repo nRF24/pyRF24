@@ -152,8 +152,8 @@ def slave(timeout: int = 6):
                 print("Response failed or timed out")
             start_timer = time.monotonic()  # reset the timeout timer
 
-    # recommended behavior is to keep in TX mode while idle
-    radio.listen = False  # put the nRF24L01 is in TX mode
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def set_role():

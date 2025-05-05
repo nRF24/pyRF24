@@ -676,7 +676,7 @@ void init_rf24(py::module& m)
         // *****************************************************************************
 
         .def("set_status_flags", &RF24::setStatusFlags, R"docstr(
-            set_status_flags(flags: int = RF24_IRQ_NONE) -> None
+            set_status_flags(flags: int = RF24_IRQ_NONE.value) -> None
 
             Set which flags shall be reflected on the radio's IRQ pin (when active LOW).
 
@@ -688,29 +688,30 @@ void init_rf24(py::module& m)
 
                 .. code-block:: python
 
-                    radio.set_status_flags(RF24_IRQ_ALL)
+                    radio.set_status_flags(int(RF24_IRQ_ALL))
                     # is equivalent to
-                    radio.set_status_flags(RF24_RX_DR | RF24_TX_DS | RF24_TX_DF)
+                    radio.set_status_flags(
+                        int(RF24_RX_DR) | int(RF24_TX_DS) | int(RF24_TX_DF)
+                    )
         )docstr",
              py::arg("flags") = RF24_IRQ_NONE)
 
         .def("setStatusFlags", &RF24::setStatusFlags, R"docstr(
-            setStatusFlags(flags: int = RF24_IRQ_NONE) -> None
+            setStatusFlags(flags: int = RF24_IRQ_NONE.value) -> None
         )docstr",
              py::arg("flags") = RF24_IRQ_NONE)
 
         // *****************************************************************************
 
         .def("clear_status_flags", &RF24::clearStatusFlags, R"docstr(
-            clear_status_flags(flags: int = RF24_IRQ_ALL) -> int
+            clear_status_flags(flags: int = RF24_IRQ_ALL.value) -> int
 
             Clear the Status flags that caused an interrupt event.
 
             .. note::
                 This function is similar to `what_happened()` because it also returns the
-                Status flags that caused the interrupt event. However, this function returns
-                a STATUS byte instead of bit-banging into 3 1-byte booleans
-                passed by reference.
+                status flags that caused the interrupt event. However, this function takes
+                a 1-byte integer instead of bit-banging each flag into 3 1-byte booleans.
 
             .. caution::
                 When used in an ISR (Interrupt Service routine), there is a chance that the
@@ -720,13 +721,23 @@ void init_rf24(py::module& m)
             :param flags: The IRQ flags to clear. Default value is all of them (``RF24_IRQ_ALL``).
                 Multiple flags can be cleared by OR-ing `rf24_irq_flags_e` values together.
 
+                .. code-block:: python
+
+                    radio.clear_status_flags()
+                    # is equivalent to
+                    radio.clear_status_flags(int(RF24_IRQ_ALL))
+                    # is equivalent to
+                    radio.clear_status_flags(
+                        int(RF24_RX_DR) | int(RF24_TX_DS) | int(RF24_TX_DF)
+                    )
+
             :Returns: The STATUS byte from the radio's register before it was modified. Use
                 enumerations of `rf24_irq_flags_e` as masks to interpret the STATUS byte's meaning(s).
         )docstr",
              py::arg("flags") = RF24_IRQ_ALL)
 
         .def("clearStatusFlags", &RF24::clearStatusFlags, R"docstr(
-            clearStatusFlags(flags: int = RF24_IRQ_ALL) -> int
+            clearStatusFlags(flags: int = RF24_IRQ_ALL.value) -> int
         )docstr",
              py::arg("flags") = RF24_IRQ_ALL)
 
@@ -936,7 +947,7 @@ void init_rf24(py::module& m)
 
             Open data pipe 0 for transmitting to a specified address.
 
-            .. deprecated:: 0.5.0 Use `RF24.open_tx_pipe()` instead.
+            .. deprecated:: 0.5.0 Use `RF24.stop_listening()` instead.
 
             :param bytes,bytearray,int address: The address assigned to data pipe 0 for outgoing transmissions.
 
