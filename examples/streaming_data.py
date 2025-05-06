@@ -5,7 +5,7 @@ See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
-from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
+from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER, RF24_TX_DF
 
 print(__file__)  # print example name
 
@@ -45,8 +45,8 @@ if not radio.begin():
 # usually run with nRF24L01 transceivers in close proximity of each other
 radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
-# set TX address of RX node into the TX pipe
-radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
+# set TX address of RX node (uses pipe 0)
+radio.stop_listening(address[radio_number])  # enter inactive TX mode
 
 # set RX address of TX node into an RX pipe
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
@@ -89,9 +89,16 @@ def master(count: int = 1, size: int = 32):
         while buf_iter < size:  # cycle through all the payloads
             buf = make_buffer(buf_iter, size)  # make a payload
             if not radio.write_fast(buf):
-                # reception failed; we need to reset the irq_rf flag
-                failures += 1  # increment manual retries
-                radio.reuse_tx()
+                flags = radio.get_status_flags()
+                if flags & int(RF24_TX_DF):
+                    failures += 1  # increment manual retries
+                    # transmitting a payload failed.
+                    # we need to reset the TX_DF flag and the radio's CE pin
+                    radio.ce_pin(False)
+                    radio.clear_status_flags(int(RF24_TX_DF))
+                    radio.ce_pin(True)
+                # else the radio's TX FIFO is full; just continue the loop
+
                 if failures > 99 and buf_iter < 7 and cnt < 2:
                     # we need to prevent an infinite loop
                     print("Make sure slave() node is listening. Quitting master_fifo()")
@@ -117,7 +124,7 @@ def slave(timeout: int = 5, size: int = 32):
     #  number of bytes we need to transmit
     radio.payload_size = size  # the default is the maximum 32 bytes
 
-    radio.listen = True  # put radio into RX mode and power up
+    radio.listen = True  # put radio into RX mode
     count = 0  # keep track of the number of received payloads
     start_timer = time.monotonic()  # start timer
     while time.monotonic() < start_timer + timeout:

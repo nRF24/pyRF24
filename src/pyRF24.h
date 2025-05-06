@@ -10,6 +10,7 @@ void throw_ba_exception(void);
 char* get_bytes_or_bytearray_str(py::object buf);
 int get_bytes_or_bytearray_ln(py::object buf);
 void init_rf24(py::module& m);
+void emit_deprecation_warning(std::string message);
 
 class RF24Wrapper : public RF24
 {
@@ -35,6 +36,10 @@ public:
 
     std::tuple<bool, bool, bool> what_happened()
     {
+        emit_deprecation_warning(
+            std::string(
+                "`what_happened()` and `whatHappened()` is deprecated. "
+                "Instead use `clear_statusFlags()` or `clearStatusFlags()`."));
         bool ds = 0, df = 0, dr = 0;
         RF24::whatHappened(ds, df, dr);
         return std::tuple<bool, bool, bool>(ds, df, dr);
@@ -42,7 +47,17 @@ public:
 
     void open_tx_pipe(py::buffer address)
     {
+        emit_deprecation_warning(
+            std::string(
+                "`open_tx_pipe()` (and `openWritingPipe()`) is deprecated. "
+                "Instead use `stop_listening(address: bytes | bytearray)` "
+                "or `stopListening(address: bytes | bytearray)`."));
         RF24::openWritingPipe(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
+    }
+
+    void stop_listening(py::buffer address)
+    {
+        RF24::stopListening(reinterpret_cast<uint8_t*>(get_bytes_or_bytearray_str(address)));
     }
 
     void open_rx_pipe(uint8_t number, py::buffer address)

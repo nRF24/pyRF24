@@ -50,8 +50,8 @@ if not radio.begin():
 # usually run with nRF24L01 transceivers in close proximity of each other
 radio.set_pa_level(RF24_PA_LOW)  # RF24_PA_MAX is default
 
-# set TX address of RX node into the TX pipe
-radio.open_tx_pipe(address[radio_number])  # always uses pipe 0
+# set TX address of RX node (uses pipe 0)
+radio.stop_listening(address[radio_number])  # enter inactive TX mode
 
 # set RX address of TX node into an RX pipe
 radio.open_rx_pipe(1, address[not radio_number])  # using pipe 1
@@ -90,11 +90,14 @@ def master(count: int = 5):  # count = 5 will only transmit 5 packets
         time.sleep(1)
         count -= 1
 
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
+
 
 def slave(timeout: int = 6):
     """Polls the radio and prints the received value. This method expires
     after 6 seconds of no received transmission."""
-    radio.listen = True  # put radio into RX mode and power up
+    radio.listen = True  # put radio into RX mode
 
     start = time.monotonic()
     while (time.monotonic() - start) < timeout:
@@ -102,7 +105,7 @@ def slave(timeout: int = 6):
         if has_payload:
             length = radio.payload_size  # grab the payload length
             # fetch 1 payload from RX FIFO
-            received = radio.read(length)  # also clears radio.irq_dr status flag
+            received = radio.read(length)
             # expecting a little endian float, thus the format string "<f"
             # received[:4] truncates padded 0s in case dynamic payloads are disabled
             payload[0] = struct.unpack("<f", received[:4])[0]
@@ -110,8 +113,8 @@ def slave(timeout: int = 6):
             print(f"Received {length} bytes on pipe {pipe_number}: {payload[0]}")
             start = time.monotonic()  # reset the timeout timer
 
-    # recommended behavior is to keep in TX mode while idle
-    radio.listen = False  # put the nRF24L01 is in TX mode
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def set_role():

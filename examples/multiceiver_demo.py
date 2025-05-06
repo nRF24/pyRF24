@@ -69,9 +69,9 @@ def master(node_number: int = 0, count: int = 6):
     # So, use varying delay between retry attempts and 15 (at most) retry attempts
     radio.set_retries(((node_number * 3) % 12) + 3, 15)  # max value is 15 for both args
 
-    radio.listen = False
-    # set the TX address to the address of the base station.
-    radio.open_tx_pipe(addresses[node_number])
+    # set TX address of RX node (uses pipe 0)
+    radio.stop_listening(addresses[node_number])  # enter inactive TX mode
+
     counter = 0
     # use the node_number to identify where the payload came from
     while counter < count:
@@ -91,6 +91,9 @@ def master(node_number: int = 0, count: int = 6):
         else:
             print("Transmission failed or timed out")
         time.sleep(0.5)  # slow down the test for readability
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def slave(timeout=10):
@@ -112,7 +115,9 @@ def slave(timeout=10):
                 f"PayloadID: {payload_id}",
             )
             start_timer = time.monotonic()  # reset timer with every payload
-    radio.listen = False
+
+    # recommended behavior is to keep radio in TX mode while idle
+    radio.listen = False  # enter inactive TX mode
 
 
 def set_role():
