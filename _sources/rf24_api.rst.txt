@@ -8,8 +8,8 @@ RF24 API
 .. autoattribute:: pyrf24.RF24_DRIVER
 
     This `str` describes the backend driver used to build the pyrf24 package.
-    If installed from pypi, then this value should be ``"SPIDEV"``.
-    
+    If installed from PyPI, then this value should be ``"SPIDEV"``.
+
     All other drivers imply that the pyrf24 package was built from source
     :ref:`using-specific-driver`.
 
@@ -33,6 +33,9 @@ Enum classes
 .. autoclass:: pyrf24.rf24_fifo_state_e
     :members: RF24_FIFO_OCCUPIED, RF24_FIFO_EMPTY, RF24_FIFO_FULL, RF24_FIFO_INVALID
 
+.. autoclass:: pyrf24.rf24_irq_flags_e
+    :members: RF24_RX_DR, RF24_TX_DS, RF24_TX_DF, RF24_IRQ_ALL, RF24_IRQ_NONE
+
 RF24 class
 ----------
 
@@ -40,11 +43,13 @@ RF24 class
 
     Basic RF24 API
     **************
-    
+
     .. automethod:: __init__
 
     .. automethod:: begin
     .. autoattribute:: listen
+    .. automethod:: stop_listening
+    .. automethod:: start_listening
     .. automethod:: available
     .. automethod:: read
     .. automethod:: write
@@ -59,16 +64,22 @@ RF24 class
     .. autoattribute:: is_chip_connected
     .. autoattribute:: is_plus_variant
     .. automethod:: what_happened
+    .. automethod:: update
+    .. automethod:: set_status_flags
+    .. automethod:: get_status_flags
+    .. automethod:: clear_status_flags
+    .. automethod:: ce_pin
 
     Debugging Helpers
     ~~~~~~~~~~~~~~~~~
 
     .. autoattribute:: failure_detected
+    .. automethod:: print_status
     .. automethod:: print_details
     .. automethod:: print_pretty_details
     .. automethod:: sprintf_pretty_details
     .. automethod:: get_arc
-    
+
     Advanced Transmission
     ~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,7 +110,7 @@ RF24 class
     .. autoattribute:: rpd
     .. automethod:: start_const_carrier
     .. automethod:: stop_const_carrier
-    
+
     .. automethod:: available_pipe
     .. automethod:: close_rx_pipe
 
@@ -126,7 +137,7 @@ RF24 class
     .. autoattribute:: payload_size
     .. autoattribute:: dynamic_payloads
     .. automethod:: get_dynamic_payload_size
-    
+
     Auto-Acknowledgement
     ~~~~~~~~~~~~~~~~~~~~
 

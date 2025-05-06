@@ -1002,6 +1002,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pyrf24.pyrf24.NETWORK_OVERRUN" class="md-nav__link">
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.pyrf24.NETWORK_OVERRUN (Python attribute)">pyrf24.<wbr>NETWORK_<wbr>OVERRUN</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pyrf24.pyrf24.NETWORK_CORRUPTION" class="md-nav__link">
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.pyrf24.NETWORK_CORRUPTION (Python attribute)">pyrf24.<wbr>NETWORK_<wbr>CORRUPTION</span>
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1687,6 +1711,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pyrf24.pyrf24.NETWORK_OVERRUN" class="md-nav__link">
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.pyrf24.NETWORK_OVERRUN (Python attribute)">pyrf24.<wbr>NETWORK_<wbr>OVERRUN</span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pyrf24.pyrf24.NETWORK_CORRUPTION" class="md-nav__link">
+    
+      <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span>
+    
+    <span class="md-ellipsis">
+      <span title="pyrf24.pyrf24.NETWORK_CORRUPTION (Python attribute)">pyrf24.<wbr>NETWORK_<wbr>CORRUPTION</span>
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1783,8 +1831,10 @@
 <dd class="field-odd"><dl class="simple api-field highlight">
 <dt id="pyrf24.RF24Network.begin.node_address"><span class="sig-name descname">node_address</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></span></span><a class="headerlink" href="#pyrf24.RF24Network.begin.node_address" title="Permalink to this definition">¶</a></dt><dd><p>This is a <a class="reference internal" href="topology.html#logical-address"><span class="std std-ref">Logical Address</span></a> (typically an octal integer).</p>
 </dd>
-<dt id="pyrf24.RF24Network.begin.channel"><span class="sig-name descname">channel</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></span></span><a class="headerlink" href="#pyrf24.RF24Network.begin.channel" title="Permalink to this definition">¶</a></dt><dd><p><p>The desired channel used by the network.
-Using this parameter is the deprecated form of this function.</p>
+<dt id="pyrf24.RF24Network.begin.channel"><span class="sig-name descname">channel</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></span></span><a class="headerlink" href="#pyrf24.RF24Network.begin.channel" title="Permalink to this definition">¶</a></dt><dd><p><p>The desired channel used by the network.</p>
+<div class="admonition deprecated">
+<p class="admonition-title"><span class="versionmodified deprecated">Deprecated since version 0.2.1: </span>Using this <code class="docutils literal notranslate"><span class="pre">channel</span></code> parameter is the deprecated.</p>
+</div>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <p>Use <a class="reference internal" href="rf24_api.html#pyrf24.RF24.channel" title="pyrf24.RF24.channel (Python attribute)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">channel</span></code></a> attribute to change the radio
@@ -2225,6 +2275,18 @@ address of the available node via the header.</p>
 <dd><p>Used by RF24Mesh</p>
 <p>Messages of this type are used to request information from the master node, generally via a unicast (direct) write.
 Any (non-master) node receiving a message of this type will manually forward it to the master node using a normal network write.</p>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="pyrf24.pyrf24.NETWORK_OVERRUN">
+<span class="sig-prename descclassname"><span class="pre">pyrf24.</span></span><span class="sig-name descname"><span class="pre">NETWORK_OVERRUN</span></span><span class="p"> <span class="pre">=</span> </span><code class="code python docutils literal highlight highlight-python"><span class="mi">160</span></code><a class="headerlink" href="#pyrf24.pyrf24.NETWORK_OVERRUN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Messages of this type indicate the network is being overrun with data and <a class="reference internal" href="#pyrf24.RF24Network.available" title="pyrf24.RF24Network.available (Python method)"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">RF24Network.available()</span></code></a> has returned from a loop.</p>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="pyrf24.pyrf24.NETWORK_CORRUPTION">
+<span class="sig-prename descclassname"><span class="pre">pyrf24.</span></span><span class="sig-name descname"><span class="pre">NETWORK_CORRUPTION</span></span><span class="p"> <span class="pre">=</span> </span><code class="code python docutils literal highlight highlight-python"><span class="mi">161</span></code><a class="headerlink" href="#pyrf24.pyrf24.NETWORK_CORRUPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Messages of this type indicate the radio has encountered corrupted data &amp; the RX FIFO has been flushed.</p>
 </dd></dl>
 
 <h3 id="network-flag-mnemonics">Network flag mnemonics<a class="headerlink" href="#network-flag-mnemonics" title="Permalink to this heading">¶</a></h3>
