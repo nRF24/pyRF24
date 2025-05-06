@@ -21,6 +21,7 @@ words:
   - EDDYSTONE
   - endl
   - endwin
+  - getmaxyx
   - gpiochip
   - gpiod
   - HLINE

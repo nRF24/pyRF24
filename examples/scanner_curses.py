@@ -203,12 +203,17 @@ def scan_channel(channel: int) -> bool:
 
 def main():
     spectrum_passes = 0
+    if curses.COLS < 55:
+        raise RuntimeError("terminal size must be at least 55 columns wide.")
     data_rate, duration = get_user_input()
     print(f"Scanning for {duration} seconds at {OFFERED_DATA_RATES[data_rate]}")
     init_radio()
     radio.setDataRate(AVAILABLE_RATES[data_rate])
     try:
         std_scr = init_curses()
+        max_rows, _ = std_scr.getmaxyx()
+        if max_rows < 25:
+            raise RuntimeError("terminal size must be at least 25 rows tall.")
         timer_prompt = "Scanning for {:>3} seconds at " + OFFERED_DATA_RATES[data_rate]
         std_scr.addstr(0, 0, "Channels are labeled in MHz.")
         std_scr.addstr(1, 0, "Signal counts are clamped to a single hexadecimal digit.")
