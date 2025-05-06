@@ -6,11 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD024 -->
 
+## [0.5.0] - 2025-05-06
+
+### <!-- 6 --> 📦 Dependency updates
+
+- Bump pypa/cibuildwheel from 2.22.0 to 2.23.0 in the github-actions group by \@dependabot[bot] in [#104](https://github.com/nRF24/pyRF24/pull/104)
+- Bump the rf24-submodules group with 3 updates by \@dependabot[bot] in [#110](https://github.com/nRF24/pyRF24/pull/110)
+
+[0.5.0]: https://github.com/nRF24/pyRF24/compare/v0.4.5...v0.5.0
+
+Full commit diff: [`v0.4.5...v0.5.0`][0.5.0]
+
 ## [0.4.5] - 2025-02-07
 
 ### <!-- 6 --> 📦 Dependency updates
 
 - Bump RF24 from `6f3da43` to `929a5aa` in the rf24-submodules group by \@dependabot[bot] in [#101](https://github.com/nRF24/pyRF24/pull/101)
+
+### <!-- 9 --> 🗨️ Changed
+
+- Bump version to v0.4.5 by \@2bndy5 in [`4160298`](https://github.com/nRF24/pyRF24/commit/41602984c2c599cb74d127a1bd960758c12b2360)
 
 [0.4.5]: https://github.com/nRF24/pyRF24/compare/v0.4.4...v0.4.5
 
