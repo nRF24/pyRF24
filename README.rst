@@ -1,6 +1,6 @@
-.. |piwheels-badge| image:: https://img.shields.io/piwheels/v/pyrf24?color=informational
-    :target: https://www.piwheels.org/project/pyrf24/
-    :alt: piwheels
+.. |pypi-badge| image:: https://img.shields.io/pypi/v/pyrf24?label=PyPI&color=blue
+    :target: https://pypi.org/project/pyrf24/
+    :alt: PyPI - Version
 .. |rtd-badge| image:: https://img.shields.io/readthedocs/pyrf24?label=ReadTheDocs&logo=readthedocs&logoColor=white
     :target: https://pyrf24.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
@@ -11,7 +11,7 @@
     :target: https://github.com/nRF24/pyRF24/actions/workflows/build.yml
     :alt: Build CI
 
-|piwheels-badge| |rtd-badge| |pypi-downloads| |ci-badge|
+|pypi-badge| |rtd-badge| |pypi-downloads| |ci-badge|
 
 Introduction
 ============
