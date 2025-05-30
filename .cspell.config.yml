@@ -24,6 +24,7 @@ words:
   - getmaxyx
   - gpiochip
   - gpiod
+  - hexlified
   - HLINE
   - KBPS
   - MBPS

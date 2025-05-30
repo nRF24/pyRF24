@@ -99,7 +99,7 @@ def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
 
     :param bytes,bytearray buf: The buffer of bytes to convert into a hexlified
         string.
-    :param bool reverse: A `bool` to control the resulting endianess. `True`
+    :param bool reverse: A `bool` to control the resulting endianness. `True`
         outputs the result as big endian. `False` outputs the result as little
         endian. This parameter defaults to `True` since `bytearray` and `bytes`
         objects are stored in big endian but written in little endian.
@@ -180,7 +180,7 @@ def whitener(buf: Union[bytes, bytearray], coefficient: int) -> bytearray:
     """Whiten and de-whiten data according to the given coefficient.
 
     This is a helper function to `FakeBLE.whiten()`. It has been broken out of the
-    `FakeBLE` class to allow whitening and dewhitening a BLE payload without the
+    `FakeBLE` class to allow whitening and de-whitening a BLE payload without the
     hardcoded coefficient.
 
     :param bytes,bytearray buf: The BLE payloads data. This data should include the
@@ -704,13 +704,15 @@ class ServiceData:
         return self._type
 
     @property
-    def data(self) -> Union[float, int, str, bytes, bytearray]:
+    def data(self):
         """This attribute is a `bytearray` or `bytes` object."""
         return self._data
 
     @data.setter
-    def data(self, value: Union[float, int, str, bytes, bytearray]):
-        self._data = value
+    def data(self, value):
+        raise NotImplementedError(
+            "Derivatives of ServiceData class should implement this"
+        )
 
     @property
     def buffer(self) -> bytes:
