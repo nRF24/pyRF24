@@ -76,7 +76,7 @@ here has been adapted to work with Python.
 
 from os import urandom
 import struct
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Any
 from .pyrf24 import (  # type: ignore
     RF24,
     RF24_CRC_DISABLED,
@@ -99,7 +99,7 @@ def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
 
     :param bytes,bytearray buf: The buffer of bytes to convert into a hexlified
         string.
-    :param bool reverse: A `bool` to control the resulting endianess. `True`
+    :param bool reverse: A `bool` to control the resulting endianness. `True`
         outputs the result as big endian. `False` outputs the result as little
         endian. This parameter defaults to `True` since `bytearray` and `bytes`
         objects are stored in big endian but written in little endian.
@@ -180,7 +180,7 @@ def whitener(buf: Union[bytes, bytearray], coefficient: int) -> bytearray:
     """Whiten and de-whiten data according to the given coefficient.
 
     This is a helper function to `FakeBLE.whiten()`. It has been broken out of the
-    `FakeBLE` class to allow whitening and dewhitening a BLE payload without the
+    `FakeBLE` class to allow whitening and de-whitening a BLE payload without the
     hardcoded coefficient.
 
     :param bytes,bytearray buf: The BLE payloads data. This data should include the
@@ -321,16 +321,16 @@ class QueueElement:
             service: ServiceDataType
             if service_data_uuid == TEMPERATURE_UUID:
                 service = TemperatureServiceData()
-                service.data = buf[3:]  # type: ignore
+                service.data = buf[3:]
                 self.data.append(service)
             elif service_data_uuid == BATTERY_UUID:
                 service = BatteryServiceData()
-                service.data = buf[3:]  # type: ignore
+                service.data = buf[3:]
                 self.data.append(service)
             elif service_data_uuid == EDDYSTONE_UUID:
                 service = UrlServiceData()
-                service.pa_level_at_1_meter = buf[4:5]  # type: ignore
-                service.data = buf[5:]  # type: ignore
+                service.pa_level_at_1_meter = buf[4:5]
+                service.data = buf[5:]
                 self.data.append(service)
             else:
                 self.data.append(buf)
@@ -704,13 +704,15 @@ class ServiceData:
         return self._type
 
     @property
-    def data(self) -> Union[float, int, str, bytes, bytearray]:
+    def data(self) -> Any:
         """This attribute is a `bytearray` or `bytes` object."""
         return self._data
 
     @data.setter
-    def data(self, value: Union[float, int, str, bytes, bytearray]):
-        self._data = value
+    def data(self, value: Any) -> None:
+        raise NotImplementedError(
+            "Derivatives should implement ServiceData.data.setter"
+        )
 
     @property
     def buffer(self) -> bytes:
@@ -742,16 +744,16 @@ class TemperatureServiceData(ServiceData):
         DownloadDoc.ashx?doc_id=502132&vId=542989>`_
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(TEMPERATURE_UUID)
 
-    @property  # type: ignore[override]
+    @property
     def data(self) -> float:
         """This attribute is a `float` value."""
         return struct.unpack("<i", self._data[:3] + b"\0")[0] * 10**-2
 
     @data.setter
-    def data(self, value: Union[bytes, bytearray, float]):
+    def data(self, value: Union[bytes, bytearray, float]) -> None:
         if isinstance(value, float):
             value = struct.pack("<i", int(value * 100) & 0xFFFFFF)
             self._data = value[:3] + bytes([0xFE])
@@ -772,16 +774,16 @@ class BatteryServiceData(ServiceData):
         DownloadDoc.ashx?doc_id=502132&vId=542989>`_
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(BATTERY_UUID)
 
-    @property  # type: ignore[override]
+    @property
     def data(self) -> int:
         """The attribute is a 1-byte unsigned `int` value."""
         return int(self._data[0])
 
     @data.setter
-    def data(self, value: Union[bytes, bytearray, int]):
+    def data(self, value: Union[bytes, bytearray, int]) -> None:
         if isinstance(value, int):
             self._data = struct.pack("B", value)
         elif isinstance(value, (bytes, bytearray)):
@@ -800,7 +802,7 @@ class UrlServiceData(ServiceData):
         <https://github.com/google/eddystone/tree/master/eddystone-url>`_.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(EDDYSTONE_UUID)
         self._type += bytes([0x10]) + struct.pack(">b", -25)
 
@@ -816,7 +818,7 @@ class UrlServiceData(ServiceData):
         return struct.unpack(">b", self._type[-1:])[0]
 
     @pa_level_at_1_meter.setter
-    def pa_level_at_1_meter(self, value: Union[bytes, bytearray, int]):
+    def pa_level_at_1_meter(self, value: Union[bytes, bytearray, int]) -> None:
         if isinstance(value, int):
             self._type = self._type[:-1] + struct.pack(">b", int(value))
         elif isinstance(value, (bytes, bytearray)):
@@ -826,7 +828,7 @@ class UrlServiceData(ServiceData):
     def uuid(self) -> bytes:
         return self._type[:2]
 
-    @property  # type: ignore[override]
+    @property
     def data(self) -> str:
         """This attribute is a `str` of URL data."""
         value = self._data.decode()
