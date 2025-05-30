@@ -321,16 +321,16 @@ class QueueElement:
             service: ServiceDataType
             if service_data_uuid == TEMPERATURE_UUID:
                 service = TemperatureServiceData()
-                service.data = buf[3:]  # type: ignore
+                service.data = buf[3:]
                 self.data.append(service)
             elif service_data_uuid == BATTERY_UUID:
                 service = BatteryServiceData()
-                service.data = buf[3:]  # type: ignore
+                service.data = buf[3:]
                 self.data.append(service)
             elif service_data_uuid == EDDYSTONE_UUID:
                 service = UrlServiceData()
-                service.pa_level_at_1_meter = buf[4:5]  # type: ignore
-                service.data = buf[5:]  # type: ignore
+                service.pa_level_at_1_meter = buf[4:5]
+                service.data = buf[5:]
                 self.data.append(service)
             else:
                 self.data.append(buf)
@@ -711,7 +711,7 @@ class ServiceData:
     @data.setter
     def data(self, value):
         raise NotImplementedError(
-            "Derivatives of ServiceData class should implement this"
+            "Derivatives should implement ServiceData.data.setter"
         )
 
     @property
