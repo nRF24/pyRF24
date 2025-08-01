@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [native, aarch64, armv7l]
-        python: [cp39, cp310, cp311, cp312, cp313]
+        python: [cp39, cp310, cp311, cp312, cp313, cp314]
         tag: [manylinux, musllinux]
     steps:
       - name: Checkout Current Repo
@@ -37,8 +37,8 @@ jobs:
         if: matrix.platform != 'native'
         uses: docker/setup-qemu-action@v3
 
-      - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+      - name: Build wheels with cibuildwheel
+        uses: pypa/cibuildwheel@v3.1.2
         env:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
           CIBW_SKIP: pp* *ppc64le *s390x
