@@ -87,7 +87,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+        uses: pypa/cibuildwheel@v3.1.4
         with:
           output-dir: dist
         # see options at https://cibuildwheel.pypa.io/en/stable/options/
