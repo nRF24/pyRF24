@@ -64,7 +64,7 @@ jobs:
           name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
           path: ${{ github.workspace }}/dist
 
-  upload-pypi:
+  publish:
     needs: [build]
     permissions:
       id-token: write
