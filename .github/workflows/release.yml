@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [native, aarch64, armv7l]
-        python: [cp37, cp38, cp39, cp310, cp311, cp312, cp313]
+        python: [cp39, cp310, cp311, cp312, cp313, cp314]
         tag: [manylinux, musllinux]
     steps:
       - name: Checkout Current Repo
@@ -36,17 +36,9 @@ jobs:
       - name: Set up QEMU
         if: matrix.platform != 'native'
         uses: docker/setup-qemu-action@v3
-        with:
-          # cached image is enabled by default.
-          # This option to disable caching doesn't exist before docker/setup-qemu-action@v3.3
-          # cache-image: false
 
-          # NOTE: the default tag `tonistiigi/binfmt:latest` is old and uses qemu v6.2.0
-          # See also https://github.com/tonistiigi/binfmt/issues/215
-          image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
-
-      - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+      - name: Build wheels with cibuildwheel
+        uses: pypa/cibuildwheel@v3.1.2
         env:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
           CIBW_SKIP: pp* *ppc64le *s390x
@@ -72,7 +64,7 @@ jobs:
           name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
           path: ${{ github.workspace }}/dist
 
-  upload-pypi:
+  publish:
     needs: [build]
     permissions:
       id-token: write

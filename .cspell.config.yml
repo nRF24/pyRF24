@@ -2,6 +2,8 @@ version: "0.2"
 words:
   - addch
   - addstr
+  - ARCHS
+  - armv
   - attroff
   - attron
   - autoattribute
@@ -9,6 +11,8 @@ words:
   - automethod
   - calcsize
   - cbreak
+  - cibuildwheel
+  - CIBW
   - classmethod
   - crclength
   - currentmodule
@@ -24,21 +28,31 @@ words:
   - getmaxyx
   - gpiochip
   - gpiod
+  - graphviz
   - hexlified
   - HLINE
   - KBPS
+  - libgl
+  - libglvnd
+  - libxkbcommon
+  - manylinux
   - MBPS
   - millis
   - MRAA
   - multicasted
   - multiceiver
+  - musllinux
+  - mypy
   - nocbreak
   - noecho
+  - peaceiris
   - pigpio
   - pybind
+  - pypa
   - pyproject
   - pyrf
   - repr
+  - sdist
   - seealso
   - setuptools
   - SPIDEV
