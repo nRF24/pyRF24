@@ -46,7 +46,7 @@ jobs:
           image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+        uses: pypa/cibuildwheel@v3.1.3
         env:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
           CIBW_SKIP: pp* *ppc64le *s390x
@@ -87,7 +87,7 @@ jobs:
           python-version: 3.x
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: pyRF24_pkg_dist_*
           path: dist
