@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform == 'native' && 'ubuntu-latest' || 'ubuntu-latest-arm' }}
     strategy:
       fail-fast: false
       matrix:
@@ -16,7 +16,7 @@ jobs:
         tag: [manylinux, musllinux]
     steps:
       - name: Checkout Current Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
           fetch-depth: 0
@@ -34,16 +34,8 @@ jobs:
           python3 -m pip install -r requirements-build.txt
 
       - name: Set up QEMU
-        if: matrix.platform != 'native'
+        if: matrix.platform == 'armv7l'
         uses: docker/setup-qemu-action@v3
-        with:
-          # cached image is enabled by default.
-          # This option to disable caching doesn't exist before docker/setup-qemu-action@v3.3
-          # cache-image: false
-
-          # NOTE: the default tag `tonistiigi/binfmt:latest` is old and uses qemu v6.2.0
-          # See also https://github.com/tonistiigi/binfmt/issues/215
-          image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.23.3
@@ -79,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Current Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -87,7 +79,7 @@ jobs:
           python-version: 3.x
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: pyRF24_pkg_dist_*
           path: dist
