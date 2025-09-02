@@ -33,10 +33,6 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements-build.txt
 
-      - name: Set up QEMU
-        if: matrix.platform == 'armv7l'
-        uses: docker/setup-qemu-action@v3
-
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.23.3
         env:
