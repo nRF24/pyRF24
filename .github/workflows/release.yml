@@ -16,8 +16,7 @@ env:
 
 run-name: >-
   Release
-  ${{ github.ref_name }}
-  ${{ github.ref_name != 'main' && '(dry-run)' }}
+  ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || (github.ref_name != 'main' && '(dry-run)' || github.ref) }}
 
 jobs:
   # sdist for non-supported platforms will serve as a stub lib install
