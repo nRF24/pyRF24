@@ -28,16 +28,13 @@ jobs:
 
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.23.3
+        with:
+          output-dir: dist
         env:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
           CIBW_SKIP: pp* *ppc64le *s390x
           CIBW_BUILD_VERBOSITY: 1
           CIBW_BUILD: '${{ matrix.python }}*${{ matrix.tag }}*'
-
-      - name: Move cross-compiled wheels to dist folder
-        run: |
-          mkdir -p dist
-          mv ./wheelhouse/*.whl ${{ github.workspace }}/dist/
 
       - name: build source distributable wheel
         # only need to do this once, preferably on a native build.
@@ -51,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
-          path: ${{ github.workspace }}/dist
+          path: dist
 
   upload-pypi:
     needs: [build]
