@@ -2,11 +2,42 @@ name: Release Actions
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    branches: [main]
+    tags: ['**']
+  pull_request:
+    branches: [main]
+
+env:
+  ARTIFACT_NAME_PREFIX: 'pyRF24_wheels'
 
 jobs:
-  build:
+  # sdist for non-supported platforms will serve as a stub lib install
+  sdist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Current Repo
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+          # non-shallow checkout needed for setuptools_scm
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: build
+        run: pipx run build -s
+
+      - name: Save distributable wheels as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME_PREFIX }}_sdist
+          path: dist
+
+  linux:
     runs-on: ${{ matrix.platform == 'native' && 'ubuntu-latest' || 'ubuntu-24.04-arm' }}
     strategy:
       fail-fast: false
@@ -19,6 +50,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           submodules: true
+          # non-shallow checkout needed for setuptools_scm
           fetch-depth: 0
 
       - name: Set up Python
@@ -36,52 +68,48 @@ jobs:
           CIBW_BUILD_VERBOSITY: 1
           CIBW_BUILD: '${{ matrix.python }}*${{ matrix.tag }}*'
 
-      - name: build source distributable wheel
-        # only need to do this once, preferably on a native build.
-        if: matrix.platform == 'native' && matrix.python == 'cp313' && matrix.tag == 'manylinux'
-        # sdist for non-supported platforms will serve as a stub lib install
-        run: |
-          python -m pip install build
-          python -m build -s
-
       - name: Save distributable wheels as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pyRF24_pkg_dist_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
+          name: ${{ env.ARTIFACT_NAME_PREFIX }}_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
           path: dist
 
-  upload-pypi:
-    needs: [build]
+  deploy:
+    name: >-
+      Deploy to
+      ${{ startsWith(github.ref, 'refs/tags/') && 'pypi' || 'test-pypi' }}
+      ${{ startsWith(github.ref, 'refs/heads/') && github.ref_name != 'main' && '(dry run)' || '' }}
+    needs: [sdist, linux]
     permissions:
+      # needed permission for PyPI "trusted publishing"
       id-token: write
     runs-on: ubuntu-latest
+    env:
+      # to avoid typos, set this here for easy repetition
+      DEFAULT_BRANCH: 'refs/heads/main'
     steps:
-      - name: Checkout Current Repo
-        uses: actions/checkout@v5
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-
       - name: Download build artifacts
         uses: actions/download-artifact@v5
         with:
-          pattern: pyRF24_pkg_dist_*
+          pattern: ${{ env.ARTIFACT_NAME_PREFIX }}_*
           path: dist
           merge-multiple: true
 
-      - name: Display uploaded distributions
-        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
-        run: ls -r dist/
+      # if doing a dry-run (not a tag and not on main branch)
+      - name: Set up Python
+        if: github.ref != env.DEFAULT_BRANCH
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Validate distributions
+        if: github.ref != env.DEFAULT_BRANCH
+        run: pipx run twine check dist/*
 
-      - name: Publish package (to TestPyPI)
-        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+      - name: Publish package
+        # only deploy from the main branch or when a tag is pushed
+        if: github.ref == env.DEFAULT_BRANCH || startsWith(github.ref, 'refs/tags/')
         uses: pypa/gh-action-pypi-publish@v1.12.4
         with:
-          repository-url: https://test.pypi.org/legacy/
-
-      - name: Publish to PyPi
-        # only upload distributions to PyPi when triggered by a published release
-        if: github.event_name == 'release'
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+          # Only upload distributions to PyPI when triggered by a pushed tag.
+          # Otherwise, upload to test-PyPI for nightly builds on main branch.
+          repository-url: https://${{ startsWith(github.ref, 'refs/tags/') && 'upload' || 'test' }}.pypi.org/legacy/
