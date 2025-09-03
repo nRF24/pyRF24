@@ -1,15 +1,23 @@
-name: Release Actions
+name: Release CI
 
 on:
-  workflow_dispatch:
+  # to publish from main branch. 
   push:
     branches: [main]
     tags: ['**']
+  # to verify distributions before merging a PR
   pull_request:
     branches: [main]
+  # to manually trigger dry-runs on non-default branches
+  workflow_dispatch:
 
 env:
   ARTIFACT_NAME_PREFIX: 'pyRF24_wheels'
+
+run-name: >-
+  Release
+  ${{ github.ref_name }}
+  ${{ github.ref_name != 'main' && '(dry-run)' }}
 
 jobs:
   # sdist for non-supported platforms will serve as a stub lib install
@@ -53,20 +61,16 @@ jobs:
           # non-shallow checkout needed for setuptools_scm
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.23.3
         with:
           output-dir: dist
+        # see options at https://cibuildwheel.pypa.io/en/stable/options/
         env:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
-          CIBW_SKIP: pp* *ppc64le *s390x
           CIBW_BUILD_VERBOSITY: 1
           CIBW_BUILD: '${{ matrix.python }}*${{ matrix.tag }}*'
+          CIBW_SKIP: pp* *ppc64le *s390x
 
       - name: Save distributable wheels as artifacts
         uses: actions/upload-artifact@v4
@@ -78,7 +82,7 @@ jobs:
     name: >-
       Deploy to
       ${{ startsWith(github.ref, 'refs/tags/') && 'pypi' || 'test-pypi' }}
-      ${{ startsWith(github.ref, 'refs/heads/') && github.ref_name != 'main' && '(dry run)' || '' }}
+      ${{ github.ref_name != 'main' && '(dry run)' }}
     needs: [sdist, linux]
     permissions:
       # needed permission for PyPI "trusted publishing"
