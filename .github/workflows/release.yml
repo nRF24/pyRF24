@@ -46,13 +46,39 @@ jobs:
           path: dist
 
   linux:
-    runs-on: ${{ matrix.platform == 'native' && 'ubuntu-latest' || 'ubuntu-24.04-arm' }}
+    runs-on: ${{ (matrix.arch == 'aarch64' || matrix.arch == 'armv7l') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:
-        platform: [native, aarch64, armv7l]
+        # the intention here is that each wheel is built in a separate job
+        arch: [x86_64, aarch64, armv7l]
         python: [cp37, cp38, cp39, cp310, cp311, cp312, cp313]
         tag: [manylinux, musllinux]
+        include:
+          - arch: aarch64
+            python: pp38
+            tag: manylinux
+          - arch: aarch64
+            python: pp39
+            tag: manylinux
+          - arch: aarch64
+            python: pp310
+            tag: manylinux
+          - arch: aarch64
+            python: pp311
+            tag: manylinux
+          - arch: x86_64
+            python: pp38
+            tag: manylinux
+          - arch: x86_64
+            python: pp39
+            tag: manylinux
+          - arch: x86_64
+            python: pp310
+            tag: manylinux
+          - arch: x86_64
+            python: pp311
+            tag: manylinux
     steps:
       - name: Checkout Current Repo
         uses: actions/checkout@v5
@@ -67,15 +93,15 @@ jobs:
           output-dir: dist
         # see options at https://cibuildwheel.pypa.io/en/stable/options/
         env:
-          CIBW_ARCHS_LINUX: ${{ matrix.platform }}
+          # for transparent logs
           CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: '${{ matrix.python }}*${{ matrix.tag }}*'
-          CIBW_SKIP: pp* *ppc64le *s390x
+          CIBW_BUILD: '${{ matrix.python }}-${{ matrix.tag }}_*'
+          CIBW_ARCHS_LINUX: ${{ matrix.arch }}
 
       - name: Save distributable wheels as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ARTIFACT_NAME_PREFIX }}_${{ matrix.platform }}_${{ matrix.python }}_${{ matrix.tag }}
+          name: ${{ env.ARTIFACT_NAME_PREFIX }}_${{ matrix.arch }}_${{ matrix.python }}_${{ matrix.tag }}
           path: dist
 
   deploy:
