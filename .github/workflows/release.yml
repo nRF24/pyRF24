@@ -26,13 +26,6 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Install dependencies
-        if: matrix.platform == 'native'
-        run: |
-          sudo apt install python3-dev
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -r requirements-build.txt
-
       - name: Build wheels with cibuildwheels
         uses: pypa/cibuildwheel@v2.23.3
         env:
