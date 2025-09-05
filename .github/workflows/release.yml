@@ -16,13 +16,13 @@ jobs:
         tag: [manylinux, musllinux]
     steps:
       - name: Checkout Current Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
@@ -46,7 +46,7 @@ jobs:
           image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+        uses: pypa/cibuildwheel@v3.1.4
         env:
           CIBW_ARCHS_LINUX: ${{ matrix.platform }}
           CIBW_SKIP: pp* *ppc64le *s390x
@@ -79,15 +79,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Current Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: pyRF24_pkg_dist_*
           path: dist
@@ -99,11 +99,11 @@ jobs:
 
       - name: Publish package (to TestPyPI)
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        uses: pypa/gh-action-pypi-publish@v1.13.0
         with:
           repository-url: https://test.pypi.org/legacy/
 
       - name: Publish to PyPi
         # only upload distributions to PyPi when triggered by a published release
         if: github.event_name == 'release'
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        uses: pypa/gh-action-pypi-publish@v1.13.0
