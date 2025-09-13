@@ -702,13 +702,11 @@ pip<span class="w"> </span>install<span class="w"> </span>gpiod
 </code></pre></div>
 </div>
 <p>We have distributed binary wheels to pypi.org for easy installation and automated dependency.
-These wheels specifically target any Linux platform on <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> architecture.
-If you’re using Raspberry Pi OS (32 bit), then the above command will fetch <code class="docutils literal notranslate"><span class="pre">armv7l</span></code> binary
-wheels from the piwheels index (which is already configured for use in the Raspberry Pi OS).</p>
+These wheels specifically target any Linux platform on <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>, <code class="docutils literal notranslate"><span class="pre">armv7l</span></code>, and <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> architectures.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
-<p>If you’re installing from a Linux machine that is not using an architecture <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>
-or <code class="docutils literal notranslate"><span class="pre">armv7l</span></code>, then pip may try to build the package from source code.
+<p>If you’re installing from a Linux machine that is not using an architecture <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>,
+<code class="docutils literal notranslate"><span class="pre">armv7l</span></code>, or <code class="docutils literal notranslate"><span class="pre">x86_64</span></code>, then pip may try to build the package from source code.
 In this case, you’ll likely need to install some extra build dependencies:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-dev<span class="w"> </span>cmake
 </code></pre></div>
@@ -805,6 +803,11 @@ layers of the RF24 stack. For a list of supported options, look at the script in
 <p>The following value will turn on debug output for the RF24Mesh and RF24Network
 classes (respectively).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF24MESH_DEBUG=ON -DRF24NETWORK_DEBUG=ON&quot;</span>
+</code></pre></div>
+</div>
+<p>For RPi clones that use a different GPIO chip number, the <code class="docutils literal notranslate"><span class="pre">CMAKE_ARGS</span></code> can be used to adjust this too.
+The default GPIO chip number is set to <code class="docutils literal notranslate"><span class="pre">/dev/gpiochip0</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DRF24_LINUX_GPIO_CHIP=/dev/gpiochip4&quot;</span>
 </code></pre></div>
 </div>
 </div>
