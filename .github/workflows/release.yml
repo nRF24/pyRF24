@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
@@ -87,7 +87,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+        uses: pypa/cibuildwheel@v3.1.4
         with:
           output-dir: dist
         # see options at https://cibuildwheel.pypa.io/en/stable/options/
@@ -127,7 +127,7 @@ jobs:
       # if doing a dry-run (not a tag and not on main branch)
       - name: Set up Python
         if: github.ref != env.DEFAULT_BRANCH
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
       - name: Validate distributions
@@ -137,7 +137,7 @@ jobs:
       - name: Publish package
         # only deploy from the main branch or when a tag is pushed
         if: github.ref == env.DEFAULT_BRANCH || startsWith(github.ref, 'refs/tags/')
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        uses: pypa/gh-action-pypi-publish@v1.13.0
         with:
           # Only upload distributions to PyPI when triggered by a pushed tag.
           # Otherwise, upload to test-PyPI for nightly builds on main branch.
