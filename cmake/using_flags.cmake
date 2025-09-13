@@ -2,6 +2,7 @@
 
 # ## RF24 core specific options
 option(RF24_DEBUG "enable/disable debugging output for RF24 lib" OFF)
+option(RF24_LINUX_GPIO_CHIP "select a specific GPIO chip corresponding to `/dev/gpiochipX`" /dev/gpiochip0)
 
 # ## RF24Network specific options
 option(RF24NETWORK_DEBUG "enable/disable debugging output for RF24Network lib" OFF)
@@ -81,6 +82,11 @@ function(apply_flags target)
 
     # pass driver used to expose as a constant in rf24 module.
     target_compile_definitions(${target} PUBLIC RF24_DRIVER="${RF24_DRIVER}")
+
+    if(RF24_LINUX_GPIO_CHIP)
+        message(STATUS "Setting default GPIO chip to ${RF24_LINUX_GPIO_CHIP}")
+        target_compile_definitions(${target} PUBLIC RF24_LINUX_GPIO_CHIP="${RF24_LINUX_GPIO_CHIP}")
+    endif()
 
     # apply RF24Network flags to cpp_rf24_network target
     if(RF24NETWORK_DEBUG)

@@ -23,17 +23,20 @@ words:
   - Doherty
   - Doxyfile
   - EDDYSTONE
+  - endfunction
   - endl
   - endwin
   - getmaxyx
   - gpiochip
   - gpiod
+  - graphviz
   - hexlified
   - HLINE
   - KBPS
   - manylinux
   - MBPS
   - millis
+  - MOSI
   - MRAA
   - multicasted
   - multiceiver
@@ -41,7 +44,9 @@ words:
   - mypy
   - nocbreak
   - noecho
+  - NOMASTER
   - pigpio
+  - Pinout
   - pipx
   - pybind
   - pypa

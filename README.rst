@@ -76,13 +76,11 @@ Simply use:
     python -m pip install pyrf24
 
 We have distributed binary wheels to pypi.org for easy installation and automated dependency.
-These wheels specifically target any Linux platform on ``aarch64`` architecture.
-If you're using Raspberry Pi OS (32 bit), then the above command will fetch ``armv7l`` binary
-wheels from the piwheels index (which is already configured for use in the Raspberry Pi OS).
+These wheels specifically target any Linux platform on ``aarch64``, ``armv7l``, and ``x86_64`` architectures.
 
 .. note::
-    If you're installing from a Linux machine that is not using an architecture ``aarch64``
-    or ``armv7l``, then pip may try to build the package from source code.
+    If you're installing from a Linux machine that is not using an architecture ``aarch64``,
+    ``armv7l``, or ``x86_64``, then pip may try to build the package from source code.
     In this case, you'll likely need to install some extra build dependencies:
 
     .. code-block:: bash
@@ -197,6 +195,14 @@ then it is necessary to use an environment variable containing additional argume
     .. code-block:: bash
 
         export CMAKE_ARGS="-DRF24MESH_DEBUG=ON -DRF24NETWORK_DEBUG=ON"
+
+    For RPi clones that use a different GPIO chip number, the ``CMAKE_ARGS`` can be used to adjust this too.
+    The default GPIO chip number is set to ``/dev/gpiochip0``.
+
+    .. code-block:: bash
+
+        export CMAKE_ARGS="-DRF24_LINUX_GPIO_CHIP=/dev/gpiochip4"
+
 
 Then just build and install the package from source as usual.
 
