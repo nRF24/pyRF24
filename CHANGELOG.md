@@ -6,12 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD024 -->
 
+## [0.5.1] - 2025-09-13
+
+### <!-- 1 --> 🚀 Added
+
+- Note support for changing default GPIO chip by \@2bndy5 in [#125](https://github.com/nRF24/pyRF24/pull/125)
+
+### <!-- 3 --> 🗑️ Removed
+
+- Use arm runner instead of qemu in release CI by \@2bndy5 in [#120](https://github.com/nRF24/pyRF24/pull/120)
+
+### <!-- 6 --> 📦 Dependency updates
+
+- Bump pypa/cibuildwheel from 2.23.0 to 2.23.3 in the github-actions group by \@dependabot[bot] in [#111](https://github.com/nRF24/pyRF24/pull/111)
+- Bump the github-actions group across 1 directory with 2 updates by \@dependabot[bot] in [#124](https://github.com/nRF24/pyRF24/pull/124)
+- Bump the rf24-submodules group with 3 updates by \@dependabot[bot] in [#117](https://github.com/nRF24/pyRF24/pull/117)
+
+### <!-- 9 --> 🗨️ Changed
+
+- Update version badge in README by \@2bndy5 in [`f8d3e06`](https://github.com/nRF24/pyRF24/commit/f8d3e067012b56c202becf03412a555b866c560d)
+- Relax types on abstract class for BLE `ServiceData` by \@2bndy5 in [#115](https://github.com/nRF24/pyRF24/pull/115)
+
+[0.5.1]: https://github.com/nRF24/pyRF24/compare/v0.5.0...v0.5.1
+
+Full commit diff: [`v0.5.0...v0.5.1`][0.5.1]
+
 ## [0.5.0] - 2025-05-06
 
 ### <!-- 6 --> 📦 Dependency updates
 
 - Bump pypa/cibuildwheel from 2.22.0 to 2.23.0 in the github-actions group by \@dependabot[bot] in [#104](https://github.com/nRF24/pyRF24/pull/104)
 - Bump the rf24-submodules group with 3 updates by \@dependabot[bot] in [#110](https://github.com/nRF24/pyRF24/pull/110)
+
+### <!-- 9 --> 🗨️ Changed
+
+- Bump version to v0.5.0 by \@2bndy5 in [`fb6a5d4`](https://github.com/nRF24/pyRF24/commit/fb6a5d470526b156e04089c4466f3c8bc59dbdc9)
 
 [0.5.0]: https://github.com/nRF24/pyRF24/compare/v0.4.5...v0.5.0
 
