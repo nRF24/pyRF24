@@ -11,7 +11,7 @@ words:
   - automethod
   - calcsize
   - cbreak
-  - cibuildwheels
+  - cibuildwheel
   - CIBW
   - classmethod
   - crclength

@@ -54,7 +54,7 @@ jobs:
       matrix:
         # the intention here is that each wheel is built in a separate job
         arch: [x86_64, aarch64, armv7l]
-        python: [cp37, cp38, cp39, cp310, cp311, cp312, cp313]
+        python: [cp39, cp310, cp311, cp312, cp313, cp314]
         tag: [manylinux, musllinux]
         include:
           - arch: aarch64

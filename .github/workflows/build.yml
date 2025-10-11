@@ -57,9 +57,7 @@ jobs:
         run: exit 1
 
       - name: Build package for docs extraction and linting examples
-        run: |-
-          pipx run build -o dist
-          python -m pip install dist/pyrf24-*.whl
+        run: python -m pip install -v ./
 
       - name: check python typing
         run: mypy src
@@ -85,15 +83,6 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./docs/_build/html
-
-      - name: Save distributable wheels as artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: "pyRF24_pkg_dist"
-          path: ${{ github.workspace }}/dist
-
-      - name: Validate distribution
-        run: pipx run twine check dist/*
 
   deploy-docs:
     needs: [build]
