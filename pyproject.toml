@@ -2,7 +2,7 @@
 # building cmake from pypi releases requires openssl-dev installed, so
 # just require users install cmake from apt when getting python-dev (CPython headers)
 requires = [
-    "setuptools>=61",
+    "setuptools>=77",
     "wheel",
     "setuptools_scm[toml]>=6.2"
 ]
@@ -35,17 +35,13 @@ classifiers = [
     "Operating System :: POSIX :: Linux",
     "Programming Language :: C++",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Topic :: Software Development :: Libraries",
     "Topic :: System :: Hardware",
     "Topic :: System :: Hardware :: Hardware Drivers",
     "Topic :: System :: Networking",
     "Typing :: Typed",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 dependencies = ['typing-extensions; python_version < "3.13"']
 dynamic = ["version"]
 
