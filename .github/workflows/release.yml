@@ -18,6 +18,8 @@ run-name: >-
   Release
   ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || (github.ref_name != 'main' && '(dry-run)' || github.ref) }}
 
+permissions: {}
+
 jobs:
   # sdist for non-supported platforms will serve as a stub lib install
   sdist:
@@ -29,6 +31,7 @@ jobs:
           submodules: true
           # non-shallow checkout needed for setuptools_scm
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -51,26 +54,14 @@ jobs:
       matrix:
         # the intention here is that each wheel is built in a separate job
         arch: [x86_64, aarch64, armv7l]
-        python: [cp37, cp38, cp39, cp310, cp311, cp312, cp313]
+        python: [cp39, cp310, cp311, cp312, cp313, cp314]
         tag: [manylinux, musllinux]
         include:
-          - arch: aarch64
-            python: pp38
-            tag: manylinux
-          - arch: aarch64
-            python: pp39
-            tag: manylinux
           - arch: aarch64
             python: pp310
             tag: manylinux
           - arch: aarch64
             python: pp311
-            tag: manylinux
-          - arch: x86_64
-            python: pp38
-            tag: manylinux
-          - arch: x86_64
-            python: pp39
             tag: manylinux
           - arch: x86_64
             python: pp310
@@ -85,9 +76,10 @@ jobs:
           submodules: true
           # non-shallow checkout needed for setuptools_scm
           fetch-depth: 0
+          persist-credentials: false
 
-      - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v2.23.3
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3.2.0
         with:
           output-dir: dist
         # see options at https://cibuildwheel.pypa.io/en/stable/options/
