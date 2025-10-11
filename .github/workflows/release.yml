@@ -58,22 +58,10 @@ jobs:
         tag: [manylinux, musllinux]
         include:
           - arch: aarch64
-            python: pp38
-            tag: manylinux
-          - arch: aarch64
-            python: pp39
-            tag: manylinux
-          - arch: aarch64
             python: pp310
             tag: manylinux
           - arch: aarch64
             python: pp311
-            tag: manylinux
-          - arch: x86_64
-            python: pp38
-            tag: manylinux
-          - arch: x86_64
-            python: pp39
             tag: manylinux
           - arch: x86_64
             python: pp310
@@ -90,8 +78,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Build wheels with cibuildwheels
-        uses: pypa/cibuildwheel@v3.1.4
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3.2.0
         with:
           output-dir: dist
         # see options at https://cibuildwheel.pypa.io/en/stable/options/
