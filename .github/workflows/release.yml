@@ -54,7 +54,7 @@ jobs:
       matrix:
         # the intention here is that each wheel is built in a separate job
         arch: [x86_64, aarch64, armv7l]
-        python: [cp39, cp310, cp311, cp312, cp313, cp314]
+        python: [cp39, cp310, cp311, cp312, cp313, cp314, cp314t]
         tag: [manylinux, musllinux]
         include:
           - arch: aarch64
@@ -99,7 +99,7 @@ jobs:
     name: >-
       Deploy to
       ${{ startsWith(github.ref, 'refs/tags/') && 'pypi' || 'test-pypi' }}
-      ${{ github.ref_name != 'main' && '(dry run)' }}
+      ${{ github.ref_name != 'main' && '(dry run)' || '' }}
     needs: [sdist, linux]
     permissions:
       # needed permission for PyPI "trusted publishing"
