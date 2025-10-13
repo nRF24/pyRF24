@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD024 -->
 
+## [0.6.0] - 2025-10-13
+
+### <!-- 6 --> 📦 Dependency updates
+
+- Bump RF24 from `2df8418` to `4016a31` in the rf24-submodules group by \@dependabot[bot] in [#127](https://github.com/nRF24/pyRF24/pull/127)
+- Drop support for Python v3.7 and v3.8 by \@2bndy5 in [#128](https://github.com/nRF24/pyRF24/pull/128)
+
+### <!-- 9 --> 🗨️ Changed
+
+- Enable Python v3.14t (free-threaded) deployments by \@2bndy5 in [`455281a`](https://github.com/nRF24/pyRF24/commit/455281a4fe844e27efa959e99b887fcd9ace8f62)
+
+[0.6.0]: https://github.com/nRF24/pyRF24/compare/v0.5.1...v0.6.0
+
+Full commit diff: [`v0.5.1...v0.6.0`][0.6.0]
+
 ## [0.5.1] - 2025-09-13
 
 ### <!-- 1 --> 🚀 Added
@@ -26,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update version badge in README by \@2bndy5 in [`f8d3e06`](https://github.com/nRF24/pyRF24/commit/f8d3e067012b56c202becf03412a555b866c560d)
 - Relax types on abstract class for BLE `ServiceData` by \@2bndy5 in [#115](https://github.com/nRF24/pyRF24/pull/115)
+- Bump version to v0.5.1 by \@2bndy5 in [`670385e`](https://github.com/nRF24/pyRF24/commit/670385e0bf76a2255923cdfcbb674ed36916f108)
 
 [0.5.1]: https://github.com/nRF24/pyRF24/compare/v0.5.0...v0.5.1
 
