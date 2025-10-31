@@ -42,7 +42,7 @@ jobs:
         run: pipx run build -s
 
       - name: Save distributable wheels as artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ env.ARTIFACT_NAME_PREFIX }}_sdist
           path: dist
@@ -90,7 +90,7 @@ jobs:
           CIBW_ARCHS_LINUX: ${{ matrix.arch }}
 
       - name: Save distributable wheels as artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ env.ARTIFACT_NAME_PREFIX }}_${{ matrix.arch }}_${{ matrix.python }}_${{ matrix.tag }}
           path: dist
@@ -110,7 +110,7 @@ jobs:
       DEFAULT_BRANCH: 'refs/heads/main'
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: ${{ env.ARTIFACT_NAME_PREFIX }}_*
           path: dist
