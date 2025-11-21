@@ -24,7 +24,7 @@ jobs:
           python-version: '3.13'
 
       - name: Checkout Current Repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
           fetch-depth: 0
