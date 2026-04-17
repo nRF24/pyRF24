@@ -80,7 +80,7 @@ jobs:
         run: sphinx-build -E -W -b html . _build/html
 
       - name: upload github pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./docs/_build/html
 
