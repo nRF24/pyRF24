@@ -3,6 +3,7 @@
 #include <pybind11/pybind11.h>
 #include <RF24.h>
 #include <nRF24L01.h>
+using namespace nRF24L01;
 
 namespace py = pybind11;
 
@@ -175,7 +176,7 @@ public:
 
     bool isPowerUp()
     {
-        return read_register(NRF_CONFIG) & _BV(PWR_UP);
+        return read_register(CONFIG) & _BV(PWR_UP);
     }
 
     void set_pa_level(rf24_pa_dbm_e level)
@@ -217,7 +218,7 @@ public:
 
     bool isListening()
     {
-        return read_register(NRF_CONFIG) & _BV(PRIM_RX);
+        return read_register(CONFIG) & _BV(PRIM_RX);
     }
 
     void listen(const bool enable)
