@@ -180,3 +180,6 @@ _skbuild
 
 # examples generate a list of assigned network addresses corresponding to mesh node IDs
 dhcplist.txt
+
+# This project does not use uv officially, but it can be used locally.
+uv.lock
