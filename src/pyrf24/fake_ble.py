@@ -530,7 +530,7 @@ class FakeBLE:
         pl_size = 9 + len(payload) + name_length + self._show_dbm * 3
         buf = bytes([0x42, pl_size]) + self.mac
         buf += chunk(b"\x05", 1)
-        pa_level = b""
+        pa_level: Union[bytes, bytearray] = b""
         if self._show_dbm:
             lvl = self._radio.pa_level
             # assume this radio is an actual nRF24L01 (& not a clone)
@@ -621,12 +621,12 @@ class FakeBLE:
         """
         if not isinstance(buf, (bytearray, bytes, list, tuple)):
             raise ValueError("buffer is an invalid format")
-        payload = b""
+        payload = bytearray()
         if isinstance(buf, (list, tuple)):
             for byte in buf:
                 payload += byte
         else:
-            payload = chunk(buf, data_type) if buf else b""
+            payload = chunk(buf, data_type) if buf else bytearray()
         payload = self.whiten(self._make_payload(payload))
         # print("original: 0x{}".format(address_repr(payload)))
         # print("reversed: 0x{}".format(address_repr(reverse_bits(payload))))
