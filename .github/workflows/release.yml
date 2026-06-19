@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Current Repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
           # non-shallow checkout needed for setuptools_scm
@@ -71,7 +71,7 @@ jobs:
             tag: manylinux
     steps:
       - name: Checkout Current Repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
           # non-shallow checkout needed for setuptools_scm
@@ -79,7 +79,7 @@ jobs:
           persist-credentials: false
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v4.0.0
+        uses: pypa/cibuildwheel@v4.1.0
         with:
           output-dir: dist
         # see options at https://cibuildwheel.pypa.io/en/stable/options/
