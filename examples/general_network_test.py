@@ -4,17 +4,18 @@ An all-purpose example of using the nRF24L01 transceiver in a network of nodes.
 See documentation at https://nRF24.github.io/pyRF24
 """
 
-import time
 import struct
+import time
+
 from pyrf24 import (
-    RF24,
-    RF24Network,
-    RF24NetworkHeader,  # only need to construct frame headers for RF24Network.write()
-    RF24Mesh,
     MAX_PAYLOAD_SIZE,
     MESH_DEFAULT_ADDRESS,
-    RF24_PA_LOW,
+    RF24,
     RF24_DRIVER,
+    RF24_PA_LOW,
+    RF24Mesh,
+    RF24Network,
+    RF24NetworkHeader,  # only need to construct frame headers for RF24Network.write()
 )
 
 print(__file__)  # print example name

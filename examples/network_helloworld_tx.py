@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 Simplest possible example of using RF24Network.
 
@@ -10,7 +9,8 @@ See documentation at https://nRF24.github.io/pyRF24
 
 import struct
 import time
-from pyrf24 import RF24, RF24Network, RF24NetworkHeader, RF24_DRIVER
+
+from pyrf24 import RF24, RF24_DRIVER, RF24Network, RF24NetworkHeader
 
 print(__file__)  # print example name
 

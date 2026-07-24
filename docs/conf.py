@@ -132,8 +132,8 @@ html_theme_options = {
 
 # turn off some features specific to sphinx-immaterial theme
 object_description_options = [
-    ("py:.*", dict(include_fields_in_toc=False, generate_synopses=None)),
-    ("py:parameter", dict(include_in_toc=False)),
+    ("py:.*", {"include_fields_in_toc": False, "generate_synopses": None}),
+    ("py:parameter", {"include_in_toc": False}),
 ]
 
 sphinx_immaterial_custom_admonitions = [

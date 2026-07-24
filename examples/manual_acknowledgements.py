@@ -8,9 +8,10 @@ example uses a call and response paradigm.
 See documentation at https://nRF24.github.io/pyRF24
 """
 
-import time
 import struct
-from pyrf24 import RF24, RF24_PA_LOW, RF24_DRIVER
+import time
+
+from pyrf24 import RF24, RF24_DRIVER, RF24_PA_LOW
 
 print(__file__)  # print example name
 

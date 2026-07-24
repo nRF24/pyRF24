@@ -6,9 +6,13 @@ This example does not require a counterpart node.
 See documentation at https://nRF24.github.io/pyRF24
 """
 
+# ruff: file-ignore[UP045]
+from __future__ import annotations
+
 import time
 from typing import Optional
-from pyrf24 import RF24, RF24_CRC_DISABLED, address_repr, RF24_DRIVER, RF24_FIFO_EMPTY
+
+from pyrf24 import RF24, RF24_CRC_DISABLED, RF24_DRIVER, RF24_FIFO_EMPTY, address_repr
 
 print(__file__)  # print example name
 
@@ -62,10 +66,10 @@ def scan(timeout: int = 30):
     # print the vertical header of channel numbers
     print("0" * 100 + "1" * 26)
     for i in range(13):
-        print(str(i % 10) * (10 if i < 12 else 6), sep="", end="")
-    print("")  # endl
+        print(str(i % 10) * (10 if i < 12 else 6), end="")
+    print()  # endl
     for i in range(126):
-        print(str(i % 10), sep="", end="")
+        print(str(i % 10), end="")
     print("\n" + "~" * 126)
 
     signals = [0] * 126  # store the signal count for each channel
@@ -95,9 +99,8 @@ def scan(timeout: int = 30):
         # output the signal counts per channel
         sig_cnt = signals[curr_channel]
         print(
-            ("%X" % min(15, sig_cnt)) if sig_cnt else "-",
-            sep="",
-            end="" if curr_channel < 125 else ("\n" if endl else "\r"),
+            f"{min(15, sig_cnt):X}" if sig_cnt else "-",
+            end="" if curr_channel < 125 else "\n" if endl else "\r",
         )
         curr_channel = curr_channel + 1 if curr_channel < 125 else 0
         if endl:
@@ -107,8 +110,8 @@ def scan(timeout: int = 30):
     while curr_channel < len(signals) - 1:
         curr_channel += 1
         sig_cnt = signals[curr_channel]
-        print(("%X" % min(15, sig_cnt)) if sig_cnt else "-", sep="", end="")
-    print("")
+        print(f"{min(15, sig_cnt):X}" if sig_cnt else "-", end="")
+    print()
 
 
 def noise(timeout: int = 1, channel: Optional[int] = None):
