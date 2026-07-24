@@ -811,8 +811,10 @@ class UrlServiceData(ServiceData):
         self._type += bytes([0x10]) + struct.pack(">b", -25)
 
     codex_prefix = ("http://www.", "https://www.", "http://", "https://")
-    codex_suffix = (".com", ".org", ".edu", ".net", ".info", ".biz", ".gov")
-    codex_suffix = [suffix + "/" for suffix in codex_suffix] + codex_suffix
+    _codex_suffix_base = (".com", ".org", ".edu", ".net", ".info", ".biz", ".gov")
+    codex_suffix = tuple(
+        [suffix + "/" for suffix in _codex_suffix_base] + list(_codex_suffix_base)
+    )
 
     @property
     def pa_level_at_1_meter(self) -> int:
