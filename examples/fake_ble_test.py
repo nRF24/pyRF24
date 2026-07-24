@@ -5,16 +5,17 @@ See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
+
 from pyrf24 import (
     RF24,
-    RF24_PA_LOW,
     RF24_DRIVER,
-    FakeBLE,
-    chunk,
-    address_repr,
-    UrlServiceData,
+    RF24_PA_LOW,
     BatteryServiceData,
+    FakeBLE,
     TemperatureServiceData,
+    UrlServiceData,
+    address_repr,
+    chunk,
 )
 
 print(__file__)  # print example name

@@ -9,7 +9,8 @@ See documentation at https://nRF24.github.io/pyRF24
 """
 
 import struct
-from pyrf24 import RF24, RF24Network, RF24_DRIVER
+
+from pyrf24 import RF24, RF24_DRIVER, RF24Network
 
 print(__file__)  # print example name
 

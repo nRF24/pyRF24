@@ -6,6 +6,7 @@ import platform
 import subprocess
 import sys
 from pathlib import Path
+
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
@@ -38,7 +39,7 @@ class CMakeBuild(build_ext):
         if not extdir.endswith(os.sep):
             extdir += os.sep
 
-        debug = int(os.environ.get("DEBUG", 0)) if self.debug is None else self.debug
+        debug = int(os.environ.get("DEBUG", "0")) if self.debug is None else self.debug
         cfg = "Debug" if debug else "Release"
 
         cmake_args = [
@@ -76,12 +77,12 @@ class CMakeBuild(build_ext):
         subprocess.check_call(["cmake", "--build", "."] + build_args, cwd=build_temp)
 
 
-setup_args = dict(
-    zip_safe=False,
-    packages=["pyrf24"],
-    package_dir={"pyrf24": "src/pyrf24"},
-    package_data={"pyrf24": ["rf24.pyi", "rf24_network.pyi", "rf24_mesh.pyi"]},
-)
+setup_args = {
+    "zip_safe": False,
+    "packages": ["pyrf24"],
+    "package_dir": {"pyrf24": "src/pyrf24"},
+    "package_data": {"pyrf24": ["rf24.pyi", "rf24_network.pyi", "rf24_mesh.pyi"]},
+}
 
 if IS_LINUX:
     setup_args["cmdclass"] = {"build_ext": CMakeBuild}

@@ -6,9 +6,13 @@ good channel for your application.
 See documentation at https://nRF24.github.io/pyRF24
 """
 
+# ruff: file-ignore[UP006, UP045, UP035]
+from __future__ import annotations
+
 import curses
 import time
-from typing import List, Tuple, Any, cast, Optional
+from typing import Any, List, Optional, Tuple, cast
+
 from pyrf24 import RF24, RF24_1MBPS, RF24_2MBPS, RF24_250KBPS, RF24_DRIVER
 
 print(__file__)  # print example name
@@ -92,7 +96,7 @@ class ProgressBar:  # pylint: disable=too-few-public-methods
         """Update the progress bar."""
         count = " - "
         if signal_count:
-            count = " %X " % min(0xF, signal_count)
+            count = f" {min(0xF, signal_count):X} "
         filled = (self.width - 8) * completed / CACHE_MAX
         offset_x = 5
         self.win.move(self.y, self.x + offset_x)

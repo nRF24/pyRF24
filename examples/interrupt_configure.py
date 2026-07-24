@@ -6,15 +6,16 @@ See documentation at https://nRF24.github.io/pyRF24
 """
 
 import time
+
 from pyrf24 import (
     RF24,
-    RF24_PA_LOW,
     RF24_DRIVER,
     RF24_FIFO_FULL,
-    RF24_TX_DS,
-    RF24_TX_DF,
-    RF24_RX_DR,
     RF24_IRQ_ALL,
+    RF24_PA_LOW,
+    RF24_RX_DR,
+    RF24_TX_DF,
+    RF24_TX_DS,
 )
 
 try:

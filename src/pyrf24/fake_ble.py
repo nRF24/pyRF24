@@ -74,9 +74,13 @@ here has been adapted to work with Python.
        `mask_irq()`.
 """
 
-from os import urandom
+# ruff: file-ignore[UP006, UP007, UP045, UP035]
+from __future__ import annotations
+
 import struct
-from typing import Union, List, Optional, Any
+from os import urandom
+from typing import Any, List, Optional, Union
+
 from .pyrf24 import (  # type: ignore
     RF24,
     RF24_CRC_DISABLED,
@@ -111,7 +115,7 @@ def address_repr(buf, reverse: bool = True, delimit: str = "") -> str:
         specified ``buf`` parameter.
     """
     order = range(len(buf) - 1, -1, -1) if reverse else range(len(buf))
-    return delimit.join(["%02X" % buf[byte] for byte in order])
+    return delimit.join([f"{buf[byte]:02X}" for byte in order])
 
 
 def swap_bits(original: int) -> int:
@@ -620,7 +624,7 @@ class FakeBLE:
             ble.hop_channel()
         """
         if not isinstance(buf, (bytearray, bytes, list, tuple)):
-            raise ValueError("buffer is an invalid format")
+            raise TypeError("buffer is an invalid format")
         payload = bytearray()
         if isinstance(buf, (list, tuple)):
             for byte in buf:
@@ -634,7 +638,7 @@ class FakeBLE:
 
     def print_pretty_details(self):
         self._radio.print_pretty_details()
-        print(f"BLE device name           {str(self.name)}")
+        print(f"BLE device name           {self.name!s}")
         print(f"Broadcasting PA Level     {self.show_pa_level}")
 
     def available(self) -> bool:
@@ -806,8 +810,8 @@ class UrlServiceData(ServiceData):
         super().__init__(EDDYSTONE_UUID)
         self._type += bytes([0x10]) + struct.pack(">b", -25)
 
-    codex_prefix = ["http://www.", "https://www.", "http://", "https://"]
-    codex_suffix = [".com", ".org", ".edu", ".net", ".info", ".biz", ".gov"]
+    codex_prefix = ("http://www.", "https://www.", "http://", "https://")
+    codex_suffix = (".com", ".org", ".edu", ".net", ".info", ".biz", ".gov")
     codex_suffix = [suffix + "/" for suffix in codex_suffix] + codex_suffix
 
     @property
